@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 16 summary</p>
       
-      <h1 class="section-title">Self-Harness An Iterative Loop for Model-Specific Harness Im</h1>
+      <h1 class="section-title">Main Results</h1>
       
 
       <div class="section-summary">
         
-        This section defines the paper’s core mechanism: a fixed model repeatedly improves its own harness by using execution evidence rather than manual tuning or blind search. It explains the loop in which failures are clustered into recurring patterns, turned into structured feedback, and then used to prompt the same model to propose small, diverse harness edits that target specific problems without changing the overall architecture. Those edits are then checked on held-out tasks, and only the ones that help without harmful regressions are accepted. The section exists to answer the paper’s central setup question: how can a harness be made self-improving in a controlled, model-specific way, and what process makes such improvement reliable enough to evaluate experimentally?
+        This section reports the core empirical outcome of Self-Harness: after the harness is promoted, performance rises or stays the same across all three backends on both the held-in and held-out splits of Terminal-Bench-2.0. It quantifies the gains in absolute and relative terms to show that the improvements are substantial, not just marginal noise, and that they transfer beyond the failures used to generate the edits. The section exists to answer the paper’s main question: can harness-level changes produce reusable performance improvements without changing the model, tools, budget, environment, or evaluator? By showing consistent held-out gains and no regressions, it sets up the claim that Self-Harness is improving the execution mechanism itself rather than overfitting to specific examples.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

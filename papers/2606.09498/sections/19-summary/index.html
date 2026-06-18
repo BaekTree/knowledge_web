@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 19 summary</p>
       
-      <h1 class="section-title">Terminal-Bench-20 configuration</h1>
+      <h1 class="section-title">Conclusion</h1>
       
 
       <div class="section-summary">
         
-        This section specifies the exact Terminal-Bench-2.0 evaluation setup used in the paper: Harbor as the runtime, the machine and network limits, the task concurrency for each backend, and the filtering or mirroring choices used to keep runs stable and reproducible. It exists to answer a practical question behind the results: what environment did the authors actually benchmark in, and how did they control for confounds that could make agent performance look better or worse for reasons unrelated to the harness itself? By defining these constraints, the paper sets up a fair comparison and shows that the reported gains come from the harness design rather than from looser infrastructure, flaky downloads, or unsupported task types.
+        The conclusion pulls the paper’s thread together by restating the core claim: a fixed model can still improve its own governing harness when harness changes are proposed from execution evidence, evaluated under the same benchmark, and only accepted if they do not regress performance. It exists to answer the paper’s central question in practical terms, showing that Self-Harness is not just a training trick but a controlled state-transition process for harness design. It also clarifies the scope of the result by emphasizing that the gains are bounded, benchmark-dependent, and backed by regression testing rather than open-ended self-improvement, which sets up the broader agenda of making agent scaffolds evolve through auditable, testable changes.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

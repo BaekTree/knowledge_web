@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 16 deeper explanation</p>
       
-      <h1 class="section-title">Self-Harness An Iterative Loop for Model-Specific Harness Im</h1>
+      <h1 class="section-title">Main Results</h1>
       
 
       <div class="deeper-copy">
         
-        This section introduces Self-Harness as a closed-loop method for improving an agent’s harness using the same model that the harness serves. The key idea is to move between two roles: an evaluation system that observes failures, and a proposer system that suggests fixes. Instead of treating harness design as purely manual engineering or a black-box search problem, Self-Harness uses execution traces as evidence. A trace is the record of what the harness and model did on a task; by clustering similar traces, the system finds recurring failure patterns rather than reacting to isolated mistakes. That makes the improvement process more systematic: it targets underlying mechanisms, such as bad tool-selection logic or brittle retry behavior, not just surface symptoms.
+        This section introduces the paper’s main empirical claim: a harness can improve itself. Here, the “harness” is the execution and evaluation wrapper around a model, including how tasks are run, how outputs are checked, and how failures are handled. The key metric is Pass (%), measured on two splits: held-in, which contains failures used to generate proposal evidence, and held-out, which contains separate failures used to test generalization. The reported relative gain uses the formula `(Self-Harness - Initial) / Initial`, so the paper distinguishes between absolute point improvements and proportional improvement over the original harness.
 
-The design choices are conservative on purpose. The model is asked to produce “diverse yet minimal” candidate modifications, meaning each edit should address one failure mode while leaving the overall control architecture intact. This matters because large rewrites can entangle improvements with new regressions, making it hard to know what actually helped. The loop also includes regression testing on held-out tasks, which functions like a unit-test suite for harness behavior. Only edits that improve performance without unacceptable regressions are accepted. In effect, the method is balancing exploration and stability: it searches for useful local changes, but it keeps a strong guardrail against overfitting to the observed failures.
+The design choice that matters most is the regression gate. The authors do not want edits that merely memorize the held-in failures; they want changes that improve the underlying execution mechanism and still work on unseen cases. That is why they keep the model backend, tools, budget, benchmark environment, and evaluator fixed. This isolates the effect of the harness itself, making the results interpretable as harness-level optimization rather than changes in model capability or test conditions. The table-like results show that this is not a narrow win: all three backends improve on held-out data as well, and none of the promoted harnesses hurts either split.
 
-This section sets up the paper’s next step by establishing the full iterative refinement pipeline: observe failures, propose edits, test them, and accept only robust gains. Once that loop is defined, the rest of the paper can focus on what kinds of evidence are extracted, how candidate edits are generated and ranked, and how much improvement the self-improving harness achieves compared with manually engineered or externally optimized baselines.
+This section sets up the next step in the paper by motivating the self-improvement loop. Once the authors show that promoted harness edits can generalize across splits, the natural next question is how those edits are proposed, filtered, and promoted automatically. In other words, the paper can now move from “the harness can improve” to “how Self-Harness searches for better harnesses while avoiding overfitting and regressions.”
         
       </div>
 
@@ -260,7 +260,6 @@ This section sets up the paper’s next step by establishing the full iterative 
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ This section sets up the paper’s next step by establishing the full iterative 
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

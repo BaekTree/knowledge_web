@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 18 summary</p>
       
-      <h1 class="section-title">Splits and protocol</h1>
+      <h1 class="section-title">Trace-Level Analysis of Accepted Edits</h1>
       
 
       <div class="section-summary">
         
-        This section defines the evaluation protocol that makes Self-Harness measurable and fair: the fixed task set is split into a held-in portion, which the proposer can inspect through trajectories, verifier results, and failure evidence, and a held-out portion, which remains hidden and is used only by the automatic promotion gate. It also keeps task assignments constant across harness variants and resets each task in a fresh benchmark environment. The point of these controls is to isolate the effect of harness changes from noise, leakage, or cross-run differences. In the paper, this section answers the question of how the system decides whether an improved harness is genuinely better, and it sets up the experimental comparison that follows.
+        This section inspects before-and-after traces for accepted harness edits to show how Self-Harness changes agent behavior in practice. It exists to answer the causal question behind the gains: not just whether performance improves, but what the edits are actually doing to the agent’s workflow. By comparing MiniMax M2.5, Qwen3.5, and GLM-5, the section shows that the accepted edits are model-specific and address the main observed failure modes, such as delayed artifact creation, repeated ineffective recovery, and environment changes that do not persist. That sets up the paper’s main claim that the quantitative improvements come from targeted behavioral shifts in execution, not from generic prompt strengthening or random variation.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 12 summary</p>
       
-      <h1 class="section-title">Model inference services</h1>
+      <h1 class="section-title">Models</h1>
       
 
       <div class="section-summary">
         
-        This section specifies the inference infrastructure used to run the paper’s models: MiniMax M2.5 and GLM-5 were accessed through hosted services, while Qwen3.5-35B-A3B was run locally on four NVIDIA H200 GPUs with an SGLang-based container. Its purpose is to make the experimental setup reproducible and to clarify the practical constraints behind the harness experiments, since the behavior, latency, cost, and deployment style of the underlying model service can affect how the self-improving harness is evaluated. In other words, it answers “what exactly were the models running on?” so the later results can be interpreted as properties of the harness design rather than hidden differences in inference backends.
+        This section defines the experimental backbone for the paper: the authors test Self-Harness on three fixed base models, then compare different harness variants while keeping everything else constant, including decoding, budget, tools, environment, and evaluator. It exists to make the results interpretable as true within-model harness comparisons rather than differences caused by stronger models or a changed evaluation setup. In other words, it answers a core methodological question: if performance improves, is that because Self-Harness itself got better, or because the underlying model or testing conditions changed?
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

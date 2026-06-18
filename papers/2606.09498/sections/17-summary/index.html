@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 17 summary</p>
       
-      <h1 class="section-title">Self-improving agents and automated agent design</h1>
+      <h1 class="section-title">Harness evolution and retained edits</h1>
       
 
       <div class="section-summary">
         
-        This section positions Self-Harness relative to prior work on self-improvement and automated agent design. It shows that many systems already adapt memories, contexts, workflows, or programs, and that other methods search over agent designs or optimize harnesses from the outside. The point is to distinguish those settings from the paper’s target: a fixed model making a bounded proposal to change the harness that will govern its own later behavior. The section exists to answer a framing question, namely why harness self-modification is a distinct problem rather than just another form of reflection, memory update, or external architecture search. It sets up the paper’s core claim that the interesting unit of improvement is the harness itself, and that this can be studied under a controlled self-improvement loop.
+        This section traces how Self-Harness changes the harness over time and which edits survive into the final promoted version for MiniMax M2.5, Qwen3.5, and GLM-5. It shows that improvement does not come from a steady stream of uniformly good proposals, but from a few validation-gated edits that directly fix the failures each model exposes, such as missing artifacts, tool-content schema errors, retry loops, and late or lost outputs. The section exists to answer a central question: what kinds of harness changes actually drive gains, and whether those changes are shared across models or tailored to model-specific failure modes. It sets up the paper’s broader claim that Self-Harness learns from concrete execution pathologies and adapts the harness accordingly rather than applying one generic fix.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

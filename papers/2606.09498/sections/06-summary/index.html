@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 6 summary</p>
       
-      <h1 class="section-title">Harness</h1>
+      <h1 class="section-title">Preliminary</h1>
       
 
       <div class="section-summary">
         
-        This section defines the starting point of Self-Harness: a deliberately small DeepAgent-based harness with only a benchmark-facing system prompt plus default filesystem and shell tools. It also narrows what the system is allowed to edit when proposing a new harness candidate, namely the harness definition file and its explicit configuration fields such as instructions, tools, and verification guidance. The point of the section is to set the boundary of self-improvement: the paper is not asking whether an agent can rewrite arbitrary code, but whether it can improve the control structure that instantiates and governs itself. That setup is necessary because later results depend on comparing harness variants under a clear, constrained definition of what can change.
+        This section defines the object Self-Harness improves: not the model weights, but the harness, meaning the fixed scaffolding that controls prompts, tools, memory, state, and execution flow around a language model. It formalizes a run as a trace plus an output, with a fixed model and evaluator, and treats improvement as moving through a sequence of harnesses via bounded edits. The algorithm then sets up the core loop: evaluate the current harness on held-in and held-out data, build evidence from verifier-grounded failures, have the model propose several candidate edits in parallel, test each candidate, and accept only those that improve performance without hurting the held-out split. This section exists to make the optimization problem precise and to establish the self-improvement procedure that the rest of the paper studies.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

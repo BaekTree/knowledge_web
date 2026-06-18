@@ -230,11 +230,11 @@
 
       <div class="deeper-copy">
         
-        This abstract argues that an agent’s behavior is not determined only by the base LLM, but also by the “harness” around it: the code, prompts, tools, and control logic that mediate interaction with the environment. The key technical idea is that harness design is model-specific, because different LLMs fail in different ways. Self-Harness is the proposed remedy: instead of humans hand-authoring better harnesses, the model itself iteratively improves its own harness without stronger external agents. That turns harness design into a closed-loop optimization problem.
+        This abstract introduces a key idea: an agent’s behavior is not determined only by the base LLM, but also by the “harness,” meaning the surrounding code, prompts, tools, and control logic that mediate how the model acts in an environment. The authors argue that harnesses must be model-specific because different LLMs fail in different ways, yet today they are still hand-designed by humans. That becomes a bottleneck as models diversify quickly. Self-Harness is the proposed alternative: instead of relying on human engineers or a stronger outside agent, the model improves the harness it runs inside.
 
-The method is organized into three stages. First, Weakness Mining analyzes execution traces to find recurring, model-specific failure patterns. Second, Harness Proposal generates candidate harness edits that are both diverse and minimal, meaning they target the observed weakness without introducing unnecessary changes that could overfit or destabilize behavior. Third, Proposal Validation filters edits through regression testing, accepting only those that fix the target issue while preserving earlier capabilities. This validation step is important because harness changes can easily create new failures elsewhere; the paper’s design explicitly trades off improvement against regressions.
+Technically, Self-Harness is an iterative feedback loop with three stages. Weakness Mining analyzes execution traces to find recurring failure patterns, such as where a model consistently misuses tools or gets stuck in a particular interaction style. Harness Proposal then turns those mined weaknesses into candidate harness edits, but keeps the changes minimal and diverse so the system does not drift into broad, hard-to-attribute rewrites. Proposal Validation acts as a safeguard: a candidate change is accepted only if regression tests show it helps without breaking previously working behavior. That design choice matters because harness changes can easily overfit to one failure mode while degrading overall performance.
 
-The experimental setup instantiates this loop on Terminal-Bench-2.0 with a very small starting harness and three different base models. The reported gains show that the approach generalizes across model families rather than being tuned to one architecture. The section sets up the next part of the paper by establishing the core pipeline and the evidence that self-directed harness revision can produce concrete performance gains, motivating deeper analysis of what kinds of failures are discovered and what edits the system learns to make.
+The abstract also previews the empirical result that motivates the rest of the paper: when this loop is instantiated on Terminal-Bench-2.0 with a minimal starting harness, all three tested models improve substantially. The specific pass-rate gains show that the method is not tied to one architecture or one model family. The final qualitative claim sets up the next sections: the improvement is not just from adding generic instructions, but from converting concrete weaknesses into executable harness modifications. That naturally leads into the paper’s methods and analysis of how the loop actually mines failures, proposes edits, and validates them.
         
       </div>
 
@@ -260,7 +260,6 @@ The experimental setup instantiates this loop on Terminal-Bench-2.0 with a very 
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ The experimental setup instantiates this loop on Terminal-Bench-2.0 with a very 
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

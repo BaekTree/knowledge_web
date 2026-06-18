@@ -230,7 +230,7 @@
 
       <div class="root-intuition">
         
-        This paper asks whether an AI agent can improve the “rules of the road” it uses while working, not just get better because a bigger model is swapped in. That matters because today’s agents are often held together by hand-built harnesses, and those harnesses do not fit every model equally well, especially as new models keep appearing. The key idea is to let the model inspect its own failures, propose small targeted changes to its harness, and then keep only the changes that pass regression tests. In effect, it turns repeated mistakes into practical repairs, so the agent is not just driving on a road built by humans but helping redesign the road as it learns to travel it better.
+        This paper asks whether an LLM agent can improve the “rulebook” it uses to act, not just improve its answers inside a fixed setup. That matters because today these harnesses, the code and instructions that steer an agent, are mostly hand-built and often need to be tuned differently for each model, which does not scale as models keep changing. The key idea is a self-improving loop: the agent studies where it fails, proposes small harness changes aimed at those failures, and keeps only the changes that actually help without breaking other tasks. In effect, the paper shows that an agent can help rewrite its own operating manual, turning model-specific weaknesses into concrete improvements.
         
       </div>
 
@@ -251,7 +251,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -271,30 +270,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

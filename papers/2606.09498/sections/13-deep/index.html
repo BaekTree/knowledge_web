@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 13 deeper explanation</p>
       
-      <h1 class="section-title">Models</h1>
+      <h1 class="section-title">Harness</h1>
       
 
       <div class="deeper-copy">
         
-        This section sets up the experimental scope for Self-Harness by fixing the underlying model and varying only the harness around it. A harness here means the scaffolding that controls how the model is prompted, how tools are used, and how evaluator feedback is turned into revisions. The paper tests three different base models: MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. Importantly, the same model is used across all harness variants, and even the proposal stage uses that same model to produce edits from evaluator feedback. In other words, the system is not changing the model itself, only the wrapper that steers it.
+        The section introduces the paper’s core control object: the *harness*, meaning the wrapper that defines how the underlying agent is instantiated, prompted, equipped with tools, and evaluated. The initial harness is deliberately simple. It builds on the DeepAgent SDK, but keeps only a short system prompt aimed at the benchmark and the default filesystem and shell tools. This matters because the authors want to study whether the harness itself can be improved, not whether performance comes from a large amount of hand-engineered scaffolding.
 
-That design choice is deliberate. By holding the model, decoding settings, tool access, benchmark environment, and evaluator constant, the authors make the comparison a within-model study. This matters because it isolates the effect of the harness from confounding factors like better model capacity or a different evaluation protocol. If performance improves, the gain can be attributed much more confidently to Self-Harness rather than to unrelated changes in the underlying model stack. It is the equivalent of testing different driving systems on the same car, track, and weather conditions.
+A key constraint is that Self-Harness is only allowed to modify the *harness definition file*, not the agent code or model itself. That file contains the configuration points the system exposes to the agent builder, such as instructions, tool selection, and verification guidance. In effect, these are the “knobs” that shape behavior. By restricting edits to these declared surfaces, the method keeps the search space focused and comparable: each new candidate harness, written as \(h_t^{(j)}\), differs only through sanctioned configuration changes rather than arbitrary code rewrites.
 
-This section therefore functions as the experimental control setup for the rest of the paper. Once the base model is fixed, the next step can focus on whether Self-Harness actually improves outcomes through self-generated edits and iterative refinement. The paper can then compare harness variants on a clean basis and measure how much of the improvement comes from the harness mechanism itself.
+This design choice sets up the next stage of the paper. Once the editable parts are clearly delimited, the system can generate candidate harnesses and test whether they improve task performance. So this section establishes both the starting baseline and the intervention boundary, which are the prerequisites for the self-improvement loop that follows.
         
       </div>
 
@@ -260,7 +260,6 @@ This section therefore functions as the experimental control setup for the rest 
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ This section therefore functions as the experimental control setup for the rest 
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

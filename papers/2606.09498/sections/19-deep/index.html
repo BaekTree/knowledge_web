@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 19 deeper explanation</p>
       
-      <h1 class="section-title">Terminal-Bench-20 configuration</h1>
+      <h1 class="section-title">Conclusion</h1>
       
 
       <div class="deeper-copy">
         
-        This section specifies the benchmark setup used for Terminal-Bench-2.0, which matters because agent performance can change substantially with the execution environment. The authors run tasks in Harbor, an isolated machine with 64 CPU cores, 256 GB RAM, and a capped outbound network of 2 MB/s. That kind of controlled setup reduces hidden variability from hardware differences, background load, or unconstrained internet access. They also choose different default concurrency levels, meaning how many tasks are run in parallel: 32 for MiniMax M2.5 and GLM-5, and 48 for the locally deployed Qwen3.5-35B-A3B backend. Higher concurrency improves throughput, but it must be balanced against resource contention, so the chosen values reflect the practical limits of each backend.
+        This conclusion frames Self-Harness as a controlled way for a fixed language model to improve the “harness” around it, meaning the scaffolding that shapes its agent behavior: prompts, configuration, tool policies, and other declared surfaces. The central mechanism is propose-evaluate-accept. First, the model runs under the current harness and generates execution traces. Those traces are converted into structured evidence, which the model uses to propose a bounded edit to one of the allowed harness surfaces. Then the candidate harness is re-run under the exact same benchmark protocol, and the edit is only kept if it passes a non-regression rule. In other words, the system treats self-improvement like a state transition that must be justified by measured behavior, not by a persuasive explanation alone.
 
-A second design choice is to mirror some external resources that Terminal-Bench-2.0 tasks depend on. This is a robustness measure: if a dataset, package, or web resource is slow to download but otherwise stable, mirroring it removes failures caused by network latency rather than by the agent itself. In other words, the benchmark is trying to measure agent behavior, not internet fragility. At the same time, the authors exclude tasks whose resources cannot be accessed reliably, as well as tasks needing multimodal inputs that the initial harness cannot handle. The result is a 64-case evaluation set that is smaller but more controlled and reproducible.
+The main design choice is to keep the model, evaluator, and benchmark fixed while changing only the harness. That isolates causality: if performance improves, the gain can be attributed to the harness edit rather than to a different model or evaluation setup. This is why the edits are deliberately small and auditable. The paper wants harness improvement to be testable, reversible, and tied to evidence from actual failures, not broad speculative redesign. On Terminal-Bench-2.0, that yields pass-rate gains across backends while preserving held-in and held-out performance, which supports the claim that even sparse initial harnesses can be refined safely when edits are constrained and regression-tested.
 
-This configuration sets up the next stage of the paper by defining the exact operating conditions under which Self-Harness is evaluated. Once the environment is standardized, any improvements reported later can be attributed more confidently to the harness or agent changes rather than to accidental differences in task availability, bandwidth, or input modality. In that sense, this section is the experimental foundation for the paper’s later claims.
+The next step is the paper’s broader argument about what this means for agent engineering. The conclusion signals that Self-Harness is not claiming open-ended self-improvement; it is a bounded, benchmarked process for improving agent scaffolding under strict acceptance gates. That sets up the forward-looking part of the paper: future systems may generalize this idea to richer environments, but the core requirement stays the same, namely that any improvement must be grounded in observed behavioral evidence and validated against test outcomes.
         
       </div>
 
@@ -260,7 +260,6 @@ This configuration sets up the next stage of the paper by defining the exact ope
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ This configuration sets up the next stage of the paper by defining the exact ope
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

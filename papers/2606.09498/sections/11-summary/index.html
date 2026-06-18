@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 11 summary</p>
       
-      <h1 class="section-title">Metrics</h1>
+      <h1 class="section-title">Benchmarks</h1>
       
 
       <div class="section-summary">
         
-        This section defines the paper’s main evaluation rule: Pass (%), the fraction of task attempts that the benchmark verifier marks as successful, usually averaged over two repeated attempts per harness candidate. In practice, it turns each harness into a fixed experimental condition and measures how often that condition lets the agent complete tasks correctly on a single try. The section exists to make the self-improvement claim testable: it answers what “better harness” means numerically, how success is counted, and what protocol all later results use. It also clarifies the special case for Terminal-Bench-2.0, where success is judged from the final container state, so readers know exactly how the reported gains are computed.
+        This section defines the evaluation setting for Self-Harness: it tests the system on a fixed 64-task subset of Terminal-Bench-2.0, a benchmark of containerized terminal tasks with deterministic verification. The point is to measure whether harness edits actually improve agentic execution on realistic tool-use problems such as command handling, artifact management, verification, and recovery from errors, while excluding tasks that would add noise from unstable web resources or unsupported multimodal inputs. In the paper, this section sets up the core empirical question: does self-improving the harness produce better terminal-task performance under a controlled, reproducible benchmark, rather than merely benefiting from easier or differently scoped tasks?
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

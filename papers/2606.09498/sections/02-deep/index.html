@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 2 deeper explanation</p>
       
-      <h1 class="section-title">Benchmarks</h1>
+      <h1 class="section-title">Introduction</h1>
       
 
       <div class="deeper-copy">
         
-        This section establishes the evaluation setting for Self-Harness. The authors test it on Terminal-Bench-2.0, a multi-turn benchmark for terminal agents, where the agent works inside realistic execution environments and is scored by deterministic verifiers. The important technical idea is that success is not judged by a language model or a human, but by objective checks against the task outcome. The benchmark covers core agent skills such as managing artifacts, issuing correct shell commands, verifying results, and recovering from errors during execution.
+        This introduction frames an LLM agent as more than just a base model: its behavior is shaped by the harness around it, meaning the system prompt, tools, orchestration logic, verification rules, and recovery behavior. The key technical idea is that the same model can perform very differently under different harnesses, so improving agent performance is not only a model problem but also a systems problem. The paper proposes “Self-Harness,” where the target agent improves its own harness instead of relying on humans or a stronger external model. That choice matters because model-specific failures are often systematic, and a harness tuned for one model may be a poor fit for another.
 
-A key design choice is to evaluate on a fixed 64-case subset rather than all 89 tasks. They exclude tasks that depend on unstable web resources or require multimodal inputs. This is a control strategy: by removing cases where outcomes can vary because of external sites or unsupported input types, they reduce noise and make the measurement more sensitive to harness quality itself. The multimodal exclusion is especially important because the initial harness is intentionally minimal and does not yet include modality-specific input handling; otherwise, the benchmark would mostly measure missing infrastructure instead of whether Self-Harness edits improve agent behavior.
+The method is organized as an iterative improvement loop with three stages. First, Weakness Mining runs the current harness on tasks and clusters failed execution traces, so the agent can identify recurring failure patterns rather than isolated mistakes. Second, Harness Proposal asks the agent to generate small, diverse edits that each address a specific failure mode; keeping edits minimal is a deliberate design choice to avoid broad, noisy changes that are hard to attribute. Third, Proposal Validation tests each candidate with regression checks and only keeps changes that improve performance without harming held-out tasks. This makes the process conservative: it favors edits that generalize rather than overfitting to the observed failures.
 
-This setup prepares the next part of the paper by defining a clean test bed for self-improvement. Once the benchmark is constrained to tasks the harness can actually support, any gains can be interpreted as coming from harness modifications rather than from unrelated environment artifacts. That lets the paper move from “what should we measure?” to “how do harness edits change agent performance?”
+The experiments show why this loop is useful. Across three different base models, Self-Harness improves both held-in and held-out performance on Terminal-Bench-2.0, which suggests the harness changes are not just memorizing evaluation traces. The qualitative examples reinforce the mechanism: different models benefit from different fixes, such as earlier file creation, better dependency checking, or preserving shell state. The next part of the paper would naturally build on this setup by specifying the exact harness-update process, since the introduction has established the problem, the loop, and the empirical motivation.
         
       </div>
 
@@ -260,7 +260,6 @@ This setup prepares the next part of the paper by defining a clean test bed for 
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ This setup prepares the next part of the paper by defining a clean test bed for 
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

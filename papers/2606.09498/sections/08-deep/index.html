@@ -225,16 +225,18 @@
 
       <p class="eyebrow">Section 8 deeper explanation</p>
       
-      <h1 class="section-title">Harness evolution and retained edits</h1>
+      <h1 class="section-title">Harness Proposal Exploring Diverse yet Minimal Candidate Mod</h1>
       
 
       <div class="deeper-copy">
         
-        This section explains how Self-Harness does not improve a harness by making a long, smooth chain of uniformly better proposals. Instead, it searches through candidate edits and keeps only the ones that pass validation, so the final harness is the result of a few high-value, code-level changes. The main technical ideas are the evolution trajectory, which tracks accepted versus rejected candidates over time, and the retained edits, which show the specific interfaces or behaviors that survived into the promoted harness. In other words, the system is doing selective repair, not gradual refinement for its own sake.
+        This section describes how Self-Harness turns an evidence bundle of failures into concrete candidate edits for the harness. The key idea is that the same fixed model is reused in a “proposer” role, but it only sees a bounded context: editable harness surfaces, failure patterns verified by the evaluator, preserved passing behaviors, and a history of prior attempts. That restriction matters because the system is not asking the model to search arbitrarily; it is asking it to reason from structured, cross-case evidence and propose changes that are actually implementable in the harness.
 
-The design choice behind these edits is driven by observed failure modes in each model. For MiniMax M2.5, the retained changes focus on missing required artifacts, malformed tool content, and tool-use loops, because those are the points where the harness was failing to produce usable outputs or was getting stuck. For Qwen3.5, the edits emphasize artifact checking, recovery from missing files, retry discipline, and middleware triggered by tool errors, which helps the agent recover from execution failures while preserving verifier-required artifacts. For GLM-5, the improvements target late artifact creation, external computation, and session-scoped tools, because persistent environment state and a shift from exploration to implementation were needed to move toward working solutions.
+The proposal stage generates several candidate bundles in parallel. Each bundle pairs an edit function with an audit record explaining which failure pattern it targets, which part of the harness it changes, what behavior should improve, and what regressions might appear. The paper requires these proposals to be materially distinct, not just rephrasings of the same fix. This gives breadth of exploration without losing interpretability, so later stages can compare alternatives and understand why one branch was better than another.
 
-The broader lesson is that the same base harness exposes different bottlenecks depending on the model, so Self-Harness adapts by matching edits to the model’s failure pattern rather than applying a generic fix. This sets up the next step in the paper by motivating why retained edits matter: the authors can now treat these promoted harnesses as evidence of which interventions actually improve execution, and use that to compare patterns across models or derive more general harness-design principles.
+A central design choice is the addressability filter: only failure clusters that are both evidence-backed and plausibly fixable through a harness edit are eligible targets. That avoids wasting proposals on problems that reflect task difficulty or model limitations rather than missing execution logic. Within each proposal, minimality is enforced so the edit changes only the surface needed to address the selected mechanism, preserving unrelated behavior and avoiding unnecessary control-flow rewrites.
+
+This section sets up the next step in the pipeline: once the system has a small set of diverse, minimally invasive candidate harnesses, it can evaluate or select among them using the same evidence bundle and downstream verification. In other words, this is the exploration phase that produces interpretable hypotheses for the subsequent scoring, refinement, or adoption step.
         
       </div>
 
@@ -260,7 +262,6 @@ The broader lesson is that the same base harness exposes different bottlenecks d
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +281,6 @@ The broader lesson is that the same base harness exposes different bottlenecks d
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

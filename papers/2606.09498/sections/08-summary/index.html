@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 8 summary</p>
       
-      <h1 class="section-title">Harness evolution and retained edits</h1>
+      <h1 class="section-title">Harness Proposal Exploring Diverse yet Minimal Candidate Mod</h1>
       
 
       <div class="section-summary">
         
-        This section shows how Self-Harness changes over time and which code edits survive validation, using MiniMax M2.5, Qwen3.5, and GLM-5 as examples. It exists to answer a concrete question: does the system improve through a steady stream of good ideas, or through a few validation-approved fixes that directly target failure modes? The answer is the latter. The section sets up the paper’s claim that Self-Harness is not just generating generic harness variations; it is identifying model-specific breakdowns such as missing artifacts, brittle tool use, retry loops, and poor transition from exploration to implementation, then retaining only the edits that measurably improve behavior.
+        This section defines how Self-Harness turns collected failures into a small set of candidate harness edits: it uses the current harness plus bounded evidence to make the same model propose multiple distinct, minimal patches grounded in specific failure mechanisms and editable surfaces. Each proposal is paired with an audit record so the system can see what behavior it is meant to fix, what it should preserve, and what regression risk it introduces. The section exists to answer a central design question: how can a harness improve itself without becoming an unrestricted optimizer or a messy rewrite machine? Its answer is to combine diversity across proposal branches with strict minimality within each branch, so the search remains interpretable, targeted, and tied to evidence rather than ad hoc changes.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

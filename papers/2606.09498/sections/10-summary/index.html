@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 10 summary</p>
       
-      <h1 class="section-title">Main Results</h1>
+      <h1 class="section-title">Experiments</h1>
       
 
       <div class="section-summary">
         
-        This section quantifies whether Self-Harness promotion actually helps in the benchmark setting it was designed for. It compares Terminal-Bench-2.0 Pass rates before and after promotion for three different model backends, on both the held-in split used to generate edits and the held-out split used to test generalization. The point is to answer a concrete question: do harness-level changes improve execution behavior without changing the model, tools, budget, or evaluator? The results show that promoted harnesses consistently improve or at least preserve performance on both splits, including the unseen one, which supports the paper’s claim that Self-Harness is learning reusable execution improvements rather than overfitting to a narrow set of failures.
+        This section tests the paper’s central claim: that agent performance can improve even when the language model stays fixed, as long as the surrounding harness is allowed to evolve. It does this on Terminal-Bench-2.0, a terminal-interaction benchmark, by starting from the same minimal DeepAgent-style harness and letting Self-Harness generate, check, and selectively adopt small bounded edits. The experiments use evidence from held-in runs to justify changes and held-out regression gates to prevent overfitting or harmful drift. In the paper’s structure, this section answers whether self-improving harnesses actually work in practice across different model backends, and it sets up the later analysis of which harness changes help, how robust they are, and where the approach fails.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

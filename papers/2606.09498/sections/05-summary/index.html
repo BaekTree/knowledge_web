@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 5 summary</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Self-Harness An Iterative Loop for Model-Specific Harness Im</h1>
       
 
       <div class="section-summary">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        This section defines Self-Harness’s core optimization loop: the current harness is executed, its recurring failures are clustered into structured evidence, the same model proposes small targeted edits, and those edits are filtered by regression testing and an acceptance rule. In other words, it explains how the system can use execution feedback to improve its own harness without changing the underlying control architecture. The section exists to answer a central design question in the paper: how can harness improvement be made iterative, model-specific, and evidence-driven rather than depending only on human experts or broad search over design choices? It also sets up the rest of the paper by establishing the mechanism that later experiments evaluate.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

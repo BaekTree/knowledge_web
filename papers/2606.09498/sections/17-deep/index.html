@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 17 deeper explanation</p>
       
-      <h1 class="section-title">Self-improving agents and automated agent design</h1>
+      <h1 class="section-title">Harness evolution and retained edits</h1>
       
 
       <div class="deeper-copy">
         
-        This section situates Self-Harness among three related research threads. The first thread studies self-improving agents that change what they carry forward across attempts: they may store feedback in memory, rewrite their context, or recursively refine their outputs. The key technical idea is that a fixed base model can still improve if some persistent artifact around it changes over time. But in these methods, the thing being updated is usually not the agent itself as a bounded system; it is a response policy, a memory store, a prompt context, or a generated program.
+        This section introduces the idea that Self-Harness does not improve a harness by making many small, uniformly good edits. Instead, it follows a validation-gated evolution process: candidate changes are proposed, tested, and only the ones that improve pass rate and preserve required behavior are retained. The “evolution trajectory” shows which proposals were accepted or rejected, while the “retained code-level edits” show what actually survived into the final promoted harness. The technical takeaway is that the harness is itself optimized like a system component, with success measured by whether it helps the agent produce required artifacts, avoid invalid tool content, and recover from stalled or failing tool interactions.
 
-The second thread shifts optimization outside the agent. Automated agent-design methods search over whole agent graphs or harness code using scores, traces, and prior candidates. The important design choice here is that improvement is treated as an external search problem: some optimizer proposes better agent structures from the outside. Self-Harness distinguishes itself by asking whether the model, while running inside its current harness, can propose a limited edit to that harness rather than relying on a separate design loop. That bounded-edit framing matters because it constrains the search space and makes the improvement mechanism more directly attributable to the model’s own proposal.
+The design choices differ by model because each model fails in a different way. MiniMax M2.5 needed earlier artifact creation and better handling of tool loops; Qwen3.5 benefited from artifact checking, retry discipline, and middleware triggered by tool errors; GLM-5 needed persistence across shell commands and guidance away from unproductive exploration. These edits are not arbitrary tweaks. They are targeted derivations from observed failure modes, so the harness changes align with the model’s actual execution pathology rather than a generic “better prompt” strategy. That is why the section emphasizes retained edits: they reveal the mechanisms that mattered, not just the proposals that were tried.
 
-The third thread covers broader self-evolving systems for science, algorithms, and capability growth. These works motivate the idea that agents can participate in open-ended improvement, but they often target much larger loops than harness tuning. Self-Harness narrows the problem to a controlled question: can the same fixed model improve its own future behavior by suggesting a small harness change under the current setup? That narrower setting is what makes the next part of the paper possible, because it turns self-improvement into something concrete to evaluate, rather than an open-ended claim about autonomy.
+This section also sets up the next part of the paper by establishing that harness improvement is both measurable and model-specific. Once the paper has shown that self-evolution can produce a better harness, the natural next step is to explain how those changes translate into broader behavior, evaluation results, or general principles for harness design. In other words, this section provides the evidence that the method works and the failure patterns it addresses, which the next section can then use to argue about generalization and impact.
         
       </div>
 
@@ -260,7 +260,6 @@ The third thread covers broader self-evolving systems for science, algorithms, a
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ The third thread covers broader self-evolving systems for science, algorithms, a
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 5 deeper explanation</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Self-Harness An Iterative Loop for Model-Specific Harness Im</h1>
       
 
       <div class="deeper-copy">
         
-        This section broadens the usual notion of “prompt engineering” into a larger systems view. A fixed model can be influenced not only by the text prompt, but also by demonstrations, retrieved documents, memory, tool outputs, and other runtime inputs. The paper then extends that idea to agentic systems, where the model is no longer just answering once: it acts in an environment, observes results, calls tools, receives feedback, and follows policies during execution. In that setting, the important object is the surrounding control system, not the model alone.
+        This section introduces Self-Harness as an iterative refinement loop for a model-specific harness. The core idea is to let the same model that will use the harness also help improve it, but only through evidence gathered from real execution. Instead of treating harness design as a one-shot human task or as a black-box search problem, the system repeatedly runs the current harness, collects execution traces, and clusters recurring failures into structured evidence. That gives the model a concrete diagnosis of where the harness is breaking, rather than asking it to speculate from scratch.
 
-The authors call this surrounding layer the “harness.” A harness includes prompts, tools, memory, verification rules, permission checks, adapters, and any runtime mechanism that mediates between the model and the world. The design choice here is to treat these pieces as one technical unit because many failures arise from their interaction: an agent may claim success without validating an output, repeat a bad action loop, forget the authoritative source in a long session, or get stuck because it has no recovery path. In other words, the failure is often in orchestration, state management, or policy enforcement, not in the base model’s raw capability. That is why improving agent performance often requires changing the harness itself, not just rewriting instructions.
+The design choice here is to generate small, diverse, and targeted edits rather than sweeping rewrites. The model is switched into a proposer role and asked to produce candidate modifications that each address a specific failure mechanism. This matters because harnesses are control systems: replacing the whole architecture can introduce new failure modes or erase useful behavior. By keeping edits minimal, the method preserves stable parts of the harness while fixing only the weakest links. The held-out regression test then acts as a guardrail, ensuring that an edit improves the target behavior without causing unacceptable damage elsewhere.
 
-This framing sets up the paper’s next step: if the harness is a first-class system component, then it can also be improved systematically. The section prepares the reader for self-harnessing by establishing that agent behavior is shaped by an editable execution environment. Once that is accepted, the natural question becomes how to measure, modify, and iteratively improve the harness so the whole agent loop becomes more reliable over long-horizon tasks.
+This loop sets up the next step of the paper by turning harness improvement into a measurable optimization process. Once the method for proposing, testing, and accepting edits is defined, the paper can evaluate whether self-generated harness revisions actually outperform human baselines or static harnesses. In other words, this section defines the algorithmic mechanism, and the next part can focus on what happens when that mechanism is applied in practice: how much performance improves, what kinds of failures are fixed, and where the approach succeeds or breaks down.
         
       </div>
 
@@ -260,7 +260,6 @@ This framing sets up the paper’s next step: if the harness is a first-class sy
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ This framing sets up the paper’s next step: if the harness is a first-class sy
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

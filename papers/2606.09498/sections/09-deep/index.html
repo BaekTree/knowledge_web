@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 9 deeper explanation</p>
       
-      <h1 class="section-title">Introduction</h1>
+      <h1 class="section-title">Proposal Validation Ensuring Robust Improvement through Regr</h1>
       
 
       <div class="deeper-copy">
         
-        The section’s central idea is that an LLM agent’s behavior depends not only on the base model, but also on its harness: the surrounding prompts, tools, orchestration logic, verification rules, and recovery procedures that shape how the model acts. The paper argues that harnesses are usually hand-engineered, but that this does not scale because different models fail in different ways. Self-Harness addresses this by letting the target agent improve its own harness, instead of relying on a stronger external model or human tuning.
+        This section turns a proposed harness edit into a controlled experiment. Rather than accepting a change as soon as it is suggested, the system treats it as a candidate harness variant and runs it through the same evaluator used to diagnose the current harness. The evaluator is split into a held-in set, which checks whether the edit fixes the evidence that motivated the change, and a held-out set, which acts as a regression test for behaviors the proposal could not directly observe. The main quantity is the number of passed tasks on each split, and improvement is measured separately on the held-in and held-out splits, not just as one combined score.
 
-Technically, Self-Harness is an iterative improvement loop with three steps. First, Weakness Mining runs the current harness on tasks and clusters failed traces, so the system can infer recurring failure modes rather than react to isolated errors. Second, Harness Proposal asks the agent to generate a small set of diverse but minimal edits, which keeps changes targeted and tied to a specific mechanism. Third, Proposal Validation uses regression tests to accept only edits that improve performance without harming held-out tasks. This design is deliberate: it balances adaptation with generalization, and it prevents the harness from overfitting to the exact failures it just observed.
+The acceptance rule is intentionally conservative. A candidate is promoted only if it improves at least one split without making the other worse, which prevents “gaming” the metric by trading generalization for narrow gains, or vice versa. This is stricter than optimizing total pass count, because total improvement can hide regressions on unseen cases. When evaluation is stochastic, the system repeats the test and aggregates pass counts across runs, so a lucky sample does not cause a bad edit to slip through. If several compatible edits pass the rule in the same round, they are merged; otherwise, rejected edits are retained only as records. The additional filters for “actually changed something” and “did not crash” keep the loop from promoting no-ops or invalid proposals.
 
-The experiments motivate why this loop matters. Across three different models, the same initial harness improves differently, showing that harness design is model-specific. The qualitative examples also show that the learned edits are not just longer prompts, but concrete interventions such as earlier file creation, dependency checking, and better loop avoidance. This section therefore sets up the paper’s next step: a closer description of how the loop is implemented and how the harness updates are derived and evaluated in practice.
+Taken together, this validation step defines the paper’s safety gate for self-improvement. It ensures that harness updates are both locally justified and globally non-degrading, and it produces an auditable lineage of what changed and why. That sets up the next stage of the method: once a candidate passes validation, the system can safely use it as the new active harness and continue iterating, building improvement on top of verified improvement rather than on noisy or brittle gains.
         
       </div>
 
@@ -260,7 +260,6 @@ The experiments motivate why this loop matters. Across three different models, t
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ The experiments motivate why this loop matters. Across three different models, t
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

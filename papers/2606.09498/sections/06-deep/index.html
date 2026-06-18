@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 6 deeper explanation</p>
       
-      <h1 class="section-title">Harness</h1>
+      <h1 class="section-title">Preliminary</h1>
       
 
       <div class="deeper-copy">
         
-        The section introduces the paper’s core object: a **harness**, meaning the control layer that wraps an agent and determines how it is instantiated, prompted, equipped with tools, and verified. The initial harness is built on the DeepAgent SDK, but the authors deliberately keep it minimal: a short system prompt aimed at the benchmark, plus the default filesystem and shell tools. That choice matters because it gives the system a simple, stable starting point, so any later performance changes are easier to attribute to harness edits rather than to a complex initial setup.
+        This section introduces the paper’s central abstraction: a *harness* is the non-parametric layer around a fixed language model that determines how it is used as an agent. In this setup, the model weights never change. Instead, the harness controls the instruction prompt, tool access, memory, state handling, and the execution protocol for interacting with a task. That makes the harness the thing being optimized: the same model can behave very differently depending on how it is deployed. The formal notation reflects this separation by treating the model `M` and evaluator `E` as fixed, while the harness `h` is the object updated across iterations.
 
-A key constraint is that Self-Harness can only modify the **harness definition file** that configures DeepAgent. In other words, the system is not allowed to rewrite the whole agent arbitrarily; it can only adjust declared configuration points such as instructions, tool access, and verification guidance. This is a controlled design space. By limiting edits to these surfaces, the method keeps the search over candidate harnesses structured and interpretable, while still allowing meaningful improvements in how the agent behaves. A candidate harness at time `t`, written as `h_t^(j)`, is one such proposed revision.
+The algorithm then defines a search process over harness versions `h_0, h_1, ..., h_T`. For each round, the current harness is evaluated on both a held-in split `D_in` and a held-out split `D_ho`, producing performance metrics and execution traces. Those traces are used to build an evidence bundle from verifier-grounded failures, meaning the system focuses on cases where the harness demonstrably broke down rather than on vague errors. The model is then asked to propose multiple candidate edits in parallel, which increases exploration without committing to a single guessed fix. Each proposal is turned into a new harness, evaluated again, and accepted only if it improves held-in performance without hurting held-out performance. This is a deliberate anti-overfitting rule: it rewards genuine protocol improvements, not edits that merely memorize the training split.
 
-This section sets up the next step of the paper: a self-improvement loop over harness candidates. Once the baseline harness and its editable parameters are defined, the rest of the method can ask the system to propose, evaluate, and select better harnesses. The minimal initial setup is therefore not just an implementation detail; it is the reference point from which the paper measures whether self-modification actually helps.
+If no candidate passes, the harness stays unchanged; otherwise, the accepted edits are merged into the next harness version. Conceptually, this is an iterative self-improvement loop, but at the level of execution scaffolding rather than model parameters. The next part of the paper builds on this foundation by showing how the evidence bundle, proposal mechanism, and acceptance criterion are instantiated in practice, and how these harness edits are structured so they can reliably improve agent behavior.
         
       </div>
 
@@ -260,7 +260,6 @@ This section sets up the next step of the paper: a self-improvement loop over ha
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ This section sets up the next step of the paper: a self-improvement loop over ha
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

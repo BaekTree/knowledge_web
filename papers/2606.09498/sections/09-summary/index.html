@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 9 summary</p>
       
-      <h1 class="section-title">Introduction</h1>
+      <h1 class="section-title">Proposal Validation Ensuring Robust Improvement through Regr</h1>
       
 
       <div class="section-summary">
         
-        This introduction frames the paper’s central claim: the harness around an LLM agent can matter as much as the base model, and it can itself be improved by the model it supports. It sets up the problem that current harnesses are mostly hand-designed, fragile across models, and expensive to retune as models change. It then introduces Self-Harness as the paper’s answer: an iterative loop where the agent mines its own failures, proposes targeted harness edits, and keeps only changes that improve held-out performance. Finally, it previews the experimental evidence that this approach works across multiple model families and yields model-specific, nontrivial harness improvements. The section exists to motivate the problem, define the new paradigm, and establish the paper’s main question: can an agent systematically improve the harness that governs its own behavior?
+        This section defines the gatekeeper for improving a harness: every proposed edit is tested as a candidate variant on both the evidence split that motivated the change and a held-out split that checks for regressions. A proposal is accepted only when it helps at least one split without hurting the other, with repeated evaluation used when outcomes are noisy. The section also rejects malformed proposals that do not actually change an editable part of the harness or fail before producing a valid result, and it logs the full decision trail for auditability. The point of this procedure is to answer a central question: how can a self-improving harness avoid overfitting to its own diagnostics while still making real progress?
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

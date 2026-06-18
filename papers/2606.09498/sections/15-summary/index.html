@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 15 summary</p>
       
-      <h1 class="section-title">Proposal Validation Ensuring Robust Improvement through Regr</h1>
+      <h1 class="section-title">Metrics</h1>
       
 
       <div class="section-summary">
         
-        This section defines the gate that decides whether a proposed harness edit actually becomes part of the harness lineage. Instead of trusting a proposal just because it looks plausible, the system re-evaluates the edited harness on the same held-in and held-out splits used to diagnose the problem, then accepts it only if it improves at least one split without hurting the other. That conservative rule answers a central question for self-improving harnesses: how do we let the harness change itself without turning improvement into overfitting or regressions? It also sets up the rest of the paper by making harness evolution auditable, robust to stochastic evaluation, and resistant to proposals that do not meaningfully edit the harness or fail to run.
+        This section defines the paper’s main evaluation metric, Pass (%), and how it is measured so the results are comparable across harness candidates. It specifies that each candidate is tested with two repeated attempts by default, and that success is judged by the benchmark verifier, with Terminal-Bench-2.0 using the final container state as the pass signal. The purpose of this section is to set the yardstick for the rest of the paper: it answers what “improvement” means for self-improving harnesses and establishes the evaluation protocol used to compare harness versions fairly and consistently.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

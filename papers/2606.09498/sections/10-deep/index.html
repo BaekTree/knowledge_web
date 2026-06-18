@@ -225,18 +225,16 @@
 
       <p class="eyebrow">Section 10 deeper explanation</p>
       
-      <h1 class="section-title">Main Results</h1>
+      <h1 class="section-title">Experiments</h1>
       
 
       <div class="deeper-copy">
         
-        This section introduces the core evaluation idea behind Self-Harness: the harness is not a fixed wrapper, but something that can be edited and then “promoted” if the edits improve benchmark performance. The authors measure success on Terminal-Bench-2.0 using Pass(%), which is simply the fraction of tasks solved. They test three different model backends and report results on two splits: held-in, the failures used to generate proposal evidence, and held-out, a separate split used to check whether the edits generalize beyond the examples that motivated them.
+        This section introduces the paper’s core experimental idea: instead of changing the language model itself, Self-Harness tries to improve agent behavior by editing the “harness,” meaning the surrounding control logic, prompts, policies, and checks that steer the model during execution. The benchmark is Terminal-Bench-2.0, a setting for terminal-based problem solving inside containers, so success depends not just on raw model capability but on how well the agent manages tools, commands, and feedback loops.
 
-A key design choice is to report both absolute gains in percentage points and relative gains. Absolute gain shows the direct change in Pass(%), while relative gain normalizes that change by the starting score, which matters when comparing models that begin at very different baselines. For example, Qwen3.5 starts much lower than the others, so a similar-sized absolute improvement corresponds to a much larger relative jump. This makes it easier to see whether the harness edits help mainly by patching easy failures or by improving the execution mechanism in a more reusable way.
+The design is deliberately controlled. The authors begin with the same minimal DeepAgent-based harness for every backend model, so any gains can be attributed to harness modifications rather than to a different baseline system. Self-Harness then proposes bounded edits, validates them using held-in execution evidence, and promotes them only if they pass held-out regression gates. “Held-in” evidence is the data used to search for improvements, while “held-out” gates act like a test suite to prevent overfitting: an edit must help on observed cases without breaking previously working behavior.
 
-The main technical claim is that harness-level changes can improve performance while keeping everything else fixed: the backend model, tool set, budget, benchmark environment, and evaluator do not change. That isolates the harness as the source of improvement. The fact that all three models improve on held-out tasks is especially important, because it shows the edits are not just memorizing the failure cases used to propose them. The regression gate then acts as a safeguard, ensuring a candidate edit only gets promoted if it does not harm either split.
-
-This result sets up the next stage of the paper by justifying the promotion mechanism itself. Once the authors establish that harness edits can generalize and avoid regressions, the natural next question is what kinds of edits were made, why they work, and how the self-improvement loop selects them. In other words, this section provides the empirical evidence that the Self-Harness pipeline is worth studying in more detail.
+That setup matters because it turns harness improvement into a disciplined optimization problem rather than ad hoc prompt tweaking. The section also connects naturally to what comes next: once the experimental protocol is fixed, the paper can report whether these harness-only changes actually improve performance across models, and which kinds of edits are most effective. In other words, this section establishes the evaluation machinery that the rest of the paper uses to justify the method’s claims.
         
       </div>
 
@@ -262,7 +260,6 @@ This result sets up the next stage of the paper by justifying the promotion mech
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -282,30 +279,6 @@ This result sets up the next stage of the paper by justifying the promotion mech
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

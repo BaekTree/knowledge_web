@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 4 summary</p>
       
-      <h1 class="section-title">Experiments</h1>
+      <h1 class="section-title">Self-improving agents and automated agent design</h1>
       
 
       <div class="section-summary">
         
-        This section tests the core claim of Self-Harness: that agent performance can improve even when the language model stays fixed, as long as the surrounding harness is allowed to evolve. It does this on Terminal-Bench-2.0, using the same minimal DeepAgent-style starting harness across several model backends, then letting Self-Harness propose small bounded changes, check them against execution traces, and keep only edits that also pass held-out regression gates. The point of the section is to answer a concrete empirical question: do harness-only improvements actually translate into better terminal-task performance, or are they just local overfitting tricks? It also sets up the rest of the paper by establishing whether the method works in practice before discussing what kinds of changes it learns.
+        This section positions Self-Harness against two neighboring ideas: systems that improve their own prompts, memories, or workflows over time, and systems that search externally for better agent designs. It shows that prior work already demonstrates self-improvement and harness optimization, but usually in settings where the thing being changed is a strategy, context, program, or architecture chosen by an outside optimizer. The section exists to sharpen the paper’s core question: can a fixed model, running inside its current harness, propose a bounded edit to that very harness and thereby improve its own future behavior? That framing sets up the paper’s narrower, more controlled contribution and distinguishes it from broader autonomous research or open-ended agent evolution.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

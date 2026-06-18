@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 21 deeper explanation</p>
       
-      <h1 class="section-title">Weakness Mining Identifying Failure Patterns from Clustered </h1>
+      <h1 class="section-title">Terminal-Bench-20 configuration</h1>
       
 
       <div class="deeper-copy">
         
-        This section turns raw failures into structured training signal for the harness. At each round, the fixed model `M` is run on a held-in set `D_in` under the current harness `h_t`, producing a task instance, output, trace, and evaluator label `z_i` for each example. The important design choice is that both the model and evaluator stay fixed, so any change in the collected records across rounds can be attributed to the harness itself. That makes the trace set `R_t` a controlled snapshot of how the harness is shaping behavior. From there, the method narrows attention to the failed cases `F_t`, because the goal is not to catalogue all behavior, but to mine recurring weaknesses that the harness might correct.
+        This section defines the exact evaluation environment for Terminal-Bench-2.0, which matters because benchmark results can vary a lot with infrastructure rather than agent quality. The authors run tasks inside Harbor, a fixed execution platform, on an isolated machine with 64 CPU cores, 256 GB of RAM, and a capped 2 MB/s outbound network. They also choose different task concurrency levels for different models: 32 parallel tasks for MiniMax M2.5 and GLM-5, and 48 for the locally hosted Qwen3.5-35B-A3B backend. Here, concurrency means how many tasks are processed at once; higher concurrency increases throughput, but only if the model and system can sustain it without excessive contention or instability.
 
-The core technical move is the failure signature `(c_i, q_i, m_i)`. Here `c_i` is the terminal verifier-level cause, such as timeout or missing artifact; `q_i` is the causal status of the agent behavior, meaning whether that behavior actually contributed to the failure; and `m_i` is the abstract reusable mechanism revealed by the trace. This separation is deliberate. Two failures can look identical at the evaluator level but still require different interventions, so clustering only on surface outcome would blur distinct causes together. By clustering on exact signature agreement, the system groups cases only when they share the same rejection cause, causal role, and mechanism, producing deterministic, evaluator-grounded clusters rather than fuzzy semantic similarity groups.
+A major design decision is to reduce “false failures” caused by the environment. Some Terminal-Bench tasks require downloading external resources, and if those resources are merely slow rather than genuinely unavailable, the benchmark would unfairly penalize the agent. To avoid that, the authors mirror a subset of stable-but-slow external resources locally. At the same time, they exclude tasks that depend on unreliable external resources and tasks that require multimodal inputs the initial harness cannot handle. This produces a cleaner 64-case evaluation set that measures terminal-interaction ability instead of network luck or unsupported input types.
 
-Each cluster is then summarized as a failure pattern with support, example tasks, trace symptoms, verifier evidence, and the inferred mechanism. Ordering clusters by support and estimated actionability pushes the proposer toward recurring, high-value weaknesses instead of one-off anomalies. The output is an evidence bundle `B_t`, which does not yet change the harness; it just packages the strongest failure patterns in a way that supports revision. This directly feeds the next stage, where the proposer uses `B_t` to suggest concrete harness modifications targeted at reusable failure mechanisms rather than generic outcomes like “timeout” or “assertion failed.”
+The overall effect is a controlled benchmark that preserves the core difficulty of Terminal-Bench-2.0 while removing avoidable sources of noise. That setup is important for the next stage of the paper, because the self-harness method can only be judged fairly if improvements come from the harness itself rather than from accidental advantages in execution conditions. In other words, this configuration establishes the baseline experimental contract that the later self-improvement results build on.
         
       </div>
 
@@ -260,7 +260,6 @@ Each cluster is then summarized as a failure pattern with support, example tasks
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ Each cluster is then summarized as a failure pattern with support, example tasks
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

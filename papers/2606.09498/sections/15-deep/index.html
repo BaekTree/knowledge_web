@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 15 deeper explanation</p>
       
-      <h1 class="section-title">Proposal Validation Ensuring Robust Improvement through Regr</h1>
+      <h1 class="section-title">Metrics</h1>
       
 
       <div class="deeper-copy">
         
-        This section describes how Self-Harness validates a proposed edit before letting it change the active harness. A proposal is treated as a full candidate harness variant, then evaluated on two splits: the held-in split, which checks whether the edit fixes the problem that motivated it, and the held-out split, which acts like a regression test for behaviors the proposer did not directly observe. The paper measures success with pass counts on each split, then compares the candidate against the current harness to compute split-wise improvements. In effect, the system asks not just “did performance go up?” but “did it improve for the right reason, and without breaking anything else?”
+        The section defines the paper’s main evaluation metric, `Pass (%)`, which is simply the fraction of task attempts that satisfy the benchmark’s verifier. In practical terms, each harness candidate is tested on two repeated attempts by default, and the result is averaged into a percentage. This makes the metric easy to interpret: it estimates how often a single run succeeds when the harness is fixed. The phrase “mean single-attempt task success” matters because it distinguishes performance of one execution from more aggregated measures like best-of-N or multi-step recovery.
 
-The acceptance rule is deliberately conservative. A candidate is promoted only if it improves at least one split and does not worsen the other, so edits that merely trade off held-in gains for held-out losses are rejected even if the total score increases. This is a design choice aimed at preventing brittle overfitting during self-modification. When evaluation is stochastic, the system repeats runs and aggregates pass counts before applying the same rule, reducing the chance that a lucky sample causes a bad edit to slip through. The additional checks that reject no-op edits and failed executions also ensure that only meaningful, testable changes enter the lineage.
+The design choice to use the benchmark verifier as the source of truth is important. Instead of judging outputs by human inspection or loose heuristics, the evaluation is tied to an objective pass/fail signal. For Terminal-Bench-2.0 specifically, that signal comes from the final container state, meaning the task is considered successful only if the end state satisfies the verifier’s conditions. This is a strong choice for agentic systems: it evaluates whether the harness actually helps the agent complete the task, not whether intermediate behavior merely looks plausible. Using repeated attempts also reduces noise from stochastic model behavior while keeping the metric focused on typical single-run reliability.
 
-This validation step is what turns self-improvement into a controlled search rather than an unconstrained rewrite process. It creates an auditable chain of harness versions, with every accepted or rejected proposal recorded alongside the affected surfaces and split outcomes. That record becomes the basis for the next stage of the method: iterating on the harness with verified improvements while preserving a regression-safe path through the harness lineage.
+This metric section sets up the rest of the paper by establishing what “improving” a harness means in measurable terms. Once pass rate is defined, the paper can compare different harnesses, track self-improvement across iterations, and attribute gains to changes in harness design rather than to ambiguous evaluation criteria. In other words, the metric provides the scoreboard that the self-improvement loop will optimize against in the next part of the paper.
         
       </div>
 
@@ -260,7 +260,6 @@ This validation step is what turns self-improvement into a controlled search rat
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ This validation step is what turns self-improvement into a controlled search rat
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

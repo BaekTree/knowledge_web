@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 14 summary</p>
       
-      <h1 class="section-title">Preliminary</h1>
+      <h1 class="section-title">Splits and protocol</h1>
       
 
       <div class="section-summary">
         
-        This section pins down the object the paper improves: not the model weights, but the harness, meaning the instructions, tools, memory, and execution protocol around a fixed language model. It defines how a task instance becomes a trace and output, how an evaluator judges behavior, and how Self-Harness treats harnesses as a lineage of bounded edits from `h_0` to `h_T`. The algorithm sketch then sets up the full loop: evaluate the current harness on held-in and held-out data, collect verifier-grounded failure evidence, ask the model to propose several candidate edits in parallel, test them, and merge only the edits that improve held-in performance without hurting held-out performance. This section exists to make the optimization target precise and to answer the core question: how can a harness improve itself while keeping the underlying model fixed?
+        This section defines the evaluation split that makes Self-Harness measurable and fair: the task set is fixed, then divided into a held-in split that the proposer can inspect through trajectories, verifier results, and failure evidence, and a held-out split that remains hidden and is used only to decide whether a new harness is promoted. It also keeps split assignments constant across harness variants and resets each task in a fresh benchmark environment so comparisons are not contaminated by different task selections or state carryover. The point of the section is to answer a basic experimental question: when the harness improves, is it because the harness logic got better, or because it saw easier tasks or reused environment state?
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

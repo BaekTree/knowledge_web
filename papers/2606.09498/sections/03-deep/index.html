@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 3 deeper explanation</p>
       
-      <h1 class="section-title">Conclusion</h1>
+      <h1 class="section-title">From prompts to agent harnesses</h1>
       
 
       <div class="deeper-copy">
         
-        The conclusion’s core technical idea is that a harness can be improved as a controlled state transition rather than an informal prompt tweak. In Self-Harness, the model first runs under the current harness, then uses structured evidence from its own execution traces to propose bounded edits to specific harness surfaces, such as configuration or control logic. Those candidate harnesses are re-run under the same benchmark protocol, and only changes that pass a non-regression acceptance rule are kept. This separates “the model got better” from “the harness changed,” which is important because the goal is to measure harness-level improvement, not hidden changes in the underlying model.
+        This section distinguishes two levels of control over an LLM. In prompt engineering and context engineering, the model is still fixed, but its behavior is steered by inputs: instructions, examples, retrieved documents, memory, and other dynamically assembled context. Agentic systems go further by placing the model inside an execution loop where it can act, observe results, call tools, receive feedback, and follow runtime policies. In other words, the “input” is no longer just a prompt string; it is an environment that shapes what the model can do and how it recovers when things go wrong.
 
-The design choices are driven by auditability and causality. Requiring each edit to state the intended behavior change, the modified surface, the motivating evidence, and the evaluation result makes the process traceable and easy to inspect. Fixing the model, evaluator, and benchmark protocol removes confounds, so any performance shift can be attributed to the harness edit itself. The paper emphasizes that these edits are intentionally small and reversible: this keeps the search space bounded and reduces the risk of overfitting to a single run or inventing broad changes that are hard to verify.
+The paper then defines a harness as that surrounding system layer: prompts, tools, memory, verification rules, permission policies, adapters, and runtime mechanisms that mediate between the model and the world. This definition is deliberate. It treats many agent failures as system failures rather than pure model failures. For example, an agent may claim it finished a task without checking the output artifact, repeat a bad action because there is no recovery policy, or lose the source of truth when the context gets long. The design implication is that improving agent performance often requires changing the control structure around the model, not merely rewriting the prompt.
 
-This section connects to the next step by setting up a disciplined workflow for extending harnesses beyond the initial DeepAgent baseline. The reported gains on Terminal-Bench-2.0 show that even sparse harnesses can self-improve when proposals are evidence-backed and regression-tested, but the limits section makes clear that this is not open-ended self-improvement. The next logical step is to test whether the same evidence-driven loop works in broader, more variable environments, and whether stronger acceptance gates are needed when harness changes affect higher-stakes behavior.
+This framing sets up the next step in the paper: if the harness is part of the effective algorithm, then it can itself be improved. That is the motivation for “self-harness” systems, where the surrounding environment is modified, refined, or adapted based on observed failures and successes. The section therefore establishes the unit of optimization for the rest of the paper: not just the model’s text output, but the whole closed-loop agent system that produces and verifies actions.
         
       </div>
 
@@ -260,7 +260,6 @@ This section connects to the next step by setting up a disciplined workflow for 
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ This section connects to the next step by setting up a disciplined workflow for 
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

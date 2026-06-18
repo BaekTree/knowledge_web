@@ -227,12 +227,12 @@
 
       <p class="eyebrow">Section 21 summary</p>
       
-      <h1 class="section-title">Weakness Mining Identifying Failure Patterns from Clustered </h1>
+      <h1 class="section-title">Terminal-Bench-20 configuration</h1>
       
 
       <div class="section-summary">
         
-        This section turns raw run failures into structured evidence that can guide harness improvement. It runs the model under the current harness, collects traces and pass/fail outcomes, then groups failed cases into deterministic clusters using a failure signature that separates the verifier’s terminal rejection reason, the agent behavior that caused it, and the underlying reusable mechanism. The point is to avoid treating failures as isolated accidents and instead identify recurring weakness patterns that plausibly admit the same harness-level fix. It exists to answer a practical question: what exact failure modes should the proposer target next, and on what evidence? The result is an evidence bundle of clustered weaknesses, not an edit itself, which sets up the next stage where candidate harness revisions are proposed from these grounded failure patterns.
+        This section specifies the exact Terminal-Bench-2.0 evaluation setup used in the paper: Harbor as the execution environment, the machine and network limits, the task concurrency for each model backend, the mirroring of slow but stable external resources, and the exclusion of tasks that are unreliable or unsupported by the initial harness. Its purpose is to make the benchmark conditions reproducible and controlled so the results reflect agent behavior rather than infrastructure noise. It also sets up the paper’s later claims by defining the concrete evaluation regime under which Self-Harness is measured, so readers can interpret performance numbers as coming from a consistent terminal-interaction testbed rather than a loosely specified benchmark run.
         
       </div>
 
@@ -258,7 +258,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -278,30 +277,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 18 deeper explanation</p>
       
-      <h1 class="section-title">Splits and protocol</h1>
+      <h1 class="section-title">Trace-Level Analysis of Accepted Edits</h1>
       
 
       <div class="deeper-copy">
         
-        This section defines the evaluation protocol that keeps Self-Harness honest. The full task set is split into two fixed parts: a held-in split and a held-out split. The held-in split is the only part the proposer can inspect, and it provides the raw material for improvement: execution trajectories, verifier results, and failure evidence. In other words, it is the “training signal” for harness refinement. The held-out split is hidden from the proposer and is reserved for the automatic promotion gate, which acts like a validation set to check whether a candidate harness generalizes beyond the tasks it can see.
+        This section explains the paper’s trace-level analysis, which means the authors do not just measure whether an edited harness improves scores, but inspect how the agent’s step-by-step behavior changes after the edit is accepted. The key idea is that Self-Harness is not learning one universal prompt trick. Instead, it produces model-specific harness edits that address the failure mode most visible in each backend’s execution trace, such as wasting time exploring, looping on errors, or failing to preserve environment changes.
 
-The main design choice is to separate harness development from harness selection. That separation matters because a self-improving system can otherwise overfit to the examples it is allowed to inspect, producing a harness that looks good on exposed tasks but does not actually improve overall. By fixing the task split assignments across all harness variants, the authors ensure that comparisons are fair: every variant faces the same held-in and held-out tasks. Starting each task from a fresh benchmark environment removes carryover effects, so gains cannot come from hidden state, cached information, or prior interactions. Taken together, these controls make the source of any measured improvement much clearer: it must come from the harness changes themselves.
+The design choice here is to connect prompt changes to concrete execution outcomes. For MiniMax M2.5, the edit pushes the agent to create the required artifact early and cap tool use, so behavior shifts from open-ended investigation to a direct “find, compute, write, verify” workflow. For Qwen3.5, the edits add recovery rules for dependency checks, retries, and error-triggered redirection, which helps the agent stop repeating the same broken action and instead recreate the missing file and validate the result. For GLM-5, the edits emphasize persistence across shell sessions and a switch from exploration to implementation once enough evidence has accumulated. These are not arbitrary prompt additions; they are derived from the observed bottlenecks in the initial traces.
 
-This section sets up the next stage of the method, where candidate harnesses are proposed and then tested against the promotion rule. Once the split protocol is fixed, the paper can focus on how proposals are generated and how the gate decides whether a candidate is strong enough to replace the current harness. In effect, this section defines the experimental guardrails that make the later self-improvement loop measurable and credible.
+This section connects to the next step in the paper by justifying the quantitative gains with behavioral evidence. The trace analysis shows that the edits change execution in the intended way, so the score improvements in later figures are interpretable as the result of targeted workflow corrections, not luck or a generic prompt boost. In other words, the paper moves from “does it work?” to “why does it work?” and uses these traces to support the causal story.
         
       </div>
 
@@ -260,7 +260,6 @@ This section sets up the next stage of the method, where candidate harnesses are
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ This section sets up the next stage of the method, where candidate harnesses are
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

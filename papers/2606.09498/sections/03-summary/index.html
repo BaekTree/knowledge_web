@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 3 summary</p>
       
-      <h1 class="section-title">Conclusion</h1>
+      <h1 class="section-title">From prompts to agent harnesses</h1>
       
 
       <div class="section-summary">
         
-        This conclusion ties the paper’s results back to its central question: can a fixed model improve the harness that constrains its own behavior? It summarizes the Self-Harness protocol, the empirical finding that bounded, evidence-backed harness edits can improve performance without regressions, and the main limitations of this approach, especially its dependence on fixed benchmarks and verifier quality. The section exists to convert the experimental results into the paper’s broader takeaway: self-improvement should be treated as a controlled, testable harness transition, not just a persuasive proposal from the model. It also sets up the paper’s future-work direction by clarifying that the method supports reversible, auditable harness evolution, but only within strong acceptance gates and evidence-based validation.
+        This section widens the paper’s focus from prompt crafting to the full agent harness, arguing that agent behavior is shaped by the surrounding execution system as much as by the base model. It exists to set up the paper’s main question: if many failures come from missing tools, weak verification, poor memory handling, unsafe permissions, or bad runtime policies rather than from the model’s raw generation, then what should it mean for a harness to improve itself? By framing prompts, tools, memory, and control policies as one layer, the section explains why self-improvement must target the system that mediates action and feedback, not just the text given to the model.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

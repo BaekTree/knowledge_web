@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 7 summary</p>
       
-      <h1 class="section-title">Harness Proposal Exploring Diverse yet Minimal Candidate Mod</h1>
+      <h1 class="section-title">Weakness Mining Identifying Failure Patterns from Clustered </h1>
       
 
       <div class="section-summary">
         
-        This section describes how Self-Harness turns evidence from recent failures into a small set of candidate harness edits: the same model is prompted in a proposer role with bounded context, asked to identify addressable failure patterns, and then generate several materially distinct but minimal edits, each with an audit record explaining the target mechanism, changed harness surface, expected effect, and regression risk. The point of the section is to answer a practical search question: how can the system explore useful improvements without giving up interpretability or blowing up the harness into a large rewrite? It sets up a controlled proposal stage that balances diversity across candidates with minimality within each candidate, so later stages can evaluate focused, comparable harness changes rather than opaque, overbroad interventions.
+        This section turns raw run failures into structured evidence the system can use to improve the harness. It runs the model under the current harness, records traces and evaluator outcomes, extracts a failure signature for each failed case, and clusters failures only when they share the same verifier-level cause, agent behavior status, and reusable mechanism. For each cluster, it builds a failure pattern summary and ranks clusters by support and likely usefulness, producing an evidence bundle for the next stage. The point is to answer a key question: what recurring weaknesses does the current harness expose, and which ones are actionable enough to fix first? By separating verifier rejection from agent mechanism, it avoids patching superficial symptoms and sets up targeted harness revision.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

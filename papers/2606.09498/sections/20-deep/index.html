@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 20 deeper explanation</p>
       
-      <h1 class="section-title">Trace-Level Analysis of Accepted Edits</h1>
+      <h1 class="section-title">Model inference services</h1>
       
 
       <div class="deeper-copy">
         
-        This section analyzes accepted harness edits at the trace level, meaning it compares concrete agent execution logs before and after Self-Harness changes the prompt or runtime policy. The main technical idea is that the improvements are not caused by a single generic “better instruction,” but by targeted edits matched to each model’s failure mode. Across the examples, the authors distinguish between bootstrap instructions, runtime constraints, error-triggered prompt updates, and environment-management rules, all of which shape how the agent spends its tool-use budget and whether it produces the required artifact.
+        This section describes the inference layer the authors used to run the models in the study. “Hosted inference service” means the model is accessed through a remote API rather than being run on the experimenter’s own hardware. MiniMax M2.5 was called through MiniMax’s own API, while GLM-5 was accessed through OpenRouter, a gateway that provides a standardized interface to third-party models. In contrast, Qwen3.5-35B-A3B was deployed locally, meaning the team ran it on their own machines instead of relying on a vendor endpoint.
 
-The design choices are driven by observed failures. For MiniMax M2.5, the edit shifts the agent from broad exploration to early artifact creation and bounded execution, which is why the agent stops wandering through data and instead computes the answer, writes the file, and verifies it. For Qwen3.5, the harness adds recovery rules such as dependency checks, loop breaking, and artifact-focused retries so that tool errors redirect the agent toward fixing the missing output rather than repeatedly mutating the wrong file. For GLM-5, the edits make environment changes persistent and force a transition from exploration to implementation once the agent has spent too long searching without producing deliverables.
+The design choice here is mostly about balancing convenience, control, and scalability. Hosted APIs reduce operational overhead: the team does not need to manage model serving, GPU scheduling, or upgrades for those models. Local deployment, on the other hand, gives tighter control over runtime behavior, latency, and reproducibility, which is especially useful when the model is part of an experimental pipeline. Running Qwen3.5-35B-A3B on four NVIDIA H200 GPUs suggests the model was large enough to require substantial memory and throughput, so the authors used multi-GPU hardware to make inference practical. Using an internal image derived from the public SGLang Docker image also standardizes the serving stack, because SGLang is a model-serving framework designed for efficient LLM inference.
 
-The point of this trace analysis is to justify the quantitative gains shown earlier. By showing that the accepted edits reliably change behavior in ways that match the diagnosed weaknesses, the section argues that Self-Harness works through causal workflow improvements, not just prompt noise. That sets up the next step in the paper: using these behavioral observations to support the broader claim that the system can automatically discover harness edits that generalize across tasks by correcting model-specific failure patterns.
+Overall, this section sets up the execution environment for the rest of the paper. Before the authors can measure whether harnesses improve themselves, they need a reliable way to query the base models and compare outputs across systems. These inference-service choices define that plumbing: which models are remote, which are local, and what serving software is trusted to make the experiments reproducible. The next step in the paper can then build on this infrastructure to evaluate harness behavior and improvements without ambiguity about how model responses were obtained.
         
       </div>
 
@@ -260,7 +260,6 @@ The point of this trace analysis is to justify the quantitative gains shown earl
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ The point of this trace analysis is to justify the quantitative gains shown earl
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

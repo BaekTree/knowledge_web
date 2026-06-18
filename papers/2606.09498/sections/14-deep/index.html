@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 14 deeper explanation</p>
       
-      <h1 class="section-title">Preliminary</h1>
+      <h1 class="section-title">Splits and protocol</h1>
       
 
       <div class="deeper-copy">
         
-        This section defines the central object of the paper: the harness. A harness is the non-parametric scaffolding around a fixed language model, including instructions, tools, memory, state tracking, and the protocol for when the model can observe, act, verify, and answer. The key point is that the model weights do not change. Instead, the system behavior changes by editing the execution setup that surrounds the model. Formally, the paper treats the model `M` and evaluator `E` as fixed, and studies a sequence of harnesses `h_0, h_1, ..., h_T`, where each new harness is produced by a bounded edit to the previous one.
+        The section defines the evaluation protocol that makes Self-Harness comparisons meaningful. The authors split the benchmark tasks into two fixed parts: a held-in split and a held-out split. The held-in split is the part the proposer can “see” during harness improvement: it provides trajectories, verifier results, and failure evidence, which are the signals used to suggest changes. The held-out split is hidden from the proposer and is used only by the automatic promotion gate, meaning it acts like an internal test set for deciding whether a candidate harness is actually better rather than just overfitting to the visible examples.
 
-The algorithm, Self-Harness, is a search-and-selection loop over harness edits. At each round, the current harness is evaluated on a held-in split `D_in` and a held-out split `D_ho`, producing performance metrics and traces. Those traces are distilled into an evidence bundle, specifically from held-in verifier-grounded failures, so the proposal process is informed by concrete breakdowns rather than vague intuition. The model then proposes `K` candidate edits in parallel, which makes exploration broader and cheaper than serially testing one idea at a time. Each candidate is applied to the current harness and re-evaluated on both splits.
+This design is doing two important things. First, it separates learning signal from evaluation signal, which prevents the proposer from optimizing directly against the same tasks used to judge success. Second, the split assignments are fixed across all harness variants, so every candidate is measured against the same task partition. Each task also starts from a fresh benchmark environment, which avoids contamination from previous runs or accidental state carryover. Together, these choices make the comparison controlled: if performance changes, the paper can attribute that improvement to the harness modifications themselves instead of to different task samples or reused environment state.
 
-The acceptance rule is deliberately strict: a candidate is only accepted if it improves the held-in metric, does not hurt held-out performance, and satisfies an additional positive-score condition. This is meant to prevent overfitting to the training-like split while still allowing local improvements. If multiple candidates are accepted, they are merged into the next harness; if none are accepted, the harness stays unchanged. The section sets up the rest of the paper by establishing the optimization target and the iterative improvement loop, which later sections can then use to show how harness edits are proposed, validated, and accumulated into better agent behavior.
+This section connects directly to the next step in the method: the acceptance rule. Once a candidate harness is proposed from the held-in evidence, the automatic gate checks whether it should be promoted using the held-out split. In other words, this section sets up the experimental scaffolding, and the next section defines the decision criterion that turns a proposed harness into an accepted one.
         
       </div>
 
@@ -260,7 +260,6 @@ The acceptance rule is deliberately strict: a candidate is only accepted if it i
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ The acceptance rule is deliberately strict: a candidate is only accepted if it i
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

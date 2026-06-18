@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 12 deeper explanation</p>
       
-      <h1 class="section-title">Model inference services</h1>
+      <h1 class="section-title">Models</h1>
       
 
       <div class="deeper-copy">
         
-        This section describes the inference infrastructure used to run the paper’s models. The key idea is that different models were accessed in different ways depending on practical constraints: MiniMax M2.5 and GLM-5 were used through hosted APIs, while Qwen3.5-35B-A3B was run locally. An inference service is the layer that turns a model checkpoint into something the researchers can actually query, whether that is a remote endpoint or a self-managed GPU deployment.
+        This section establishes the experimental scope for Self-Harness: the authors test it on three fixed base models, MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. The important technical idea is that the “model” is not being changed when comparing harnesses; instead, the same underlying model is wrapped by different harness designs. Here, a harness means the surrounding control logic that decides how the model is prompted, how it uses tools, how it reacts to evaluator feedback, and how it proposes edits to itself. Because the model is also used during the proposal stage to generate edits from feedback, the system is effectively self-improving using the same core model rather than relying on a stronger external editor.
 
-The design choice here is mostly about reliability, compatibility, and control. Using MiniMax’s own API and OpenRouter for GLM-5 avoids the overhead of self-hosting those models and lets the authors use the providers’ maintained serving stacks. By contrast, Qwen3.5-35B-A3B was deployed on four NVIDIA H200 GPUs using an internal image based on the public SGLang Docker image. SGLang is a serving framework designed for efficient LLM inference, so basing the deployment on it gives the authors a standardized runtime for batching, request handling, and GPU utilization. The specific Docker tag also matters for reproducibility, because it pins the software environment to a known version.
+The main design choice is to keep everything except the harness constant: decoding settings, budget, tool access, benchmark environment, and evaluator are all held fixed. This makes the comparison a within-model comparison, which is much cleaner than comparing different models or mixed protocols. The point is causal isolation: if performance changes, the difference can be attributed to the harness itself rather than to a better model, more compute, a different evaluator, or a looser tool budget. In other words, they are trying to measure the marginal value of the self-improvement mechanism, not the base capability of the model.
 
-Taken together, these choices establish a controlled execution environment for the rest of the paper. Once the models are reachable through stable inference paths, the authors can fairly run harness-generation or harness-improvement experiments without the results being confounded by ad hoc deployment differences. In other words, this section is the plumbing that makes the next experimental step trustworthy and repeatable.
+This setup matters because it defines the experimental baseline for the rest of the paper. Once the authors have isolated harness effects, they can move on to show whether Self-Harness actually improves outcomes under controlled conditions and how those improvements compare across model families. The next step is therefore likely to analyze the behavior and effectiveness of the self-generated harness edits, since this section has already fixed the evaluation frame that makes those results interpretable.
         
       </div>
 
@@ -260,7 +260,6 @@ Taken together, these choices establish a controlled execution environment for t
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ Taken together, these choices establish a controlled execution environment for t
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

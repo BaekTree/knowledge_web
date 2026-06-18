@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 7 deeper explanation</p>
       
-      <h1 class="section-title">Harness Proposal Exploring Diverse yet Minimal Candidate Mod</h1>
+      <h1 class="section-title">Weakness Mining Identifying Failure Patterns from Clustered </h1>
       
 
       <div class="deeper-copy">
         
-        This section describes the proposal stage of Self-Harness: given an evidence bundle \(B_t\), the system asks the same fixed model \(M\) to act as a harness editor rather than a general optimizer. The key constraint is that the proposer only sees a bounded context: editable harness surfaces, verifier-backed failure patterns, examples of behaviors that should be preserved, and summaries of prior attempts. That design matters because it pushes the model to reason over repeated, cross-case failure mechanisms instead of reacting to isolated logs. In other words, the proposer is trying to infer “what rule is missing or wrong in the harness?” rather than “what happened in one run?”
+        This section turns raw failures into structured evidence that can guide harness improvement. For each task instance in a held-in split, the system runs the fixed model under the current harness, collects the output and execution trace, and asks a fixed evaluator to label the result as pass or fail. Each run becomes a trace record, and the full set of records for a round is the round-level dataset. The important design choice is that the model and evaluator stay fixed across rounds, so any systematic change in the records can be attributed to the harness itself rather than to a moving target.
 
-The method then generates \(K\) parallel proposal bundles, each containing a concrete edit \(d_j\) and an audit record \(a_j\). The edit produces a candidate harness \(h_t^{(j)} = d_j(h_t)\). The audit record serves as a compact justification: which failure pattern is being targeted, what surface is being changed, what effect is expected, and what regressions might occur. Two design choices are central here. First, proposals must be materially distinct, so the search space is broadened without producing redundant variants of the same idea. Second, each proposal must be minimal, meaning it changes only the harness surface needed to address the chosen mechanism. This keeps branches interpretable and reduces the risk of collateral damage to unrelated behavior.
+The key technical move is to focus only on failed runs and cluster them by a failure signature, not by surface similarity of the traces. That signature combines three pieces: the terminal verifier-level cause, the causal status of the agent behavior that led there, and the abstract mechanism exposed by the trace. This matters because two runs may both end in “timeout,” but one may be caused by the agent getting stuck in a loop while another is caused by a missing cleanup step. Grouping by exact signature avoids mixing different root causes that happen to share the same final symptom. In other words, the clustering is evaluator-grounded and deterministic: it groups failures only when they reflect the same verifier rejection and the same reusable behavioral weakness.
 
-The proposal stage also filters targets before editing. A failure cluster is only eligible if it is both supported by evidence and plausibly addressable through a harness modification. That excludes cases where the issue is really task difficulty, unstable execution, or model capability rather than a missing control rule. This section connects directly to the next step in the paper: once a small set of diverse, minimally edited candidate harnesses has been generated, the system can evaluate them and choose the best improvement while preserving the behaviors that already work.
+The output of this stage is an evidence bundle that summarizes the dominant failure patterns, including cluster size, representative examples, shared symptoms, and inferred mechanisms. The clusters are then ranked by support and actionability, so the most recurring and fixable weaknesses rise to the top. This is what connects to the next step: the proposer does not receive a vague list of failures, but a curated set of failure patterns that point toward concrete harness edits. The separation between “what failed” and “how to fix it” is deliberate, because it keeps the evaluator as an evidence producer and lets the optimizer focus on selecting the best harness revision.
         
       </div>
 
@@ -260,7 +260,6 @@ The proposal stage also filters targets before editing. A failure cluster is onl
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ The proposal stage also filters targets before editing. A failure cluster is onl
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

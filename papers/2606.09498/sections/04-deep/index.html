@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 4 deeper explanation</p>
       
-      <h1 class="section-title">Experiments</h1>
+      <h1 class="section-title">Self-improving agents and automated agent design</h1>
       
 
       <div class="deeper-copy">
         
-        This section tests the central claim of Self-Harness: instead of changing the language model, improve the surrounding control code, or “harness,” that orchestrates how the model is prompted, checked, and used in a terminal environment. The benchmark is Terminal-Bench-2.0, which measures how well an agent can operate inside containerized shells. The important technical idea is that the model weights stay fixed while the harness adapts, so any gains come from better scaffolding rather than a stronger base model.
+        This section separates prior work into three related but distinct ideas. First are systems that improve themselves by updating some internal object over time, such as verbal feedback, long-term memory, context, or even generated code. The technical point is that these methods let a fixed base model benefit from accumulated experience, but the thing being improved is usually not the harness itself. Instead, they modify the model’s prompt history, memory store, or an auxiliary program that wraps the model.
 
-The experimental design uses the same minimal DeepAgent-style harness for every backend, then lets Self-Harness search for bounded edits. “Bounded” means changes are constrained enough to remain safe and comparable, rather than rewriting the whole agent. Candidate edits are not accepted blindly: they are validated against held-in execution evidence, meaning the system checks them on observed task behavior, and then promoted only if they also pass held-out regression gates, which are tests meant to prevent improvements on one case from breaking previously solved cases. This is a deliberate design choice because harness optimization can easily overfit to a single trajectory unless it is tied to regression testing.
+Second are methods that optimize agent designs from the outside. Here, the design space is the agent’s graph, workflow, or harness code, and an external search procedure evaluates many candidates using scores, traces, or source code. The important distinction is control: the improvement process is not produced by the agent under test, but by a separate optimizer. This motivates the paper’s focus on harness-level optimization, while also highlighting a gap: existing systems treat improvement as external rather than as a bounded self-proposal made by the same model inside its current setup.
 
-This section sets up the rest of the paper’s empirical story. Once the experimental protocol is defined, the next step is to report whether these self-generated harness edits actually improve performance across different model backends and whether the gains are robust rather than accidental. In other words, the section establishes the controlled setting; the following section can then answer how much Self-Harness helps, on which models, and under what conditions the gains hold up.
+The final paragraph broadens the landscape to self-evolving systems for science and algorithms, such as automated research agents and open-ended capability-expansion loops. Self-Harness sits closest to these ideas, but deliberately narrows the problem. It asks a more controlled question: can a fixed model, operating within its present harness, propose a small, bounded change to that harness that will govern its future behavior? This framing sets up the next step in the paper, where the authors move from related work to their specific self-improvement mechanism and evaluation protocol.
         
       </div>
 
@@ -260,7 +260,6 @@ This section sets up the rest of the paper’s empirical story. Once the experim
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@ This section sets up the rest of the paper’s empirical story. Once the experim
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

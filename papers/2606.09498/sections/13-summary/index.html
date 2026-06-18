@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 13 summary</p>
       
-      <h1 class="section-title">Models</h1>
+      <h1 class="section-title">Harness</h1>
       
 
       <div class="section-summary">
         
-        This section specifies the experimental models used to test Self-Harness and makes the comparison setup explicit: MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. The key design choice is that each model stays fixed across all harness variants, and the same model is also used to turn evaluator feedback into proposed edits. That means the paper is not asking whether one model is better than another, but whether Self-Harness improves the harness for a given model under the same decoding settings, tool access, benchmark environment, and evaluator. It exists to isolate the causal effect of the harness itself, so later results can be interpreted as changes due to self-improvement in the harness rather than differences in model strength or evaluation protocol.
+        This section defines the starting point for Self-Harness: a deliberately minimal DeepAgent-based harness with only a short benchmark-facing system prompt and the default filesystem and shell tools. It also constrains what the self-improving system is allowed to edit, namely the harness definition file that controls how DeepAgent is instantiated, along with specific configuration surfaces such as instructions, tool setup, and verification guidance. The section exists to establish the exact object being improved and the boundary of permissible self-modification. That setup answers the question of what “self-improving the harness” means in practice, and it prepares the rest of the paper to measure whether changes to these control points actually produce better harnesses.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>

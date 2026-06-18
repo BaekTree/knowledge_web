@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 2 summary</p>
       
-      <h1 class="section-title">Benchmarks</h1>
+      <h1 class="section-title">Introduction</h1>
       
 
       <div class="section-summary">
         
-        This section defines the evaluation setting for Self-Harness and explains how the authors measure whether self-edits actually help. It uses Terminal-Bench-2.0, a realistic terminal-agent benchmark with deterministic verification, and narrows it to a fixed 64-case subset that excludes unstable web-dependent and multimodal tasks. That choice reduces noise and avoids crediting or blaming the harness for capabilities it does not support yet, so the benchmark reflects harness quality rather than missing infrastructure. In the paper, this section sets up the core question: when the harness improves itself, does that translate into better performance on real tool-using agent tasks under controlled, reproducible conditions?
+        This introduction frames the paper’s central claim: an agent’s behavior depends not just on its base model, but on the harness around it, and that harness can itself be improved. It motivates why hand-engineering harnesses is increasingly impractical as models diversify, then sets up the paper’s main question: can an LLM-based agent learn to revise its own harness using evidence from its failures? To answer that, it defines Self-Harness, outlines the iterative improvement loop, and previews the empirical setting and results showing that the approach improves multiple models on Terminal-Bench-2.0. In short, this section establishes the problem, introduces the proposed solution, and explains why the rest of the paper matters.
         
       </div>
 
@@ -260,7 +260,6 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
-    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -280,30 +279,6 @@
         goTo(nav.upPage);
       }
     });
-
-    document.getElementById('viewport').addEventListener('touchstart', (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('viewport').addEventListener('touchend', (event) => {
-      if (touchStartX === null) {
-        return;
-      }
-
-      const touchEndX = event.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-      touchStartX = null;
-
-      if (Math.abs(deltaX) < 50) {
-        return;
-      }
-
-      if (deltaX < 0 && nav.nextSummary) {
-        goTo(nav.nextSummary);
-      } else if (deltaX > 0 && nav.prevSummary) {
-        goTo(nav.prevSummary);
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>
