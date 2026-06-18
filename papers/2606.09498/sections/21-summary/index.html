@@ -205,9 +205,9 @@
   </style>
 </head>
 <body
-  data-prev-summary="../04-summary/index.html"
-  data-next-summary="../06-summary/index.html"
-  data-deep-page="../05-deep/index.html"
+  data-prev-summary="../20-summary/index.html"
+  data-next-summary=""
+  data-deep-page="../21-deep/index.html"
   data-up-page=""
 >
   <div class="chrome">
@@ -221,25 +221,23 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <a class="nav-arrow prev" href="../04-summary/index.html" aria-label="Previous summary page">←</a>
+      <a class="nav-arrow prev" href="../20-summary/index.html" aria-label="Previous summary page">←</a>
       
-      
-      <a class="nav-arrow next" href="../06-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Section 5 summary</p>
+      <p class="eyebrow">Section 21 summary</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Weakness Mining Identifying Failure Patterns from Clustered </h1>
       
 
       <div class="section-summary">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        This section turns raw run failures into structured evidence that can guide harness improvement. It runs the model under the current harness, collects traces and pass/fail outcomes, then groups failed cases into deterministic clusters using a failure signature that separates the verifier’s terminal rejection reason, the agent behavior that caused it, and the underlying reusable mechanism. The point is to avoid treating failures as isolated accidents and instead identify recurring weakness patterns that plausibly admit the same harness-level fix. It exists to answer a practical question: what exact failure modes should the proposer target next, and on what evidence? The result is an evidence bundle of clustered weaknesses, not an edit itself, which sets up the next stage where candidate harness revisions are proposed from these grounded failure patterns.
         
       </div>
 
       
-      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
+      <a class="down-control" href="../21-deep/index.html" aria-label="Go to deeper explanation">
         <span class="down-arrow">↓</span>
         <span class="down-label">Deeper level</span>
       </a>
@@ -250,7 +248,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 5 summary
+    Section 21 summary
   </p>
 
   <script>

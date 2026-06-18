@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 4 summary</p>
       
-      <h1 class="section-title">2 Background and Related Work</h1>
+      <h1 class="section-title">Experiments</h1>
       
 
       <div class="section-summary">
         
-        This section positions Self-Harness in the landscape of agent and self-improvement research by separating the model from the surrounding system that actually controls behavior. It argues that many failures come from the harness, not just the model, and that improving performance often means changing prompts, tools, memory, verification, permissions, and runtime policies together. It then contrasts prior work on self-improving agents and automated design, which usually adapt memories, contexts, workflows, or externally optimized agent designs, with Self-Harness’s setting: the same fixed model proposes a bounded change to the harness that will govern its own future actions. The section exists to answer a simple framing question: what is new here, and why should we study harness improvement as its own problem rather than just another form of prompting or agent optimization?
+        This section tests the core claim of Self-Harness: that agent performance can improve even when the language model stays fixed, as long as the surrounding harness is allowed to evolve. It does this on Terminal-Bench-2.0, using the same minimal DeepAgent-style starting harness across several model backends, then letting Self-Harness propose small bounded changes, check them against execution traces, and keep only edits that also pass held-out regression gates. The point of the section is to answer a concrete empirical question: do harness-only improvements actually translate into better terminal-task performance, or are they just local overfitting tricks? It also sets up the rest of the paper by establishing whether the method works in practice before discussing what kinds of changes it learns.
         
       </div>
 

@@ -230,7 +230,7 @@
 
       <div class="root-intuition">
         
-        This paper asks whether an AI agent can improve the “control panel” it uses to work, not just its own raw model. That matters because today these harnesses are usually hand-built by people, and they become a bottleneck as models change quickly and behave differently from one another. The key idea is a self-improving loop: the system watches where the model fails, turns those failures into small targeted harness changes, and only keeps a change if it survives regression tests. In effect, the paper shows that the agent can help reshape its own operating rules, and that this can noticeably improve performance across several different models.
+        This paper asks whether an AI agent can improve the “rules of the road” it uses while working, not just get better because a bigger model is swapped in. That matters because today’s agents are often held together by hand-built harnesses, and those harnesses do not fit every model equally well, especially as new models keep appearing. The key idea is to let the model inspect its own failures, propose small targeted changes to its harness, and then keep only the changes that pass regression tests. In effect, it turns repeated mistakes into practical repairs, so the agent is not just driving on a road built by humans but helping redesign the road as it learns to travel it better.
         
       </div>
 

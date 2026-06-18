@@ -229,14 +229,12 @@
 
       <p class="eyebrow">Section 7 summary</p>
       
-      <h1 class="section-title">5
-
-Weakness MiningProceed to Next</h1>
+      <h1 class="section-title">Harness Proposal Exploring Diverse yet Minimal Candidate Mod</h1>
       
 
       <div class="section-summary">
         
-        This section turns failed executions into actionable harness improvements. It first mines recurring weakness patterns from traces, clustering failures by verifier outcome, agent behavior, and underlying mechanism so the system can identify reusable problems instead of isolated errors. It then uses those evidence bundles to propose several diverse but minimal harness edits, each tied to a specific failure mechanism and editable surface. Finally, it validates each candidate against both the held-in and held-out splits to accept only edits that improve performance without causing regressions. The section exists to answer a central question of self-improvement: how can a harness reliably diagnose its own weaknesses, generate targeted fixes, and promote only edits that are actually better rather than merely different?
+        This section describes how Self-Harness turns evidence from recent failures into a small set of candidate harness edits: the same model is prompted in a proposer role with bounded context, asked to identify addressable failure patterns, and then generate several materially distinct but minimal edits, each with an audit record explaining the target mechanism, changed harness surface, expected effect, and regression risk. The point of the section is to answer a practical search question: how can the system explore useful improvements without giving up interpretability or blowing up the harness into a large rewrite? It sets up a controlled proposal stage that balances diversity across candidates with minimality within each candidate, so later stages can evaluate focused, comparable harness changes rather than opaque, overbroad interventions.
         
       </div>
 

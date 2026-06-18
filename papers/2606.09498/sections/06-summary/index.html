@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 6 summary</p>
       
-      <h1 class="section-title">4 Experiments</h1>
+      <h1 class="section-title">Harness</h1>
       
 
       <div class="section-summary">
         
-        This section establishes the experimental testbed for Self-Harness and shows how the authors evaluate whether changing only the harness, not the language model, can improve agent performance. It sets up the benchmark, task filtering, model backends, and fixed evaluation protocol so later results can be interpreted as evidence about the harness itself rather than confounded by model changes or benchmark instability. In other words, it answers the paper’s core experimental question: can self-modifying harness edits produce measurable gains for the same underlying model across realistic terminal tasks?
+        This section defines the starting point of Self-Harness: a deliberately small DeepAgent-based harness with only a benchmark-facing system prompt plus default filesystem and shell tools. It also narrows what the system is allowed to edit when proposing a new harness candidate, namely the harness definition file and its explicit configuration fields such as instructions, tools, and verification guidance. The point of the section is to set the boundary of self-improvement: the paper is not asking whether an agent can rewrite arbitrary code, but whether it can improve the control structure that instantiates and governs itself. That setup is necessary because later results depend on comparing harness variants under a clear, constrained definition of what can change.
         
       </div>
 

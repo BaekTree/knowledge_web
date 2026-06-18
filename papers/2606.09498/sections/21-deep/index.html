@@ -205,10 +205,10 @@
   </style>
 </head>
 <body
-  data-prev-summary="../04-summary/index.html"
-  data-next-summary="../06-summary/index.html"
-  data-deep-page="../05-deep/index.html"
-  data-up-page=""
+  data-prev-summary=""
+  data-next-summary=""
+  data-deep-page=""
+  data-up-page="../21-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -221,36 +221,36 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <a class="nav-arrow prev" href="../04-summary/index.html" aria-label="Previous summary page">←</a>
-      
-      
-      <a class="nav-arrow next" href="../06-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Section 5 summary</p>
+      <p class="eyebrow">Section 21 deeper explanation</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Weakness Mining Identifying Failure Patterns from Clustered </h1>
       
 
-      <div class="section-summary">
+      <div class="deeper-copy">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        This section turns raw failures into structured training signal for the harness. At each round, the fixed model `M` is run on a held-in set `D_in` under the current harness `h_t`, producing a task instance, output, trace, and evaluator label `z_i` for each example. The important design choice is that both the model and evaluator stay fixed, so any change in the collected records across rounds can be attributed to the harness itself. That makes the trace set `R_t` a controlled snapshot of how the harness is shaping behavior. From there, the method narrows attention to the failed cases `F_t`, because the goal is not to catalogue all behavior, but to mine recurring weaknesses that the harness might correct.
+
+The core technical move is the failure signature `(c_i, q_i, m_i)`. Here `c_i` is the terminal verifier-level cause, such as timeout or missing artifact; `q_i` is the causal status of the agent behavior, meaning whether that behavior actually contributed to the failure; and `m_i` is the abstract reusable mechanism revealed by the trace. This separation is deliberate. Two failures can look identical at the evaluator level but still require different interventions, so clustering only on surface outcome would blur distinct causes together. By clustering on exact signature agreement, the system groups cases only when they share the same rejection cause, causal role, and mechanism, producing deterministic, evaluator-grounded clusters rather than fuzzy semantic similarity groups.
+
+Each cluster is then summarized as a failure pattern with support, example tasks, trace symptoms, verifier evidence, and the inferred mechanism. Ordering clusters by support and estimated actionability pushes the proposer toward recurring, high-value weaknesses instead of one-off anomalies. The output is an evidence bundle `B_t`, which does not yet change the harness; it just packages the strongest failure patterns in a way that supports revision. This directly feeds the next stage, where the proposer uses `B_t` to suggest concrete harness modifications targeted at reusable failure mechanisms rather than generic outcomes like “timeout” or “assertion failed.”
         
       </div>
 
       
-      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
-        <span class="down-arrow">↓</span>
-        <span class="down-label">Deeper level</span>
-      </a>
-      
 
+      
+      <a class="up-control" href="../21-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
       
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 5 summary
+    Section 21 deeper explanation
   </p>
 
   <script>

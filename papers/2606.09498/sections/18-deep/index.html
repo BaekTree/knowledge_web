@@ -205,10 +205,10 @@
   </style>
 </head>
 <body
-  data-prev-summary="../04-summary/index.html"
-  data-next-summary="../06-summary/index.html"
-  data-deep-page="../05-deep/index.html"
-  data-up-page=""
+  data-prev-summary=""
+  data-next-summary=""
+  data-deep-page=""
+  data-up-page="../18-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -221,36 +221,36 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <a class="nav-arrow prev" href="../04-summary/index.html" aria-label="Previous summary page">←</a>
-      
-      
-      <a class="nav-arrow next" href="../06-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Section 5 summary</p>
+      <p class="eyebrow">Section 18 deeper explanation</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Splits and protocol</h1>
       
 
-      <div class="section-summary">
+      <div class="deeper-copy">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        This section defines the evaluation protocol that keeps Self-Harness honest. The full task set is split into two fixed parts: a held-in split and a held-out split. The held-in split is the only part the proposer can inspect, and it provides the raw material for improvement: execution trajectories, verifier results, and failure evidence. In other words, it is the “training signal” for harness refinement. The held-out split is hidden from the proposer and is reserved for the automatic promotion gate, which acts like a validation set to check whether a candidate harness generalizes beyond the tasks it can see.
+
+The main design choice is to separate harness development from harness selection. That separation matters because a self-improving system can otherwise overfit to the examples it is allowed to inspect, producing a harness that looks good on exposed tasks but does not actually improve overall. By fixing the task split assignments across all harness variants, the authors ensure that comparisons are fair: every variant faces the same held-in and held-out tasks. Starting each task from a fresh benchmark environment removes carryover effects, so gains cannot come from hidden state, cached information, or prior interactions. Taken together, these controls make the source of any measured improvement much clearer: it must come from the harness changes themselves.
+
+This section sets up the next stage of the method, where candidate harnesses are proposed and then tested against the promotion rule. Once the split protocol is fixed, the paper can focus on how proposals are generated and how the gate decides whether a candidate is strong enough to replace the current harness. In effect, this section defines the experimental guardrails that make the later self-improvement loop measurable and credible.
         
       </div>
 
       
-      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
-        <span class="down-arrow">↓</span>
-        <span class="down-label">Deeper level</span>
-      </a>
-      
 
+      
+      <a class="up-control" href="../18-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
       
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 5 summary
+    Section 18 deeper explanation
   </p>
 
   <script>

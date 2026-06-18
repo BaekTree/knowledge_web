@@ -206,7 +206,7 @@
 </head>
 <body
   data-prev-summary="../09-summary/index.html"
-  data-next-summary=""
+  data-next-summary="../11-summary/index.html"
   data-deep-page="../10-deep/index.html"
   data-up-page=""
 >
@@ -224,15 +224,17 @@
       <a class="nav-arrow prev" href="../09-summary/index.html" aria-label="Previous summary page">←</a>
       
       
+      <a class="nav-arrow next" href="../11-summary/index.html" aria-label="Next summary page">→</a>
+      
 
       <p class="eyebrow">Section 10 summary</p>
       
-      <h1 class="section-title">References</h1>
+      <h1 class="section-title">Main Results</h1>
       
 
       <div class="section-summary">
         
-        This section lists the prior work the paper builds on and positions Self-Harness within the broader landscape of agent systems, harness engineering, self-improvement loops, prompting, context engineering, tool use, and benchmarked coding agents. It exists to answer the question “What ideas, systems, and empirical results is this paper extending or comparing against?” and to make the paper’s novelty legible against closely related efforts. In practice, it provides the intellectual map for the paper’s claims: which approaches already explored automatic agent design, which ones focused on evaluation or observability, and which ones hint at self-optimization but stop short of harnesses that can improve themselves.
+        This section quantifies whether Self-Harness promotion actually helps in the benchmark setting it was designed for. It compares Terminal-Bench-2.0 Pass rates before and after promotion for three different model backends, on both the held-in split used to generate edits and the held-out split used to test generalization. The point is to answer a concrete question: do harness-level changes improve execution behavior without changing the model, tools, budget, or evaluator? The results show that promoted harnesses consistently improve or at least preserve performance on both splits, including the unseen one, which supports the paper’s claim that Self-Harness is learning reusable execution improvements rather than overfitting to a narrow set of failures.
         
       </div>
 

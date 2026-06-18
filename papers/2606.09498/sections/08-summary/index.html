@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 8 summary</p>
       
-      <h1 class="section-title">5 Conclusion</h1>
+      <h1 class="section-title">Harness evolution and retained edits</h1>
       
 
       <div class="section-summary">
         
-        This conclusion wraps up the paper by restating the core claim: a fixed model can improve the harness that controls it, but only through bounded, evidence-backed edits that are re-evaluated under the same benchmark and accepted only if they do not regress. It exists to answer the paper’s main question, whether harness changes can be treated as a disciplined empirical process rather than an ad hoc prompt tweak, and to summarize what the experiments showed on Terminal-Bench-2.0 across different backends. It also sets up the paper’s boundaries and future direction by noting that the method works for constrained harness surfaces, not open-ended self-improvement, and that stronger safety gates are needed for higher-stakes changes.
+        This section shows how Self-Harness changes over time and which code edits survive validation, using MiniMax M2.5, Qwen3.5, and GLM-5 as examples. It exists to answer a concrete question: does the system improve through a steady stream of good ideas, or through a few validation-approved fixes that directly target failure modes? The answer is the latter. The section sets up the paper’s claim that Self-Harness is not just generating generic harness variations; it is identifying model-specific breakdowns such as missing artifacts, brittle tool use, retry loops, and poor transition from exploration to implementation, then retaining only the edits that measurably improve behavior.
         
       </div>
 

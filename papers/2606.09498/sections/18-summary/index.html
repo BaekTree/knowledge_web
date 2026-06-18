@@ -205,9 +205,9 @@
   </style>
 </head>
 <body
-  data-prev-summary="../04-summary/index.html"
-  data-next-summary="../06-summary/index.html"
-  data-deep-page="../05-deep/index.html"
+  data-prev-summary="../17-summary/index.html"
+  data-next-summary="../19-summary/index.html"
+  data-deep-page="../18-deep/index.html"
   data-up-page=""
 >
   <div class="chrome">
@@ -221,25 +221,25 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <a class="nav-arrow prev" href="../04-summary/index.html" aria-label="Previous summary page">←</a>
+      <a class="nav-arrow prev" href="../17-summary/index.html" aria-label="Previous summary page">←</a>
       
       
-      <a class="nav-arrow next" href="../06-summary/index.html" aria-label="Next summary page">→</a>
+      <a class="nav-arrow next" href="../19-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Section 5 summary</p>
+      <p class="eyebrow">Section 18 summary</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Splits and protocol</h1>
       
 
       <div class="section-summary">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        This section defines the evaluation protocol that makes Self-Harness measurable and fair: the fixed task set is split into a held-in portion, which the proposer can inspect through trajectories, verifier results, and failure evidence, and a held-out portion, which remains hidden and is used only by the automatic promotion gate. It also keeps task assignments constant across harness variants and resets each task in a fresh benchmark environment. The point of these controls is to isolate the effect of harness changes from noise, leakage, or cross-run differences. In the paper, this section answers the question of how the system decides whether an improved harness is genuinely better, and it sets up the experimental comparison that follows.
         
       </div>
 
       
-      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
+      <a class="down-control" href="../18-deep/index.html" aria-label="Go to deeper explanation">
         <span class="down-arrow">↓</span>
         <span class="down-label">Deeper level</span>
       </a>
@@ -250,7 +250,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 5 summary
+    Section 18 summary
   </p>
 
   <script>

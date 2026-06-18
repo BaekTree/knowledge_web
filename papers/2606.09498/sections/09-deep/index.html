@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 9 deeper explanation</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">Introduction</h1>
       
 
       <div class="deeper-copy">
         
-        This abstract introduces two coupled pieces of an LLM agent: the base model, which produces actions, and the harness, which is the surrounding control logic that formats prompts, interprets outputs, retries failures, and interfaces with the environment. The key idea is that performance depends on both, and that harnesses are not one-size-fits-all because different models fail in different ways. Self-Harness is the paper’s proposal for closing this gap: instead of having humans hand-tune the harness, the model itself iteratively improves its own operating wrapper.
+        The section’s central idea is that an LLM agent’s behavior depends not only on the base model, but also on its harness: the surrounding prompts, tools, orchestration logic, verification rules, and recovery procedures that shape how the model acts. The paper argues that harnesses are usually hand-engineered, but that this does not scale because different models fail in different ways. Self-Harness addresses this by letting the target agent improve its own harness, instead of relying on a stronger external model or human tuning.
 
-The method is organized as a three-stage loop. First, Weakness Mining scans execution traces, which are records of what the agent tried and where it failed, to identify recurring model-specific failure patterns. Second, Harness Proposal turns those weaknesses into candidate harness edits, but keeps the edits “minimal” so the system changes only what is necessary rather than rewriting the whole setup. Third, Proposal Validation tests each candidate against regressions, meaning it only accepts changes that help on the targeted failures without breaking existing behavior. That design choice matters because harnesses are easy to overfit: a clever patch can fix one benchmark and silently damage generality.
+Technically, Self-Harness is an iterative improvement loop with three steps. First, Weakness Mining runs the current harness on tasks and clusters failed traces, so the system can infer recurring failure modes rather than react to isolated errors. Second, Harness Proposal asks the agent to generate a small set of diverse but minimal edits, which keeps changes targeted and tied to a specific mechanism. Third, Proposal Validation uses regression tests to accept only edits that improve performance without harming held-out tasks. This design is deliberate: it balances adaptation with generalization, and it prevents the harness from overfitting to the exact failures it just observed.
 
-The results section is foreshadowed here by showing that the approach is instantiated on Terminal-Bench-2.0 with a deliberately small initial harness and three diverse models. The reported gains suggest the loop is not just adding generic prompting tricks; it is converting concrete failure traces into executable control changes. This sets up the next part of the paper, which will need to show how the loop works in detail and why these harness edits reliably improve performance across model families.
+The experiments motivate why this loop matters. Across three different models, the same initial harness improves differently, showing that harness design is model-specific. The qualitative examples also show that the learned edits are not just longer prompts, but concrete interventions such as earlier file creation, dependency checking, and better loop avoidance. This section therefore sets up the paper’s next step: a closer description of how the loop is implemented and how the harness updates are derived and evaluated in practice.
         
       </div>
 

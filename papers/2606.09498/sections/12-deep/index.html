@@ -205,10 +205,10 @@
   </style>
 </head>
 <body
-  data-prev-summary="../04-summary/index.html"
-  data-next-summary="../06-summary/index.html"
-  data-deep-page="../05-deep/index.html"
-  data-up-page=""
+  data-prev-summary=""
+  data-next-summary=""
+  data-deep-page=""
+  data-up-page="../12-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -221,36 +221,36 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <a class="nav-arrow prev" href="../04-summary/index.html" aria-label="Previous summary page">←</a>
-      
-      
-      <a class="nav-arrow next" href="../06-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Section 5 summary</p>
+      <p class="eyebrow">Section 12 deeper explanation</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Model inference services</h1>
       
 
-      <div class="section-summary">
+      <div class="deeper-copy">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        This section describes the inference infrastructure used to run the paper’s models. The key idea is that different models were accessed in different ways depending on practical constraints: MiniMax M2.5 and GLM-5 were used through hosted APIs, while Qwen3.5-35B-A3B was run locally. An inference service is the layer that turns a model checkpoint into something the researchers can actually query, whether that is a remote endpoint or a self-managed GPU deployment.
+
+The design choice here is mostly about reliability, compatibility, and control. Using MiniMax’s own API and OpenRouter for GLM-5 avoids the overhead of self-hosting those models and lets the authors use the providers’ maintained serving stacks. By contrast, Qwen3.5-35B-A3B was deployed on four NVIDIA H200 GPUs using an internal image based on the public SGLang Docker image. SGLang is a serving framework designed for efficient LLM inference, so basing the deployment on it gives the authors a standardized runtime for batching, request handling, and GPU utilization. The specific Docker tag also matters for reproducibility, because it pins the software environment to a known version.
+
+Taken together, these choices establish a controlled execution environment for the rest of the paper. Once the models are reachable through stable inference paths, the authors can fairly run harness-generation or harness-improvement experiments without the results being confounded by ad hoc deployment differences. In other words, this section is the plumbing that makes the next experimental step trustworthy and repeatable.
         
       </div>
 
       
-      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
-        <span class="down-arrow">↓</span>
-        <span class="down-label">Deeper level</span>
-      </a>
-      
 
+      
+      <a class="up-control" href="../12-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
       
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 5 summary
+    Section 12 deeper explanation
   </p>
 
   <script>

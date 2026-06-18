@@ -205,10 +205,10 @@
   </style>
 </head>
 <body
-  data-prev-summary="../04-summary/index.html"
-  data-next-summary="../06-summary/index.html"
-  data-deep-page="../05-deep/index.html"
-  data-up-page=""
+  data-prev-summary=""
+  data-next-summary=""
+  data-deep-page=""
+  data-up-page="../16-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -221,36 +221,36 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <a class="nav-arrow prev" href="../04-summary/index.html" aria-label="Previous summary page">←</a>
-      
-      
-      <a class="nav-arrow next" href="../06-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Section 5 summary</p>
+      <p class="eyebrow">Section 16 deeper explanation</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Self-Harness An Iterative Loop for Model-Specific Harness Im</h1>
       
 
-      <div class="section-summary">
+      <div class="deeper-copy">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        This section introduces Self-Harness as a closed-loop method for improving an agent’s harness using the same model that the harness serves. The key idea is to move between two roles: an evaluation system that observes failures, and a proposer system that suggests fixes. Instead of treating harness design as purely manual engineering or a black-box search problem, Self-Harness uses execution traces as evidence. A trace is the record of what the harness and model did on a task; by clustering similar traces, the system finds recurring failure patterns rather than reacting to isolated mistakes. That makes the improvement process more systematic: it targets underlying mechanisms, such as bad tool-selection logic or brittle retry behavior, not just surface symptoms.
+
+The design choices are conservative on purpose. The model is asked to produce “diverse yet minimal” candidate modifications, meaning each edit should address one failure mode while leaving the overall control architecture intact. This matters because large rewrites can entangle improvements with new regressions, making it hard to know what actually helped. The loop also includes regression testing on held-out tasks, which functions like a unit-test suite for harness behavior. Only edits that improve performance without unacceptable regressions are accepted. In effect, the method is balancing exploration and stability: it searches for useful local changes, but it keeps a strong guardrail against overfitting to the observed failures.
+
+This section sets up the paper’s next step by establishing the full iterative refinement pipeline: observe failures, propose edits, test them, and accept only robust gains. Once that loop is defined, the rest of the paper can focus on what kinds of evidence are extracted, how candidate edits are generated and ranked, and how much improvement the self-improving harness achieves compared with manually engineered or externally optimized baselines.
         
       </div>
 
       
-      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
-        <span class="down-arrow">↓</span>
-        <span class="down-label">Deeper level</span>
-      </a>
-      
 
+      
+      <a class="up-control" href="../16-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
       
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 5 summary
+    Section 16 deeper explanation
   </p>
 
   <script>

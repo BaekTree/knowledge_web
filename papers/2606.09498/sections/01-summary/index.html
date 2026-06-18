@@ -229,14 +229,12 @@
 
       <p class="eyebrow">Section 1 summary</p>
       
-      <h1 class="section-title">1
-
-Introduction</h1>
+      <h1 class="section-title">Abstract</h1>
       
 
       <div class="section-summary">
         
-        This introduction frames the paper’s core problem: agent performance depends not just on the base LLM, but on the harness around it, and hand-designed harnesses do not scale across rapidly changing models. It then introduces Self-Harness as the paper’s answer: instead of relying on humans or a stronger external agent, the target model improves its own harness by mining its failures, proposing focused edits, and validating them with regression tests. The section exists to motivate why self-improvement at the harness level matters, define the paradigm the rest of the paper studies, and preview the evidence that this loop can produce model-specific, generalizable gains across different base models.
+        This abstract frames the paper’s core claim: agent performance depends not just on the base model, but also on the harness that guides its actions, and that harness can itself be improved by the agent. It introduces Self-Harness as an iterative process with three parts: mining model-specific failures, proposing small harness edits targeted at those failures, and validating edits through regression tests. It then summarizes the main empirical result on Terminal-Bench-2.0, showing that this method improves three different base models by substantial margins. The section exists to answer the paper’s central question up front: can an LLM-based agent systematically reshape its own harness without human engineers or stronger helper models, and does that actually help in practice?
         
       </div>
 

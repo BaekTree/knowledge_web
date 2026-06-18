@@ -205,10 +205,10 @@
   </style>
 </head>
 <body
-  data-prev-summary="../04-summary/index.html"
-  data-next-summary="../06-summary/index.html"
-  data-deep-page="../05-deep/index.html"
-  data-up-page=""
+  data-prev-summary=""
+  data-next-summary=""
+  data-deep-page=""
+  data-up-page="../17-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -221,36 +221,36 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <a class="nav-arrow prev" href="../04-summary/index.html" aria-label="Previous summary page">←</a>
-      
-      
-      <a class="nav-arrow next" href="../06-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Section 5 summary</p>
+      <p class="eyebrow">Section 17 deeper explanation</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Self-improving agents and automated agent design</h1>
       
 
-      <div class="section-summary">
+      <div class="deeper-copy">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        This section situates Self-Harness among three related research threads. The first thread studies self-improving agents that change what they carry forward across attempts: they may store feedback in memory, rewrite their context, or recursively refine their outputs. The key technical idea is that a fixed base model can still improve if some persistent artifact around it changes over time. But in these methods, the thing being updated is usually not the agent itself as a bounded system; it is a response policy, a memory store, a prompt context, or a generated program.
+
+The second thread shifts optimization outside the agent. Automated agent-design methods search over whole agent graphs or harness code using scores, traces, and prior candidates. The important design choice here is that improvement is treated as an external search problem: some optimizer proposes better agent structures from the outside. Self-Harness distinguishes itself by asking whether the model, while running inside its current harness, can propose a limited edit to that harness rather than relying on a separate design loop. That bounded-edit framing matters because it constrains the search space and makes the improvement mechanism more directly attributable to the model’s own proposal.
+
+The third thread covers broader self-evolving systems for science, algorithms, and capability growth. These works motivate the idea that agents can participate in open-ended improvement, but they often target much larger loops than harness tuning. Self-Harness narrows the problem to a controlled question: can the same fixed model improve its own future behavior by suggesting a small harness change under the current setup? That narrower setting is what makes the next part of the paper possible, because it turns self-improvement into something concrete to evaluate, rather than an open-ended claim about autonomy.
         
       </div>
 
       
-      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
-        <span class="down-arrow">↓</span>
-        <span class="down-label">Deeper level</span>
-      </a>
-      
 
+      
+      <a class="up-control" href="../17-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
       
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 5 summary
+    Section 17 deeper explanation
   </p>
 
   <script>

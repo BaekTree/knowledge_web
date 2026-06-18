@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 9 summary</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">Introduction</h1>
       
 
       <div class="section-summary">
         
-        This abstract sets up the paper’s core claim: harnesses are not just fixed scaffolding around an LLM agent, but something the model itself can improve. It briefly defines Self-Harness as a three-step loop, explains how the method works at a high level, and summarizes the main empirical result that model-specific harness edits substantially boost benchmark performance across three different base models. The section exists to answer the paper’s opening question: can an agent discover and repair its own harness better than a human-designed one, without stronger outside help? It also previews the paper’s contribution by showing that the improvements come from concrete, regression-tested harness changes rather than vague prompt expansion, setting up the later sections that explain the method and validate it.
+        This introduction frames the paper’s central claim: the harness around an LLM agent can matter as much as the base model, and it can itself be improved by the model it supports. It sets up the problem that current harnesses are mostly hand-designed, fragile across models, and expensive to retune as models change. It then introduces Self-Harness as the paper’s answer: an iterative loop where the agent mines its own failures, proposes targeted harness edits, and keeps only changes that improve held-out performance. Finally, it previews the experimental evidence that this approach works across multiple model families and yields model-specific, nontrivial harness improvements. The section exists to motivate the problem, define the new paradigm, and establish the paper’s main question: can an agent systematically improve the harness that governs its own behavior?
         
       </div>
 

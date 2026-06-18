@@ -205,10 +205,10 @@
   </style>
 </head>
 <body
-  data-prev-summary="../04-summary/index.html"
-  data-next-summary="../06-summary/index.html"
-  data-deep-page="../05-deep/index.html"
-  data-up-page=""
+  data-prev-summary=""
+  data-next-summary=""
+  data-deep-page=""
+  data-up-page="../14-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -221,36 +221,36 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <a class="nav-arrow prev" href="../04-summary/index.html" aria-label="Previous summary page">←</a>
-      
-      
-      <a class="nav-arrow next" href="../06-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Section 5 summary</p>
+      <p class="eyebrow">Section 14 deeper explanation</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Preliminary</h1>
       
 
-      <div class="section-summary">
+      <div class="deeper-copy">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        This section defines the central object of the paper: the harness. A harness is the non-parametric scaffolding around a fixed language model, including instructions, tools, memory, state tracking, and the protocol for when the model can observe, act, verify, and answer. The key point is that the model weights do not change. Instead, the system behavior changes by editing the execution setup that surrounds the model. Formally, the paper treats the model `M` and evaluator `E` as fixed, and studies a sequence of harnesses `h_0, h_1, ..., h_T`, where each new harness is produced by a bounded edit to the previous one.
+
+The algorithm, Self-Harness, is a search-and-selection loop over harness edits. At each round, the current harness is evaluated on a held-in split `D_in` and a held-out split `D_ho`, producing performance metrics and traces. Those traces are distilled into an evidence bundle, specifically from held-in verifier-grounded failures, so the proposal process is informed by concrete breakdowns rather than vague intuition. The model then proposes `K` candidate edits in parallel, which makes exploration broader and cheaper than serially testing one idea at a time. Each candidate is applied to the current harness and re-evaluated on both splits.
+
+The acceptance rule is deliberately strict: a candidate is only accepted if it improves the held-in metric, does not hurt held-out performance, and satisfies an additional positive-score condition. This is meant to prevent overfitting to the training-like split while still allowing local improvements. If multiple candidates are accepted, they are merged into the next harness; if none are accepted, the harness stays unchanged. The section sets up the rest of the paper by establishing the optimization target and the iterative improvement loop, which later sections can then use to show how harness edits are proposed, validated, and accumulated into better agent behavior.
         
       </div>
 
       
-      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
-        <span class="down-arrow">↓</span>
-        <span class="down-label">Deeper level</span>
-      </a>
-      
 
+      
+      <a class="up-control" href="../14-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
       
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 5 summary
+    Section 14 deeper explanation
   </p>
 
   <script>

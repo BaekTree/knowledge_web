@@ -225,18 +225,16 @@
 
       <p class="eyebrow">Section 3 deeper explanation</p>
       
-      <h1 class="section-title">17
-
-A Additional Implementation Details</h1>
+      <h1 class="section-title">Conclusion</h1>
       
 
       <div class="deeper-copy">
         
-        This section spells out the experimental setup that makes the paper’s results reproducible and fair. The authors ran different model backends in different ways: MiniMax M2.5 and GLM-5 through hosted APIs, while Qwen3.5-35B-A3B was deployed locally on four H200 GPUs. For Terminal-Bench-2.0, they standardized execution on Harbor inside a tightly controlled machine: fixed CPU and memory, plus a low outbound bandwidth cap. They also tuned concurrency per backend, because throughput limits and latency differ across hosted and local inference. A key design choice was to mirror some external resources locally when downloads were stable but slow, so the benchmark measured agent behavior rather than network noise. Tasks with unreliable external dependencies or unsupported multimodal inputs were left out of the main 64-case set for the same reason.
+        The conclusion’s core technical idea is that a harness can be improved as a controlled state transition rather than an informal prompt tweak. In Self-Harness, the model first runs under the current harness, then uses structured evidence from its own execution traces to propose bounded edits to specific harness surfaces, such as configuration or control logic. Those candidate harnesses are re-run under the same benchmark protocol, and only changes that pass a non-regression acceptance rule are kept. This separates “the model got better” from “the harness changed,” which is important because the goal is to measure harness-level improvement, not hidden changes in the underlying model.
 
-The GLM-5 analysis shows what “self-harnessing” actually changes in practice. In the failing trace, the initial harness allowed long, monolithic downloads and wasted tool budget; the agent also kept finalizing even when sanity checks were still failing. The edited harness instead imposed bounded, staged operations, forced the agent to inspect evidence from archives before doing more work, and repaired the failed sanity check before allowing finalization. In other words, the harness is not just a wrapper: it actively shapes search, budget use, and termination behavior.
+The design choices are driven by auditability and causality. Requiring each edit to state the intended behavior change, the modified surface, the motivating evidence, and the evaluation result makes the process traceable and easy to inspect. Fixing the model, evaluator, and benchmark protocol removes confounds, so any performance shift can be attributed to the harness edit itself. The paper emphasizes that these edits are intentionally small and reversible: this keeps the search space bounded and reduces the risk of overfitting to a single run or inventing broad changes that are hard to verify.
 
-That sets up the next step in the paper, which is the harness evolution trajectory in Figure 10. The retained edits from the GLM-5 run are shown as code-level deltas, and the iteration plot tracks how accepted harness candidates gradually improved pass rate while rejected branches did not. This connects the implementation details to the core claim of Self-Harness: small, targeted changes to the execution scaffold can accumulate into a materially stronger agent.
+This section connects to the next step by setting up a disciplined workflow for extending harnesses beyond the initial DeepAgent baseline. The reported gains on Terminal-Bench-2.0 show that even sparse harnesses can self-improve when proposals are evidence-backed and regression-tested, but the limits section makes clear that this is not open-ended self-improvement. The next logical step is to test whether the same evidence-driven loop works in broader, more variable environments, and whether stronger acceptance gates are needed when harness changes affect higher-stakes behavior.
         
       </div>
 

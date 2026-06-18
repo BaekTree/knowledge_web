@@ -205,10 +205,10 @@
   </style>
 </head>
 <body
-  data-prev-summary="../04-summary/index.html"
-  data-next-summary="../06-summary/index.html"
-  data-deep-page="../05-deep/index.html"
-  data-up-page=""
+  data-prev-summary=""
+  data-next-summary=""
+  data-deep-page=""
+  data-up-page="../11-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -221,36 +221,36 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <a class="nav-arrow prev" href="../04-summary/index.html" aria-label="Previous summary page">←</a>
-      
-      
-      <a class="nav-arrow next" href="../06-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Section 5 summary</p>
+      <p class="eyebrow">Section 11 deeper explanation</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Metrics</h1>
       
 
-      <div class="section-summary">
+      <div class="deeper-copy">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        The section defines the paper’s main evaluation metric: **Pass (%)**, meaning the fraction of task attempts that satisfy the benchmark’s verifier. In practice, each harness candidate is tested with **two repeated attempts** unless the paper says otherwise, and the reported score is the percentage of those attempts that pass. The key idea is that they are not measuring a vague notion of “good performance,” but a concrete, binary outcome: did the attempt meet the benchmark’s success condition or not?
+
+This choice makes the metric a measure of **mean single-attempt task success** under a fixed harness setup. That matters because the paper is about harnesses themselves, so the evaluation must isolate how well a particular harness configuration helps a model complete tasks. Using repeated attempts reduces noise from randomness in generation or execution, while still keeping the metric simple and comparable across candidate harnesses. For **Terminal-Bench-2.0**, the pass signal comes from the task verifier applied to the **final container state**, which is a clean end-state criterion: the benchmark checks the resulting environment rather than intermediate behavior.
+
+This metric sets up the next part of the paper by giving Self-Harness a reliable objective function for comparing and improving harness candidates. Once “better” is defined as higher verifier pass rate, the paper can study how self-generated harness changes affect performance and whether the system can iteratively improve its own setup. In other words, this section establishes the score that later parts of the paper will optimize.
         
       </div>
 
       
-      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
-        <span class="down-arrow">↓</span>
-        <span class="down-label">Deeper level</span>
-      </a>
-      
 
+      
+      <a class="up-control" href="../11-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
       
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 5 summary
+    Section 11 deeper explanation
   </p>
 
   <script>

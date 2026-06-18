@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 4 deeper explanation</p>
       
-      <h1 class="section-title">2 Background and Related Work</h1>
+      <h1 class="section-title">Experiments</h1>
       
 
       <div class="deeper-copy">
         
-        This section sets up the paper’s central abstraction: a “harness” is everything around the model that shapes behavior at runtime, not just the prompt. That includes instructions, tool APIs, memory, verification checks, permissions, adapters, and other control logic. The technical point is that many failures in agentic systems come from this outer layer: the model may answer confidently but fail to inspect artifacts, repeat a bad action loop, or forget the source of truth in a long run. The authors distinguish this from isolated model quality because the same base model can behave very differently when the surrounding execution environment changes.
+        This section tests the central claim of Self-Harness: instead of changing the language model, improve the surrounding control code, or “harness,” that orchestrates how the model is prompted, checked, and used in a terminal environment. The benchmark is Terminal-Bench-2.0, which measures how well an agent can operate inside containerized shells. The important technical idea is that the model weights stay fixed while the harness adapts, so any gains come from better scaffolding rather than a stronger base model.
 
-The section also positions Self-Harness relative to prior self-improvement work. One line of research improves the model’s inputs or internal state over time, such as Reflexion-style feedback memory or context engineering, but those methods usually modify a memory, context, or response strategy rather than the harness itself. A second line searches externally over agent designs, as in systems that optimize agent graphs or harness code from traces and scores. The authors deliberately narrow the problem: instead of letting an outside optimizer redesign the agent, they ask whether the model, under its current harness, can propose a bounded edit to that very harness. That choice makes the problem more controlled and easier to attribute, because improvements can be tied to a specific self-proposed change rather than a large external search process.
+The experimental design uses the same minimal DeepAgent-style harness for every backend, then lets Self-Harness search for bounded edits. “Bounded” means changes are constrained enough to remain safe and comparable, rather than rewriting the whole agent. Candidate edits are not accepted blindly: they are validated against held-in execution evidence, meaning the system checks them on observed task behavior, and then promoted only if they also pass held-out regression gates, which are tests meant to prevent improvements on one case from breaking previously solved cases. This is a deliberate design choice because harness optimization can easily overfit to a single trajectory unless it is tied to regression testing.
 
-This framing leads directly into the paper’s next step: defining the self-harness loop and evaluating whether such bounded harness edits actually improve future behavior. In other words, the background motivates a move from “better prompts” or “better external search” to “the model improves the machinery that governs its own future runs.”
+This section sets up the rest of the paper’s empirical story. Once the experimental protocol is defined, the next step is to report whether these self-generated harness edits actually improve performance across different model backends and whether the gains are robust rather than accidental. In other words, the section establishes the controlled setting; the following section can then answer how much Self-Harness helps, on which models, and under what conditions the gains hold up.
         
       </div>
 

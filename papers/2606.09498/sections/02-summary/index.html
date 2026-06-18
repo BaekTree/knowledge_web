@@ -229,12 +229,12 @@
 
       <p class="eyebrow">Section 2 summary</p>
       
-      <h1 class="section-title">13 BASELINE SYSTEM PROMPT  build system prompt</h1>
+      <h1 class="section-title">Benchmarks</h1>
       
 
       <div class="section-summary">
         
-        This section defines the starting harness that Self-Harness is allowed to modify: a minimal DeepAgent-based setup with the baseline system prompt, default file and shell tools, and a small set of configurable hooks for instructions, skills, subagents, memory sources, verification, recovery, and runtime control. It exists to make the intervention space explicit and constrained, so the paper can ask a clean question: if the model is only allowed to edit the harness definition, can it discover better execution policies than the default one? In other words, this section sets up the benchmark for measuring harness self-improvement while holding the model, tools, and task environment fixed.
+        This section defines the evaluation setting for Self-Harness and explains how the authors measure whether self-edits actually help. It uses Terminal-Bench-2.0, a realistic terminal-agent benchmark with deterministic verification, and narrows it to a fixed 64-case subset that excludes unstable web-dependent and multimodal tasks. That choice reduces noise and avoids crediting or blaming the harness for capabilities it does not support yet, so the benchmark reflects harness quality rather than missing infrastructure. In the paper, this section sets up the core question: when the harness improves itself, does that translate into better performance on real tool-using agent tasks under controlled, reproducible conditions?
         
       </div>
 

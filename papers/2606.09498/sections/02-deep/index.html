@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 2 deeper explanation</p>
       
-      <h1 class="section-title">13 BASELINE SYSTEM PROMPT  build system prompt</h1>
+      <h1 class="section-title">Benchmarks</h1>
       
 
       <div class="deeper-copy">
         
-        This section defines the starting point for Self-Harness: a deliberately minimal harness built on the DeepAgent SDK. The baseline only includes the default filesystem and shell tools plus a short system prompt, while the rest of the behavior is exposed through explicit configuration functions such as `build_bootstrap_instruction`, `build_execution_instruction`, `build_verification_instruction`, and `build_failure_recovery_instruction`. The key technical idea is that the harness itself becomes the object of optimization. Instead of tuning the model weights, Self-Harness edits the surrounding execution policy that shapes how the model plans, uses tools, recovers from errors, and decides when to verify results.
+        This section establishes the evaluation setting for Self-Harness. The authors test it on Terminal-Bench-2.0, a multi-turn benchmark for terminal agents, where the agent works inside realistic execution environments and is scored by deterministic verifiers. The important technical idea is that success is not judged by a language model or a human, but by objective checks against the task outcome. The benchmark covers core agent skills such as managing artifacts, issuing correct shell commands, verifying results, and recovering from errors during execution.
 
-The design choice to keep the harness small is important. It creates a clean causal setup: any performance change can be attributed to harness edits rather than to a richer toolset, a different budget, or a more permissive environment. The paper also fixes a held-in/held-out split before proposing edits. The held-in split supplies traces and failure evidence to the proposer, while the held-out split remains hidden and serves as the promotion gate. That separation is what makes the improvements meaningful: the system is not just memorizing specific failures, but learning reusable execution mechanisms that generalize across tasks.
+A key design choice is to evaluate on a fixed 64-case subset rather than all 89 tasks. They exclude tasks that depend on unstable web resources or require multimodal inputs. This is a control strategy: by removing cases where outcomes can vary because of external sites or unsupported input types, they reduce noise and make the measurement more sensitive to harness quality itself. The multimodal exclusion is especially important because the initial harness is intentionally minimal and does not yet include modality-specific input handling; otherwise, the benchmark would mostly measure missing infrastructure instead of whether Self-Harness edits improve agent behavior.
 
-This section sets up the empirical part of the paper. Once the baseline harness and editable interfaces are defined, the next step is to let Self-Harness iteratively propose changes, test them under the promotion rule, and measure whether the promoted harness improves pass rate on Terminal-Bench-2.0. The later results and trace analyses rely on this setup to show that gains come from targeted changes such as earlier artifact creation, better tool-error recovery, and stronger verification discipline, rather than from arbitrary prompt tweaks.
+This setup prepares the next part of the paper by defining a clean test bed for self-improvement. Once the benchmark is constrained to tasks the harness can actually support, any gains can be interpreted as coming from harness modifications rather than from unrelated environment artifacts. That lets the paper move from “what should we measure?” to “how do harness edits change agent performance?”
         
       </div>
 

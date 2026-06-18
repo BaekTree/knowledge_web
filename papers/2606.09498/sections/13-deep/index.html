@@ -205,10 +205,10 @@
   </style>
 </head>
 <body
-  data-prev-summary="../04-summary/index.html"
-  data-next-summary="../06-summary/index.html"
-  data-deep-page="../05-deep/index.html"
-  data-up-page=""
+  data-prev-summary=""
+  data-next-summary=""
+  data-deep-page=""
+  data-up-page="../13-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -221,36 +221,36 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <a class="nav-arrow prev" href="../04-summary/index.html" aria-label="Previous summary page">←</a>
-      
-      
-      <a class="nav-arrow next" href="../06-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Section 5 summary</p>
+      <p class="eyebrow">Section 13 deeper explanation</p>
       
-      <h1 class="section-title">From prompts to agent harnesses</h1>
+      <h1 class="section-title">Models</h1>
       
 
-      <div class="section-summary">
+      <div class="deeper-copy">
         
-        This section expands the paper’s basic intuition from “better prompts” to “better systems around the model.” It defines the harness as the runtime layer that includes prompts, tools, memory, verification, permissions, adapters, and other mechanisms that shape how a model behaves over time. The point is to show that many agent failures are not isolated model mistakes but failures of the surrounding execution environment, such as skipping checks, repeating bad actions, losing grounding, or lacking recovery paths. This section exists to answer the question of what exactly must be improved for self-harnessing to work: not just the model’s next token, but the control structure that governs action, observation, and correction. It sets up the rest of the paper by making harnesses the unit of improvement.
+        This section sets up the experimental scope for Self-Harness by fixing the underlying model and varying only the harness around it. A harness here means the scaffolding that controls how the model is prompted, how tools are used, and how evaluator feedback is turned into revisions. The paper tests three different base models: MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. Importantly, the same model is used across all harness variants, and even the proposal stage uses that same model to produce edits from evaluator feedback. In other words, the system is not changing the model itself, only the wrapper that steers it.
+
+That design choice is deliberate. By holding the model, decoding settings, tool access, benchmark environment, and evaluator constant, the authors make the comparison a within-model study. This matters because it isolates the effect of the harness from confounding factors like better model capacity or a different evaluation protocol. If performance improves, the gain can be attributed much more confidently to Self-Harness rather than to unrelated changes in the underlying model stack. It is the equivalent of testing different driving systems on the same car, track, and weather conditions.
+
+This section therefore functions as the experimental control setup for the rest of the paper. Once the base model is fixed, the next step can focus on whether Self-Harness actually improves outcomes through self-generated edits and iterative refinement. The paper can then compare harness variants on a clean basis and measure how much of the improvement comes from the harness mechanism itself.
         
       </div>
 
       
-      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
-        <span class="down-arrow">↓</span>
-        <span class="down-label">Deeper level</span>
-      </a>
-      
 
+      
+      <a class="up-control" href="../13-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
       
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 5 summary
+    Section 13 deeper explanation
   </p>
 
   <script>

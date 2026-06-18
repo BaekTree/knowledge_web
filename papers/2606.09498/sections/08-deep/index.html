@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 8 deeper explanation</p>
       
-      <h1 class="section-title">5 Conclusion</h1>
+      <h1 class="section-title">Harness evolution and retained edits</h1>
       
 
       <div class="deeper-copy">
         
-        This conclusion distills the paper’s core technical idea: treat harness improvement as a controlled state transition rather than free-form prompt rewriting. In Self-Harness, the model first runs under the current harness, then receives structured evidence from its own execution traces, proposes a bounded edit to a declared harness surface, and is re-tested under the same benchmark protocol. The key terms matter: “bounded edits” means the model can only change specific, named parts of the harness; “non-regressive acceptance” means a candidate is promoted only if it does not worsen held-in or held-out results. That design keeps the model, evaluator, and benchmark fixed, so any behavior change can be attributed to the harness itself.
+        This section explains how Self-Harness does not improve a harness by making a long, smooth chain of uniformly better proposals. Instead, it searches through candidate edits and keeps only the ones that pass validation, so the final harness is the result of a few high-value, code-level changes. The main technical ideas are the evolution trajectory, which tracks accepted versus rejected candidates over time, and the retained edits, which show the specific interfaces or behaviors that survived into the promoted harness. In other words, the system is doing selective repair, not gradual refinement for its own sake.
 
-The main design choice is conservatism. Rather than letting the model explain why an edit sounds good, Self-Harness requires empirical justification from traces and regression testing. This is important because agent scaffolds can improve for accidental reasons if the evaluation setup shifts alongside them. By constraining the proposal space and demanding evidence-backed acceptance, the method makes harness evolution auditable, reversible, and comparable across backends. The experimental result on Terminal-Bench-2.0 shows that even a minimal baseline harness can be improved this way, which supports the paper’s claim that harness quality is itself an optimizable object.
+The design choice behind these edits is driven by observed failure modes in each model. For MiniMax M2.5, the retained changes focus on missing required artifacts, malformed tool content, and tool-use loops, because those are the points where the harness was failing to produce usable outputs or was getting stuck. For Qwen3.5, the edits emphasize artifact checking, recovery from missing files, retry discipline, and middleware triggered by tool errors, which helps the agent recover from execution failures while preserving verifier-required artifacts. For GLM-5, the improvements target late artifact creation, external computation, and session-scoped tools, because persistent environment state and a shift from exploration to implementation were needed to move toward working solutions.
 
-This section also sets up the paper’s broader direction: self-improvement should be grounded in behavioral evidence, not just model rhetoric. That is the bridge to the next step in the argument, which is moving from a proof-of-concept on bounded benchmark edits toward more general agent engineering settings. The conclusion makes clear that future progress depends on stronger acceptance gates and richer environments, but the central workflow remains the same: propose an edit, verify it empirically, and only then let it change the system.
+The broader lesson is that the same base harness exposes different bottlenecks depending on the model, so Self-Harness adapts by matching edits to the model’s failure pattern rather than applying a generic fix. This sets up the next step in the paper by motivating why retained edits matter: the authors can now treat these promoted harnesses as evidence of which interventions actually improve execution, and use that to compare patterns across models or derive more general harness-design principles.
         
       </div>
 

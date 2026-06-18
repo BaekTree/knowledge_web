@@ -225,16 +225,16 @@
 
       <p class="eyebrow">Section 6 deeper explanation</p>
       
-      <h1 class="section-title">4 Experiments</h1>
+      <h1 class="section-title">Harness</h1>
       
 
       <div class="deeper-copy">
         
-        This section sets up Self-Harness as a method for improving agent performance by changing the harness, not the underlying language model. A harness is the scaffolding around the model: how it is prompted, what tools it can use, how outputs are checked, and how failures are recovered. The key experimental question is therefore whether bounded harness edits can produce better terminal-agent behavior when the model itself is held fixed. To test that, the authors use Terminal-Bench-2.0, a benchmark of realistic, multi-turn terminal tasks with deterministic verifiers, so success can be measured reliably rather than by subjective judgment.
+        The section introduces the paper’s core object: a **harness**, meaning the control layer that wraps an agent and determines how it is instantiated, prompted, equipped with tools, and verified. The initial harness is built on the DeepAgent SDK, but the authors deliberately keep it minimal: a short system prompt aimed at the benchmark, plus the default filesystem and shell tools. That choice matters because it gives the system a simple, stable starting point, so any later performance changes are easier to attribute to harness edits rather than to a complex initial setup.
 
-The design choices are aimed at isolating the effect of the harness. They start from the same minimal DeepAgent-based harness across all runs, then let Self-Harness propose edits, validate them on held-in execution evidence, and promote them only if they pass held-out regression gates. That setup matters because it turns harness improvement into a controlled search problem: candidate changes are allowed, but only if they improve behavior without breaking earlier cases. They also evaluate on a fixed 64-task subset, removing web-dependent and multimodal tasks to reduce noise from capabilities the initial harness does not even support. This makes the benchmark better aligned with what the method can actually change.
+A key constraint is that Self-Harness can only modify the **harness definition file** that configures DeepAgent. In other words, the system is not allowed to rewrite the whole agent arbitrarily; it can only adjust declared configuration points such as instructions, tool access, and verification guidance. This is a controlled design space. By limiting edits to these surfaces, the method keeps the search over candidate harnesses structured and interpretable, while still allowing meaningful improvements in how the agent behaves. A candidate harness at time `t`, written as `h_t^(j)`, is one such proposed revision.
 
-The model choice reinforces that point. MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5 are kept fixed, and the same model is used both to act in the benchmark and to propose harness edits from evaluator feedback. As a result, the comparison is strictly within-model: any gain must come from the harness, not from a stronger model, different decoding, or a changed tool environment. This experimental framing sets up the next part of the paper, where the authors can ask whether the self-improving harness actually delivers measurable gains and which kinds of edits are responsible.
+This section sets up the next step of the paper: a self-improvement loop over harness candidates. Once the baseline harness and its editable parameters are defined, the rest of the method can ask the system to propose, evaluate, and select better harnesses. The minimal initial setup is therefore not just an implementation detail; it is the reference point from which the paper measures whether self-modification actually helps.
         
       </div>
 

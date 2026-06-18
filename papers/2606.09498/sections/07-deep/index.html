@@ -225,18 +225,16 @@
 
       <p class="eyebrow">Section 7 deeper explanation</p>
       
-      <h1 class="section-title">5
-
-Weakness MiningProceed to Next</h1>
+      <h1 class="section-title">Harness Proposal Exploring Diverse yet Minimal Candidate Mod</h1>
       
 
       <div class="deeper-copy">
         
-        This section describes the self-improvement loop used by Self-Harness: first mine weaknesses from failed runs, then propose candidate harness edits, then validate those edits before promotion. The weakness-mining step groups failures using a deterministic signature built from three pieces: the verifier’s final rejection cause, the causal role of the agent behavior, and the reusable mechanism exposed by the trace. In other words, it does not cluster traces by vague similarity; it clusters only when they point to the same actionable weakness, such as missing validation, unconstrained exploration, or corrupted tool calls. The result is an evidence bundle that summarizes recurring failure patterns without directly telling the model how to patch them.
+        This section describes the proposal stage of Self-Harness: given an evidence bundle \(B_t\), the system asks the same fixed model \(M\) to act as a harness editor rather than a general optimizer. The key constraint is that the proposer only sees a bounded context: editable harness surfaces, verifier-backed failure patterns, examples of behaviors that should be preserved, and summaries of prior attempts. That design matters because it pushes the model to reason over repeated, cross-case failure mechanisms instead of reacting to isolated logs. In other words, the proposer is trying to infer “what rule is missing or wrong in the harness?” rather than “what happened in one run?”
 
-The proposal stage then uses the same fixed model in a new role: instead of solving tasks, it acts as a proposer that reads the evidence bundle plus the editable parts of the current harness. It generates several mutually distinct candidate edits in parallel. This design balances exploration and discipline: diversity helps avoid local fixes that only address one symptom, while minimality ensures each candidate changes only the smallest relevant harness surface. The paper also filters by “addressability,” meaning a failure pattern is only targeted if a harness edit can plausibly affect it; this avoids wasting edits on issues that are really model-capability limits or task ambiguity.
+The method then generates \(K\) parallel proposal bundles, each containing a concrete edit \(d_j\) and an audit record \(a_j\). The edit produces a candidate harness \(h_t^{(j)} = d_j(h_t)\). The audit record serves as a compact justification: which failure pattern is being targeted, what surface is being changed, what effect is expected, and what regressions might occur. Two design choices are central here. First, proposals must be materially distinct, so the search space is broadened without producing redundant variants of the same idea. Second, each proposal must be minimal, meaning it changes only the harness surface needed to address the chosen mechanism. This keeps branches interpretable and reduces the risk of collateral damage to unrelated behavior.
 
-The validation stage is a conservative gate. Each candidate harness is evaluated on both held-in data, which checks whether it fixes the observed weakness, and held-out data, which checks for regressions. A candidate is accepted only if it improves at least one split without hurting the other, and stochastic runs are repeated to reduce luck-based promotions. This connects directly to the next step in the paper: only validated edits become the updated harness, which then feeds back into the next mining round, creating an auditable improvement cycle rather than an unconstrained search loop.
+The proposal stage also filters targets before editing. A failure cluster is only eligible if it is both supported by evidence and plausibly addressable through a harness modification. That excludes cases where the issue is really task difficulty, unstable execution, or model capability rather than a missing control rule. This section connects directly to the next step in the paper: once a small set of diverse, minimally edited candidate harnesses has been generated, the system can evaluate them and choose the best improvement while preserving the behaviors that already work.
         
       </div>
 

@@ -229,14 +229,12 @@
 
       <p class="eyebrow">Section 3 summary</p>
       
-      <h1 class="section-title">17
-
-A Additional Implementation Details</h1>
+      <h1 class="section-title">Conclusion</h1>
       
 
       <div class="section-summary">
         
-        This appendix gives the concrete setup behind the experiments: how each model was served, what hardware and concurrency settings were used, how the Terminal-Bench-2.0 environment was configured, and which cases were excluded or stabilized with mirrored resources. It also adds a qualitative GLM-5 case study showing how a harness edit changes a failing trace into a successful one by constraining downloads, checking evidence earlier, and fixing sanity checks before finalizing. The section exists to make the reported results reproducible and to show that the gains are not just abstract: they depend on specific execution conditions and correspond to real behavioral improvements in the harness, which helps answer whether Self-Harness is evaluating a controlled terminal benchmark or merely exploiting incidental setup details.
+        This conclusion ties the paper’s results back to its central question: can a fixed model improve the harness that constrains its own behavior? It summarizes the Self-Harness protocol, the empirical finding that bounded, evidence-backed harness edits can improve performance without regressions, and the main limitations of this approach, especially its dependence on fixed benchmarks and verifier quality. The section exists to convert the experimental results into the paper’s broader takeaway: self-improvement should be treated as a controlled, testable harness transition, not just a persuasive proposal from the model. It also sets up the paper’s future-work direction by clarifying that the method supports reversible, auditable harness evolution, but only within strong acceptance gates and evidence-based validation.
         
       </div>
 

@@ -225,18 +225,16 @@
 
       <p class="eyebrow">Section 5 deeper explanation</p>
       
-      <h1 class="section-title">3
-
-Algorithm 1 Self-Harness</h1>
+      <h1 class="section-title">From prompts to agent harnesses</h1>
       
 
       <div class="deeper-copy">
         
-        Section 3 introduces Self-Harness as an iterative repair loop for the agent’s surrounding control logic, not the model itself. The key distinction is between the fixed language model `M` and the harness `h`, which includes prompts, tools, memory, and state-management rules that determine how the model acts. The algorithm keeps `M` and the evaluator `E` fixed, then repeatedly evaluates the current harness on a held-in split `D_in` and a held-out split `D_ho`. This separation matters: `D_in` is used to mine weaknesses, while `D_ho` checks whether a proposed fix generalizes rather than merely overfitting to the same failures.
+        This section broadens the usual notion of “prompt engineering” into a larger systems view. A fixed model can be influenced not only by the text prompt, but also by demonstrations, retrieved documents, memory, tool outputs, and other runtime inputs. The paper then extends that idea to agentic systems, where the model is no longer just answering once: it acts in an environment, observes results, calls tools, receives feedback, and follows policies during execution. In that setting, the important object is the surrounding control system, not the model alone.
 
-The core design choice is to turn raw failures into structured evidence before proposing edits. Instead of asking the model to “improve the harness” blindly, Self-Harness clusters execution traces from failed runs into verifier-grounded failure signatures, which capture the terminal failure reason, the relevant agent behavior, and whether that behavior caused the failure. This attribution step avoids shallow grouping by outcome alone. For example, two “timeout” failures might actually require different remedies if one is caused by repeated tool misuse and another by missing early stopping logic. The system then builds an evidence bundle from these clustered failures and asks the same model, acting as proposer, to generate a small set of diverse but minimal harness edits.
+The authors call this surrounding layer the “harness.” A harness includes prompts, tools, memory, verification rules, permission checks, adapters, and any runtime mechanism that mediates between the model and the world. The design choice here is to treat these pieces as one technical unit because many failures arise from their interaction: an agent may claim success without validating an output, repeat a bad action loop, forget the authoritative source in a long session, or get stuck because it has no recovery path. In other words, the failure is often in orchestration, state management, or policy enforcement, not in the base model’s raw capability. That is why improving agent performance often requires changing the harness itself, not just rewriting instructions.
 
-Each proposed edit is validated by re-running evaluation and measuring the change in performance on both splits. The acceptance rule only keeps edits that improve held-in performance without harming held-out behavior, and it requires a strictly positive improvement signal. This makes the loop conservative: it favors targeted local fixes over broad rewrites, and accepted changes are merged only if they survive regression testing. Section 3 therefore sets up the rest of the paper’s method: observe failures, distill them into reusable patterns, propose bounded harness modifications, and admit only those that demonstrably improve the agent’s execution protocol.
+This framing sets up the paper’s next step: if the harness is a first-class system component, then it can also be improved systematically. The section prepares the reader for self-harnessing by establishing that agent behavior is shaped by an editable execution environment. Once that is accepted, the natural question becomes how to measure, modify, and iteratively improve the harness so the whole agent loop becomes more reliable over long-horizon tasks.
         
       </div>
 

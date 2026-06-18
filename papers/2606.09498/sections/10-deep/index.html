@@ -225,16 +225,18 @@
 
       <p class="eyebrow">Section 10 deeper explanation</p>
       
-      <h1 class="section-title">References</h1>
+      <h1 class="section-title">Main Results</h1>
       
 
       <div class="deeper-copy">
         
-        This reference list situates Self-Harness at the intersection of agentic systems, prompt/context engineering, tool use, and self-improvement. The cited work spans practical agent frameworks such as DeepAgents, OpenHands, SWE-agent, and Claude Code analyses; benchmark and evaluation efforts like Terminal-Bench, Catarena, and Meta-Harness; and self-improving or recursively optimizing systems such as Reflexion, STaR-like optimization, Gödel Agent, Darwin Gödel Machine, AlphaEvolve, and The AI Scientist. Together, these citations define the technical vocabulary of the paper: a “harness” is the orchestration layer around an LLM agent, including prompts, tools, memory, planning, and evaluation loops.
+        This section introduces the core evaluation idea behind Self-Harness: the harness is not a fixed wrapper, but something that can be edited and then “promoted” if the edits improve benchmark performance. The authors measure success on Terminal-Bench-2.0 using Pass(%), which is simply the fraction of tasks solved. They test three different model backends and report results on two splits: held-in, the failures used to generate proposal evidence, and held-out, a separate split used to check whether the edits generalize beyond the examples that motivated them.
 
-The design choices implied by the bibliography are deliberate. The paper is not treating the model alone as the unit of improvement; it frames the surrounding system as the thing to optimize. That is why references on prompting, context engineering, retrieval-augmented generation, and tool-use data synthesis appear alongside works on autonomous coding and scientific discovery. The underlying idea is that many gains come from changing the agent’s control logic, observation channels, and feedback signals rather than only scaling the base model. The citations also show why self-improvement needs robust measurement: if the harness changes itself, then benchmarks and observability become part of the optimization loop, not just external evaluation.
+A key design choice is to report both absolute gains in percentage points and relative gains. Absolute gain shows the direct change in Pass(%), while relative gain normalizes that change by the starting score, which matters when comparing models that begin at very different baselines. For example, Qwen3.5 starts much lower than the others, so a similar-sized absolute improvement corresponds to a much larger relative jump. This makes it easier to see whether the harness edits help mainly by patching easy failures or by improving the execution mechanism in a more reusable way.
 
-This section mainly prepares the reader for the paper’s next step by mapping Self-Harness onto prior art and distinguishing its contribution from adjacent systems. In other words, the references tell you what parts of the stack are already understood, what parts have been automated before, and where the paper claims novelty: an agent harness that can iteratively improve its own structure. The next section can then build on this foundation without re-explaining the entire field, because the bibliography has already established the relevant baseline methods and competing approaches.
+The main technical claim is that harness-level changes can improve performance while keeping everything else fixed: the backend model, tool set, budget, benchmark environment, and evaluator do not change. That isolates the harness as the source of improvement. The fact that all three models improve on held-out tasks is especially important, because it shows the edits are not just memorizing the failure cases used to propose them. The regression gate then acts as a safeguard, ensuring a candidate edit only gets promoted if it does not harm either split.
+
+This result sets up the next stage of the paper by justifying the promotion mechanism itself. Once the authors establish that harness edits can generalize and avoid regressions, the natural next question is what kinds of edits were made, why they work, and how the self-improvement loop selects them. In other words, this section provides the empirical evidence that the Self-Harness pipeline is worth studying in more detail.
         
       </div>
 
