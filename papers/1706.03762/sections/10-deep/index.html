@@ -206,14 +206,14 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../10-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
+      <div><a class="paper-root-link" href="../../index.html">Attention Is All You Need</a></div>
       <div>arxiv:1706.03762</div>
     </div>
   </div>
@@ -222,26 +222,35 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 10 deeper explanation</p>
+      
+      <h1 class="section-title">Abstract</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        The abstract introduces the paper’s core technical shift: replacing recurrent neural networks and convolutions with an architecture built entirely on attention. In the translation setting, older encoder-decoder models process tokens sequentially, which limits parallelism and makes training slow. The Transformer instead uses attention mechanisms to let each token directly “look at” other tokens in the input or previously generated output. This matters because the model can capture long-range dependencies without having to pass information through many recurrent steps. The abstract also highlights the main empirical claim: this simpler design is not just faster to train, but also better in translation quality.
+
+Several design choices are already foreshadowed here. The model uses self-attention, where a sequence attends to itself, and this is combined with multi-head attention, which lets the network learn different kinds of relationships in parallel. The abstract also mentions parameter-free position representation, which is necessary because removing recurrence eliminates the natural notion of order; the model must be told where tokens appear in the sequence. These decisions are motivated by a tradeoff: reduce architectural complexity while preserving the ability to model sequence structure and context. The reported BLEU scores on WMT 2014 English-German and English-French serve as the paper’s evidence that this tradeoff works.
+
+This section sets up the rest of the paper by establishing both the motivation and the benchmark for success. The next sections need to explain how the Transformer is built to realize these claims: how attention is computed, how the encoder and decoder are structured, and how positional information is injected. In other words, the abstract says “what changed” and “why it matters,” while the body of the paper will show the exact mechanism that makes the change work.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../10-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 10 deeper explanation
   </p>
 
   <script>

@@ -206,14 +206,14 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../07-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
+      <div><a class="paper-root-link" href="../../index.html">Attention Is All You Need</a></div>
       <div>arxiv:1706.03762</div>
     </div>
   </div>
@@ -222,26 +222,35 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 7 deeper explanation</p>
+      
+      <h1 class="section-title">5 Training</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This section explains how the Transformer was actually trained, which matters because the architecture alone does not determine performance. The authors use large parallel translation corpora: WMT 2014 English-German with about 4.5 million sentence pairs and the much larger English-French corpus with 36 million pairs. They apply byte-pair encoding or word-piece tokenization to build compact shared vocabularies, which helps handle rare words while keeping the vocabulary size manageable. Batching is done by approximate sequence length so that each batch contains roughly 25,000 source tokens and 25,000 target tokens, a practical way to reduce padding waste and keep GPU computation efficient.
+
+The optimizer and learning-rate schedule are the main technical choices here. They use Adam, but not with a fixed step size. Instead, the learning rate follows a schedule that rises linearly during a warmup phase and then decays proportionally to the inverse square root of the step number, with a scaling factor based on the model dimension. This design stabilizes early training, when parameters are still uncalibrated, while later allowing smaller updates as the model converges. The warmup period of 4,000 steps is especially important for deep attention models, which can be unstable if trained too aggressively at the start.
+
+They also report the compute budget: 8 NVIDIA P100 GPUs, 0.4 seconds per step for the base model, and longer training for the larger model. This gives readers a sense of the efficiency gain relative to older sequence models. The section sets up the next part of the paper by showing that the reported translation quality is not just an architectural claim, but the result of a carefully controlled training recipe, including optimization, batching, and regularization choices.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../07-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 7 deeper explanation
   </p>
 
   <script>

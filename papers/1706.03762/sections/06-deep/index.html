@@ -206,14 +206,14 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../06-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
+      <div><a class="paper-root-link" href="../../index.html">Attention Is All You Need</a></div>
       <div>arxiv:1706.03762</div>
     </div>
   </div>
@@ -222,26 +222,35 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 6 deeper explanation</p>
+      
+      <h1 class="section-title">4 Why Self-Attention</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This section motivates self-attention by comparing it with recurrent and convolutional layers along three axes: total computation per layer, how much can be parallelized, and how long the “information path” is between two positions in a sequence. The basic idea is that sequence models must transform an input sequence \((x_1, \dots, x_n)\) into an output sequence \((z_1, \dots, z_n)\), and the easier it is for a signal to move between distant tokens, the easier it is to learn long-range dependencies such as subject-verb agreement or coreference. Self-attention is attractive because every position can directly attend to every other position in a constant number of sequential steps.
+
+The paper’s comparison is not just qualitative; it is a complexity argument. A self-attention layer has only \(O(1)\) sequential depth and can be faster than recurrence when the sequence length \(n\) is smaller than the representation size \(d\), which is common in machine translation. Recurrent layers, by contrast, require \(O(n)\) sequential operations because they process tokens one after another. Convolutions improve parallelism over recurrence, but a kernel of width \(k\) does not connect all positions in one layer, so multiple stacked layers are needed to propagate information globally. That increases the longest path between positions, which can make learning harder. The authors also note variants such as local attention and separable convolutions, but present them mainly as tradeoffs rather than their final design.
+
+This section sets up the model architecture in the next part of the paper. Having argued that self-attention offers shorter paths, better parallelism, and competitive complexity, the authors can justify building the Transformer from attention plus feed-forward blocks rather than recurrence or standard convolution. The final point about interpretability also foreshadows later discussion of attention heads, where different heads specialize in different syntactic and semantic relations.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../06-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 6 deeper explanation
   </p>
 
   <script>

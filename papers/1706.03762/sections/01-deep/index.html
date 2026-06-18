@@ -206,14 +206,14 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../01-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
+      <div><a class="paper-root-link" href="../../index.html">Attention Is All You Need</a></div>
       <div>arxiv:1706.03762</div>
     </div>
   </div>
@@ -222,26 +222,37 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 1 deeper explanation</p>
+      
+      <h1 class="section-title">12
+
+Attention Visualizations</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This section uses attention heatmaps to show what different heads in the Transformer are actually learning. The key idea is that each head assigns weights from one token to other tokens in the sentence, and those weights can reveal linguistic relationships such as long-distance dependencies and anaphora resolution. In Figure 3, several heads in the encoder’s fifth layer focus on the word “making” and attend strongly to “difficult,” showing that self-attention can connect words that are far apart in the sequence even when the dependency spans many intervening tokens. In Figures 4 and 5, other heads appear to track pronouns like “its” back to their antecedents or to capture sentence structure more generally.
+
+The design point here is not that every head has a single human-interpretable role, but that the multi-head setup encourages specialization. Different heads can focus on different syntactic or semantic relations at the same time, which is one reason the model can represent rich structure without recurrence or convolution. The authors include these visualizations to argue that attention is not only effective for prediction, but also mechanically well-suited to modeling language relationships that depend on context across long distances. The sharpness of some heads, especially for pronoun resolution, suggests that the learned attention distributions are often selective rather than diffuse.
+
+This section connects to the next part of the paper by reinforcing the core claim that attention alone is sufficient for sequence modeling. After showing qualitative evidence that heads discover useful structure, the paper moves on to summarize the experimental results and performance comparisons. In other words, the visualizations provide intuition for why the architecture works before the paper turns to quantitative validation.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 1 deeper explanation
   </p>
 
   <script>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attention Is All You Need — arxiv Study</title>
+  <title>Self-Harness: Harnesses That Improve Themselves — arxiv Study</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -206,15 +206,15 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../02-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
-      <div>arxiv:1706.03762</div>
+      <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
+      <div>arxiv:2606.09498</div>
     </div>
   </div>
 
@@ -222,26 +222,35 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 2 deeper explanation</p>
+      
+      <h1 class="section-title">13 BASELINE SYSTEM PROMPT  build system prompt</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This section defines the starting point for Self-Harness: a deliberately minimal harness built on the DeepAgent SDK. The baseline only includes the default filesystem and shell tools plus a short system prompt, while the rest of the behavior is exposed through explicit configuration functions such as `build_bootstrap_instruction`, `build_execution_instruction`, `build_verification_instruction`, and `build_failure_recovery_instruction`. The key technical idea is that the harness itself becomes the object of optimization. Instead of tuning the model weights, Self-Harness edits the surrounding execution policy that shapes how the model plans, uses tools, recovers from errors, and decides when to verify results.
+
+The design choice to keep the harness small is important. It creates a clean causal setup: any performance change can be attributed to harness edits rather than to a richer toolset, a different budget, or a more permissive environment. The paper also fixes a held-in/held-out split before proposing edits. The held-in split supplies traces and failure evidence to the proposer, while the held-out split remains hidden and serves as the promotion gate. That separation is what makes the improvements meaningful: the system is not just memorizing specific failures, but learning reusable execution mechanisms that generalize across tasks.
+
+This section sets up the empirical part of the paper. Once the baseline harness and editable interfaces are defined, the next step is to let Self-Harness iteratively propose changes, test them under the promotion rule, and measure whether the promoted harness improves pass rate on Terminal-Bench-2.0. The later results and trace analyses rely on this setup to show that gains come from targeted changes such as earlier artifact creation, better tool-error recovery, and stronger verification discipline, rather than from arbitrary prompt tweaks.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../02-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 2 deeper explanation
   </p>
 
   <script>

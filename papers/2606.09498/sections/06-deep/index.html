@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attention Is All You Need — arxiv Study</title>
+  <title>Self-Harness: Harnesses That Improve Themselves — arxiv Study</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -206,15 +206,15 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../06-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
-      <div>arxiv:1706.03762</div>
+      <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
+      <div>arxiv:2606.09498</div>
     </div>
   </div>
 
@@ -222,26 +222,35 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 6 deeper explanation</p>
+      
+      <h1 class="section-title">4 Experiments</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This section sets up Self-Harness as a method for improving agent performance by changing the harness, not the underlying language model. A harness is the scaffolding around the model: how it is prompted, what tools it can use, how outputs are checked, and how failures are recovered. The key experimental question is therefore whether bounded harness edits can produce better terminal-agent behavior when the model itself is held fixed. To test that, the authors use Terminal-Bench-2.0, a benchmark of realistic, multi-turn terminal tasks with deterministic verifiers, so success can be measured reliably rather than by subjective judgment.
+
+The design choices are aimed at isolating the effect of the harness. They start from the same minimal DeepAgent-based harness across all runs, then let Self-Harness propose edits, validate them on held-in execution evidence, and promote them only if they pass held-out regression gates. That setup matters because it turns harness improvement into a controlled search problem: candidate changes are allowed, but only if they improve behavior without breaking earlier cases. They also evaluate on a fixed 64-task subset, removing web-dependent and multimodal tasks to reduce noise from capabilities the initial harness does not even support. This makes the benchmark better aligned with what the method can actually change.
+
+The model choice reinforces that point. MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5 are kept fixed, and the same model is used both to act in the benchmark and to propose harness edits from evaluator feedback. As a result, the comparison is strictly within-model: any gain must come from the harness, not from a stronger model, different decoding, or a changed tool environment. This experimental framing sets up the next part of the paper, where the authors can ask whether the self-improving harness actually delivers measurable gains and which kinds of edits are responsible.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../06-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 6 deeper explanation
   </p>
 
   <script>

@@ -206,14 +206,14 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../12-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
+      <div><a class="paper-root-link" href="../../index.html">Attention Is All You Need</a></div>
       <div>arxiv:1706.03762</div>
     </div>
   </div>
@@ -222,26 +222,35 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 12 deeper explanation</p>
+      
+      <h1 class="section-title">Model</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This section highlights two practical choices that make the Transformer train well and generalize better: residual dropout and label smoothing. Residual dropout means applying dropout to each sublayer output before adding it back to the sublayer input and normalizing. In effect, the model does not become too dependent on any one sublayer path, which is especially important in a deep stack of attention and feed-forward blocks. Dropout is also applied to the sum of token embeddings and positional encodings, so the model cannot overfit to exact position-token combinations too early. For the base model, the authors use a dropout rate of 0.1, balancing regularization with stable optimization.
+
+The table in this section provides the empirical motivation for the architecture: the Transformer reaches strong BLEU scores on English-German and English-French translation while requiring far less training cost than older sequence-to-sequence systems. BLEU is an automatic metric for translation quality, and FLOPs measure approximate computation. The key point is not just that the Transformer is accurate, but that it is efficient relative to recurrent and convolutional competitors. That efficiency comes from replacing sequential recurrence with parallelizable self-attention, which allows much faster training on modern hardware.
+
+Label smoothing is the other important training decision. Instead of treating the correct token as probability 1.0, the target distribution is softened with a small amount of mass spread over other tokens, here ϵls = 0.1. This makes the model less overconfident, which can worsen perplexity slightly because predictions become less sharp, but it often improves real translation quality and BLEU. Together, these regularizers prepare the model for the next stage of the paper: a detailed explanation of the Transformer architecture and why its attention-based design can outperform more traditional encoder-decoder systems.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../12-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 12 deeper explanation
   </p>
 
   <script>

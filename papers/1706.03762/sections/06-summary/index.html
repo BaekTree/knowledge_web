@@ -205,15 +205,15 @@
   </style>
 </head>
 <body
-  data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
-  data-deep-page=""
+  data-prev-summary="../05-summary/index.html"
+  data-next-summary="../07-summary/index.html"
+  data-deep-page="../06-deep/index.html"
   data-up-page=""
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
+      <div><a class="paper-root-link" href="../../index.html">Attention Is All You Need</a></div>
       <div>arxiv:1706.03762</div>
     </div>
   </div>
@@ -221,19 +221,28 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
+      <a class="nav-arrow prev" href="../05-summary/index.html" aria-label="Previous summary page">←</a>
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+      
+      <a class="nav-arrow next" href="../07-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Top level intuition</p>
+      <p class="eyebrow">Section 6 summary</p>
+      
+      <h1 class="section-title">4 Why Self-Attention</h1>
       
 
-      <div class="root-intuition">
+      <div class="section-summary">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This section justifies the paper’s core design choice by comparing self-attention with recurrence and convolution on three practical criteria: total computation per layer, how much can be parallelized, and how short the paths are between distant positions in a sequence. The point is to answer why self-attention is a better building block for sequence-to-sequence models, especially for learning long-range dependencies. The comparison shows that self-attention has constant sequential depth, often lower cost for typical sequence lengths, and shorter dependency paths than recurrent or convolutional alternatives, while still being compatible with the encoder-decoder setting. It also sets up the rest of the paper by motivating the Transformer architecture and hinting at an additional benefit: attention patterns may be easier to interpret.
         
       </div>
 
+      
+      <a class="down-control" href="../06-deep/index.html" aria-label="Go to deeper explanation">
+        <span class="down-arrow">↓</span>
+        <span class="down-label">Deeper level</span>
+      </a>
       
 
       
@@ -241,7 +250,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 6 summary
   </p>
 
   <script>

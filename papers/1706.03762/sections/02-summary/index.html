@@ -205,15 +205,15 @@
   </style>
 </head>
 <body
-  data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
-  data-deep-page=""
+  data-prev-summary="../01-summary/index.html"
+  data-next-summary="../03-summary/index.html"
+  data-deep-page="../02-deep/index.html"
   data-up-page=""
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
+      <div><a class="paper-root-link" href="../../index.html">Attention Is All You Need</a></div>
       <div>arxiv:1706.03762</div>
     </div>
   </div>
@@ -221,19 +221,30 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
+      <a class="nav-arrow prev" href="../01-summary/index.html" aria-label="Previous summary page">←</a>
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+      
+      <a class="nav-arrow next" href="../03-summary/index.html" aria-label="Next summary page">→</a>
       
 
-      <p class="eyebrow">Top level intuition</p>
+      <p class="eyebrow">Section 2 summary</p>
+      
+      <h1 class="section-title">2
+
+Figure 1 The Transformer - model architecture</h1>
       
 
-      <div class="root-intuition">
+      <div class="section-summary">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This section turns the paper’s main idea into an implementable model: it lays out the Transformer as stacked encoder and decoder layers built from self-attention, feed-forward networks, residual paths, layer normalization, and masked decoding attention. It exists to answer a basic design question: if we remove recurrence and convolution, what exact computation replaces them so the model can still process sequences and generate outputs autoregressively? By specifying the layer structure, dimensions, and the attention mechanism, the section establishes the architecture that the rest of the paper analyzes, trains, and compares against prior sequence models.
         
       </div>
 
+      
+      <a class="down-control" href="../02-deep/index.html" aria-label="Go to deeper explanation">
+        <span class="down-arrow">↓</span>
+        <span class="down-label">Deeper level</span>
+      </a>
       
 
       
@@ -241,7 +252,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 2 summary
   </p>
 
   <script>

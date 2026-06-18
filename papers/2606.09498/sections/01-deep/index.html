@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attention Is All You Need — arxiv Study</title>
+  <title>Self-Harness: Harnesses That Improve Themselves — arxiv Study</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -206,15 +206,15 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../01-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
-      <div>arxiv:1706.03762</div>
+      <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
+      <div>arxiv:2606.09498</div>
     </div>
   </div>
 
@@ -222,26 +222,37 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 1 deeper explanation</p>
+      
+      <h1 class="section-title">1
+
+Introduction</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This introduction frames an LLM agent as more than just a base model: its behavior is strongly shaped by the “harness,” meaning the surrounding system of prompts, tools, runtime rules, verification, and recovery logic. The core technical claim is that the same model can perform very differently under different harnesses, so the bottleneck is not only model capability but also how the model is embedded in the agent loop. The paper’s proposal, Self-Harness, is to let the agent improve its own harness instead of relying on human engineers or a stronger external agent.
+
+The design is an iterative improvement loop with three stages. First, Weakness Mining runs the current harness on tasks and clusters failed traces so the system can identify recurring failure modes rather than react to isolated errors. Second, Harness Proposal asks the agent to produce small, diverse edits that are explicitly tied to those failure patterns; this “minimal but targeted” constraint is important because it reduces the chance of broad, noisy prompt changes that accidentally fix one issue while harming others. Third, Proposal Validation uses regression tests and held-out tasks to accept only edits that improve performance without measurable degradation, which is the mechanism that guards against overfitting to observed failures.
+
+The experimental results in this section serve as motivation, not the full argument: they show that self-improvement can yield model-specific harnesses that generalize across tasks, and that the changes are often concrete operational fixes such as better file handling, dependency checking, or loop avoidance. This sets up the next part of the paper, which must explain how Self-Harness is implemented in practice and how those proposed edits are generated, evaluated, and merged into a working system.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 1 deeper explanation
   </p>
 
   <script>

@@ -206,14 +206,14 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../08-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
+      <div><a class="paper-root-link" href="../../index.html">Attention Is All You Need</a></div>
       <div>arxiv:1706.03762</div>
     </div>
   </div>
@@ -222,26 +222,35 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 8 deeper explanation</p>
+      
+      <h1 class="section-title">6 Results</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This section turns the Transformer from a design proposal into an empirical claim: the architecture is not just elegant, it is competitive. On machine translation, the big model sets new state of the art on WMT 2014 English-to-German and English-to-French, with the key takeaway being that self-attention can replace recurrence while still delivering better BLEU scores at lower training cost. The paper also clarifies the inference setup that made those numbers work: checkpoint averaging smooths training noise, beam search explores multiple candidate translations, and a length penalty prevents the decoder from preferring overly short outputs.
+
+The model-variation study explains *why* the architecture works. By systematically changing the number of heads, key/value dimensions, model width, dropout, and positional encoding, the authors isolate which components matter. Too few heads hurts because the model loses representational diversity; too many heads also degrades quality because each head becomes too narrow. Smaller key dimensions reduce performance, suggesting that the dot-product compatibility function becomes too limited when compressed too aggressively. Larger models improve results, while dropout clearly reduces overfitting. Interestingly, learned positional embeddings perform almost identically to fixed sinusoidal encodings, implying that the exact choice of position representation is less critical than the broader attention-based design.
+
+The parsing experiments show the same architecture generalizes beyond translation, even to structured prediction with long outputs and strong syntactic constraints. That matters because it argues the Transformer is not tuned narrowly to machine translation. This section therefore serves as the paper’s evidence base: the proposed attention-only sequence model is both effective and broadly usable, which sets up the paper’s closing argument that self-attention is a practical foundation for sequence transduction tasks.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../08-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 8 deeper explanation
   </p>
 
   <script>

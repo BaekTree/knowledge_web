@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attention Is All You Need — arxiv Study</title>
+  <title>Self-Harness: Harnesses That Improve Themselves — arxiv Study</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -206,15 +206,15 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../10-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
-      <div>arxiv:1706.03762</div>
+      <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
+      <div>arxiv:2606.09498</div>
     </div>
   </div>
 
@@ -222,26 +222,35 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 10 deeper explanation</p>
+      
+      <h1 class="section-title">References</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This reference list situates Self-Harness at the intersection of agentic systems, prompt/context engineering, tool use, and self-improvement. The cited work spans practical agent frameworks such as DeepAgents, OpenHands, SWE-agent, and Claude Code analyses; benchmark and evaluation efforts like Terminal-Bench, Catarena, and Meta-Harness; and self-improving or recursively optimizing systems such as Reflexion, STaR-like optimization, Gödel Agent, Darwin Gödel Machine, AlphaEvolve, and The AI Scientist. Together, these citations define the technical vocabulary of the paper: a “harness” is the orchestration layer around an LLM agent, including prompts, tools, memory, planning, and evaluation loops.
+
+The design choices implied by the bibliography are deliberate. The paper is not treating the model alone as the unit of improvement; it frames the surrounding system as the thing to optimize. That is why references on prompting, context engineering, retrieval-augmented generation, and tool-use data synthesis appear alongside works on autonomous coding and scientific discovery. The underlying idea is that many gains come from changing the agent’s control logic, observation channels, and feedback signals rather than only scaling the base model. The citations also show why self-improvement needs robust measurement: if the harness changes itself, then benchmarks and observability become part of the optimization loop, not just external evaluation.
+
+This section mainly prepares the reader for the paper’s next step by mapping Self-Harness onto prior art and distinguishing its contribution from adjacent systems. In other words, the references tell you what parts of the stack are already understood, what parts have been automated before, and where the paper claims novelty: an agent harness that can iteratively improve its own structure. The next section can then build on this foundation without re-explaining the entire field, because the bibliography has already established the relevant baseline methods and competing approaches.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../10-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 10 deeper explanation
   </p>
 
   <script>

@@ -206,14 +206,14 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../13-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
+      <div><a class="paper-root-link" href="../../index.html">Attention Is All You Need</a></div>
       <div>arxiv:1706.03762</div>
     </div>
   </div>
@@ -222,26 +222,35 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 13 deeper explanation</p>
+      
+      <h1 class="section-title">References</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        This reference list is the paper’s map of prior ideas that the Transformer combines and improves on. It points to the main building blocks of sequence models: recurrent networks and LSTMs for handling order and long-range dependencies, attention mechanisms for letting a model focus on relevant source positions, convolutional sequence models, residual connections, layer normalization, dropout, and Adam for stable optimization. It also cites machine translation systems and related structured prediction work, because translation was the benchmark where these ideas were most heavily tested.
+
+The key technical choice behind the paper is not a new dataset or task, but a new architecture assembled from the strongest parts of earlier systems while removing recurrence and convolution. The references show that the authors are comparing against, and borrowing from, RNN encoder-decoders with attention, memory networks, self-attention models, and efficient sequence learners. That context matters because the Transformer’s attention-only design is a deliberate simplification: instead of processing tokens step by step, it can model pairwise relationships directly and in parallel. The citations to layer normalization, residual networks, and Adam also signal the training recipe that makes such a deep model practical.
+
+This section connects to the next stage of the paper by justifying the model design and the experimental baseline choices. Once the authors have grounded their architecture in prior work, they can move on to define the Transformer’s encoder-decoder blocks, scaled dot-product attention, multi-head attention, and positional encoding, then test whether this reference-backed design actually beats the earlier RNN and CNN approaches on translation tasks.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../13-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 13 deeper explanation
   </p>
 
   <script>

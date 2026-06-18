@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attention Is All You Need — arxiv Study</title>
+  <title>Self-Harness: Harnesses That Improve Themselves — arxiv Study</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -206,15 +206,15 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../05-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
+    <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
-      <div><a class="paper-root-link" href="./index.html">Attention Is All You Need</a></div>
-      <div>arxiv:1706.03762</div>
+      <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
+      <div>arxiv:2606.09498</div>
     </div>
   </div>
 
@@ -222,26 +222,37 @@
     <article class="page-card">
       
       
-      <a class="nav-arrow next" href="sections/01-summary/index.html" aria-label="Next summary page">→</a>
+
+      <p class="eyebrow">Section 5 deeper explanation</p>
+      
+      <h1 class="section-title">3
+
+Algorithm 1 Self-Harness</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
+        Section 3 introduces Self-Harness as an iterative repair loop for the agent’s surrounding control logic, not the model itself. The key distinction is between the fixed language model `M` and the harness `h`, which includes prompts, tools, memory, and state-management rules that determine how the model acts. The algorithm keeps `M` and the evaluator `E` fixed, then repeatedly evaluates the current harness on a held-in split `D_in` and a held-out split `D_ho`. This separation matters: `D_in` is used to mine weaknesses, while `D_ho` checks whether a proposed fix generalizes rather than merely overfitting to the same failures.
+
+The core design choice is to turn raw failures into structured evidence before proposing edits. Instead of asking the model to “improve the harness” blindly, Self-Harness clusters execution traces from failed runs into verifier-grounded failure signatures, which capture the terminal failure reason, the relevant agent behavior, and whether that behavior caused the failure. This attribution step avoids shallow grouping by outcome alone. For example, two “timeout” failures might actually require different remedies if one is caused by repeated tool misuse and another by missing early stopping logic. The system then builds an evidence bundle from these clustered failures and asks the same model, acting as proposer, to generate a small set of diverse but minimal harness edits.
+
+Each proposed edit is validated by re-running evaluation and measuring the change in performance on both splits. The acceptance rule only keeps edits that improve held-in performance without harming held-out behavior, and it requires a strictly positive improvement signal. This makes the loop conservative: it favors targeted local fixes over broad rewrites, and accepted changes are merged only if they survive regression testing. Section 3 therefore sets up the rest of the paper’s method: observe failures, distill them into reusable patterns, propose bounded harness modifications, and admit only those that demonstrably improve the agent’s execution protocol.
         
       </div>
 
       
 
       
+      <a class="up-control" href="../05-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 5 deeper explanation
   </p>
 
   <script>
