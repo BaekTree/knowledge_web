@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -237,6 +269,8 @@
         This section justifies the paper’s core design choice by comparing self-attention with recurrence and convolution on three practical criteria: total computation per layer, how much can be parallelized, and how short the paths are between distant positions in a sequence. The point is to answer why self-attention is a better building block for sequence-to-sequence models, especially for learning long-range dependencies. The comparison shows that self-attention has constant sequential depth, often lower cost for typical sequence lengths, and shorter dependency paths than recurrent or convolutional alternatives, while still being compatible with the encoder-decoder setting. It also sets up the rest of the paper by motivating the Transformer architecture and hinting at an additional benefit: attention patterns may be easier to interpret.
         
       </div>
+
+      
 
       
       <a class="down-control" href="../06-deep/index.html" aria-label="Go to deeper explanation">

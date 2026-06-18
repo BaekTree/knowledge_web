@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        The section defines the paper’s main evaluation metric, `Pass (%)`, which is simply the fraction of task attempts that satisfy the benchmark’s verifier. In practical terms, each harness candidate is tested on two repeated attempts by default, and the result is averaged into a percentage. This makes the metric easy to interpret: it estimates how often a single run succeeds when the harness is fixed. The phrase “mean single-attempt task success” matters because it distinguishes performance of one execution from more aggregated measures like best-of-N or multi-step recovery.
+        The section defines the paper’s main evaluation metric: **Pass (%)**, the share of task attempts that satisfy the benchmark’s verifier. In practice, each harness candidate is tested on two repeated attempts per task, and the pass rate is computed from those outcomes unless the paper says otherwise. The important idea is that the metric is not measuring how often the harness produces a nice-looking intermediate trace; it is measuring whether the run ends in a verifiably correct final result. That makes the metric objective and comparable across harnesses.
 
-The design choice to use the benchmark verifier as the source of truth is important. Instead of judging outputs by human inspection or loose heuristics, the evaluation is tied to an objective pass/fail signal. For Terminal-Bench-2.0 specifically, that signal comes from the final container state, meaning the task is considered successful only if the end state satisfies the verifier’s conditions. This is a strong choice for agentic systems: it evaluates whether the harness actually helps the agent complete the task, not whether intermediate behavior merely looks plausible. Using repeated attempts also reduces noise from stochastic model behavior while keeping the metric focused on typical single-run reliability.
+This design choice matters because harnesses can vary in how they guide the model, but the benchmark needs a single, stable success signal. By using a verifier rather than subjective judging, the authors avoid ambiguity about partial progress or stylistic quality. The repeated attempts help reduce noise from stochastic model behavior: if one run succeeds and another fails, the Pass rate captures the harness’s average reliability under the same configuration and evaluation protocol. For Terminal-Bench-2.0 specifically, the success signal comes from checking the final container state, which matches the benchmark’s focus on end-to-end task completion rather than intermediate steps.
 
-This metric section sets up the rest of the paper by establishing what “improving” a harness means in measurable terms. Once pass rate is defined, the paper can compare different harnesses, track self-improvement across iterations, and attribute gains to changes in harness design rather than to ambiguous evaluation criteria. In other words, the metric provides the scoreboard that the self-improvement loop will optimize against in the next part of the paper.
+This metric sets up the next stage of the paper because self-harnessing only makes sense if improvements can be measured consistently. Once Pass (%) is fixed as the yardstick, the authors can compare candidate harnesses, track whether self-modifications help or hurt, and run iterative improvement loops with a clear optimization target. In other words, the metric becomes the feedback signal that drives the self-improvement process described later.
         
       </div>
+
+      
 
       
 

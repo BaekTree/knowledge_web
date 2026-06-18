@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section distinguishes two levels of control over an LLM. In prompt engineering and context engineering, the model is still fixed, but its behavior is steered by inputs: instructions, examples, retrieved documents, memory, and other dynamically assembled context. Agentic systems go further by placing the model inside an execution loop where it can act, observe results, call tools, receive feedback, and follow runtime policies. In other words, the “input” is no longer just a prompt string; it is an environment that shapes what the model can do and how it recovers when things go wrong.
+        This section broadens the idea of “prompting” into a larger control system. In classic prompt engineering, the main lever is text: instructions, examples, retrieved facts, or memory injected into the model’s context. Context engineering extends that by treating the input as something dynamically assembled from multiple sources. The paper then argues that agentic systems go one step further: the model is not just producing one answer, but operating inside an environment where it can act, observe results, use tools, receive feedback, and be constrained by runtime policies. In that setting, behavior is shaped as much by the surrounding machinery as by the model itself.
 
-The paper then defines a harness as that surrounding system layer: prompts, tools, memory, verification rules, permission policies, adapters, and runtime mechanisms that mediate between the model and the world. This definition is deliberate. It treats many agent failures as system failures rather than pure model failures. For example, an agent may claim it finished a task without checking the output artifact, repeat a bad action because there is no recovery policy, or lose the source of truth when the context gets long. The design implication is that improving agent performance often requires changing the control structure around the model, not merely rewriting the prompt.
+The paper calls that surrounding machinery the “harness.” A harness includes prompts, tools, memory, verification checks, permission rules, adapters, and execution logic that mediate between the model and the world. This definition is important because many failures in agents are not pure reasoning failures. An agent can claim success without checking whether a file was actually written, repeat a bad action because there is no recovery path, or lose track of the authoritative source in a long workflow. Those are system-level failures: the model may be capable, but the harness lets the wrong behavior persist.
 
-This framing sets up the next step in the paper: if the harness is part of the effective algorithm, then it can itself be improved. That is the motivation for “self-harness” systems, where the surrounding environment is modified, refined, or adapted based on observed failures and successes. The section therefore establishes the unit of optimization for the rest of the paper: not just the model’s text output, but the whole closed-loop agent system that produces and verifies actions.
+The design choice here is to treat the harness as a first-class object rather than a fixed wrapper around the model. That framing explains why improving agent performance often requires changing policies, feedback loops, and tool orchestration, not just rewriting the prompt. It also sets up the next step of the paper: if the harness strongly shapes behavior, then the harness itself can be studied, evaluated, and improved. That is the bridge to “self-harness,” where the system learns to redesign its own surrounding control layer.
         
       </div>
+
+      
 
       
 

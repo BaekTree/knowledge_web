@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -234,9 +266,11 @@
 
       <div class="section-summary">
         
-        This section traces how Self-Harness changes the harness over time and which edits survive into the final promoted version for MiniMax M2.5, Qwen3.5, and GLM-5. It shows that improvement does not come from a steady stream of uniformly good proposals, but from a few validation-gated edits that directly fix the failures each model exposes, such as missing artifacts, tool-content schema errors, retry loops, and late or lost outputs. The section exists to answer a central question: what kinds of harness changes actually drive gains, and whether those changes are shared across models or tailored to model-specific failure modes. It sets up the paper’s broader claim that Self-Harness learns from concrete execution pathologies and adapts the harness accordingly rather than applying one generic fix.
+        This section shows how Self-Harness changes over time and which code edits survive validation in the final harness for each model. It contrasts accepted and rejected proposals, then highlights the retained interfaces and behaviors that actually drive the final performance gains for MiniMax M2.5, Qwen3.5, and GLM-5. The point of the section is to answer a concrete question: does Self-Harness improve by making one clean, steady sequence of upgrades, or by selecting a few targeted fixes that address the model’s specific failure modes? The section sets up the paper’s broader claim that the method is not just finding generally better harness code, but adapting the harness to each model’s execution pathologies, especially around artifact reliability, tool-use failures, and transitions from exploration to implementation.
         
       </div>
+
+      
 
       
       <a class="down-control" href="../17-deep/index.html" aria-label="Go to deeper explanation">

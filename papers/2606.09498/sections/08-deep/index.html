@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,15 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section describes how Self-Harness turns an evidence bundle of failures into concrete candidate edits for the harness. The key idea is that the same fixed model is reused in a “proposer” role, but it only sees a bounded context: editable harness surfaces, failure patterns verified by the evaluator, preserved passing behaviors, and a history of prior attempts. That restriction matters because the system is not asking the model to search arbitrarily; it is asking it to reason from structured, cross-case evidence and propose changes that are actually implementable in the harness.
+        This section describes how Self-Harness turns observed failures into a small set of concrete harness-change candidates. The key idea is that the proposer is not a separate optimizer with free rein; it is the same model \(M\), run in a special role and given a bounded context. That context includes the parts of the harness that can actually be edited, evidence-grounded failure patterns, behaviors that already work and should be preserved, and summaries of earlier attempts. In other words, the system is trying to make the model reason over recurring mechanisms, not just over individual bad runs.
 
-The proposal stage generates several candidate bundles in parallel. Each bundle pairs an edit function with an audit record explaining which failure pattern it targets, which part of the harness it changes, what behavior should improve, and what regressions might appear. The paper requires these proposals to be materially distinct, not just rephrasings of the same fix. This gives breadth of exploration without losing interpretability, so later stages can compare alternatives and understand why one branch was better than another.
+A central technical choice is to generate multiple proposals in parallel. Each proposal bundle contains an edit, the resulting candidate harness, and an audit record explaining what failure pattern it targets, what surface it changes, what effect it is expected to have, and what risks it might introduce. The paper requires these proposals to be materially distinct, so the system explores different hypotheses rather than producing several paraphrases of the same fix. This improves coverage of the search space while keeping each branch interpretable.
 
-A central design choice is the addressability filter: only failure clusters that are both evidence-backed and plausibly fixable through a harness edit are eligible targets. That avoids wasting proposals on problems that reflect task difficulty or model limitations rather than missing execution logic. Within each proposal, minimality is enforced so the edit changes only the surface needed to address the selected mechanism, preserving unrelated behavior and avoiding unnecessary control-flow rewrites.
-
-This section sets up the next step in the pipeline: once the system has a small set of diverse, minimally invasive candidate harnesses, it can evaluate or select among them using the same evidence bundle and downstream verification. In other words, this is the exploration phase that produces interpretable hypotheses for the subsequent scoring, refinement, or adoption step.
+The section also adds two important filters: addressability and minimality. A failure pattern is only worth targeting if it is both supported by evidence and plausibly fixable by changing the harness. That rules out clusters caused by task hardness or model limits, which a harness tweak cannot solve. Within each branch, the edit should be as small as possible, changing only the surface needed to address the chosen mechanism and avoiding unrelated rewrites. This sets up the next stage of the paper: the system can now evaluate these minimal candidate harnesses, compare their evidence-backed tradeoffs, and keep the ones that improve behavior without breaking preserved functionality.
         
       </div>
+
+      
 
       
 

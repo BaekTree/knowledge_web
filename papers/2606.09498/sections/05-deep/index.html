@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section introduces Self-Harness as an iterative refinement loop for a model-specific harness. The core idea is to let the same model that will use the harness also help improve it, but only through evidence gathered from real execution. Instead of treating harness design as a one-shot human task or as a black-box search problem, the system repeatedly runs the current harness, collects execution traces, and clusters recurring failures into structured evidence. That gives the model a concrete diagnosis of where the harness is breaking, rather than asking it to speculate from scratch.
+        This section introduces Self-Harness as an iterative self-improvement loop for agent “harnesses,” meaning the surrounding control code that steers a model’s behavior during execution. The key idea is to sit between two extremes: on one side, human harness engineering, where experts manually inspect failures and rewrite the harness; on the other, external optimizer methods, where harness design is treated as a search problem. Self-Harness instead keeps the model fixed and lets it improve the harness around itself, using execution evidence rather than abstract guesses about what might work.
 
-The design choice here is to generate small, diverse, and targeted edits rather than sweeping rewrites. The model is switched into a proposer role and asked to produce candidate modifications that each address a specific failure mechanism. This matters because harnesses are control systems: replacing the whole architecture can introduce new failure modes or erase useful behavior. By keeping edits minimal, the method preserves stable parts of the harness while fixing only the weakest links. The held-out regression test then acts as a guardrail, ensuring that an edit improves the target behavior without causing unacceptable damage elsewhere.
+The loop has three main technical stages. First, the current harness is run and its execution traces are clustered to find recurring failure patterns. Clustering matters because single failures can be noisy, but repeated trace structures usually indicate a real mechanism, such as a bad tool-selection branch or an overly rigid stopping rule. Second, the same model is reused in a proposer role, but now it is given structured evidence and asked to produce small, diverse edits. The “minimal” requirement is deliberate: the system is not trying to redesign the whole agent, only to patch the specific weakness while preserving the broader control architecture. Third, each candidate edit is regression-tested on held-out tasks, and only improvements that clear an acceptance threshold are kept. That acceptance rule is what prevents the loop from overfitting to a narrow set of observed failures.
 
-This loop sets up the next step of the paper by turning harness improvement into a measurable optimization process. Once the method for proposing, testing, and accepting edits is defined, the paper can evaluate whether self-generated harness revisions actually outperform human baselines or static harnesses. In other words, this section defines the algorithmic mechanism, and the next part can focus on what happens when that mechanism is applied in practice: how much performance improves, what kinds of failures are fixed, and where the approach succeeds or breaks down.
+The design reflects a practical tradeoff: use the model’s own generative ability to suggest fixes, but anchor those suggestions in measured behavior and test-time validation. This section sets up the next part of the paper by defining the actual optimization loop and its criteria for safe adoption. In other words, it moves from the intuition of “self-improving harnesses” to the mechanics of how candidate changes are proposed, checked, and promoted.
         
       </div>
+
+      
 
       
 

@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,82 @@
 
       <div class="deeper-copy">
         
-        This section introduces the paper’s core experimental idea: instead of changing the language model itself, Self-Harness tries to improve agent behavior by editing the “harness,” meaning the surrounding control logic, prompts, policies, and checks that steer the model during execution. The benchmark is Terminal-Bench-2.0, a setting for terminal-based problem solving inside containers, so success depends not just on raw model capability but on how well the agent manages tools, commands, and feedback loops.
+        This section sets up the core experiment: instead of changing the language model, Self-Harness tries to improve the *harness* around it, meaning the scaffolding that schedules actions, tracks state, validates outputs, and decides when to stop or retry. The benchmark is Terminal-Bench-2.0, which measures how well an agent can operate in containerized terminal environments. The important technical idea is that performance gains can come from better orchestration logic, not just a stronger model. So the authors keep the model fixed and let Self-Harness search for small, bounded edits to a DeepAgent-based baseline harness.
 
-The design is deliberately controlled. The authors begin with the same minimal DeepAgent-based harness for every backend model, so any gains can be attributed to harness modifications rather than to a different baseline system. Self-Harness then proposes bounded edits, validates them using held-in execution evidence, and promotes them only if they pass held-out regression gates. “Held-in” evidence is the data used to search for improvements, while “held-out” gates act like a test suite to prevent overfitting: an edit must help on observed cases without breaking previously working behavior.
+The design is careful about avoiding overfitting. Self-Harness does not freely rewrite the system; it proposes candidate changes, validates them against held-in execution evidence, and then promotes only those that also pass held-out regression gates. “Held-in” evidence is the data used to support a change during development, while “held-out” gates are separate checks meant to catch regressions on unseen cases. This setup reflects a practical engineering tradeoff: the harness should become more capable, but it must remain stable and not accidentally break behaviors that already worked. Bounded edits also matter because they make the optimization space smaller and the results easier to attribute to the harness rather than to uncontrolled redesign.
 
-That setup matters because it turns harness improvement into a disciplined optimization problem rather than ad hoc prompt tweaking. The section also connects naturally to what comes next: once the experimental protocol is fixed, the paper can report whether these harness-only changes actually improve performance across models, and which kinds of edits are most effective. In other words, this section establishes the evaluation machinery that the rest of the paper uses to justify the method’s claims.
+This section is the experimental bridge from method to evidence. It defines the baseline, the benchmark, and the validation protocol that will be used to judge whether self-modification actually helps. The next step in the paper is therefore to show what kinds of improvements these harness edits produce, across multiple model backends, and whether the gains hold under the regression checks rather than disappearing as benchmark-specific overfitting.
         
       </div>
+
+      
+      <div class="page-media">
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/pass_results.pdf" type="application/pdf" aria-label="pass_results.pdf">
+            <a href="../../images/pass_results.pdf">Open pass_results.pdf</a>
+          </object>
+          
+          <figcaption class="figure-caption">pass_results.pdf</figcaption>
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/harness_evolution.pdf" type="application/pdf" aria-label="harness_evolution.pdf">
+            <a href="../../images/harness_evolution.pdf">Open harness_evolution.pdf</a>
+          </object>
+          
+          <figcaption class="figure-caption">harness_evolution.pdf</figcaption>
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/evolved_harness_delta.pdf" type="application/pdf" aria-label="evolved_harness_delta.pdf">
+            <a href="../../images/evolved_harness_delta.pdf">Open evolved_harness_delta.pdf</a>
+          </object>
+          
+          <figcaption class="figure-caption">evolved_harness_delta.pdf</figcaption>
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/qwen_harness_evolution_v2.pdf" type="application/pdf" aria-label="qwen_harness_evolution_v2.pdf">
+            <a href="../../images/qwen_harness_evolution_v2.pdf">Open qwen_harness_evolution_v2.pdf</a>
+          </object>
+          
+          <figcaption class="figure-caption">qwen_harness_evolution_v2.pdf</figcaption>
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/qwen_harness_delta.pdf" type="application/pdf" aria-label="qwen_harness_delta.pdf">
+            <a href="../../images/qwen_harness_delta.pdf">Open qwen_harness_delta.pdf</a>
+          </object>
+          
+          <figcaption class="figure-caption">qwen_harness_delta.pdf</figcaption>
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/case_m25_count_dataset_tokens.pdf" type="application/pdf" aria-label="case_m25_count_dataset_tokens.pdf">
+            <a href="../../images/case_m25_count_dataset_tokens.pdf">Open case_m25_count_dataset_tokens.pdf</a>
+          </object>
+          
+          <figcaption class="figure-caption">case_m25_count_dataset_tokens.pdf</figcaption>
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/case_qwen_extract_elf.pdf" type="application/pdf" aria-label="case_qwen_extract_elf.pdf">
+            <a href="../../images/case_qwen_extract_elf.pdf">Open case_qwen_extract_elf.pdf</a>
+          </object>
+          
+          <figcaption class="figure-caption">case_qwen_extract_elf.pdf</figcaption>
+        </figure>
+        
+      </div>
+      
 
       
 

@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -237,6 +269,8 @@ The design choice here is to preserve the encoder-decoder abstraction while chan
 This short setup also prepares the reader for the rest of the architecture description. Once the paper defines the encoder-decoder flow and the auto-regressive decoding rule, it can explain how attention replaces recurrence as the main computation inside both components. The next sections build on this by specifying the attention-based layers, showing how the model processes all positions in parallel while still supporting ordered generation.
         
       </div>
+
+      
 
       
 

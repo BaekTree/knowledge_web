@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        The section defines the evaluation protocol that makes Self-Harness comparisons meaningful. The authors split the benchmark tasks into two fixed parts: a held-in split and a held-out split. The held-in split is the part the proposer can “see” during harness improvement: it provides trajectories, verifier results, and failure evidence, which are the signals used to suggest changes. The held-out split is hidden from the proposer and is used only by the automatic promotion gate, meaning it acts like an internal test set for deciding whether a candidate harness is actually better rather than just overfitting to the visible examples.
+        This section defines the experimental split that makes Self-Harness self-improvement measurable. The evaluated task set is divided once into a held-in split and a held-out split. The held-in split is the data the proposer can “see”: it includes trajectories, verifier outcomes, and failure evidence, meaning the concrete execution traces and error signals that reveal how the current harness is behaving. The held-out split is hidden from the proposer entirely and is reserved for the automatic promotion gate, so it acts like a private test set for judging whether a candidate harness really improved rather than just overfitting to the visible examples.
 
-This design is doing two important things. First, it separates learning signal from evaluation signal, which prevents the proposer from optimizing directly against the same tasks used to judge success. Second, the split assignments are fixed across all harness variants, so every candidate is measured against the same task partition. Each task also starts from a fresh benchmark environment, which avoids contamination from previous runs or accidental state carryover. Together, these choices make the comparison controlled: if performance changes, the paper can attribute that improvement to the harness modifications themselves instead of to different task samples or reused environment state.
+The main design choice here is to separate proposal from evaluation. By fixing the split assignments across all harness variants, the paper ensures that every version is compared on exactly the same tasks, which removes a major source of noise. Likewise, each task starts from a fresh benchmark environment, so one run cannot leak state into the next. These controls are important because harnesses can otherwise appear better simply by memorizing quirks of the evaluation set or by benefiting from accidental reuse of environment state. The acceptance rule mentioned in the section is the formal gate that decides whether a proposed harness is promoted, using only the hidden held-out split.
 
-This section connects directly to the next step in the method: the acceptance rule. Once a candidate harness is proposed from the held-in evidence, the automatic gate checks whether it should be promoted using the held-out split. In other words, this section sets up the experimental scaffolding, and the next section defines the decision criterion that turns a proposed harness into an accepted one.
+This section sets up the next stage of the paper: iterative harness improvement. Once the held-in evidence is defined and the held-out gate is fixed, the proposer can use the visible failures to generate a candidate revision, and the system can then test whether that revision generalizes. In other words, this split protocol turns self-improvement into a closed loop with a built-in check against overfitting, which is the foundation for the later results on harnesses that improve themselves.
         
       </div>
+
+      
 
       
 

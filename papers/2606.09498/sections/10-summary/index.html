@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -234,9 +266,24 @@
 
       <div class="section-summary">
         
-        This section tests the paper’s central claim: that agent performance can improve even when the language model stays fixed, as long as the surrounding harness is allowed to evolve. It does this on Terminal-Bench-2.0, a terminal-interaction benchmark, by starting from the same minimal DeepAgent-style harness and letting Self-Harness generate, check, and selectively adopt small bounded edits. The experiments use evidence from held-in runs to justify changes and held-out regression gates to prevent overfitting or harmful drift. In the paper’s structure, this section answers whether self-improving harnesses actually work in practice across different model backends, and it sets up the later analysis of which harness changes help, how robust they are, and where the approach fails.
+        This section tests the core claim of Self-Harness in a controlled setting: can agent performance improve even when the language model stays fixed, if only the surrounding harness is allowed to evolve? To answer that, the authors run experiments on Terminal-Bench-2.0, a terminal-interaction benchmark in containerized environments, and begin from the same minimal DeepAgent-based harness across multiple model backends. Self-Harness then proposes harness edits, validates them with execution evidence, and promotes only those that pass held-out regression checks. The section exists to establish whether self-improving orchestration, rather than model changes, can produce measurable gains, and to set up the empirical evidence that the method is useful, safe enough to automate, and robust across different backends.
         
       </div>
+
+      
+      <div class="page-media">
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/pass_results.pdf" type="application/pdf" aria-label="pass_results.pdf">
+            <a href="../../images/pass_results.pdf">Open pass_results.pdf</a>
+          </object>
+          
+          <figcaption class="figure-caption">pass_results.pdf</figcaption>
+        </figure>
+        
+      </div>
+      
 
       
       <a class="down-control" href="../10-deep/index.html" aria-label="Go to deeper explanation">

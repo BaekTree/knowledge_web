@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section explains the paper’s trace-level analysis, which means the authors do not just measure whether an edited harness improves scores, but inspect how the agent’s step-by-step behavior changes after the edit is accepted. The key idea is that Self-Harness is not learning one universal prompt trick. Instead, it produces model-specific harness edits that address the failure mode most visible in each backend’s execution trace, such as wasting time exploring, looping on errors, or failing to preserve environment changes.
+        This section zooms in from aggregate results to behavior-level evidence. The key idea is trace-level analysis: comparing “before” and “after” execution traces to see how accepted harness edits actually change an agent’s workflow. Rather than treating the harness as one generic prompt improvement, the authors show that Self-Harness learns model-specific interventions aimed at the dominant failure mode for each backend. In practice, that means changing what the agent is nudged to do early, how it recovers from tool errors, and when it stops exploring and starts producing the required deliverable.
 
-The design choice here is to connect prompt changes to concrete execution outcomes. For MiniMax M2.5, the edit pushes the agent to create the required artifact early and cap tool use, so behavior shifts from open-ended investigation to a direct “find, compute, write, verify” workflow. For Qwen3.5, the edits add recovery rules for dependency checks, retries, and error-triggered redirection, which helps the agent stop repeating the same broken action and instead recreate the missing file and validate the result. For GLM-5, the edits emphasize persistence across shell sessions and a switch from exploration to implementation once enough evidence has accumulated. These are not arbitrary prompt additions; they are derived from the observed bottlenecks in the initial traces.
+The edits are deliberately targeted. For MiniMax M2.5, the harness pushes earlier artifact creation and limits excessive tool use, which turns open-ended exploration into a bounded sequence: identify the relevant data, compute the answer, write the file, and verify it. For Qwen3.5, the harness adds recovery rules for dependency checks, loop breaking, and retry discipline, so tool failures redirect the agent toward reconstructing the missing artifact instead of repeatedly editing the wrong one. For GLM-5, the edits emphasize persistence of environment changes and a clearer transition from exploration to implementation, helping the agent stop wasting budget on downloads or dead ends and instead converge on a working build. These choices are made because each model’s failures are different, so the harness needs to correct different control-flow bottlenecks.
 
-This section connects to the next step in the paper by justifying the quantitative gains with behavioral evidence. The trace analysis shows that the edits change execution in the intended way, so the score improvements in later figures are interpretable as the result of targeted workflow corrections, not luck or a generic prompt boost. In other words, the paper moves from “does it work?” to “why does it work?” and uses these traces to support the causal story.
+The section connects the qualitative traces to the quantitative gains reported earlier. The point is not just that performance improved, but that the improved scores correspond to concrete behavioral changes aligned with the diagnosed failure mechanisms. That sets up the next step in the paper: arguing that Self-Harness works by learning useful, targeted workflow corrections, rather than by chance, generic verbosity, or a uniformly stronger prompt across models.
         
       </div>
+
+      
 
       
 

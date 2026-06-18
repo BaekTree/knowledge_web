@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -233,6 +265,8 @@
         This paper tries to make machines better at understanding and generating sequences like sentences, by building a translation system that does not rely on the usual slow, step-by-step neural network designs. It matters because the new design trains faster, uses hardware more efficiently, and produces better translation quality than the previous best systems. The key insight is that attention alone can do the heavy lifting: instead of reading a sentence word by word like a conveyor belt, the model can look at all words at once and decide which parts matter most to each other. That simple shift replaced recurrence and convolutions with a cleaner architecture called the Transformer, which became the foundation for many modern language models.
         
       </div>
+
+      
 
       
 

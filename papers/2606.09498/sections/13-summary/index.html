@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -234,9 +266,11 @@
 
       <div class="section-summary">
         
-        This section defines the starting point for Self-Harness: a deliberately minimal DeepAgent-based harness with only a short benchmark-facing system prompt and the default filesystem and shell tools. It also constrains what the self-improving system is allowed to edit, namely the harness definition file that controls how DeepAgent is instantiated, along with specific configuration surfaces such as instructions, tool setup, and verification guidance. The section exists to establish the exact object being improved and the boundary of permissible self-modification. That setup answers the question of what “self-improving the harness” means in practice, and it prepares the rest of the paper to measure whether changes to these control points actually produce better harnesses.
+        This section defines the starting point of Self-Harness: a deliberately minimal DeepAgent-based harness with a short benchmark-facing system prompt plus default filesystem and shell tools. It also restricts what the self-improvement loop is allowed to edit, namely the harness definition file and its declared configuration points such as instructions, tools, and verification guidance, so each candidate harness is a controlled variation rather than a free-form rewrite. The section exists to set the experimental boundary for the paper’s main question: can the system improve the harness that controls it, when the only thing it may change is the harness configuration itself? That setup makes later results interpretable because any gains can be attributed to harness design changes, not to unconstrained agent redesign.
         
       </div>
+
+      
 
       
       <a class="down-control" href="../13-deep/index.html" aria-label="Go to deeper explanation">

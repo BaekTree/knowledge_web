@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -237,6 +269,8 @@ The model-variation study explains *why* the architecture works. By systematical
 The parsing experiments show the same architecture generalizes beyond translation, even to structured prediction with long outputs and strong syntactic constraints. That matters because it argues the Transformer is not tuned narrowly to machine translation. This section therefore serves as the paper’s evidence base: the proposed attention-only sequence model is both effective and broadly usable, which sets up the paper’s closing argument that self-attention is a practical foundation for sequence transduction tasks.
         
       </div>
+
+      
 
       
 

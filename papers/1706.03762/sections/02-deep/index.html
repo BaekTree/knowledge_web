@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -239,6 +271,8 @@ The decoder follows the same basic pattern but adds a third sub-layer that atten
 Section 3.2 then formalizes attention itself as a mapping from queries and key-value pairs to an output vector. The motivation is simple: rather than compressing all context into a single hidden state, attention builds a weighted combination of values based on relevance between a query and each key. This is the core mechanism that powers both self-attention in the encoder/decoder and the encoder-decoder attention in the decoder. The next part of the paper uses this definition to derive scaled dot-product attention and multi-head attention, which are the specific implementations that make the architecture work in practice.
         
       </div>
+
+      
 
       
 

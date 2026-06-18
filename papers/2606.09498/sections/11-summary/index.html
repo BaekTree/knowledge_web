@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -234,9 +266,11 @@
 
       <div class="section-summary">
         
-        This section defines the evaluation setting for Self-Harness: it tests the system on a fixed 64-task subset of Terminal-Bench-2.0, a benchmark of containerized terminal tasks with deterministic verification. The point is to measure whether harness edits actually improve agentic execution on realistic tool-use problems such as command handling, artifact management, verification, and recovery from errors, while excluding tasks that would add noise from unstable web resources or unsupported multimodal inputs. In the paper, this section sets up the core empirical question: does self-improving the harness produce better terminal-task performance under a controlled, reproducible benchmark, rather than merely benefiting from easier or differently scoped tasks?
+        This section establishes the evaluation setting for Self-Harness by describing the benchmark, the task subset, and the filtering criteria used before any results are reported. It chooses Terminal-Bench-2.0 because it tests realistic agent behavior in terminal environments, including using tools, checking work, and recovering from errors, which makes it a good fit for measuring whether harness edits actually improve agent performance. The fixed 64-case subset removes tasks that would add noise from unstable web resources or unsupported multimodal inputs, so the benchmark reflects the harness changes rather than unrelated environment limitations. In the paper, this section answers a simple setup question: on what controlled tasks can Self-Harness be fairly judged, and what kinds of abilities does that evaluation really measure?
         
       </div>
+
+      
 
       
       <a class="down-control" href="../11-deep/index.html" aria-label="Go to deeper explanation">

@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -237,6 +269,8 @@ Several design choices are already foreshadowed here. The model uses self-attent
 This section sets up the rest of the paper by establishing both the motivation and the benchmark for success. The next sections need to explain how the Transformer is built to realize these claims: how attention is computed, how the encoder and decoder are structured, and how positional information is injected. In other words, the abstract says “what changed” and “why it matters,” while the body of the paper will show the exact mechanism that makes the change work.
         
       </div>
+
+      
 
       
 

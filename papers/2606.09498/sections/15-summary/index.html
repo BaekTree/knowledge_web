@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -234,9 +266,11 @@
 
       <div class="section-summary">
         
-        This section defines the paper’s main evaluation metric, Pass (%), and how it is measured so the results are comparable across harness candidates. It specifies that each candidate is tested with two repeated attempts by default, and that success is judged by the benchmark verifier, with Terminal-Bench-2.0 using the final container state as the pass signal. The purpose of this section is to set the yardstick for the rest of the paper: it answers what “improvement” means for self-improving harnesses and establishes the evaluation protocol used to compare harness versions fairly and consistently.
+        This section defines the paper’s main evaluation yardstick: Pass (%), the share of task attempts that satisfy the benchmark verifier, usually averaged over two tries per harness candidate. In practical terms, it tells the reader how the authors decide whether a harness actually helps the agent complete tasks, and how they summarize performance across repeated evaluations. The section exists to make the self-improvement claim measurable and comparable: before asking whether one harness is better than another, the paper needs a consistent success metric and a clear evaluation protocol. It also clarifies what “success” means in Terminal-Bench-2.0, where the verifier judges the final container state, setting up all later results and comparisons.
         
       </div>
+
+      
 
       
       <a class="down-control" href="../15-deep/index.html" aria-label="Go to deeper explanation">

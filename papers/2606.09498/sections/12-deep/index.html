@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section establishes the experimental scope for Self-Harness: the authors test it on three fixed base models, MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. The important technical idea is that the “model” is not being changed when comparing harnesses; instead, the same underlying model is wrapped by different harness designs. Here, a harness means the surrounding control logic that decides how the model is prompted, how it uses tools, how it reacts to evaluator feedback, and how it proposes edits to itself. Because the model is also used during the proposal stage to generate edits from feedback, the system is effectively self-improving using the same core model rather than relying on a stronger external editor.
+        This section sets up the paper’s central experimental control: the authors test Self-Harness on three specific base models, MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5, while keeping the model itself fixed across all harness variants. In this context, a “harness” means the surrounding scaffolding that drives evaluation and improvement, such as how feedback is processed, how tool use is organized, and how candidate edits are proposed. The important point is that the same model is used not only for the final runs, but also earlier in the proposal stage, where evaluator feedback is converted into edits. That makes the setup self-contained: the system is effectively trying to improve its own harness using the same underlying model.
 
-The main design choice is to keep everything except the harness constant: decoding settings, budget, tool access, benchmark environment, and evaluator are all held fixed. This makes the comparison a within-model comparison, which is much cleaner than comparing different models or mixed protocols. The point is causal isolation: if performance changes, the difference can be attributed to the harness itself rather than to a better model, more compute, a different evaluator, or a looser tool budget. In other words, they are trying to measure the marginal value of the self-improvement mechanism, not the base capability of the model.
+The main design choice here is to make all comparisons within-model. That means decoding settings, compute budget, available tools, benchmark environment, and the evaluator remain unchanged, and only the harness changes. This is a strong experimental design because it removes many confounders. If performance improves, the gain can be attributed to the harness itself rather than to a stronger model, a larger budget, or a different evaluation protocol. In other words, the paper is asking a narrow but important question: given the same model and the same testing conditions, does a better harness produce better results?
 
-This setup matters because it defines the experimental baseline for the rest of the paper. Once the authors have isolated harness effects, they can move on to show whether Self-Harness actually improves outcomes under controlled conditions and how those improvements compare across model families. The next step is therefore likely to analyze the behavior and effectiveness of the self-generated harness edits, since this section has already fixed the evaluation frame that makes those results interpretable.
+This section connects directly to the next stage of the paper by establishing the experimental baseline for self-improvement. Once the model is held fixed and the comparison is clean, the authors can study how different harness variants behave under the same constraints and then measure whether Self-Harness actually improves system performance. The next step is therefore the empirical comparison: evaluating how much of the observed change comes from the harness design itself, and whether that improvement generalizes across the three chosen models.
         
       </div>
+
+      
 
       
 

@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -234,9 +266,22 @@
 
       <div class="section-summary">
         
-        This introduction frames the paper’s central claim: an agent’s behavior depends not just on its base model, but on the harness around it, and that harness can itself be improved. It motivates why hand-engineering harnesses is increasingly impractical as models diversify, then sets up the paper’s main question: can an LLM-based agent learn to revise its own harness using evidence from its failures? To answer that, it defines Self-Harness, outlines the iterative improvement loop, and previews the empirical setting and results showing that the approach improves multiple models on Terminal-Bench-2.0. In short, this section establishes the problem, introduces the proposed solution, and explains why the rest of the paper matters.
+        This introduction frames the paper’s core claim: an agent’s behavior depends not only on its base model but also on the harness around it, and that harness can itself be improved by the model it serves. It motivates why human-designed, model-specific harnesses are increasingly hard to scale as models diversify and change quickly, then sets up the paper’s main question: can an LLM-based agent learn to refine its own harness without a stronger external agent? The section also previews the Self-Harness loop, the experimental setup, and the main results, so the reader knows the method is iterative, validation-based, and aimed at generalizing beyond single failures.
         
       </div>
+
+      
+      <div class="page-media">
+        
+        <figure class="page-figure">
+          
+          <img src="../../images/sh1.png" alt="sh1.png">
+          
+          <figcaption class="figure-caption">sh1.png</figcaption>
+        </figure>
+        
+      </div>
+      
 
       
       <a class="down-control" href="../02-deep/index.html" aria-label="Go to deeper explanation">

@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section turns raw failures into structured evidence that can guide harness improvement. For each task instance in a held-in split, the system runs the fixed model under the current harness, collects the output and execution trace, and asks a fixed evaluator to label the result as pass or fail. Each run becomes a trace record, and the full set of records for a round is the round-level dataset. The important design choice is that the model and evaluator stay fixed across rounds, so any systematic change in the records can be attributed to the harness itself rather than to a moving target.
+        This section describes how Self-Harness turns raw execution failures into reusable evidence for improving the harness. For each task instance, the fixed model `M` is run under the current harness `h_t`, producing an output, a trace, and an evaluator label `z_i` such as pass or fail. Those are packaged into a record `r_i`, and the full set of records `R_t` becomes the evidence base for round `t`. Because both the model and evaluator are held fixed, any systematic change in these records across rounds can be attributed to the harness itself rather than to the model or the scoring rule.
 
-The key technical move is to focus only on failed runs and cluster them by a failure signature, not by surface similarity of the traces. That signature combines three pieces: the terminal verifier-level cause, the causal status of the agent behavior that led there, and the abstract mechanism exposed by the trace. This matters because two runs may both end in “timeout,” but one may be caused by the agent getting stuck in a loop while another is caused by a missing cleanup step. Grouping by exact signature avoids mixing different root causes that happen to share the same final symptom. In other words, the clustering is evaluator-grounded and deterministic: it groups failures only when they reflect the same verifier rejection and the same reusable behavioral weakness.
+The main design choice is to focus only on failed records and to cluster them by a failure signature, not by vague semantic similarity. Each signature combines three pieces: the terminal verifier cause `c_i` (what the evaluator ultimately rejected), the causal status `q_i` of the agent behavior in the trace, and the abstract mechanism `m_i` exposed by that trace. This avoids grouping failures that look alike on the surface but need different fixes. For example, two runs may both end in “timeout,” but one may be caused by repeated looping while another stems from a missing file write; treating them as the same would produce the wrong harness edit.
 
-The output of this stage is an evidence bundle that summarizes the dominant failure patterns, including cluster size, representative examples, shared symptoms, and inferred mechanisms. The clusters are then ranked by support and actionability, so the most recurring and fixable weaknesses rise to the top. This is what connects to the next step: the proposer does not receive a vague list of failures, but a curated set of failure patterns that point toward concrete harness edits. The separation between “what failed” and “how to fix it” is deliberate, because it keeps the evaluator as an evidence producer and lets the optimizer focus on selecting the best harness revision.
+After clustering, each cluster is summarized as a structured failure pattern with size, representative examples, trace symptoms, verifier evidence, and the inferred mechanism. Clusters are ordered by support and estimated actionability, so the proposer sees the most recurring and fixable weaknesses first. The output of this stage is an evidence bundle `B_t`, which intentionally stops short of proposing an edit. That separation is important: Weakness Mining identifies what is failing and why, while the next step uses this grounded evidence to generate candidate harness revisions targeted at the reusable weakness rather than at a coarse failure label.
         
       </div>
+
+      
 
       
 

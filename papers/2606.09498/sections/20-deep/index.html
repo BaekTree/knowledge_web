@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section describes the inference layer the authors used to run the models in the study. “Hosted inference service” means the model is accessed through a remote API rather than being run on the experimenter’s own hardware. MiniMax M2.5 was called through MiniMax’s own API, while GLM-5 was accessed through OpenRouter, a gateway that provides a standardized interface to third-party models. In contrast, Qwen3.5-35B-A3B was deployed locally, meaning the team ran it on their own machines instead of relying on a vendor endpoint.
+        This section describes the paper’s inference stack, meaning the concrete way each model was actually run during experiments. Two models, MiniMax M2.5 and GLM-5, were not self-hosted by the authors; instead, they were accessed through hosted inference services. In practice, that means the authors sent prompts to a provider-managed endpoint and received generated outputs, rather than running the model weights on their own hardware. MiniMax was used through its own hosted API, while GLM-5 was accessed through OpenRouter, which acts as a unified gateway to third-party models.
 
-The design choice here is mostly about balancing convenience, control, and scalability. Hosted APIs reduce operational overhead: the team does not need to manage model serving, GPU scheduling, or upgrades for those models. Local deployment, on the other hand, gives tighter control over runtime behavior, latency, and reproducibility, which is especially useful when the model is part of an experimental pipeline. Running Qwen3.5-35B-A3B on four NVIDIA H200 GPUs suggests the model was large enough to require substantial memory and throughput, so the authors used multi-GPU hardware to make inference practical. Using an internal image derived from the public SGLang Docker image also standardizes the serving stack, because SGLang is a model-serving framework designed for efficient LLM inference.
+The third model, Qwen3.5-35B-A3B, was deployed locally on four NVIDIA H200 GPUs. That choice gives the researchers more control over latency, batching, logging, and reproducibility, especially when a model is used heavily or needs to be integrated tightly into an experiment pipeline. The mention of an internal image derived from the public SGLang Docker image indicates that they built on a known serving stack rather than assembling a custom server from scratch. SGLang is a high-throughput inference framework for serving LLMs efficiently, so using it reduces engineering risk and helps ensure the deployment matches standard behavior.
 
-Overall, this section sets up the execution environment for the rest of the paper. Before the authors can measure whether harnesses improve themselves, they need a reliable way to query the base models and compare outputs across systems. These inference-service choices define that plumbing: which models are remote, which are local, and what serving software is trusted to make the experiments reproducible. The next step in the paper can then build on this infrastructure to evaluate harness behavior and improvements without ambiguity about how model responses were obtained.
+The main technical idea here is that “model inference service” is part infrastructure and part experimental control. Different serving modes were chosen based on practical constraints: hosted APIs for externally provided models, local GPU deployment for a model the authors could run themselves. This section sets up the next step in the paper by establishing that all later results come from a defined, repeatable inference layer, so any improvements in Self-Harness can be attributed to the harness method rather than inconsistent model serving.
         
       </div>
+
+      
 
       
 

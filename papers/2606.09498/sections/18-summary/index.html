@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -234,9 +266,11 @@
 
       <div class="section-summary">
         
-        This section inspects before-and-after traces for accepted harness edits to show how Self-Harness changes agent behavior in practice. It exists to answer the causal question behind the gains: not just whether performance improves, but what the edits are actually doing to the agent’s workflow. By comparing MiniMax M2.5, Qwen3.5, and GLM-5, the section shows that the accepted edits are model-specific and address the main observed failure modes, such as delayed artifact creation, repeated ineffective recovery, and environment changes that do not persist. That sets up the paper’s main claim that the quantitative improvements come from targeted behavioral shifts in execution, not from generic prompt strengthening or random variation.
+        This section opens the black box behind the headline gains by comparing before-and-after execution traces for representative models and showing how the accepted harness edits actually change agent behavior. It exists to answer the question of whether Self-Harness improves results through meaningful workflow corrections or just by adding a generally better prompt. The trace analysis shows the edits are model-specific and tied to observed failure modes: earlier artifact creation for MiniMax, tighter error recovery and loop breaking for Qwen3.5, and more persistent environment handling plus earlier transition from exploration to implementation for GLM-5. In doing so, the section sets up the paper’s central interpretation of the quantitative improvements as causally linked to targeted harness-induced behavior changes.
         
       </div>
+
+      
 
       
       <a class="down-control" href="../18-deep/index.html" aria-label="Go to deeper explanation">

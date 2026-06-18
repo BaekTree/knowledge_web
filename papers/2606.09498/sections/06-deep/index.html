@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section introduces the paper’s central abstraction: a *harness* is the non-parametric layer around a fixed language model that determines how it is used as an agent. In this setup, the model weights never change. Instead, the harness controls the instruction prompt, tool access, memory, state handling, and the execution protocol for interacting with a task. That makes the harness the thing being optimized: the same model can behave very differently depending on how it is deployed. The formal notation reflects this separation by treating the model `M` and evaluator `E` as fixed, while the harness `h` is the object updated across iterations.
+        This section defines the central object of the paper: a “harness,” meaning the non-parameteric scaffolding around a fixed language model when it is used as an agent. The harness includes prompts, tool access, memory, and state handling, and it controls the execution protocol: how the model sees a task, chooses actions, calls tools, checks intermediate results, and returns an answer. The key distinction is that the model weights do not change. Instead, improvement happens by editing the harness itself. Formally, the paper fixes a model `M` and evaluator `E`, then studies a sequence of harnesses `h_0, h_1, ..., h_T`, where each step is a bounded modification to the agent’s control logic.
 
-The algorithm then defines a search process over harness versions `h_0, h_1, ..., h_T`. For each round, the current harness is evaluated on both a held-in split `D_in` and a held-out split `D_ho`, producing performance metrics and execution traces. Those traces are used to build an evidence bundle from verifier-grounded failures, meaning the system focuses on cases where the harness demonstrably broke down rather than on vague errors. The model is then asked to propose multiple candidate edits in parallel, which increases exploration without committing to a single guessed fix. Each proposal is turned into a new harness, evaluated again, and accepted only if it improves held-in performance without hurting held-out performance. This is a deliberate anti-overfitting rule: it rewards genuine protocol improvements, not edits that merely memorize the training split.
+The algorithmic design makes this concrete. At each round, the current harness is evaluated on a held-in split and a held-out split, producing performance scores and an execution trace. The trace is then turned into an evidence bundle, but only from held-in failures that are grounded in verifier signals, so the proposal process is driven by concrete mistakes rather than vague suggestions. The model then generates `K` parallel edit proposals. Each candidate harness is evaluated again, and an edit is accepted only if it does not hurt held-in performance, does not hurt held-out performance, and strictly improves the combined criterion. This conservative acceptance rule is important: it prevents the system from overfitting to one split or accepting changes that trade one metric for another in an uncontrolled way.
 
-If no candidate passes, the harness stays unchanged; otherwise, the accepted edits are merged into the next harness version. Conceptually, this is an iterative self-improvement loop, but at the level of execution scaffolding rather than model parameters. The next part of the paper builds on this foundation by showing how the evidence bundle, proposal mechanism, and acceptance criterion are instantiated in practice, and how these harness edits are structured so they can reliably improve agent behavior.
+If no proposal survives, the harness stays unchanged; otherwise, the accepted edits are merged into the next harness. The result is an iterative search over harness design, not a one-shot rewrite. This sets up the next part of the paper, which can focus on how candidate edits are generated, how evidence is packaged, and how the acceptance criterion yields a stable self-improvement loop.
         
       </div>
+
+      
 
       
 

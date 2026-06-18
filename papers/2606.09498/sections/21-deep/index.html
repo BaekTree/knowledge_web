@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section defines the exact evaluation environment for Terminal-Bench-2.0, which matters because benchmark results can vary a lot with infrastructure rather than agent quality. The authors run tasks inside Harbor, a fixed execution platform, on an isolated machine with 64 CPU cores, 256 GB of RAM, and a capped 2 MB/s outbound network. They also choose different task concurrency levels for different models: 32 parallel tasks for MiniMax M2.5 and GLM-5, and 48 for the locally hosted Qwen3.5-35B-A3B backend. Here, concurrency means how many tasks are processed at once; higher concurrency increases throughput, but only if the model and system can sustain it without excessive contention or instability.
+        This section describes the exact benchmark setup used to evaluate Self-Harness on Terminal-Bench-2.0. The authors run all tasks inside Harbor, which is the execution environment that provides a controlled terminal sandbox. They also specify the hardware budget: 64 CPU cores, 256 GB RAM, and a capped 2 MB/s outbound network connection. These details matter because terminal-agent performance can change significantly with compute limits, memory pressure, and network speed, so the benchmark needs to be reproducible and comparable across runs.
 
-A major design decision is to reduce “false failures” caused by the environment. Some Terminal-Bench tasks require downloading external resources, and if those resources are merely slow rather than genuinely unavailable, the benchmark would unfairly penalize the agent. To avoid that, the authors mirror a subset of stable-but-slow external resources locally. At the same time, they exclude tasks that depend on unreliable external resources and tasks that require multimodal inputs the initial harness cannot handle. This produces a cleaner 64-case evaluation set that measures terminal-interaction ability instead of network luck or unsupported input types.
+A second key concept is concurrency, meaning how many tasks are executed at the same time. They use different default concurrency levels for different model backends: 32 for MiniMax M2.5 and GLM-5, and 48 for a locally deployed Qwen3.5-35B-A3B backend. This is a practical throughput choice, balancing experiment speed against resource contention. They also mirror some external resources when the original sources are stable but slow to download, which reduces failures caused by network latency rather than by the agent’s actual reasoning or tool use. In other words, they try to measure agent quality, not internet reliability.
 
-The overall effect is a controlled benchmark that preserves the core difficulty of Terminal-Bench-2.0 while removing avoidable sources of noise. That setup is important for the next stage of the paper, because the self-harness method can only be judged fairly if improvements come from the harness itself rather than from accidental advantages in execution conditions. In other words, this configuration establishes the baseline experimental contract that the later self-improvement results build on.
+The section also explains task filtering. Tasks that depend on unreliable external resources, or that require multimodal inputs the initial harness cannot handle, are excluded from the main 64-case evaluation set. This keeps the benchmark focused on the core terminal-interaction problem while avoiding confounds the system is not yet designed to solve. The next step in the paper can therefore build on a cleaner evaluation base: once the environment is fixed and the task set is controlled, the authors can more credibly test whether self-harnessing improves agent performance rather than just making the benchmark easier or less noisy.
         
       </div>
+
+      
 
       
 

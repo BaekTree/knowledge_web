@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This conclusion frames Self-Harness as a controlled way for a fixed language model to improve the “harness” around it, meaning the scaffolding that shapes its agent behavior: prompts, configuration, tool policies, and other declared surfaces. The central mechanism is propose-evaluate-accept. First, the model runs under the current harness and generates execution traces. Those traces are converted into structured evidence, which the model uses to propose a bounded edit to one of the allowed harness surfaces. Then the candidate harness is re-run under the exact same benchmark protocol, and the edit is only kept if it passes a non-regression rule. In other words, the system treats self-improvement like a state transition that must be justified by measured behavior, not by a persuasive explanation alone.
+        This conclusion frames the paper’s central technical idea: a language model can improve the harness that constrains its own agent behavior, but only through a controlled loop. The Self-Harness protocol is a propose-evaluate-accept pipeline. First, the model is run under the current harness and its execution traces are collected. Those traces provide structured evidence about failures or inefficiencies. The model then proposes bounded edits to declared harness surfaces, meaning it can only change specific configurable parts of the scaffold rather than rewriting the whole system. Each candidate harness is then re-run under the same benchmark protocol, and only edits that do not regress performance are promoted.
 
-The main design choice is to keep the model, evaluator, and benchmark fixed while changing only the harness. That isolates causality: if performance improves, the gain can be attributed to the harness edit rather than to a different model or evaluation setup. This is why the edits are deliberately small and auditable. The paper wants harness improvement to be testable, reversible, and tied to evidence from actual failures, not broad speculative redesign. On Terminal-Bench-2.0, that yields pass-rate gains across backends while preserving held-in and held-out performance, which supports the claim that even sparse initial harnesses can be refined safely when edits are constrained and regression-tested.
+The main design choice is to treat harness improvement as an empirical state transition rather than as a purely generative suggestion problem. That matters because a plausible edit is not enough; the paper requires four things to line up: the intended behavioral change, the surface being modified, the evidence that motivates the change, and the evaluation result that supports acceptance. Keeping the model, evaluator, and benchmark fixed isolates causality: if performance improves, the gain can be attributed to the harness change rather than to a different test setting. This is why the acceptance rule is conservative and non-regressive. It favors small, auditable edits over large, speculative ones, which makes the resulting harness lineage easier to trust and inspect.
 
-The next step is the paper’s broader argument about what this means for agent engineering. The conclusion signals that Self-Harness is not claiming open-ended self-improvement; it is a bounded, benchmarked process for improving agent scaffolding under strict acceptance gates. That sets up the forward-looking part of the paper: future systems may generalize this idea to richer environments, but the core requirement stays the same, namely that any improvement must be grounded in observed behavioral evidence and validated against test outcomes.
+The conclusion also positions the experiments as proof of concept rather than the endpoint. On Terminal-Bench-2.0, the method improved pass rate across multiple backends while preserving held-in and held-out behavior, showing that even sparse baseline harnesses can self-improve when edits are evidence-backed and regression-tested. At the same time, the section warns that this is bounded optimization, not open-ended self-improvement. That sets up the next stage of the paper: the broader argument that future agent systems should evolve through recorded, testable, reversible changes, with stronger acceptance gates as the stakes increase.
         
       </div>
+
+      
 
       
 

@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section introduces the idea that Self-Harness does not improve a harness by making many small, uniformly good edits. Instead, it follows a validation-gated evolution process: candidate changes are proposed, tested, and only the ones that improve pass rate and preserve required behavior are retained. The “evolution trajectory” shows which proposals were accepted or rejected, while the “retained code-level edits” show what actually survived into the final promoted harness. The technical takeaway is that the harness is itself optimized like a system component, with success measured by whether it helps the agent produce required artifacts, avoid invalid tool content, and recover from stalled or failing tool interactions.
+        This section introduces two linked ideas: the evolution trajectory of a self-improving harness, and the set of edits that survive validation into the final promoted version. The evolution plots separate accepted proposals from rejected ones, which matters because the process is not a smooth monotonic climb. Instead, Self-Harness tests many candidate changes, keeps only the ones that pass validation, and discards the rest. The retained code diffs show what the system actually learned at the interface level: when to emit required artifacts, how to handle structured tool outputs, how to recover from tool failures, and how to avoid getting stuck in unproductive loops.
 
-The design choices differ by model because each model fails in a different way. MiniMax M2.5 needed earlier artifact creation and better handling of tool loops; Qwen3.5 benefited from artifact checking, retry discipline, and middleware triggered by tool errors; GLM-5 needed persistence across shell commands and guidance away from unproductive exploration. These edits are not arbitrary tweaks. They are targeted derivations from observed failure modes, so the harness changes align with the model’s actual execution pathology rather than a generic “better prompt” strategy. That is why the section emphasizes retained edits: they reveal the mechanisms that mattered, not just the proposals that were tried.
+The design choice here is to make improvements targeted and failure-driven rather than generic. For MiniMax M2.5, the edits focus on early artifact creation, schema-safe tool content, and redirecting execution after long tool interaction because those were the observed bottlenecks. Qwen3.5 adds artifact checking, missing-artifact recovery, retry discipline, and tool-error-triggered middleware, reflecting a different failure profile around file edits and tool instability. GLM-5 instead emphasizes persistence of environment changes across shell commands and a shift from exploration to implementation, because its harness needed to preserve state and encourage execution progress. In other words, the system is not optimizing a single abstract objective in the same way for every model; it is fitting the harness to the model’s specific failure mode.
 
-This section also sets up the next part of the paper by establishing that harness improvement is both measurable and model-specific. Once the paper has shown that self-evolution can produce a better harness, the natural next step is to explain how those changes translate into broader behavior, evaluation results, or general principles for harness design. In other words, this section provides the evidence that the method works and the failure patterns it addresses, which the next section can then use to argue about generalization and impact.
+This section sets up the next stage of the paper by showing that the gains come from mechanism-level edits, not just more search or more attempts. The important takeaway is that harness quality is itself an adaptive variable: once the system can identify what went wrong in prior runs, it can propose and retain changes that directly address that weakness. That motivates the next step in the paper, which is to analyze or leverage these retained improvements as a recipe for further self-improvement and broader harness design.
         
       </div>
+
+      
 
       
 

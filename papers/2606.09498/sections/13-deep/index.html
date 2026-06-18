@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        The section introduces the paper’s core control object: the *harness*, meaning the wrapper that defines how the underlying agent is instantiated, prompted, equipped with tools, and evaluated. The initial harness is deliberately simple. It builds on the DeepAgent SDK, but keeps only a short system prompt aimed at the benchmark and the default filesystem and shell tools. This matters because the authors want to study whether the harness itself can be improved, not whether performance comes from a large amount of hand-engineered scaffolding.
+        This section introduces the “harness” as the control layer around the agent, not the agent itself. The initial harness is built on the DeepAgent SDK, but it is intentionally stripped down: a short system prompt aimed at the benchmark, plus the standard filesystem and shell tools. That design keeps the starting point simple and well-defined, so any later performance changes can be attributed to harness modifications rather than to a complicated baseline implementation.
 
-A key constraint is that Self-Harness is only allowed to modify the *harness definition file*, not the agent code or model itself. That file contains the configuration points the system exposes to the agent builder, such as instructions, tool selection, and verification guidance. In effect, these are the “knobs” that shape behavior. By restricting edits to these declared surfaces, the method keeps the search space focused and comparable: each new candidate harness, written as \(h_t^{(j)}\), differs only through sanctioned configuration changes rather than arbitrary code rewrites.
+A key constraint is that Self-Harness can only edit the harness definition file, which is the configuration that tells DeepAgent how to be instantiated and managed. In practice, that means the system is not free to rewrite arbitrary code; it can only modify declared control surfaces such as the instructions, tool set, and verification guidance. This is a deliberate modularity choice: by limiting edits to explicit configuration points, the method makes harness changes safer, easier to compare, and easier to interpret as candidate variants \(h_t^{(j)}\).
 
-This design choice sets up the next stage of the paper. Once the editable parts are clearly delimited, the system can generate candidate harnesses and test whether they improve task performance. So this section establishes both the starting baseline and the intervention boundary, which are the prerequisites for the self-improvement loop that follows.
+The point of this setup is to create a controlled search space for self-improvement. Each candidate harness is a different configuration of the same underlying agent framework, so the paper can study whether better prompting, tool access, or verification rules improve benchmark performance. This section therefore sets up the next step in the paper: generating, evaluating, and selecting among harness candidates as part of the self-improvement loop.
         
       </div>
+
+      
 
       
 

@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section defines the evaluation setting for Self-Harness. The authors use Terminal-Bench-2.0, a multi-turn benchmark where an agent works inside a realistic terminal/container environment and is scored by deterministic verifiers, meaning success or failure can be checked automatically rather than by a human judge. The benchmark is useful because it tests the whole execution loop: issuing commands, managing files and artifacts, checking whether outputs are correct, and recovering when something goes wrong. In other words, it measures not just whether the model can “know” an answer, but whether it can reliably carry out a tool-using workflow.
+        This section defines the evaluation setting for Self-Harness. The core benchmark is Terminal-Bench-2.0, a multi-turn terminal-agent testbed where an agent works inside a realistic execution environment and is scored by deterministic verifiers, meaning the outcome can be checked automatically rather than judged by a human. The benchmark covers 89 containerized tasks that probe general tool use: managing files and artifacts, issuing commands, checking whether results are correct, and recovering after an execution error. In other words, it tests not just whether the agent can “do the task,” but whether it can operate like a disciplined terminal user.
 
-A key design choice is that they evaluate on a fixed 64-case subset instead of the full 89-task set. They exclude tasks that rely on unstable external web resources or multimodal inputs. This is a methodological control: web resources can change or fail independently of the agent, adding noise that obscures whether a harness edit helped. Multimodal tasks are also excluded because the starting harness does not support modality-specific input handling. Including them would confound two factors at once: the model’s behavior and missing harness capabilities. So the subset is chosen to isolate the effect of Self-Harness improvements on the supported terminal-only setting.
+The authors then narrow evaluation to a fixed 64-case subset. They remove tasks that depend on unstable external web resources and tasks requiring multimodal inputs. This is a deliberate experimental design choice: if a task can fail because a website changes or because the harness cannot ingest images or other modalities, then the result would reflect outside noise or missing infrastructure rather than the quality of Self-Harness itself. The filtering keeps the benchmark focused on what the initial harness can actually support, so measured improvements are attributable to harness edits rather than to irrelevant capability gaps.
 
-This section sets up the paper’s next step: using a clean, controlled benchmark to attribute performance changes to harness edits rather than to outside variability or unsupported features. Once the evaluation target is defined, the paper can compare baseline harness behavior against self-modified harnesses and interpret gains or failures as consequences of the self-improvement process itself.
+This setup matters because it establishes a clean baseline for the next stage of the paper: assessing whether self-modified harnesses improve agent performance under controlled conditions. By fixing the benchmark subset and removing unsupported task types, the authors create a stable target for comparison. That lets the following sections isolate the effect of harness changes, instead of conflating them with benchmark variance or mismatched input requirements.
         
       </div>
+
+      
 
       
 

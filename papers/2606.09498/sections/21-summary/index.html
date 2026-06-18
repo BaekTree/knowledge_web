@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -232,9 +264,11 @@
 
       <div class="section-summary">
         
-        This section specifies the exact Terminal-Bench-2.0 evaluation setup used in the paper: Harbor as the execution environment, the machine and network limits, the task concurrency for each model backend, the mirroring of slow but stable external resources, and the exclusion of tasks that are unreliable or unsupported by the initial harness. Its purpose is to make the benchmark conditions reproducible and controlled so the results reflect agent behavior rather than infrastructure noise. It also sets up the paper’s later claims by defining the concrete evaluation regime under which Self-Harness is measured, so readers can interpret performance numbers as coming from a consistent terminal-interaction testbed rather than a loosely specified benchmark run.
+        This section specifies the exact Terminal-Bench-2.0 setup used for the paper’s evaluations: the Harbor execution environment, machine resources, network limits, task concurrency settings, resource mirroring for slow downloads, and which tasks are excluded from the main 64-case set. Its purpose is to make the benchmark conditions reproducible and to define a controlled testbed where performance differences are more likely to reflect the agent or harness rather than infrastructure noise. In other words, it answers the question “what environment were the results measured in, and what was intentionally held fixed or filtered out so the evaluation is fair and stable?”
         
       </div>
+
+      
 
       
       <a class="down-control" href="../21-deep/index.html" aria-label="Go to deeper explanation">

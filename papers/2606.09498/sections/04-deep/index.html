@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,13 +262,15 @@
 
       <div class="deeper-copy">
         
-        This section separates prior work into three related but distinct ideas. First are systems that improve themselves by updating some internal object over time, such as verbal feedback, long-term memory, context, or even generated code. The technical point is that these methods let a fixed base model benefit from accumulated experience, but the thing being improved is usually not the harness itself. Instead, they modify the model’s prompt history, memory store, or an auxiliary program that wraps the model.
+        This section situates Self-Harness among three related research threads. The first thread includes self-improving agents that modify their own inputs over time, such as by storing feedback, rewriting context, or recursively improving generated code. The key idea there is that a fixed base model can still get better if it accumulates useful artifacts across attempts. But the object being improved is usually an output-side mechanism, like memory or a response strategy, not the agent’s declared harness state. That distinction matters because a harness is the explicit control layer that determines what the model sees, what it can do, and how its future behavior is shaped.
 
-Second are methods that optimize agent designs from the outside. Here, the design space is the agent’s graph, workflow, or harness code, and an external search procedure evaluates many candidates using scores, traces, or source code. The important distinction is control: the improvement process is not produced by the agent under test, but by a separate optimizer. This motivates the paper’s focus on harness-level optimization, while also highlighting a gap: existing systems treat improvement as external rather than as a bounded self-proposal made by the same model inside its current setup.
+The second thread studies optimization from the outside: another process searches over agent designs, graph structures, or harness code using traces, scores, and prior candidates. This motivates the idea that harnesses are learnable objects, but it also changes the problem setup. In those systems, improvement comes from an external optimizer. Self-Harness instead asks whether the evaluated model itself, under its current harness, can propose a bounded edit to that harness. The design choice is deliberate: by constraining the candidate change to be small and explicitly proposed by the same model, the paper can test whether self-improvement is possible without granting a separate meta-optimizer broad control.
 
-The final paragraph broadens the landscape to self-evolving systems for science and algorithms, such as automated research agents and open-ended capability-expansion loops. Self-Harness sits closest to these ideas, but deliberately narrows the problem. It asks a more controlled question: can a fixed model, operating within its present harness, propose a small, bounded change to that harness that will govern its future behavior? This framing sets up the next step in the paper, where the authors move from related work to their specific self-improvement mechanism and evaluation protocol.
+The final paragraph connects Self-Harness to broader autonomous science and self-evolving agent systems, which automate loops of research, algorithm design, or capability expansion. Those systems show the power of open-ended self-improvement, but they also blur what exactly is being optimized. Self-Harness narrows the scope: it studies a controlled setting where the question is not “can an agent redesign itself arbitrarily?” but “can the same fixed model, within its current operating rules, suggest a valid harness change that improves future performance?” That framing sets up the next part of the paper, where the authors likely define the harness-edit protocol, the evaluation loop, and the constraints that make the comparison scientifically meaningful.
         
       </div>
+
+      
 
       
 

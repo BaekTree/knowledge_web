@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -230,9 +262,11 @@
 
       <div class="root-intuition">
         
-        This paper asks whether an LLM agent can improve the “rulebook” it uses to act, not just improve its answers inside a fixed setup. That matters because today these harnesses, the code and instructions that steer an agent, are mostly hand-built and often need to be tuned differently for each model, which does not scale as models keep changing. The key idea is a self-improving loop: the agent studies where it fails, proposes small harness changes aimed at those failures, and keeps only the changes that actually help without breaking other tasks. In effect, the paper shows that an agent can help rewrite its own operating manual, turning model-specific weaknesses into concrete improvements.
+        This paper asks whether an AI agent can improve not just by getting a better model, but by improving the “operating instructions” and guardrails around itself, which the authors call the harness. That matters because different models make different kinds of mistakes, so a one-size-fits-all setup leaves performance on the table, especially as models change quickly. The key idea is a feedback loop: watch where a model fails, turn those failures into small harness changes, and keep only the changes that help without breaking other things. In effect, the paper shows that an agent can help reshape the rules of its own workspace, like a mechanic tuning a race car while it is still on the track.
         
       </div>
+
+      
 
       
 

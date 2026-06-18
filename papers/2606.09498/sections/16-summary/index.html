@@ -112,6 +112,38 @@
       white-space: pre-wrap;
     }
 
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img,
+    .page-figure object {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .page-figure object {
+      min-height: 28rem;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
     .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
@@ -234,9 +266,11 @@
 
       <div class="section-summary">
         
-        This section reports the core empirical outcome of Self-Harness: after the harness is promoted, performance rises or stays the same across all three backends on both the held-in and held-out splits of Terminal-Bench-2.0. It quantifies the gains in absolute and relative terms to show that the improvements are substantial, not just marginal noise, and that they transfer beyond the failures used to generate the edits. The section exists to answer the paper’s main question: can harness-level changes produce reusable performance improvements without changing the model, tools, budget, environment, or evaluator? By showing consistent held-out gains and no regressions, it sets up the claim that Self-Harness is improving the execution mechanism itself rather than overfitting to specific examples.
+        This section reports the core empirical result of Self-Harness: when a harness is promoted, performance on Terminal-Bench-2.0 usually improves on both the held-in and held-out splits while the model, tools, budget, environment, and evaluator stay fixed. It exists to answer the paper’s main question: can editing the harness itself produce real, reusable gains rather than overfitting to the failures that motivated the edit? By showing that all three backends improve or hold steady, including on held-out cases, the section sets up the paper’s claim that Self-Harness can discover execution-level improvements that generalize, and that its regression gate helps prevent brittle, split-specific “wins” from being promoted.
         
       </div>
+
+      
 
       
       <a class="down-control" href="../16-deep/index.html" aria-label="Go to deeper explanation">
