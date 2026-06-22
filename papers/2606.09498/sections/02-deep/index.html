@@ -112,6 +112,12 @@
       white-space: pre-wrap;
     }
 
+    .deeper-copy {
+      padding: 1.2rem 1.35rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
     .page-media {
       margin-top: 2rem;
       display: grid;
@@ -144,10 +150,11 @@
       word-break: break-word;
     }
 
-    .deeper-copy {
-      padding: 1.2rem 1.35rem;
-      background: var(--panel);
-      border: 1px solid var(--line);
+    .figure-link {
+      margin-top: 0.75rem;
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: underline;
     }
 
     .empty-copy {
@@ -271,16 +278,22 @@ The experiments show why this matters: different base models benefit from differ
       </div>
 
       
-      <div class="page-media">
+      <section class="page-media" aria-label="Paper media">
+        
+
         
         <figure class="page-figure">
           
-          <img src="../../images/sh1.png" alt="sh1.png">
+          <img src="../../images/sh1.png" alt="Three paradigms of harness improvement. In human harness engineering, human engineers manually revise the agent harness. In Meta-Harness, a stronger external agent guides the improvement of a weaker target agent. In Self-Harness, the agent improves its own operating harness.">
           
-          <figcaption class="figure-caption">sh1.png</figcaption>
+          
+          <figcaption class="figure-caption">Three paradigms of harness improvement. In human harness engineering, human engineers manually revise the agent harness. In Meta-Harness, a stronger external agent guides the improvement of a weaker target agent. In Self-Harness, the agent improves its own operating harness.</figcaption>
+          
         </figure>
         
-      </div>
+
+        
+      </section>
       
 
       

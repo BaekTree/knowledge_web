@@ -112,6 +112,12 @@
       white-space: pre-wrap;
     }
 
+    .deeper-copy {
+      padding: 1.2rem 1.35rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
     .page-media {
       margin-top: 2rem;
       display: grid;
@@ -144,10 +150,11 @@
       word-break: break-word;
     }
 
-    .deeper-copy {
-      padding: 1.2rem 1.35rem;
-      background: var(--panel);
-      border: 1px solid var(--line);
+    .figure-link {
+      margin-top: 0.75rem;
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: underline;
     }
 
     .empty-copy {
@@ -271,18 +278,37 @@
       </div>
 
       
-      <div class="page-media">
+      <section class="page-media" aria-label="Paper media">
+        
+
         
         <figure class="page-figure">
           
-          <object data="../../images/pass_results.pdf" type="application/pdf" aria-label="pass_results.pdf">
-            <a href="../../images/pass_results.pdf">Open pass_results.pdf</a>
+          <object data="../../images/harness_evolution.pdf" type="application/pdf">
+            <a class="figure-link" href="../../images/harness_evolution.pdf">Open figure PDF</a>
           </object>
+          <a class="figure-link" href="../../images/harness_evolution.pdf">Open figure PDF</a>
           
-          <figcaption class="figure-caption">pass_results.pdf</figcaption>
+          
+          <figcaption class="figure-caption">Self-Harness evolution trajectory. Green markers denote accepted harness candidates and gray crosses denote rejected harness candidates. Step lines connect accepted candidates and keep performance flat across rejected iterations; the two accepted lineages meet at the final success-combined harness.</figcaption>
+          
         </figure>
         
-      </div>
+        <figure class="page-figure">
+          
+          <object data="../../images/evolved_harness_delta.pdf" type="application/pdf">
+            <a class="figure-link" href="../../images/evolved_harness_delta.pdf">Open figure PDF</a>
+          </object>
+          <a class="figure-link" href="../../images/evolved_harness_delta.pdf">Open figure PDF</a>
+          
+          
+          <figcaption class="figure-caption">Differences for the three harness modifications accepted by Self-Harness and retained in the final harness. Red rows denote code removed from the initial harness, and green rows denote the updated harness behavior.</figcaption>
+          
+        </figure>
+        
+
+        
+      </section>
       
 
       

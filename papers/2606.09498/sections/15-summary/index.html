@@ -112,6 +112,12 @@
       white-space: pre-wrap;
     }
 
+    .deeper-copy {
+      padding: 1.2rem 1.35rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
     .page-media {
       margin-top: 2rem;
       display: grid;
@@ -144,10 +150,11 @@
       word-break: break-word;
     }
 
-    .deeper-copy {
-      padding: 1.2rem 1.35rem;
-      background: var(--panel);
-      border: 1px solid var(--line);
+    .figure-link {
+      margin-top: 0.75rem;
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: underline;
     }
 
     .empty-copy {
@@ -270,6 +277,26 @@
         
       </div>
 
+      
+      <section class="page-media" aria-label="Paper media">
+        
+
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/pass_results.pdf" type="application/pdf">
+            <a class="figure-link" href="../../images/pass_results.pdf">Open figure PDF</a>
+          </object>
+          <a class="figure-link" href="../../images/pass_results.pdf">Open figure PDF</a>
+          
+          
+          <figcaption class="figure-caption">Pass rates (\%) on Terminal-Bench-2.0 across MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. For each backend, bars compare the initial harness with the final harness produced by Self-Harness on the held-in split, held-out split, and overall set; annotations above the Self-Harness bars show relative gains over the corresponding initial harness.</figcaption>
+          
+        </figure>
+        
+
+        
+      </section>
       
 
       

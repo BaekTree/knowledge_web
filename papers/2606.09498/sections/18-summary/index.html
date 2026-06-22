@@ -112,6 +112,12 @@
       white-space: pre-wrap;
     }
 
+    .deeper-copy {
+      padding: 1.2rem 1.35rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
     .page-media {
       margin-top: 2rem;
       display: grid;
@@ -144,10 +150,11 @@
       word-break: break-word;
     }
 
-    .deeper-copy {
-      padding: 1.2rem 1.35rem;
-      background: var(--panel);
-      border: 1px solid var(--line);
+    .figure-link {
+      margin-top: 0.75rem;
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: underline;
     }
 
     .empty-copy {
@@ -270,6 +277,38 @@
         
       </div>
 
+      
+      <section class="page-media" aria-label="Paper media">
+        
+
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/case_m25_count_dataset_tokens.pdf" type="application/pdf">
+            <a class="figure-link" href="../../images/case_m25_count_dataset_tokens.pdf">Open figure PDF</a>
+          </object>
+          <a class="figure-link" href="../../images/case_m25_count_dataset_tokens.pdf">Open figure PDF</a>
+          
+          
+          <figcaption class="figure-caption">Case study of a MiniMax M2.5 harness edit on the Terminal-Bench-2.0 count-dataset-tokens task. Left: a failed trace under the initial harness, where the agent continues dataset exploration after finding the relevant metadata configuration and times out without creating the required answer artifact. Right: a successful trace under the edited harness, where the agent identifies the metadata-backed science subset, computes the required token total, writes /app/answer.txt, and reads it back for verification.</figcaption>
+          
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/case_qwen_extract_elf.pdf" type="application/pdf">
+            <a class="figure-link" href="../../images/case_qwen_extract_elf.pdf">Open figure PDF</a>
+          </object>
+          <a class="figure-link" href="../../images/case_qwen_extract_elf.pdf">Open figure PDF</a>
+          
+          
+          <figcaption class="figure-caption">Case study of a Qwen3.5 harness edit on the Terminal-Bench-2.0 extract-elf task. Left: a failed trace under the initial harness, where the agent creates the required extractor script but then enters repeated overwrite and edit-file failures; before stopping, it deletes /app/extract.js, causing the verifier to fail because the required artifact is missing. Right: a successful trace under the edited harness, where a tool-error-triggered system prompt redirects the agent to recover the missing artifact, recreate the extractor, validate the generated JSON output, and leave the required file present for the verifier.</figcaption>
+          
+        </figure>
+        
+
+        
+      </section>
       
 
       

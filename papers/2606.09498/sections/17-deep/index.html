@@ -112,6 +112,12 @@
       white-space: pre-wrap;
     }
 
+    .deeper-copy {
+      padding: 1.2rem 1.35rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
     .page-media {
       margin-top: 2rem;
       display: grid;
@@ -144,10 +150,11 @@
       word-break: break-word;
     }
 
-    .deeper-copy {
-      padding: 1.2rem 1.35rem;
-      background: var(--panel);
-      border: 1px solid var(--line);
+    .figure-link {
+      margin-top: 0.75rem;
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: underline;
     }
 
     .empty-copy {
@@ -270,6 +277,38 @@ This section sets up the next stage of the paper by showing that the gains come 
         
       </div>
 
+      
+      <section class="page-media" aria-label="Paper media">
+        
+
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/qwen_harness_evolution_v2.pdf" type="application/pdf">
+            <a class="figure-link" href="../../images/qwen_harness_evolution_v2.pdf">Open figure PDF</a>
+          </object>
+          <a class="figure-link" href="../../images/qwen_harness_evolution_v2.pdf">Open figure PDF</a>
+          
+          
+          <figcaption class="figure-caption">Self-Harness evolution trajectory. Green markers denote accepted harness candidates and gray crosses denote rejected harness candidates. Step lines connect accepted candidates and keep performance flat across rejected iterations. The subagent and skill branches were discarded due to no further improvement. The remaining four accepted edits are merged to form the final harness.</figcaption>
+          
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <object data="../../images/qwen_harness_delta.pdf" type="application/pdf">
+            <a class="figure-link" href="../../images/qwen_harness_delta.pdf">Open figure PDF</a>
+          </object>
+          <a class="figure-link" href="../../images/qwen_harness_delta.pdf">Open figure PDF</a>
+          
+          
+          <figcaption class="figure-caption">Differences for the four harness modifications accepted by Self-Harness and retained in the final harness. Red rows denote code removed from the initial harness, and green rows denote the updated harness behavior.</figcaption>
+          
+        </figure>
+        
+
+        
+      </section>
       
 
       
