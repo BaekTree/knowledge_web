@@ -131,16 +131,11 @@
       background: #fcfcfc;
     }
 
-    .page-figure img,
-    .page-figure object {
+    .page-figure img {
       display: block;
       width: 100%;
       max-height: 36rem;
       margin: 0 auto;
-    }
-
-    .page-figure object {
-      min-height: 28rem;
     }
 
     .figure-caption {
@@ -148,13 +143,6 @@
       color: var(--muted);
       font-size: 0.95rem;
       word-break: break-word;
-    }
-
-    .figure-link {
-      margin-top: 0.75rem;
-      display: inline-block;
-      color: var(--muted);
-      text-decoration: underline;
     }
 
     .empty-copy {
@@ -276,23 +264,11 @@
       
       <section class="page-media" aria-label="Paper media">
         
-        <figure class="page-figure">
-          <object data="paper.pdf" type="application/pdf">
-            <a class="figure-link" href="paper.pdf">Open paper PDF</a>
-          </object>
-          <a class="figure-link" href="paper.pdf">Open paper PDF</a>
-        </figure>
-        
-
-        
 
         
         <figure class="page-figure">
           
-          <object data="images/case_glm_build_pov_ray.pdf" type="application/pdf">
-            <a class="figure-link" href="images/case_glm_build_pov_ray.pdf">Open figure PDF</a>
-          </object>
-          <a class="figure-link" href="images/case_glm_build_pov_ray.pdf">Open figure PDF</a>
+          <img src="images/case_glm_build_pov_ray.png" alt="Case study of a GLM-5 harness edit on the Terminal-Bench-2.0 build-pov-ray task. Left: a failed trace under the initial harness, where long monolithic external downloads consume large tool budgets and the agent later finalizes despite repeated non-zero sanity checks. Right: a successful trace under the edited harness, where the agent uses bounded staged operations, checks external archive evidence before committing more work, and repairs the failed sanity check before finalizing.">
           
           
           <figcaption class="figure-caption">Case study of a GLM-5 harness edit on the Terminal-Bench-2.0 build-pov-ray task. Left: a failed trace under the initial harness, where long monolithic external downloads consume large tool budgets and the agent later finalizes despite repeated non-zero sanity checks. Right: a successful trace under the edited harness, where the agent uses bounded staged operations, checks external archive evidence before committing more work, and repairs the failed sanity check before finalizing.</figcaption>
@@ -301,10 +277,7 @@
         
         <figure class="page-figure">
           
-          <object data="images/glm_harness_evolution.pdf" type="application/pdf">
-            <a class="figure-link" href="images/glm_harness_evolution.pdf">Open figure PDF</a>
-          </object>
-          <a class="figure-link" href="images/glm_harness_evolution.pdf">Open figure PDF</a>
+          <img src="images/glm_harness_evolution.png" alt="Self-Harness evolution trajectory. Green markers denote accepted harness candidates and gray crosses denote rejected harness candidates. Step lines connect accepted candidates and keep performance flat across rejected iterations. Two early branches were discarded due to no further improvement. The remaining lane becomes the final accepted harness.">
           
           
           <figcaption class="figure-caption">Self-Harness evolution trajectory. Green markers denote accepted harness candidates and gray crosses denote rejected harness candidates. Step lines connect accepted candidates and keep performance flat across rejected iterations. Two early branches were discarded due to no further improvement. The remaining lane becomes the final accepted harness.</figcaption>
@@ -313,10 +286,7 @@
         
         <figure class="page-figure">
           
-          <object data="images/glm_harness_delta.pdf" type="application/pdf">
-            <a class="figure-link" href="images/glm_harness_delta.pdf">Open figure PDF</a>
-          </object>
-          <a class="figure-link" href="images/glm_harness_delta.pdf">Open figure PDF</a>
+          <img src="images/glm_harness_delta.png" alt="Differences for the four harness modifications accepted by Self-Harness and retained in the final harness. Red rows denote code removed from the initial harness, and green rows denote the updated harness behavior.">
           
           
           <figcaption class="figure-caption">Differences for the four harness modifications accepted by Self-Harness and retained in the final harness. Red rows denote code removed from the initial harness, and green rows denote the updated harness behavior.</figcaption>
