@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section tests whether Self-Harness can raise agent performance without changing the underlying language model, only the surrounding harness. It does this on Terminal-Bench-2.0, starting from a minimal DeepAgent-based setup across several model backends and letting Self-Harness propose, validate, and promote limited edits using execution evidence plus regression gates. The section exists to answer the core empirical question of whether harness-level self-improvement is enough to produce real gains. Its main claim is that carefully bounded harness edits can improve terminal-task performance while keeping the base model fixed.
+        This section tests whether Self-Harness can make an agent better without changing the underlying language model, only the surrounding harness. It uses Terminal-Bench-2.0 and starts from the same minimal DeepAgent-based setup across several model backends, then lets Self-Harness propose bounded edits, verify them with execution evidence, and accept them only if they pass regression gates. The point is to answer a practical question: can self-modifying scaffolding reliably improve performance in real terminal tasks? The key claim is that harness changes alone can produce measurable gains while staying controlled and safe through validation and held-out checks.
         
       </div>
 

@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section adds a gate between proposing a harness edit and actually adopting it: every candidate is re-evaluated on both the held-in split that justified the change and a held-out split that checks for regressions. Its purpose is to answer a core safety question: can the harness improve without silently breaking other behaviors? The claim is that a proposal is accepted only when it improves at least one split and does not degrade the other, with repeated evaluation used to reduce stochastic flukes. It also filters out non-executable or no-op proposals and keeps an auditable record of every decision.
+        This section defines how Self-Harness decides whether a proposed harness edit is actually adopted. It exists to answer a simple question: how do we promote improvements without accidentally regressing behavior? The key claim is that a candidate must improve at least one split, held-in or held-out, without hurting the other, and stochastic runs are aggregated to avoid lucky promotions. It also rejects no-op or failed proposals and logs every outcome so each harness transition stays auditable.
         
       </div>
 

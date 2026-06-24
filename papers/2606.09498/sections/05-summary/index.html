@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section introduces the core Self-Harness mechanism: a fixed model repeatedly improves its own harness using execution evidence rather than manual editing or broad search. It exists to answer how a harness can be adapted systematically around a model while preserving the overall control architecture. The key claim is that recurring failures can be clustered into structured evidence, turned into targeted minimal candidate edits, and then filtered by regression testing so only changes that genuinely help are accepted.
+        This section defines the paper’s core mechanism: a fixed model repeatedly improves its own harness using execution evidence, rather than relying only on human editing or a separate search optimizer. It exists to answer how a harness can be made self-improving in a controlled way and to set up the paper’s experimental method. The key claim is that clustered failure traces can be turned into structured evidence, which the model can use to propose small, diverse harness edits that target specific problems without changing the overall architecture. Those edits are then kept only if regression testing shows they help overall performance and do not introduce unacceptable new failures.
         
       </div>
 

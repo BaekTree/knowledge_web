@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines the starting point for Self-Harness: a deliberately minimal DeepAgent-based harness with only a short benchmark prompt and default filesystem and shell tools. It exists to set up the core optimization question in the paper: if the harness itself is the object of search, what parts of the agent setup can be edited safely and effectively? The key claim is that Self-Harness is restricted to changing the harness definition file, so it can only modify explicit configuration surfaces such as instructions, tools, and verification guidance to produce new candidate harnesses.
+        This section defines the starting harness that Self-Harness will improve: a minimal DeepAgent-based setup with only a benchmark-facing system prompt plus default filesystem and shell tools. It exists to clarify the search space and answer what parts of the agent runtime are actually editable, namely the harness definition file rather than the model itself. The key claim is that Self-Harness can generate new harness candidates by changing declared configuration points such as instructions, tools, and verification guidance, while keeping the core harness intentionally small and controlled.
         
       </div>
 

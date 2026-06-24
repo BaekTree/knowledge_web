@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section gives the paper’s core pitch and main result: instead of treating the harness as fixed human-built infrastructure, Self-Harness lets an LLM-based agent improve its own harness through an iterative loop of weakness mining, harness proposal, and validation. It exists to answer whether model-specific harness edits can be discovered automatically, without human engineers or stronger external agents. The key claim is that this works in practice: across three different base models, the approach reliably boosts held-out performance and turns observed failure patterns into concrete, executable harness changes rather than generic prompt additions.
+        This section gives the paper’s core pitch: agent performance depends not just on the base model but also on the harness, and the harness itself should be able to improve. It exists to answer the central question of whether an LLM-based agent can discover its own weaknesses and turn them into better operating rules without human engineers or stronger outside agents. The main claim is that Self-Harness does this through an iterative loop of weakness mining, harness proposal, and regression-based validation. The abstract also establishes the empirical result that this approach improves held-out performance across three different models and that the gains come from model-specific harness edits rather than generic prompt additions.
         
       </div>
 

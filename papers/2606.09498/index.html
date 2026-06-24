@@ -517,7 +517,7 @@
 
       <div class="root-intuition">
         
-        This paper asks whether an AI agent can improve the rules and tools it runs on by studying its own mistakes, instead of waiting for human engineers to tune everything by hand. That matters because modern language models behave differently from one another, so a harness that works well for one model may hold another back, and manual tuning does not scale. The key idea is a loop that finds repeated failure patterns, proposes small targeted harness changes, and keeps only the ones that pass regression tests. In effect, the agent is not just a worker inside a machine, but also a mechanic that can notice where the machine is slipping and tighten the right bolts.
+        This paper asks whether an AI agent can improve the instructions and wrapper around itself, not just its answers, by studying where it fails and editing its own harness. That matters because different models have different quirks, and hand-tuning every agent setup is slow and does not scale as models change quickly. The key insight is a loop: find recurring failure patterns, propose small harness changes tied to those failures, and only keep the changes if they pass regression tests. In effect, the paper turns the harness from a fixed cage into something more like a self-repairing toolkit that adapts to the model using it.
         
       </div>
 

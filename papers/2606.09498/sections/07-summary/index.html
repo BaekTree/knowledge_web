@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section turns raw failures from running the fixed model under the current harness into structured evidence for improvement. It clusters only failed cases using an evaluator-grounded failure signature that separates the verifier’s terminal rejection cause, the agent behavior that led to it, and the reusable mechanism behind that behavior. The point is to answer which weaknesses recur and which ones are actually harness-fixable, rather than treating failures as isolated anecdotes or vague semantic similarities. Its key claim is that deterministic, cross-case clustering can produce an evidence bundle of dominant failure patterns that stays separate from the optimizer while still giving it actionable targets for harness revision.
+        This section turns raw failures from running the model under the current harness into structured evidence for improvement. It exists to answer which recurring weaknesses the harness is exposing, rather than treating each failure as a one-off or optimizing directly from noisy traces. The key claim is that failures should be grouped by an evaluator-grounded signature that separates the terminal verifier cause, the relevant agent behavior, and the underlying reusable mechanism. The resulting clusters are ranked into an evidence bundle, giving the proposer concrete, cross-case patterns to target with harness revisions.
         
       </div>
 

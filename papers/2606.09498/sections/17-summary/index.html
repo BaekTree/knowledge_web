@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section shows how the self-improving harness changes over the course of search and which edits are actually kept in the final promoted version. It exists to answer whether gains come from a smooth stream of better proposals or from a few validation-gated fixes that target specific failures. The main claim is that Self-Harness improves by retaining a small set of code-level edits that repair artifact handling, tool interaction, retry behavior, and environment persistence. Across MiniMax M2.5, Qwen3.5, and GLM-5, the exact edits differ, but they all reflect the same pattern: the harness adapts to each model’s failure mode and makes output delivery and execution more reliable.
+        This section traces how Self-Harness changes a harness over successive validation-gated edits and shows which code-level changes survive into the final promoted version. It exists to answer whether improvement comes from a smooth stream of good proposals or from a small number of targeted fixes selected by validation. The key claim is that the final harness emerges through a few accepted edits that address concrete failure modes, especially artifact reliability, tool-content handling, and recovery from stalled or erroneous execution. It also shows that while the overall pattern is shared, each model needs different edits because the same harness exposes different pathologies.
         
       </div>
 

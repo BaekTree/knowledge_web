@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section specifies the exact evaluation setup used for Terminal-Bench-2.0, including the Harbor execution environment, machine resources, concurrency settings, and resource-mirroring policy. It exists to make the benchmark conditions reproducible and to clarify what was included or excluded from the main evaluation set. The key claim is that the authors controlled the environment to reduce noise from network and infrastructure issues, while still preserving the core terminal-interaction task distribution used for comparison.
+        This section specifies the exact evaluation setup for Terminal-Bench-2.0 so the paper’s results are measured in a controlled, reproducible environment rather than an ad hoc one. It answers how the benchmark was run, what infrastructure and concurrency limits were used, and which tasks were included or excluded. The key claims are that all runs use Harbor on an isolated high-capacity machine, network constraints are deliberately bounded, and some unstable or unsupported tasks are removed from the main 64-case set to avoid failures that would reflect environment noise instead of agent behavior.
         
       </div>
 

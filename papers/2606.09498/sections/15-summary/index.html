@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines the paper’s main evaluation metric, Pass (%), which measures how often a harness candidate successfully completes evaluated tasks under a fixed protocol. It exists to make the self-improvement comparison concrete: the paper is asking whether one harness configuration is better than another in terms of single-attempt task success, not just whether it looks promising in isolation. The key claim is that results are reported as the percentage of attempts that satisfy the benchmark verifier, usually averaged over two repeated attempts per candidate, with Terminal-Bench-2.0 judged by the verifier on the final container state.
+        This section defines the paper’s main evaluation signal: Pass (%), the share of task attempts that satisfy the benchmark verifier, usually averaged over two repeated attempts per harness candidate. It exists to make clear how the authors measure harness quality and to set up fair comparisons under a fixed evaluation protocol. The key claim is that Pass (%) reflects mean single-attempt task success, and for Terminal-Bench-2.0 the verifier checks the final container state, so success is judged by the task’s end result rather than intermediate behavior.
         
       </div>
 

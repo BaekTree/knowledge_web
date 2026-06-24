@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section closes the paper by restating the core result of Self-Harness: a fixed model can still improve its own agent behavior when harness changes are proposed from execution evidence, checked under the same benchmark protocol, and only accepted if they do not regress performance. It exists to answer the paper’s main question and to frame the contribution as an empirical, reversible state transition in harness design rather than open-ended self-improvement. The key claim is that small, auditable harness edits can raise pass rates across backends while preserving held-in and held-out behavior, but the method remains bounded by benchmark specificity, verifier quality, and the need for stronger gates in higher-stakes settings.
+        This section closes the paper by answering the core question the experiments were built to test: can a fixed model improve the harness that controls its own behavior? It argues that self-harnessing works as an empirical, test-driven state transition, where proposals must be grounded in execution evidence and accepted only if they do not regress benchmark performance. The main claim is that small, auditable harness edits can improve pass rates across backends while preserving held-in and held-out results. It also sets the boundary of the work by stressing that this is bounded harness improvement, not open-ended self-improvement, and that stronger domains will need stricter acceptance gates.
         
       </div>
 

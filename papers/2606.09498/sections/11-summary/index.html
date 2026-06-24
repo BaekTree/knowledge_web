@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines the evaluation setup for Self-Harness on Terminal-Bench-2.0, a multi-turn terminal benchmark with deterministic verification. It exists to answer a basic but important question: whether harness self-improvements help on realistic tool-use tasks, not just on toy examples. The paper evaluates on a fixed 64-task subset and removes cases that depend on unstable web resources or multimodal inputs to reduce noise from capabilities outside the initial harness. The key claim is that this filtered benchmark better isolates the effect of Self-Harness edits, especially because multimodal tasks would mostly test unsupported harness features rather than the method itself.
+        This section defines the evaluation setting for Self-Harness and explains how the paper measures whether harness improvements actually help. It uses Terminal-Bench-2.0 as the main benchmark, focusing on realistic multi-turn terminal tasks that stress tool use, verification, artifact handling, and recovery from errors. To keep the comparison stable, the authors evaluate on a fixed 64-task subset and exclude tasks that depend on unstable web resources or unsupported multimodal inputs. The key claim is that this filtered benchmark better isolates the effect of Self-Harness edits from noise caused by missing harness capabilities or external variability.
         
       </div>
 
