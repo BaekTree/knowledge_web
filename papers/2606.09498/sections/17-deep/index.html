@@ -13,6 +13,7 @@
       --panel: #f7f7f7;
       --control: #111111;
       --max-width: 760px;
+      --index-width: 13.5rem;
     }
 
     * { box-sizing: border-box; }
@@ -62,13 +63,84 @@
       line-height: 1.4;
     }
 
+    .paper-meta.web-meta {
+      max-width: 28rem;
+    }
+
     .paper-root-link {
       color: inherit;
     }
 
+    .source-site,
+    .source-author,
+    .source-date,
+    .source-url,
+    .source-host {
+      display: block;
+    }
+
+    .source-site {
+      color: var(--text);
+    }
+
+    .source-url {
+      word-break: break-word;
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }
+
+    .brief-index {
+      position: fixed;
+      left: 1.4rem;
+      top: 5.25rem;
+      width: var(--index-width);
+      max-height: calc(100vh - 7rem);
+      overflow: auto;
+      padding: 0.2rem 0;
+      z-index: 8;
+      background: rgba(255, 255, 255, 0.94);
+      border-left: 1px solid var(--line);
+      pointer-events: auto;
+    }
+
+    .brief-index-title {
+      margin: 0 0 0.7rem;
+      padding-left: 0.85rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brief-index-list {
+      display: grid;
+      gap: 0.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .brief-index-link {
+      display: block;
+      padding: 0.2rem 0.85rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    .brief-index-link:hover,
+    .brief-index-link.is-active {
+      color: var(--text);
+    }
+
+    .brief-index-link.is-active {
+      border-left: 2px solid var(--text);
+      padding-left: calc(0.85rem - 2px);
+    }
+
     .viewport {
       min-height: 100vh;
-      padding: 4.5rem 1.25rem 2rem;
+      padding: 4.5rem 1.25rem 2rem calc(var(--index-width) + 2.8rem);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -104,8 +176,7 @@
       margin: 0;
     }
 
-    .section-summary,
-    .deeper-copy {
+    .section-summary {
       font-size: clamp(1.2rem, 2.2vw, 1.55rem);
       line-height: 1.75;
       margin: 0;
@@ -113,9 +184,20 @@
     }
 
     .deeper-copy {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.75;
+      margin: 0;
       padding: 1.2rem 1.35rem;
       background: var(--panel);
       border: 1px solid var(--line);
+    }
+
+    .deeper-copy p {
+      margin: 0 0 1em;
+    }
+
+    .deeper-copy p:last-child {
+      margin-bottom: 0;
     }
 
     .page-media {
@@ -204,7 +286,7 @@
 
     @media (max-width: 720px) {
       .chrome {
-        padding: 1rem 1rem 0;
+        padding: 0.75rem 0.25rem 0;
         flex-direction: column;
       }
 
@@ -212,12 +294,44 @@
         text-align: left;
       }
 
+      .brief-index {
+        position: static;
+        width: auto;
+        max-height: none;
+        margin: 6.1rem 0.25rem 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brief-index-title {
+        padding-left: 0;
+      }
+
+      .brief-index-list {
+        display: flex;
+        gap: 0.35rem;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+      }
+
+      .brief-index-link {
+        white-space: nowrap;
+        padding: 0.25rem 0.45rem;
+      }
+
+      .brief-index-link.is-active {
+        border-left: 0;
+        border-bottom: 2px solid var(--text);
+        padding-left: 0.45rem;
+      }
+
       .viewport {
-        padding: 6rem 1rem 2rem;
+        padding: 1.25rem 0.25rem 1.5rem;
       }
 
       .page-card {
-        padding: 2rem 4rem 2rem;
+        padding: 1.5rem 1rem 1.5rem;
       }
 
       .nav-arrow {
@@ -230,6 +344,16 @@
       .nav-arrow.next { right: 0.5rem; }
     }
   </style>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body
   data-prev-summary=""
@@ -241,9 +365,110 @@
     <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
       <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
+      
       <div>arXiv:2606.09498</div>
+      
     </div>
   </div>
+
+  <nav class="brief-index" aria-label="Brief index">
+    <p class="brief-index-title">Brief index</p>
+    <ol class="brief-index-list">
+      
+      <li>
+        <a class="brief-index-link" href="../../index.html">Top</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../02-summary/index.html">02 Introduction</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../03-summary/index.html">03 From prompts to agent harnesses</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../04-summary/index.html">04 Self-improving agents and automated agent design</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../05-summary/index.html">05 Self-Harness An Iterative Loop for Model-Specific Harness Im</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../06-summary/index.html">06 Preliminary</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../07-summary/index.html">07 Weakness Mining Identifying Failure Patterns from Clustered </a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../08-summary/index.html">08 Harness Proposal Exploring Diverse yet Minimal Candidate Mod</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../09-summary/index.html">09 Proposal Validation Ensuring Robust Improvement through Regr</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../10-summary/index.html">10 Experiments</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../11-summary/index.html">11 Benchmarks</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../12-summary/index.html">12 Models</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../13-summary/index.html">13 Harness</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../14-summary/index.html">14 Splits and protocol</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../15-summary/index.html">15 Metrics</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../16-summary/index.html">16 Main Results</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link is-active" href="../17-summary/index.html">17 Harness evolution and retained edits</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../18-summary/index.html">18 Trace-Level Analysis of Accepted Edits</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../19-summary/index.html">19 Conclusion</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../20-summary/index.html">20 Model inference services</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../21-summary/index.html">21 Terminal-Bench-20 configuration</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../22-summary/index.html">22 Weakness Mining Identifying Failure Patterns from Clustered</a>
+      </li>
+      
+    </ol>
+  </nav>
 
   <main class="viewport" id="viewport">
     <article class="page-card">
@@ -257,11 +482,10 @@
 
       <div class="deeper-copy">
         
-        This section introduces two linked ideas: the evolution trajectory of a self-improving harness, and the set of edits that survive validation into the final promoted version. The evolution plots separate accepted proposals from rejected ones, which matters because the process is not a smooth monotonic climb. Instead, Self-Harness tests many candidate changes, keeps only the ones that pass validation, and discards the rest. The retained code diffs show what the system actually learned at the interface level: when to emit required artifacts, how to handle structured tool outputs, how to recover from tool failures, and how to avoid getting stuck in unproductive loops.
-
-The design choice here is to make improvements targeted and failure-driven rather than generic. For MiniMax M2.5, the edits focus on early artifact creation, schema-safe tool content, and redirecting execution after long tool interaction because those were the observed bottlenecks. Qwen3.5 adds artifact checking, missing-artifact recovery, retry discipline, and tool-error-triggered middleware, reflecting a different failure profile around file edits and tool instability. GLM-5 instead emphasizes persistence of environment changes across shell commands and a shift from exploration to implementation, because its harness needed to preserve state and encourage execution progress. In other words, the system is not optimizing a single abstract objective in the same way for every model; it is fitting the harness to the model’s specific failure mode.
-
-This section sets up the next stage of the paper by showing that the gains come from mechanism-level edits, not just more search or more attempts. The important takeaway is that harness quality is itself an adaptive variable: once the system can identify what went wrong in prior runs, it can propose and retain changes that directly address that weakness. That motivates the next step in the paper, which is to analyze or leverage these retained improvements as a recipe for further self-improvement and broader harness design.
+        <p>This section introduces two linked ideas: harness evolution and retained edits. A harness is the surrounding code that manages how the model runs, calls tools, writes artifacts, and recovers from failures. The “evolution” plot shows the search process over candidate harness changes, while the code diff shows which changes survive validation and become part of the final promoted harness. The important technical point is that improvement is not treated as a smooth upward curve; instead, it comes from a few validation-gated jumps, where only edits that actually improve measured pass rate are kept. That makes the process resemble program repair more than gradual tuning.</p>
+<p>The design choice behind this setup is to connect failure analysis to concrete code changes. Rather than optimizing abstract scores, Self-Harness identifies recurring breakdowns in execution traces, such as missing required artifacts, schema-invalid tool content, stalled tool-use loops, or late creation of outputs. Each promoted edit is meant to address one of these pathologies directly. For MiniMax M2.5, the retained edits force required outputs to appear earlier, handle structured tool content more carefully, and break out of overly long tool interaction. For Qwen3.5, the harness adds artifact checking, recovery when files are missing, stricter retry discipline, and middleware triggered by tool errors. For GLM-5, the edits focus on keeping environment state persistent across shell commands and nudging the model away from endless exploration toward actual implementation.</p>
+<p>The intuition is that different models fail in different ways, so the harness must adapt to the model rather than apply a generic fix. The shared pattern across all three runs is artifact reliability: the harness should ensure that outputs the verifier expects are actually produced and preserved. But the specific mechanisms differ because the underlying execution failures differ. A model that forgets to write files needs early artifact creation and recovery logic; a model that repeats failing commands needs retry control; a model that loses shell state needs environment persistence. The “validation gate” is what makes these edits reliable: proposals are accepted only when they improve measured behavior, which prevents the harness from accumulating complexity that looks plausible but does not help.</p>
+<p>This section sets up the next step in the paper by showing that self-improvement is not just finding a better score, but learning which failure mode each model needs repaired. That motivates the later analysis of why certain edits transfer, why others are rejected, and how self-generated harness changes can be used as a general method for improving model execution behavior.</p>
         
       </div>
 

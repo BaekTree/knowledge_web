@@ -13,6 +13,7 @@
       --panel: #f7f7f7;
       --control: #111111;
       --max-width: 760px;
+      --index-width: 13.5rem;
     }
 
     * { box-sizing: border-box; }
@@ -62,13 +63,84 @@
       line-height: 1.4;
     }
 
+    .paper-meta.web-meta {
+      max-width: 28rem;
+    }
+
     .paper-root-link {
       color: inherit;
     }
 
+    .source-site,
+    .source-author,
+    .source-date,
+    .source-url,
+    .source-host {
+      display: block;
+    }
+
+    .source-site {
+      color: var(--text);
+    }
+
+    .source-url {
+      word-break: break-word;
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }
+
+    .brief-index {
+      position: fixed;
+      left: 1.4rem;
+      top: 5.25rem;
+      width: var(--index-width);
+      max-height: calc(100vh - 7rem);
+      overflow: auto;
+      padding: 0.2rem 0;
+      z-index: 8;
+      background: rgba(255, 255, 255, 0.94);
+      border-left: 1px solid var(--line);
+      pointer-events: auto;
+    }
+
+    .brief-index-title {
+      margin: 0 0 0.7rem;
+      padding-left: 0.85rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brief-index-list {
+      display: grid;
+      gap: 0.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .brief-index-link {
+      display: block;
+      padding: 0.2rem 0.85rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    .brief-index-link:hover,
+    .brief-index-link.is-active {
+      color: var(--text);
+    }
+
+    .brief-index-link.is-active {
+      border-left: 2px solid var(--text);
+      padding-left: calc(0.85rem - 2px);
+    }
+
     .viewport {
       min-height: 100vh;
-      padding: 4.5rem 1.25rem 2rem;
+      padding: 4.5rem 1.25rem 2rem calc(var(--index-width) + 2.8rem);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -104,8 +176,7 @@
       margin: 0;
     }
 
-    .section-summary,
-    .deeper-copy {
+    .section-summary {
       font-size: clamp(1.2rem, 2.2vw, 1.55rem);
       line-height: 1.75;
       margin: 0;
@@ -113,9 +184,20 @@
     }
 
     .deeper-copy {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.75;
+      margin: 0;
       padding: 1.2rem 1.35rem;
       background: var(--panel);
       border: 1px solid var(--line);
+    }
+
+    .deeper-copy p {
+      margin: 0 0 1em;
+    }
+
+    .deeper-copy p:last-child {
+      margin-bottom: 0;
     }
 
     .page-media {
@@ -204,7 +286,7 @@
 
     @media (max-width: 720px) {
       .chrome {
-        padding: 1rem 1rem 0;
+        padding: 0.75rem 0.25rem 0;
         flex-direction: column;
       }
 
@@ -212,12 +294,44 @@
         text-align: left;
       }
 
+      .brief-index {
+        position: static;
+        width: auto;
+        max-height: none;
+        margin: 6.1rem 0.25rem 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brief-index-title {
+        padding-left: 0;
+      }
+
+      .brief-index-list {
+        display: flex;
+        gap: 0.35rem;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+      }
+
+      .brief-index-link {
+        white-space: nowrap;
+        padding: 0.25rem 0.45rem;
+      }
+
+      .brief-index-link.is-active {
+        border-left: 0;
+        border-bottom: 2px solid var(--text);
+        padding-left: 0.45rem;
+      }
+
       .viewport {
-        padding: 6rem 1rem 2rem;
+        padding: 1.25rem 0.25rem 1.5rem;
       }
 
       .page-card {
-        padding: 2rem 4rem 2rem;
+        padding: 1.5rem 1rem 1.5rem;
       }
 
       .nav-arrow {
@@ -230,6 +344,16 @@
       .nav-arrow.next { right: 0.5rem; }
     }
   </style>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body
   data-prev-summary=""
@@ -241,9 +365,110 @@
     <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
       <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
+      
       <div>arXiv:2606.09498</div>
+      
     </div>
   </div>
+
+  <nav class="brief-index" aria-label="Brief index">
+    <p class="brief-index-title">Brief index</p>
+    <ol class="brief-index-list">
+      
+      <li>
+        <a class="brief-index-link" href="../../index.html">Top</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../02-summary/index.html">02 Introduction</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../03-summary/index.html">03 From prompts to agent harnesses</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../04-summary/index.html">04 Self-improving agents and automated agent design</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../05-summary/index.html">05 Self-Harness An Iterative Loop for Model-Specific Harness Im</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../06-summary/index.html">06 Preliminary</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../07-summary/index.html">07 Weakness Mining Identifying Failure Patterns from Clustered </a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../08-summary/index.html">08 Harness Proposal Exploring Diverse yet Minimal Candidate Mod</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../09-summary/index.html">09 Proposal Validation Ensuring Robust Improvement through Regr</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../10-summary/index.html">10 Experiments</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../11-summary/index.html">11 Benchmarks</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../12-summary/index.html">12 Models</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../13-summary/index.html">13 Harness</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../14-summary/index.html">14 Splits and protocol</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../15-summary/index.html">15 Metrics</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../16-summary/index.html">16 Main Results</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../17-summary/index.html">17 Harness evolution and retained edits</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../18-summary/index.html">18 Trace-Level Analysis of Accepted Edits</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../19-summary/index.html">19 Conclusion</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link is-active" href="../20-summary/index.html">20 Model inference services</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../21-summary/index.html">21 Terminal-Bench-20 configuration</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../22-summary/index.html">22 Weakness Mining Identifying Failure Patterns from Clustered</a>
+      </li>
+      
+    </ol>
+  </nav>
 
   <main class="viewport" id="viewport">
     <article class="page-card">
@@ -257,11 +482,10 @@
 
       <div class="deeper-copy">
         
-        This section describes the paper’s inference stack, meaning the concrete way each model was actually run during experiments. Two models, MiniMax M2.5 and GLM-5, were not self-hosted by the authors; instead, they were accessed through hosted inference services. In practice, that means the authors sent prompts to a provider-managed endpoint and received generated outputs, rather than running the model weights on their own hardware. MiniMax was used through its own hosted API, while GLM-5 was accessed through OpenRouter, which acts as a unified gateway to third-party models.
-
-The third model, Qwen3.5-35B-A3B, was deployed locally on four NVIDIA H200 GPUs. That choice gives the researchers more control over latency, batching, logging, and reproducibility, especially when a model is used heavily or needs to be integrated tightly into an experiment pipeline. The mention of an internal image derived from the public SGLang Docker image indicates that they built on a known serving stack rather than assembling a custom server from scratch. SGLang is a high-throughput inference framework for serving LLMs efficiently, so using it reduces engineering risk and helps ensure the deployment matches standard behavior.
-
-The main technical idea here is that “model inference service” is part infrastructure and part experimental control. Different serving modes were chosen based on practical constraints: hosted APIs for externally provided models, local GPU deployment for a model the authors could run themselves. This section sets up the next step in the paper by establishing that all later results come from a defined, repeatable inference layer, so any improvements in Self-Harness can be attributed to the harness method rather than inconsistent model serving.
+        <p>This section is about the paper’s inference infrastructure, not the modeling method itself. The main idea is that different LLMs were served in different ways depending on what was practical: MiniMax M2.5 was used through MiniMax’s hosted API, GLM-5 through OpenRouter, and Qwen3.5-35B-A3B through a local deployment. “Hosted inference” means the model runs on someone else’s managed service, so the researchers send prompts and receive completions without running the model weights themselves. By contrast, local deployment means the team controlled the serving stack and hardware directly, which is useful when they need predictable throughput, lower operational dependence, or custom runtime settings.</p>
+<p>The design choice here is mostly about balancing convenience, reliability, and control. Hosted services are the fastest way to access proprietary or externally hosted models, and they avoid the overhead of building and maintaining a serving stack. The paper notes concrete service entry points, such as the MiniMax token plan and the OpenRouter GLM-5 endpoint, because those are the exact access paths used during the experiments. That matters for reproducibility: model access is not just “which model,” but also “through which service and configuration,” since the service can affect latency, rate limits, and sometimes even the exact version available. The “Accessed on 2026/05” note is part of that provenance.</p>
+<p>The local Qwen deployment uses four NVIDIA H200 GPUs and an internal image derived from the public SGLang Docker image. SGLang is an inference serving framework designed for high-throughput LLM execution, so using it signals that the authors wanted a production-style runtime rather than a toy script. The Docker image choice captures the environment deterministically: the public base image gives a known serving stack, and the internal derivative lets the team customize it for their cluster without losing the benefits of a standard upstream version. Four H200s indicates the model was large enough, or the throughput target high enough, that a single GPU was not sufficient. In practice, this kind of setup is chosen to stabilize batching, reduce per-request overhead, and make generation speed more predictable.</p>
+<p>The broader intuition is that the paper is standardizing model access before evaluating self-improvement. If the harness is supposed to compare or optimize model behavior, then inference variability needs to be controlled as much as possible. This section therefore sets the experimental substrate: it tells the reader which models were remote, which were self-hosted, and what runtime they used. The next step in the paper can then focus on harness behavior and performance, with the serving layer treated as fixed infrastructure rather than a hidden source of variation.</p>
         
       </div>
 

@@ -13,6 +13,7 @@
       --panel: #f7f7f7;
       --control: #111111;
       --max-width: 760px;
+      --index-width: 13.5rem;
     }
 
     * { box-sizing: border-box; }
@@ -62,13 +63,84 @@
       line-height: 1.4;
     }
 
+    .paper-meta.web-meta {
+      max-width: 28rem;
+    }
+
     .paper-root-link {
       color: inherit;
     }
 
+    .source-site,
+    .source-author,
+    .source-date,
+    .source-url,
+    .source-host {
+      display: block;
+    }
+
+    .source-site {
+      color: var(--text);
+    }
+
+    .source-url {
+      word-break: break-word;
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }
+
+    .brief-index {
+      position: fixed;
+      left: 1.4rem;
+      top: 5.25rem;
+      width: var(--index-width);
+      max-height: calc(100vh - 7rem);
+      overflow: auto;
+      padding: 0.2rem 0;
+      z-index: 8;
+      background: rgba(255, 255, 255, 0.94);
+      border-left: 1px solid var(--line);
+      pointer-events: auto;
+    }
+
+    .brief-index-title {
+      margin: 0 0 0.7rem;
+      padding-left: 0.85rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brief-index-list {
+      display: grid;
+      gap: 0.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .brief-index-link {
+      display: block;
+      padding: 0.2rem 0.85rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    .brief-index-link:hover,
+    .brief-index-link.is-active {
+      color: var(--text);
+    }
+
+    .brief-index-link.is-active {
+      border-left: 2px solid var(--text);
+      padding-left: calc(0.85rem - 2px);
+    }
+
     .viewport {
       min-height: 100vh;
-      padding: 4.5rem 1.25rem 2rem;
+      padding: 4.5rem 1.25rem 2rem calc(var(--index-width) + 2.8rem);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -104,8 +176,7 @@
       margin: 0;
     }
 
-    .section-summary,
-    .deeper-copy {
+    .section-summary {
       font-size: clamp(1.2rem, 2.2vw, 1.55rem);
       line-height: 1.75;
       margin: 0;
@@ -113,9 +184,20 @@
     }
 
     .deeper-copy {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.75;
+      margin: 0;
       padding: 1.2rem 1.35rem;
       background: var(--panel);
       border: 1px solid var(--line);
+    }
+
+    .deeper-copy p {
+      margin: 0 0 1em;
+    }
+
+    .deeper-copy p:last-child {
+      margin-bottom: 0;
     }
 
     .page-media {
@@ -204,7 +286,7 @@
 
     @media (max-width: 720px) {
       .chrome {
-        padding: 1rem 1rem 0;
+        padding: 0.75rem 0.25rem 0;
         flex-direction: column;
       }
 
@@ -212,12 +294,44 @@
         text-align: left;
       }
 
+      .brief-index {
+        position: static;
+        width: auto;
+        max-height: none;
+        margin: 6.1rem 0.25rem 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brief-index-title {
+        padding-left: 0;
+      }
+
+      .brief-index-list {
+        display: flex;
+        gap: 0.35rem;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+      }
+
+      .brief-index-link {
+        white-space: nowrap;
+        padding: 0.25rem 0.45rem;
+      }
+
+      .brief-index-link.is-active {
+        border-left: 0;
+        border-bottom: 2px solid var(--text);
+        padding-left: 0.45rem;
+      }
+
       .viewport {
-        padding: 6rem 1rem 2rem;
+        padding: 1.25rem 0.25rem 1.5rem;
       }
 
       .page-card {
-        padding: 2rem 4rem 2rem;
+        padding: 1.5rem 1rem 1.5rem;
       }
 
       .nav-arrow {
@@ -230,6 +344,16 @@
       .nav-arrow.next { right: 0.5rem; }
     }
   </style>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body
   data-prev-summary=""
@@ -241,9 +365,110 @@
     <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
       <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
+      
       <div>arXiv:2606.09498</div>
+      
     </div>
   </div>
+
+  <nav class="brief-index" aria-label="Brief index">
+    <p class="brief-index-title">Brief index</p>
+    <ol class="brief-index-list">
+      
+      <li>
+        <a class="brief-index-link" href="../../index.html">Top</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../02-summary/index.html">02 Introduction</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../03-summary/index.html">03 From prompts to agent harnesses</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../04-summary/index.html">04 Self-improving agents and automated agent design</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../05-summary/index.html">05 Self-Harness An Iterative Loop for Model-Specific Harness Im</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../06-summary/index.html">06 Preliminary</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../07-summary/index.html">07 Weakness Mining Identifying Failure Patterns from Clustered </a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../08-summary/index.html">08 Harness Proposal Exploring Diverse yet Minimal Candidate Mod</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../09-summary/index.html">09 Proposal Validation Ensuring Robust Improvement through Regr</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../10-summary/index.html">10 Experiments</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../11-summary/index.html">11 Benchmarks</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../12-summary/index.html">12 Models</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../13-summary/index.html">13 Harness</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../14-summary/index.html">14 Splits and protocol</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link is-active" href="../15-summary/index.html">15 Metrics</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../16-summary/index.html">16 Main Results</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../17-summary/index.html">17 Harness evolution and retained edits</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../18-summary/index.html">18 Trace-Level Analysis of Accepted Edits</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../19-summary/index.html">19 Conclusion</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../20-summary/index.html">20 Model inference services</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../21-summary/index.html">21 Terminal-Bench-20 configuration</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../22-summary/index.html">22 Weakness Mining Identifying Failure Patterns from Clustered</a>
+      </li>
+      
+    </ol>
+  </nav>
 
   <main class="viewport" id="viewport">
     <article class="page-card">
@@ -257,11 +482,10 @@
 
       <div class="deeper-copy">
         
-        The section defines the paper’s main evaluation metric: **Pass (%)**, the share of task attempts that satisfy the benchmark’s verifier. In practice, each harness candidate is tested on two repeated attempts per task, and the pass rate is computed from those outcomes unless the paper says otherwise. The important idea is that the metric is not measuring how often the harness produces a nice-looking intermediate trace; it is measuring whether the run ends in a verifiably correct final result. That makes the metric objective and comparable across harnesses.
-
-This design choice matters because harnesses can vary in how they guide the model, but the benchmark needs a single, stable success signal. By using a verifier rather than subjective judging, the authors avoid ambiguity about partial progress or stylistic quality. The repeated attempts help reduce noise from stochastic model behavior: if one run succeeds and another fails, the Pass rate captures the harness’s average reliability under the same configuration and evaluation protocol. For Terminal-Bench-2.0 specifically, the success signal comes from checking the final container state, which matches the benchmark’s focus on end-to-end task completion rather than intermediate steps.
-
-This metric sets up the next stage of the paper because self-harnessing only makes sense if improvements can be measured consistently. Once Pass (%) is fixed as the yardstick, the authors can compare candidate harnesses, track whether self-modifications help or hurt, and run iterative improvement loops with a clear optimization target. In other words, the metric becomes the feedback signal that drives the self-improvement process described later.
+        <p>The section defines the paper’s main evaluation metric: Pass (\%), the fraction of task attempts that satisfy the benchmark verifier. In practice, each harness candidate is tested on two repeated attempts unless the paper says otherwise, and the reported score is the percentage of those attempts that pass. Conceptually, this is just an empirical success rate: if a harness succeeds on 7 out of 10 attempts, its Pass is \(70\%\). The important point is that the metric is tied to a fixed harness configuration and a fixed evaluation protocol, so the score reflects how well that specific harness behaves under controlled conditions rather than how well it could do with manual tuning.</p>
+<p>The reason for using Pass instead of a more elaborate metric is that the paper is studying harnesses as systems that should improve task completion reliability. A pass/fail verifier gives a clean binary outcome for each attempt, which makes harness comparison straightforward. Repeating each candidate twice helps reduce randomness from stochastic model behavior, environment variation, or occasional lucky/unlucky runs. This is not meant to estimate a deep latent capability; it is a practical measure of mean single-attempt success. In other words, the metric asks: if I run this harness once under the same setup, how often does it clear the benchmark’s correctness check?</p>
+<p>For Terminal-Bench-2.0, the section clarifies that the pass signal comes from the task verifier applied to the final container state. That design choice matters because many agent tasks are only meaningfully judged at the end of an interaction, after the agent has edited files, installed packages, or changed system state. Evaluating the final state rather than intermediate steps matches the benchmark’s notion of success: the task is solved if the container ends up in the required condition, regardless of how many intermediate actions were taken to get there. This makes the metric robust to different solution paths and focuses evaluation on outcome, not process.</p>
+<p>This metric section sets up the rest of the paper by establishing what “improvement” means for a self-improving harness. Once Pass (\%) is defined, the next step is to compare different harness candidates and see whether the self-harnessing method increases the probability of passing the verifier. The metric becomes the objective signal for selection, iteration, and reporting, so every later result can be interpreted as a change in verified task-success rate under the same protocol.</p>
         
       </div>
 

@@ -13,6 +13,7 @@
       --panel: #f7f7f7;
       --control: #111111;
       --max-width: 760px;
+      --index-width: 13.5rem;
     }
 
     * { box-sizing: border-box; }
@@ -62,13 +63,84 @@
       line-height: 1.4;
     }
 
+    .paper-meta.web-meta {
+      max-width: 28rem;
+    }
+
     .paper-root-link {
       color: inherit;
     }
 
+    .source-site,
+    .source-author,
+    .source-date,
+    .source-url,
+    .source-host {
+      display: block;
+    }
+
+    .source-site {
+      color: var(--text);
+    }
+
+    .source-url {
+      word-break: break-word;
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }
+
+    .brief-index {
+      position: fixed;
+      left: 1.4rem;
+      top: 5.25rem;
+      width: var(--index-width);
+      max-height: calc(100vh - 7rem);
+      overflow: auto;
+      padding: 0.2rem 0;
+      z-index: 8;
+      background: rgba(255, 255, 255, 0.94);
+      border-left: 1px solid var(--line);
+      pointer-events: auto;
+    }
+
+    .brief-index-title {
+      margin: 0 0 0.7rem;
+      padding-left: 0.85rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brief-index-list {
+      display: grid;
+      gap: 0.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .brief-index-link {
+      display: block;
+      padding: 0.2rem 0.85rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    .brief-index-link:hover,
+    .brief-index-link.is-active {
+      color: var(--text);
+    }
+
+    .brief-index-link.is-active {
+      border-left: 2px solid var(--text);
+      padding-left: calc(0.85rem - 2px);
+    }
+
     .viewport {
       min-height: 100vh;
-      padding: 4.5rem 1.25rem 2rem;
+      padding: 4.5rem 1.25rem 2rem calc(var(--index-width) + 2.8rem);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -104,8 +176,7 @@
       margin: 0;
     }
 
-    .section-summary,
-    .deeper-copy {
+    .section-summary {
       font-size: clamp(1.2rem, 2.2vw, 1.55rem);
       line-height: 1.75;
       margin: 0;
@@ -113,9 +184,20 @@
     }
 
     .deeper-copy {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.75;
+      margin: 0;
       padding: 1.2rem 1.35rem;
       background: var(--panel);
       border: 1px solid var(--line);
+    }
+
+    .deeper-copy p {
+      margin: 0 0 1em;
+    }
+
+    .deeper-copy p:last-child {
+      margin-bottom: 0;
     }
 
     .page-media {
@@ -204,7 +286,7 @@
 
     @media (max-width: 720px) {
       .chrome {
-        padding: 1rem 1rem 0;
+        padding: 0.75rem 0.25rem 0;
         flex-direction: column;
       }
 
@@ -212,12 +294,44 @@
         text-align: left;
       }
 
+      .brief-index {
+        position: static;
+        width: auto;
+        max-height: none;
+        margin: 6.1rem 0.25rem 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brief-index-title {
+        padding-left: 0;
+      }
+
+      .brief-index-list {
+        display: flex;
+        gap: 0.35rem;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+      }
+
+      .brief-index-link {
+        white-space: nowrap;
+        padding: 0.25rem 0.45rem;
+      }
+
+      .brief-index-link.is-active {
+        border-left: 0;
+        border-bottom: 2px solid var(--text);
+        padding-left: 0.45rem;
+      }
+
       .viewport {
-        padding: 6rem 1rem 2rem;
+        padding: 1.25rem 0.25rem 1.5rem;
       }
 
       .page-card {
-        padding: 2rem 4rem 2rem;
+        padding: 1.5rem 1rem 1.5rem;
       }
 
       .nav-arrow {
@@ -230,6 +344,16 @@
       .nav-arrow.next { right: 0.5rem; }
     }
   </style>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body
   data-prev-summary=""
@@ -241,9 +365,110 @@
     <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
       <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
+      
       <div>arXiv:2606.09498</div>
+      
     </div>
   </div>
+
+  <nav class="brief-index" aria-label="Brief index">
+    <p class="brief-index-title">Brief index</p>
+    <ol class="brief-index-list">
+      
+      <li>
+        <a class="brief-index-link" href="../../index.html">Top</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../02-summary/index.html">02 Introduction</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../03-summary/index.html">03 From prompts to agent harnesses</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../04-summary/index.html">04 Self-improving agents and automated agent design</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../05-summary/index.html">05 Self-Harness An Iterative Loop for Model-Specific Harness Im</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../06-summary/index.html">06 Preliminary</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../07-summary/index.html">07 Weakness Mining Identifying Failure Patterns from Clustered </a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../08-summary/index.html">08 Harness Proposal Exploring Diverse yet Minimal Candidate Mod</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link is-active" href="../09-summary/index.html">09 Proposal Validation Ensuring Robust Improvement through Regr</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../10-summary/index.html">10 Experiments</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../11-summary/index.html">11 Benchmarks</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../12-summary/index.html">12 Models</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../13-summary/index.html">13 Harness</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../14-summary/index.html">14 Splits and protocol</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../15-summary/index.html">15 Metrics</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../16-summary/index.html">16 Main Results</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../17-summary/index.html">17 Harness evolution and retained edits</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../18-summary/index.html">18 Trace-Level Analysis of Accepted Edits</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../19-summary/index.html">19 Conclusion</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../20-summary/index.html">20 Model inference services</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../21-summary/index.html">21 Terminal-Bench-20 configuration</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../22-summary/index.html">22 Weakness Mining Identifying Failure Patterns from Clustered</a>
+      </li>
+      
+    </ol>
+  </nav>
 
   <main class="viewport" id="viewport">
     <article class="page-card">
@@ -257,11 +482,10 @@
 
       <div class="deeper-copy">
         
-        This section turns a harness edit proposal into a controlled experiment. A candidate change is not merged right away; instead, it is wrapped as a new harness variant and evaluated with the same diagnostic evaluator used to find the original problem. The key idea is to compare the current harness and the candidate on two splits: a held-in split, which checks whether the edit fixes the evidence that motivated it, and a held-out split, which acts like a regression test for behaviors the proposer did not see. The paper measures performance with pass counts on each split and defines improvement as the difference between the candidate and current harness on that split.
-
-The acceptance rule is deliberately conservative. A proposal is promoted only if it improves at least one split and does not hurt the other, so the candidate must be non-worsening in both dimensions and strictly better in one. This avoids a common failure mode in iterative editing systems: a change that looks good overall but silently breaks previously working cases. If evaluation is stochastic, the system repeats runs and applies the rule to the aggregated results, reducing the chance that a lucky sample causes a bad edit to slip through. The section also filters out proposals that do not actually modify any editable surface or that fail before producing a valid result, since those cannot be meaningfully judged.
-
-When several compatible candidates pass in the same round, their edits are merged into the next harness, while rejected ones are preserved only in the log. That logging matters because it makes the lineage of harness changes auditable: one can later inspect what changed, what was tested, and why a transition was accepted or rejected. This validation step sets up the next stage of the paper’s loop: only edits that survive regression-aware screening are allowed to become the new active harness, so subsequent proposal generation starts from a stronger and more stable baseline.
+        <p>This section describes the paper’s “promotion gate” for harness edits: a proposed change is not automatically merged into the active harness just because it sounds plausible. Instead, each proposal is turned into a candidate harness variant \(h_t^{(j)} = j(h_t)\) and evaluated with the same evaluator used to find the original problem. The important idea is that the system tests both the evidence that motivated the edit and the parts of behavior that were not visible during proposal generation. To do that, it splits the evaluation data into a held-in split \(D_{\text{in}}\), which checks whether the proposal fixes the known issue, and a held-out split \(D_{\text{ho}}\), which checks for regressions elsewhere.</p>
+<p>The equations formalize this split-wise comparison. For a candidate harness \(h_t^{(j)}\), the paper defines improvement on each split as the difference in passed tasks relative to the current harness \(h_t\): \(\Delta_{\text{in}}^{(j)} = P_{\text{in}}(h_t^{(j)}) - P_{\text{in}}(h_t)\) and \(\Delta_{\text{ho}}^{(j)} = P_{\text{ho}}(h_t^{(j)}) - P_{\text{ho}}(h_t)\). This is a deliberately conservative design. A proposal is accepted only if it improves at least one split and does not worsen the other, so the system rejects “trade-off” edits that raise total score by helping one slice while harming another. In practice, this is closer to regression testing than to simple optimization: the goal is not just higher aggregate performance, but safer improvement.</p>
+<p>The stochastic-evaluation detail matters because harness evaluation can vary from run to run. Repeating the evaluation and aggregating pass counts reduces the chance that a noisy lucky run gets promoted. The section also adds two sanity checks beyond the numeric rule: proposals must actually modify an editable surface, and they must execute successfully enough to produce a valid result. That prevents empty or malformed edits from being treated as real improvements. Logging the changed surfaces, split-wise outcomes, repeats, proposal summary, and final decision makes the whole harness lineage auditable, which is important because self-modifying systems need traceability, not just scores.</p>
+<p>This validation step sets up the next phase of the paper: only vetted edits become part of the next harness state, so the system can iterate safely over time. In other words, the proposal mechanism generates candidate improvements, and this section defines the filter that decides which candidates are trustworthy enough to carry forward into the next round of self-improvement.</p>
         
       </div>
 

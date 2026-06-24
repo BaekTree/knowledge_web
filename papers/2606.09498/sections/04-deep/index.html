@@ -13,6 +13,7 @@
       --panel: #f7f7f7;
       --control: #111111;
       --max-width: 760px;
+      --index-width: 13.5rem;
     }
 
     * { box-sizing: border-box; }
@@ -62,13 +63,84 @@
       line-height: 1.4;
     }
 
+    .paper-meta.web-meta {
+      max-width: 28rem;
+    }
+
     .paper-root-link {
       color: inherit;
     }
 
+    .source-site,
+    .source-author,
+    .source-date,
+    .source-url,
+    .source-host {
+      display: block;
+    }
+
+    .source-site {
+      color: var(--text);
+    }
+
+    .source-url {
+      word-break: break-word;
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }
+
+    .brief-index {
+      position: fixed;
+      left: 1.4rem;
+      top: 5.25rem;
+      width: var(--index-width);
+      max-height: calc(100vh - 7rem);
+      overflow: auto;
+      padding: 0.2rem 0;
+      z-index: 8;
+      background: rgba(255, 255, 255, 0.94);
+      border-left: 1px solid var(--line);
+      pointer-events: auto;
+    }
+
+    .brief-index-title {
+      margin: 0 0 0.7rem;
+      padding-left: 0.85rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brief-index-list {
+      display: grid;
+      gap: 0.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .brief-index-link {
+      display: block;
+      padding: 0.2rem 0.85rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    .brief-index-link:hover,
+    .brief-index-link.is-active {
+      color: var(--text);
+    }
+
+    .brief-index-link.is-active {
+      border-left: 2px solid var(--text);
+      padding-left: calc(0.85rem - 2px);
+    }
+
     .viewport {
       min-height: 100vh;
-      padding: 4.5rem 1.25rem 2rem;
+      padding: 4.5rem 1.25rem 2rem calc(var(--index-width) + 2.8rem);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -104,8 +176,7 @@
       margin: 0;
     }
 
-    .section-summary,
-    .deeper-copy {
+    .section-summary {
       font-size: clamp(1.2rem, 2.2vw, 1.55rem);
       line-height: 1.75;
       margin: 0;
@@ -113,9 +184,20 @@
     }
 
     .deeper-copy {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.75;
+      margin: 0;
       padding: 1.2rem 1.35rem;
       background: var(--panel);
       border: 1px solid var(--line);
+    }
+
+    .deeper-copy p {
+      margin: 0 0 1em;
+    }
+
+    .deeper-copy p:last-child {
+      margin-bottom: 0;
     }
 
     .page-media {
@@ -204,7 +286,7 @@
 
     @media (max-width: 720px) {
       .chrome {
-        padding: 1rem 1rem 0;
+        padding: 0.75rem 0.25rem 0;
         flex-direction: column;
       }
 
@@ -212,12 +294,44 @@
         text-align: left;
       }
 
+      .brief-index {
+        position: static;
+        width: auto;
+        max-height: none;
+        margin: 6.1rem 0.25rem 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brief-index-title {
+        padding-left: 0;
+      }
+
+      .brief-index-list {
+        display: flex;
+        gap: 0.35rem;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+      }
+
+      .brief-index-link {
+        white-space: nowrap;
+        padding: 0.25rem 0.45rem;
+      }
+
+      .brief-index-link.is-active {
+        border-left: 0;
+        border-bottom: 2px solid var(--text);
+        padding-left: 0.45rem;
+      }
+
       .viewport {
-        padding: 6rem 1rem 2rem;
+        padding: 1.25rem 0.25rem 1.5rem;
       }
 
       .page-card {
-        padding: 2rem 4rem 2rem;
+        padding: 1.5rem 1rem 1.5rem;
       }
 
       .nav-arrow {
@@ -230,6 +344,16 @@
       .nav-arrow.next { right: 0.5rem; }
     }
   </style>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body
   data-prev-summary=""
@@ -241,9 +365,110 @@
     <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
       <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
+      
       <div>arXiv:2606.09498</div>
+      
     </div>
   </div>
+
+  <nav class="brief-index" aria-label="Brief index">
+    <p class="brief-index-title">Brief index</p>
+    <ol class="brief-index-list">
+      
+      <li>
+        <a class="brief-index-link" href="../../index.html">Top</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../02-summary/index.html">02 Introduction</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../03-summary/index.html">03 From prompts to agent harnesses</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link is-active" href="../04-summary/index.html">04 Self-improving agents and automated agent design</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../05-summary/index.html">05 Self-Harness An Iterative Loop for Model-Specific Harness Im</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../06-summary/index.html">06 Preliminary</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../07-summary/index.html">07 Weakness Mining Identifying Failure Patterns from Clustered </a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../08-summary/index.html">08 Harness Proposal Exploring Diverse yet Minimal Candidate Mod</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../09-summary/index.html">09 Proposal Validation Ensuring Robust Improvement through Regr</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../10-summary/index.html">10 Experiments</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../11-summary/index.html">11 Benchmarks</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../12-summary/index.html">12 Models</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../13-summary/index.html">13 Harness</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../14-summary/index.html">14 Splits and protocol</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../15-summary/index.html">15 Metrics</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../16-summary/index.html">16 Main Results</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../17-summary/index.html">17 Harness evolution and retained edits</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../18-summary/index.html">18 Trace-Level Analysis of Accepted Edits</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../19-summary/index.html">19 Conclusion</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../20-summary/index.html">20 Model inference services</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../21-summary/index.html">21 Terminal-Bench-20 configuration</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../22-summary/index.html">22 Weakness Mining Identifying Failure Patterns from Clustered</a>
+      </li>
+      
+    </ol>
+  </nav>
 
   <main class="viewport" id="viewport">
     <article class="page-card">
@@ -257,11 +482,10 @@
 
       <div class="deeper-copy">
         
-        This section situates Self-Harness among three related research threads. The first thread includes self-improving agents that modify their own inputs over time, such as by storing feedback, rewriting context, or recursively improving generated code. The key idea there is that a fixed base model can still get better if it accumulates useful artifacts across attempts. But the object being improved is usually an output-side mechanism, like memory or a response strategy, not the agent’s declared harness state. That distinction matters because a harness is the explicit control layer that determines what the model sees, what it can do, and how its future behavior is shaped.
-
-The second thread studies optimization from the outside: another process searches over agent designs, graph structures, or harness code using traces, scores, and prior candidates. This motivates the idea that harnesses are learnable objects, but it also changes the problem setup. In those systems, improvement comes from an external optimizer. Self-Harness instead asks whether the evaluated model itself, under its current harness, can propose a bounded edit to that harness. The design choice is deliberate: by constraining the candidate change to be small and explicitly proposed by the same model, the paper can test whether self-improvement is possible without granting a separate meta-optimizer broad control.
-
-The final paragraph connects Self-Harness to broader autonomous science and self-evolving agent systems, which automate loops of research, algorithm design, or capability expansion. Those systems show the power of open-ended self-improvement, but they also blur what exactly is being optimized. Self-Harness narrows the scope: it studies a controlled setting where the question is not “can an agent redesign itself arbitrarily?” but “can the same fixed model, within its current operating rules, suggest a valid harness change that improves future performance?” That framing sets up the next part of the paper, where the authors likely define the harness-edit protocol, the evaluation loop, and the constraints that make the comparison scientifically meaningful.
+        <p>This section situates Self-Harness in two related but distinct research threads. The first thread is self-improvement through accumulated experience: systems like Reflexion, agentic context engineering, and STOP do not change the base model, but they change what the model sees or produces next time. The important technical idea is that improvement can happen through a persistent “state” outside the weights, such as verbal feedback, memory, context, or even generated code. That matters because a fixed model can still get better at a task if it can carry forward useful artifacts from prior attempts. The limitation, from the paper’s perspective, is that these artifacts are not usually treated as an explicit harness state that defines how the agent is run.</p>
+<p>The second thread moves one level outward: instead of the agent improving itself, an external optimizer searches over agent designs. Automated Design of Agentic Systems, graph-based representations of language agents, and Meta-Harness all treat the agent or harness as something to be optimized using traces, scores, and source code from earlier candidates. The design choice here is to separate “the thing being evaluated” from “the thing doing the optimization.” That framing is powerful for systematic search, but it also means the improvement comes from outside the evaluated agent rather than from the agent proposing a change under its current constraints.</p>
+<p>The final paragraph broadens the landscape to self-evolving scientific and algorithmic systems such as The AI Scientist, AlphaEvolve, Alita, Godel Agent, and Darwin Godel Machine. These systems automate large loops of research or capability growth, which makes them conceptually close to Self-Harness. The key distinction is scope: Self-Harness does not try to build an open-ended autonomous researcher. Instead, it asks a narrower question about mechanism and control: can the same fixed model, while running inside its current harness, propose a bounded modification to that harness that would govern its own future behavior?</p>
+<p>That narrower framing is important for the next step in the paper. It motivates a controlled setting where improvement is local, explicit, and inspectable, rather than an unconstrained recursive process. In other words, the paper is preparing to study harness-level self-editing as a precise primitive: the model is not just generating answers, it is generating candidate changes to the system that will run it next.</p>
         
       </div>
 

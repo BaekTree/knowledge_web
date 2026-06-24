@@ -48,6 +48,13 @@
     .badge-l2 { background: color-mix(in srgb, var(--l2) 20%, transparent); color: var(--l2); }
     .badge-l3 { background: color-mix(in srgb, var(--l3) 20%, transparent); color: var(--l3); }
     .empty-state { text-align: center; padding: 4rem 2rem; color: var(--muted); }
+
+    @media (max-width: 720px) {
+      header { padding: 0.75rem 0.25rem; }
+      main { padding: 1rem 0.25rem; }
+      .paper-card { padding: 1rem 0.75rem; }
+      .empty-state { padding: 3rem 0.5rem; }
+    }
   </style>
 </head>
 <body>
@@ -88,8 +95,8 @@
       <div class="paper-abstract">The performance of LLM-based agents is jointly shaped by their base models and the harnesses that mediate their interaction with the environment. Because different models exhibit distinct behaviors, effective harness design is inherently model-specific. Yet agent harnesses are still largely engineered by human experts, a paradigm that scales poorly as modern LLMs become increasingly diverse and rapidly evolving. In this paper, we introduce Self-Harness, a new paradigm in which an LLM-based agent improves its own operating harness, without relying on human engineers or stronger external agents. We operationalize Self-Harness as an iterative loop with three stages: Weakness Mining, which identifies model-specific failure patterns from execution traces; Harness Proposal, which generates diverse yet minimal harness modifications tied to these failures; and Proposal Validation, which accepts candidate edits only after regression testing. We instantiate Self-Harness on Terminal-Bench-2.0 using a minimal initial harness and three base models from diverse families: MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. Across all three models, Self-Harness consistently improves performance, with held-out pass rates increasing from 40.5% to 61.9%, 23.8% to 38.1%, and 42.9% to 57.1%, respectively. Qualitative analyses further show that Self-Harness does not simply add generic instructions, but effectively turns model-specific weaknesses into concrete, executable harness changes. These results suggest a path toward LLM-based agents that are not merely shaped by their harnesses, but can also participate in reshaping them.</div>
       <div class="layer-badges">
         <span class="badge badge-l0">Layer 0: Intuition</span>
-        <span class="badge badge-l1">Layer 1: Sections (2403 w)</span>
-        <span class="badge badge-l2">Layer 2: Deeper (5984 w)</span>
+        <span class="badge badge-l1">Layer 1: Sections (2126 w)</span>
+        <span class="badge badge-l2">Layer 2: Deeper (8415 w)</span>
         <span class="badge badge-l3">Layer 3: Paragraphs (67 annotated)</span>
       </div>
     </div>
@@ -101,7 +108,7 @@
       <div class="paper-authors">
         
          · 2026-06-22
-         · web article
+         · arstechnica.com
       </div>
       <div class="paper-abstract">Sections Forum Subscribe Search AI Biz &amp; IT Cars Culture Gaming Health Policy Science Security Space Tech Feature Reviews AI Biz &amp; IT Cars Culture Gaming Health Policy Science Security Space Tech Forum Subscribe Story text Size Small Standard Large Width * Standard Wide Links Standard Orange * Subscribers only Learn more Pin to story Theme HyperLight Day &amp; Night Dark System Search Sign In Sign in dialog... Sign in Do robots dream of organized labor GM installs robots at flagship EV factory after</div>
       <div class="layer-badges">
@@ -119,7 +126,7 @@
       <div class="paper-authors">
         Kirsten Korosec
          · 2026-06-21
-         · web article
+         · techcrunch.com
       </div>
       <div class="paper-abstract">Latest AI</div>
       <div class="layer-badges">
@@ -137,7 +144,7 @@
       <div class="paper-authors">
         Zahra Awan
          · 2026-06-18
-         · web article
+         · www.autonomousvehicleinternational.com
       </div>
       <div class="paper-abstract">Stellantis , Wayve and Uber have entered a partnership to jointly explore the development and deployment of Level 4 driverless robotaxis at a global scale. The collaboration brings together Stellantis’ L4-ready platforms, Wayve’s AI driving technology and Uber’s global marketplace to power a new generation of fully autonomous vehicles. The partnership builds on the companies’ existing strategic relationships, including Stellantis and Wayve’s recent L2++ agreement, and Wayve and Uber’s partnershi</div>
       <div class="layer-badges">
