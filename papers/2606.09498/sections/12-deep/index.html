@@ -152,7 +152,7 @@
       max-width: var(--max-width);
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
-      padding: 3rem 5.5rem 2rem;
+      padding: 2.5rem 2.25rem 2rem;
       position: relative;
     }
 
@@ -232,7 +232,24 @@
       font-style: italic;
     }
 
-    .nav-arrow,
+    .summary-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .summary-nav.bottom {
+      margin-top: 2rem;
+      margin-bottom: 0;
+    }
+
+    .summary-nav-spacer {
+      flex: 1 1 0;
+    }
+
+    .summary-nav-link,
     .down-control,
     .up-control {
       display: inline-flex;
@@ -247,18 +264,21 @@
       cursor: pointer;
     }
 
-    .nav-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 3.5rem;
-      height: 3.5rem;
-      font-size: 1.9rem;
-      line-height: 1;
+    .summary-nav-link {
+      min-height: 2.75rem;
+      padding: 0.55rem 0.95rem;
+      font-size: 0.95rem;
+      line-height: 1.2;
     }
 
-    .nav-arrow.prev { left: 1rem; }
-    .nav-arrow.next { right: 1rem; }
+    .summary-nav-link.next {
+      margin-left: auto;
+    }
+
+    .summary-nav-label {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
 
     .down-control,
     .up-control {
@@ -331,17 +351,23 @@
       }
 
       .page-card {
-        padding: 1.5rem 1rem 1.5rem;
+        padding: 1.25rem 0.85rem 1.5rem;
       }
 
-      .nav-arrow {
-        width: 3rem;
-        height: 3rem;
-        font-size: 1.6rem;
+      .summary-nav {
+        gap: 0.5rem;
+        margin-bottom: 1rem;
       }
 
-      .nav-arrow.prev { left: 0.5rem; }
-      .nav-arrow.next { right: 0.5rem; }
+      .summary-nav.bottom {
+        margin-top: 1.5rem;
+      }
+
+      .summary-nav-link {
+        min-height: 2.5rem;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+      }
     }
   </style>
   <script>
@@ -473,7 +499,6 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      
 
       <p class="eyebrow">Section 12 deeper explanation</p>
       
@@ -488,6 +513,8 @@
 <p>This setup prepares the reader for the next step in the paper, where the authors can compare the baseline harness against Self-Harness variants under the same conditions. Because the evaluation is tightly controlled, later results can be interpreted as evidence that the harness is doing useful work on top of the model, rather than merely reflecting differences in model strength or evaluation protocol.</p>
         
       </div>
+
+      
 
       
 
