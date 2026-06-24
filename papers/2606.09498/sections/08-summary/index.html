@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section describes how Self-Harness turns a bundle of observed failures into a small set of candidate harness edits by reusing the same model in a proposer role with bounded, structured evidence. It exists to answer how the system explores improvements without turning the proposer into an unconstrained optimizer or making broad, opaque changes. The key claim is that proposals should be parallel, materially diverse, and grounded in real failure mechanisms, but each edit should stay minimal, address a specific editable surface, and preserve unrelated behavior.
+        This section defines how Self-Harness turns a bundle of recurring failures into a small set of candidate harness edits. It exists to answer a practical question: given evidence of what is going wrong, how should the system explore improvements without letting the proposer wander over the whole search space? The key claim is that the same fixed model can act as a bounded proposer when given only editable harness surfaces, verifier-grounded failure patterns, preserved passing behavior, and prior edit history. It then generates several materially distinct proposals in parallel, each tied to one addressable failure mechanism and one minimal surface change, so exploration stays diverse while each branch remains interpretable and narrowly scoped.
         
       </div>
 

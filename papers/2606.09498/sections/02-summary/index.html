@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This introduction frames the paper’s central problem: agent performance depends not just on the base model, but on the harness around it, and today those harnesses are mostly hand-built. It exists to motivate the question of whether an agent can improve its own harness instead of relying on human experts or stronger external systems. The section’s key claim is that this self-improvement loop is feasible and should be treated as a new paradigm, because model-specific failures can be mined from execution traces and turned into targeted harness edits. It also previews the main evidence: Self-Harness improves multiple model families on Terminal-Bench-2.0, with gains that generalize beyond the observed failures.
+        This section frames the paper’s core problem: LLM agents are shaped not just by their base model, but by the harness around it, and today those harnesses are mostly handcrafted. It sets up the paper’s main question of whether an agent can improve its own harness instead of relying on humans or stronger external systems. The section’s key claim is that this self-improvement loop is feasible and useful: the agent can mine its own failures, propose targeted harness edits, and keep only changes that pass regression checks. It also previews the main empirical result that this approach improves multiple models on Terminal-Bench-2.0 and produces model-specific harness changes that generalize beyond the observed failures.
         
       </div>
 

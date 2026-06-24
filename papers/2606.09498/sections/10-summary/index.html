@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section tests the core idea of Self-Harness in a controlled setting: keep the language model fixed and change only the surrounding harness to see whether performance improves. It exists to answer a direct causal question, whether better orchestration and regression-aware edits can make the same model act more effectively on terminal tasks. Using Terminal-Bench-2.0 and a minimal DeepAgent-style baseline across several model backends, the section shows that Self-Harness can propose, validate, and promote bounded harness changes using execution evidence and held-out gates, supporting the claim that the harness itself can be a meaningful source of performance gains.
+        This section tests whether Self-Harness can raise agent performance without changing the underlying language model, only the surrounding harness. It does this on Terminal-Bench-2.0, starting from a minimal DeepAgent-based setup across several model backends and letting Self-Harness propose, validate, and promote limited edits using execution evidence plus regression gates. The section exists to answer the core empirical question of whether harness-level self-improvement is enough to produce real gains. Its main claim is that carefully bounded harness edits can improve terminal-task performance while keeping the base model fixed.
         
       </div>
 

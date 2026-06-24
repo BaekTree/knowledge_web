@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines the gatekeeper for harness self-improvement: a proposed edit is not adopted just because it looks promising, but is re-evaluated as a full candidate harness on both held-in and held-out splits. It exists to answer the paper’s central safety question of whether self-edits can improve the harness without overfitting the evidence that motivated them or regressing on unseen behavior. The key claim is that promotion should be conservative: accept only candidates that improve at least one split without hurting the other, reject brittle tradeoffs, and use repeated evaluation when outcomes are stochastic. It also makes the lineage auditable by logging what changed, how it performed, and why it was accepted or rejected.
+        This section adds a gate between proposing a harness edit and actually adopting it: every candidate is re-evaluated on both the held-in split that justified the change and a held-out split that checks for regressions. Its purpose is to answer a core safety question: can the harness improve without silently breaking other behaviors? The claim is that a proposal is accepted only when it improves at least one split and does not degrade the other, with repeated evaluation used to reduce stochastic flukes. It also filters out non-executable or no-op proposals and keeps an auditable record of every decision.
         
       </div>
 

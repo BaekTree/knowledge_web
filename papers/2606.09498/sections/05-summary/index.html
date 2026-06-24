@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines Self-Harness as an iterative, model-specific harness-improvement loop: run the current harness, extract repeated failure patterns from execution traces, ask the same model to propose small targeted edits, and accept only changes that pass regression tests. It exists to answer how a harness can improve itself without human engineering or a separate black-box optimizer, and it sets up the paper’s core method. The key claim is that structured execution evidence can guide the model to make diverse but minimal harness revisions that fix concrete failure modes while preserving the overall control architecture.
+        This section introduces the core Self-Harness mechanism: a fixed model repeatedly improves its own harness using execution evidence rather than manual editing or broad search. It exists to answer how a harness can be adapted systematically around a model while preserving the overall control architecture. The key claim is that recurring failures can be clustered into structured evidence, turned into targeted minimal candidate edits, and then filtered by regression testing so only changes that genuinely help are accepted.
         
       </div>
 

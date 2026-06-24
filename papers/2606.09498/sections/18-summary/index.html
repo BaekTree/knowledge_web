@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section drills into before-and-after execution traces to show how accepted harness edits actually change agent behavior, not just benchmark scores. It exists to answer whether Self-Harness is making targeted, mechanism-specific improvements or merely adding generic prompt noise. The main claim is that the promoted edits are model-specific and map onto each backend’s dominant failure mode: earlier artifact creation and bounded execution for MiniMax M2.5, better error recovery and artifact preservation for Qwen3.5, and persistent environment handling plus earlier transition from exploration to implementation for GLM-5. Together, the traces support the broader result that Self-Harness works by inducing concrete workflow changes that explain the quantitative gains.
+        This section compares before-and-after execution traces to show how accepted harness edits change agent behavior in practice. It exists to answer why the quantitative gains happen, by connecting improved scores to concrete workflow changes rather than vague prompt effects. Across MiniMax M2.5, Qwen3.5, and GLM-5, the paper claims the edits are model-specific and target each backend’s main failure mode: earlier artifact creation, better recovery from tool errors, and more persistent, implementation-oriented behavior. The takeaway is that Self-Harness improves performance by steering agents toward better execution habits, not by applying one generic instruction everywhere.
         
       </div>
 

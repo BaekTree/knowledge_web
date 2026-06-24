@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section reports the core benchmark results for Self-Harness after promotion, comparing each backend’s original harness to its improved version on Terminal-Bench-2.0. It exists to answer whether harness edits actually generalize, not just fit the failures used to propose them, and whether the promotion process can improve performance without changing the model or environment. The main claim is that promoted harnesses improve or at least preserve Pass on both held-in and held-out splits for all three backends, with substantial gains in several cases. This supports the paper’s central idea that reusable execution logic can be improved independently of the underlying model and that the regression gate helps prevent overfitting to a single split.
+        This section reports the core benchmark outcome of Self-Harness promotion on Terminal-Bench-2.0, showing what changes after a harness edit is accepted. It exists to answer whether harness-level improvements generalize beyond the failures that produced them and whether promotion can help without changing the model, tools, budget, environment, or evaluator. The key claim is that promoted harnesses improve or preserve Pass on both held-in and held-out splits for all three backends, with substantial gains in several cases and no regressions on either split, supporting the idea that the method learns reusable execution improvements rather than overfitting to specific failures.
         
       </div>
 

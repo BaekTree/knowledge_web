@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines the evaluation protocol for Self-Harness: the task set is split into held-in data that the proposer can inspect and held-out data reserved only for the automatic promotion gate. It exists to answer a basic fairness question: how do we let the harness improve itself without leaking the test set into the proposal loop? The key claims are that task assignments are fixed across harness variants, every task starts from a fresh benchmark environment, and promoted harnesses must satisfy the acceptance rule. Together, these controls make measured gains attributable to harness changes rather than to data leakage or repeated exposure.
+        This section defines the evaluation protocol for Self-Harness: the task set is split into a held-in portion that the proposer can see and a held-out portion that remains hidden and is used only for automatic promotion. It exists to answer whether harness improvements come from the harness itself rather than from overfitting to the evaluation tasks, and it sets up the gate that decides when a candidate harness is promoted. The key claim is that fixing the split assignment across harness variants, using fresh benchmark environments for each task, and keeping held-out tasks invisible to the proposer makes the measured gains attributable to harness changes.
         
       </div>
 

@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines the evaluation setting for Self-Harness: a fixed 64-task slice of Terminal-Bench-2.0 chosen to test agentic terminal execution while avoiding unstable web dependencies and multimodal inputs. It exists to establish a clean benchmark for asking whether harness edits improve performance, rather than whether the system can cope with unsupported task types or noisy external conditions. The key claim is that this filtered subset better isolates the effect of Self-Harness itself, because the benchmark still probes real execution skills like command use, verification, artifact handling, and recovery from errors.
+        This section defines the evaluation setup for Self-Harness on Terminal-Bench-2.0, a multi-turn terminal benchmark with deterministic verification. It exists to answer a basic but important question: whether harness self-improvements help on realistic tool-use tasks, not just on toy examples. The paper evaluates on a fixed 64-task subset and removes cases that depend on unstable web resources or multimodal inputs to reduce noise from capabilities outside the initial harness. The key claim is that this filtered benchmark better isolates the effect of Self-Harness edits, especially because multimodal tasks would mostly test unsupported harness features rather than the method itself.
         
       </div>
 
