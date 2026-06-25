@@ -537,7 +537,12 @@
 
       <div class="section-summary">
         
-        <p>This section motivates why existing web-agent benchmarks miss the hardest part of real-world assistance: completing consequential, write-heavy tasks on live sites. It sets up ClawBench as a new benchmark that evaluates agents on production websites, with safe instrumentation and human-ground-truth trajectories. Its main claim is that current agents still fall far short on everyday online tasks, and that traceable, step-level evaluation is needed to expose where they fail.</p>
+        <ul>
+<li>Frames the core problem: current agents can use GUIs and automate workflows, but it is unclear whether they can function as general online assistants on real, consequential tasks.</li>
+<li>Explains the evaluation gap: existing benchmarks mostly use offline sandboxes or read-only/mock setups, so they miss the dynamic, authenticated, write-heavy behavior that matters on live websites.</li>
+<li>Introduces ClawBench and its measurement setup: 153 everyday tasks across 15 categories and 144 live platforms, with safe production-site interaction via browser-action recording and final-submission interception.</li>
+<li>Claims the paper provides traceable, step-level evaluation through five-layer trajectory capture plus an agentic evaluator, and that frontier models drop sharply on ClawBench compared with traditional web benchmarks.</li>
+</ul>
         
       </div>
 

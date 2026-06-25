@@ -537,7 +537,12 @@
 
       <div class="section-summary">
         
-        <p>This section defines the paper’s judgment mechanism: a single evaluator compares the agent’s trajectory against a human reference, step by step, to decide whether the agent reached an equivalent terminal outcome. It exists to answer how success is measured beyond the prompt, and claims that grounded, trajectory-level alignment yields a binary verdict with structured justification.</p>
+        <ul>
+<li>Evaluates each task with a single Claude Code sub-agent under a fixed rubric.</li>
+<li>Aligns agent and human trajectories step by step, matching actions, fields, divergences, and terminal state.</li>
+<li>Uses full multi-layer recordings from both runs, not just the task instruction, to judge behavior.</li>
+<li>Produces a binary verdict plus structured justification grounded in the human reference demonstration.</li>
+</ul>
         
       </div>
 

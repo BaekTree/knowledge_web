@@ -537,7 +537,13 @@
 
       <div class="section-summary">
         
-        <p>This section describes the paper’s screening process for building a realistic benchmark: it removes tasks that depend on paid plans, regional access, or dead websites, then has independent annotators confirm each task is still solvable and its reference path can be reproduced. This sets up a reliable dataset and claims 153 tasks on 144 platforms.</p>
+        <ul>
+<li>Filters out tasks that would be unfair or unstable to evaluate, especially those blocked by paid subscriptions, regional restrictions, or dead websites.</li>
+<li>Uses multiple independent annotation checks to confirm each surviving task is still doable and that its reference solution path can be reproduced.</li>
+<li>Exists to answer whether the benchmark can be built from tasks that are genuinely accessible and reliably benchmarkable, not just interesting in theory.</li>
+<li>The core claim is that the authors end with a high-quality, executable benchmark set rather than a noisy crawl of online tasks.</li>
+<li>This pipeline sets up the final dataset size and scope: 153 tasks spanning 144 unique platforms.</li>
+</ul>
         
       </div>
 

@@ -537,7 +537,12 @@
 
       <div class="section-summary">
         
-        <p>This section explains how ClawBench evaluates agents on live websites without blocking their normal browsing: it intercepts only the final action request, using a Chrome extension plus CDP server alongside the agent’s browser. It sets up the core feasibility question and argues that safe, realistic evaluation needs capture at the endpoint, not sandboxing the whole session.</p>
+        <ul>
+<li>Shows how ClawBench can keep agents on real websites while still preventing real-world side effects by intercepting only the final request.</li>
+<li>Sets up the paper’s core evaluation trick: let the agent browse and act normally, then capture the terminal submission before it reaches the true site.</li>
+<li>Claims this can be implemented with a lightweight Chrome extension plus a CDP server attached to the browser session.</li>
+<li>Establishes the technical basis for safe, realistic benchmarking without changing the websites or constraining the agent’s interaction loop.</li>
+</ul>
         
       </div>
 

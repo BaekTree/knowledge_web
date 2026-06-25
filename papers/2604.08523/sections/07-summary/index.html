@@ -537,7 +537,13 @@
 
       <div class="section-summary">
         
-        <p>This section explains how ClawBench identifies the exact browser request that would make an online task irreversible, using human experts to annotate the endpoint, method, and payload schema from network traffic. It exists to show how the benchmark can safely observe realistic agent behavior while precisely blocking only the dangerous submission, avoiding both false positives and false negatives.</p>
+        <ul>
+<li>Manually annotates each task’s interception signal: the exact HTTP endpoint, request method, and payload schema for the irreversible submission.</li>
+<li>Uses human inspection of browser network traffic during ground-truth execution to identify the one request that would actually commit the dangerous action.</li>
+<li>Sets up a declarative interception rule so ClawBench can block only the intended submission request, not ordinary navigation or harmless traffic.</li>
+<li>Claims this human-in-the-loop design avoids both false positives and false negatives while preserving realistic live-site interaction.</li>
+<li>Establishes the safety guarantee: tasks can run on real sites with zero real-world side effects such as orders, applications, or server-side state changes.</li>
+</ul>
         
       </div>
 

@@ -537,7 +537,12 @@
 
       <div class="section-summary">
         
-        <p>This section defines how ClawBench turns each task into a binary success judgment and then aggregates those judgments into an overall success rate. It exists to answer what counts as completion, using an Agentic Evaluator that compares the agent’s trajectory against the human reference under a fixed rubric. The key claim is that success should be measured comparatively, with platform-specific details made explicit.</p>
+        <ul>
+<li>Defines the paper’s task-level scoring rule: an Agentic Evaluator <code>A</code> maps the task instruction, agent trajectory, and human reference trajectory to a binary success/failure verdict.</li>
+<li>Aggregates these per-task verdicts into an overall success rate across the evaluated task set.</li>
+<li>Exists to make success measurable with an explicit reference comparison rather than judging the agent in isolation.</li>
+<li>Claims that the rubric captures concrete platform-specific requirements like field bindings, interaction order, and final submission structure that are hard to infer from the instruction alone.</li>
+</ul>
         
       </div>
 

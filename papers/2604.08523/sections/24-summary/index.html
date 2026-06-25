@@ -537,7 +537,13 @@
 
       <div class="section-summary">
         
-        <p>This section explains how agent performance is evaluated and why that problem is hard: agents can reach the same goal through different action paths, while screenshot and human-based checks each have major limitations. It sets up ClawBench’s solution, which uses intercepted submissions plus an agentic evaluator to align trajectories step by step and return a binary judgment with evidence-grounded justification.</p>
+        <ul>
+<li>Reviews the main evaluation approaches used for autonomous agents: action matching, URL checks, screenshot comparison, and human judgment.</li>
+<li>Explains the core problem this section addresses: many different action paths can still lead to correct task completion, so naive trajectory matching is often misleading.</li>
+<li>Argues that screenshot-based scoring is unstable because visual similarity thresholds are subjective and can be non-deterministic.</li>
+<li>Notes that human evaluation is flexible but costly and hard to reproduce.</li>
+<li>Sets up ClawBench’s solution: intercepted submission payloads plus an agentic evaluator that aligns steps against a human reference trajectory and returns a binary verdict with evidence-grounded justification.</li>
+</ul>
         
       </div>
 

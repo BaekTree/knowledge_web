@@ -537,7 +537,12 @@
 
       <div class="section-summary">
         
-        <p>This section explains how ClawBench keeps agent evaluation realistic without exposing the system to real-world harm. It answers whether the benchmark can safely intercept only the final action while preserving production-like behavior. The key claim is that human-annotated endpoint interception is precise, catching all terminal requests in validation with no false positives on navigation traffic.</p>
+        <ul>
+<li>Explains the paper’s safety mechanism for preventing harmful agent actions at the endpoint.</li>
+<li>Sets up the question of how to stop real-world side effects without relying on broad sandboxing.</li>
+<li>Claims that human-annotated interception signals give high precision: 100% terminal-request interception on all 153 validation tasks with zero false positives on navigation traffic.</li>
+<li>Argues this targeted interception reduces risks like accidental purchases or submissions while preserving ecological validity better than sandbox-based alternatives.</li>
+</ul>
         
       </div>
 

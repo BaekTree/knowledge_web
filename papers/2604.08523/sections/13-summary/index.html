@@ -537,7 +537,13 @@
 
       <div class="section-summary">
         
-        <p>This section defines how ClawBench decides whether an agent truly completed a task by comparing the agent’s recorded trajectory with a human reference trajectory. It exists to answer what evidence and scoring method are reliable for judging success, and it claims that multi-layer, synchronized signals like screenshots, HTTP traffic, actions, and messages enable structured, more trustworthy evaluation.</p>
+        <ul>
+<li>Defines how the paper judges whether an agent actually completed a task using the five-layer recordings from both the agent and the human annotator.</li>
+<li>Sets up the core evaluation question: which evidence streams and comparison strategy are reliable enough to determine task success.</li>
+<li>Compares three evaluator designs, each using a different subset or modality of the recorded data, to test what is sufficient for scoring.</li>
+<li>Claims evaluation should be multi-layer and synchronized across session replay, screenshots, HTTP traffic, browser actions, and agent messages.</li>
+<li>Establishes a structured rubric for comparing agent trajectories against a human reference trajectory to decide success or failure.</li>
+</ul>
         
       </div>
 

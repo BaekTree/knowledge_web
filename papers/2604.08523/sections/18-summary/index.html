@@ -537,7 +537,13 @@
 
       <div class="section-summary">
         
-        <p>This section describes the execution stack that gives each model a controlled Chromium browser through OpenClaw, along with browser actions like clicking, typing, scrolling, and navigation. It sets up the paper’s evaluation environment by showing how tasks are run and recorded, and claims that background extension and CDP instrumentation capture requests and actions for post-hoc scoring.</p>
+        <ul>
+<li>Sets up the browser execution environment by giving each model a controlled Chromium instance through the OpenClaw agent framework.</li>
+<li>Explains the runtime plumbing that lets the agent actually act in the browser: click, type, scroll, navigate, and similar interactions through OpenClaw tools.</li>
+<li>Establishes the evaluation instrumentation that stays active throughout the session, with a Chrome extension and CDP server capturing HTTP requests and agent actions.</li>
+<li>Answers how ClawBench can observe and grade agent behavior post hoc, not just whether a task was attempted.</li>
+<li>Claims the benchmark uses a managed, isolated browser setup plus continuous instrumentation so outcomes are reproducible and evaluable.</li>
+</ul>
         
       </div>
 

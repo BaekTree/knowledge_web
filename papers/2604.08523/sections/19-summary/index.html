@@ -537,7 +537,12 @@
 
       <div class="section-summary">
         
-        <p>This section explains the benchmark setup that keeps each run isolated and repeatable, so results reflect agent behavior rather than machine quirks. It sets up the paper’s credibility question: can ClawBench produce consistent outcomes across runs? The claim is that containerized execution and stripped-down Chrome reduce environmental noise and variance.</p>
+        <ul>
+<li>Runs each benchmark inside an encapsulated container to isolate the environment and keep results consistent across runs</li>
+<li>Launches Chrome with flags that suppress UI prompts, sync, and unrelated extensions so agent behavior is not distorted by setup noise</li>
+<li>Exists to answer whether benchmark outcomes reflect the agent, not accidental differences in the execution environment</li>
+<li>Sets up a fairer comparison by reducing variance and making repeated trials more comparable</li>
+</ul>
         
       </div>
 

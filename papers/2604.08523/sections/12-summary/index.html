@@ -537,7 +537,12 @@
 
       <div class="section-summary">
         
-        <p>This section explains ClawBench’s logging stack: every run is captured as synchronized video, screenshots, HTTP traffic, agent messages, and low-level browser actions. It sets up how the benchmark can compare agent and human trajectories step by step, and claims these complementary layers enable precise failure diagnosis beyond pass/fail scoring.</p>
+        <ul>
+<li>Defines ClawBench’s synchronized five-layer logging stack for every agent and human run, so behavior can be analyzed end to end.</li>
+<li>Explains why the section exists: it sets up step-level alignment between agent and human trajectories for the Agentic Evaluator and deeper failure diagnosis.</li>
+<li>Claims each layer captures a different part of the task loop: what the browser showed, what the agent thought, what it did, and what network effects occurred.</li>
+<li>Claims the combination of session video, screenshots, HTTP traffic, agent messages, and low-level browser actions makes failures traceable to the exact step rather than just pass/fail.</li>
+</ul>
         
       </div>
 
