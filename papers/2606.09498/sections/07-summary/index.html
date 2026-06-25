@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section turns raw failures from running the model under the current harness into structured evidence for improvement. It exists to answer which recurring weaknesses the harness is exposing, rather than treating each failure as a one-off or optimizing directly from noisy traces. The key claim is that failures should be grouped by an evaluator-grounded signature that separates the terminal verifier cause, the relevant agent behavior, and the underlying reusable mechanism. The resulting clusters are ranked into an evidence bundle, giving the proposer concrete, cross-case patterns to target with harness revisions.
+        This section turns failed runs into structured evidence for improving the harness: it runs the fixed model, records verifier outcomes and traces, then clusters only failed cases by exact failure signatures. It exists to answer which reusable weaknesses recur and what harness-level intervention they suggest, while separating verifier rejection from underlying agent mechanism.
         
       </div>
 

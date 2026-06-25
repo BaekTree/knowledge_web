@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section describes the inference setup used for the paper’s model runs: MiniMax M2.5 and GLM-5 were called through hosted services, while Qwen3.5-35B-A3B was run locally on four H200 GPUs with SGLang. It exists to make the experimental environment concrete and to answer a practical question the paper depends on: where each model came from and how it was executed. The key claim is that the study mixes hosted and self-hosted inference, using the vendor APIs for some models and an internal GPU deployment for another, so the results are grounded in a reproducible serving configuration rather than an abstract model list.
+        This section specifies the inference setups used for the paper’s models so the experiments are reproducible and the comparisons are grounded in real deployment choices. It answers where each model ran and under what service constraints, and it claims that MiniMax M2.5 and GLM-5 used hosted APIs, while Qwen3.5-35B-A3B ran locally on four H200 GPUs via SGLang.
         
       </div>
 

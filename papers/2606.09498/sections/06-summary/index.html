@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines the paper’s core object: the harness, meaning the non-parametric code, instructions, tools, memory, and state logic that wraps a fixed language model and determines how it acts as an agent. It sets up the formal problem by holding the model M and evaluator E fixed, then treating the harness h as the thing to improve across successive versions. The key claim is that performance can be increased by making bounded edits to the execution protocol itself, and the algorithm shows how Self-Harness evaluates a harness, gathers evidence from verifier-grounded failures, proposes multiple edits in parallel, accepts only candidates that improve held-in and held-out behavior, and merges the accepted changes into the next harness.
+        This section defines a harness as the non-parametric execution scaffold around a fixed language model: prompts, tools, memory, state, and the protocol for acting and evaluating. It sets up the paper’s core question of improving the harness rather than the model, and claims Self-Harness searches a lineage of bounded harness edits using fixed model and evaluator with held-in/held-out validation.
         
       </div>
 

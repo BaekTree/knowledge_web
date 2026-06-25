@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines the paper’s main evaluation signal: Pass (%), the share of task attempts that satisfy the benchmark verifier, usually averaged over two repeated attempts per harness candidate. It exists to make clear how the authors measure harness quality and to set up fair comparisons under a fixed evaluation protocol. The key claim is that Pass (%) reflects mean single-attempt task success, and for Terminal-Bench-2.0 the verifier checks the final container state, so success is judged by the task’s end result rather than intermediate behavior.
+        This section defines the paper’s core evaluation metric, Pass(%), and the protocol used to measure it. It exists to make harness comparisons precise and answer whether a candidate harness improves task success under a fixed verifier and repeated attempts. The key claim is that pass rate on the final verified state is the primary signal of harness quality.
         
       </div>
 

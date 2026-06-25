@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section fixes the model backends used to evaluate Self-Harness, using MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. It exists to answer a controlled question: does Self-Harness help when the base model stays the same, instead of mixing harness effects with model-strength differences? The key claim is that all results are within-model comparisons, with the decoding setup, budget, tools, benchmark environment, and evaluator held constant, so any gains can be attributed to the harness itself rather than changes in capability or evaluation protocol.
+        This section defines the experimental models and the fairness setup for the paper’s comparisons. It asks whether Self-Harness helps when the base model is held constant, and sets up a controlled within-model test. The key claim is that only the harness changes, while model capability, decoding, tools, environment, and evaluator stay fixed.
         
       </div>
 

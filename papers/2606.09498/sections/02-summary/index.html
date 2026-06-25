@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section frames the paper’s problem: an LLM agent’s behavior depends not just on the base model, but on the harness around it, and manual harness design does not scale as models change quickly. It sets up the paper’s central question of whether an agent can improve its own harness instead of relying on humans or stronger external agents. The key claim is that Self-Harness makes this possible through an iterative loop that mines failures, proposes targeted harness edits, and validates them with regression tests. The section also previews the main result: this approach improves multiple base models on Terminal-Bench-2.0 and produces model-specific harness changes that generalize beyond the observed failures.
+        This section frames the paper’s core problem: an agent’s performance depends on its harness, not just its base model, and hand-tuning harnesses does not scale across rapidly changing models. It introduces Self-Harness as an internal improvement loop that learns from execution traces, proposes targeted harness edits, and validates them with regression tests, claiming consistent gains across multiple models and better generalization to unseen tasks.
         
       </div>
 

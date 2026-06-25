@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines the paper’s core mechanism: a fixed model repeatedly improves its own harness using execution evidence, rather than relying only on human editing or a separate search optimizer. It exists to answer how a harness can be made self-improving in a controlled way and to set up the paper’s experimental method. The key claim is that clustered failure traces can be turned into structured evidence, which the model can use to propose small, diverse harness edits that target specific problems without changing the overall architecture. Those edits are then kept only if regression testing shows they help overall performance and do not introduce unacceptable new failures.
+        This section lays out the core self-improvement loop: the current harness is executed, recurring failure patterns are mined from traces, and the same model proposes small, targeted harness edits that are regression-tested before adoption. It exists to answer how a fixed model can improve its own harness without wholesale redesign, and its key claim is that evidence-driven, minimal revisions can steadily raise performance while controlling regressions.
         
       </div>
 

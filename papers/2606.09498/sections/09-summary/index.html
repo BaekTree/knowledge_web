@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines how Self-Harness decides whether a proposed harness edit is actually adopted. It exists to answer a simple question: how do we promote improvements without accidentally regressing behavior? The key claim is that a candidate must improve at least one split, held-in or held-out, without hurting the other, and stochastic runs are aggregated to avoid lucky promotions. It also rejects no-op or failed proposals and logs every outcome so each harness transition stays auditable.
+        This section defines how a proposed harness edit is validated before adoption: the candidate is evaluated on both held-in and held-out splits and compared against the current harness. It answers how the system avoids brittle self-improvement, claiming that only edits that improve one split without hurting the other, and that survive repeated evaluation and execution checks, are promoted.
         
       </div>
 

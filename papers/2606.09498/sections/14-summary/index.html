@@ -522,7 +522,7 @@
 
       <div class="section-summary">
         
-        This section defines the evaluation protocol for Self-Harness: the benchmark tasks are split into a held-in set for the proposer to inspect and a held-out set kept hidden for promotion decisions. It exists to answer a basic fairness question: whether harness gains come from real improvements rather than leakage or overfitting to the evaluation data. The key claim is that task assignments are fixed across harness variants, each task starts from a fresh environment, and only the held-out split plus the acceptance rule determine promotion, so measured gains are attributable to harness changes.
+        This section defines the evaluation protocol for Self-Harness by splitting the fixed task set into held-in and held-out portions before any harness runs. It sets up the paper’s central measurement question: whether harness improvements generalize beyond the data shown to the proposer. The key claim is that fixed splits and fresh environments isolate gains to harness changes, not task leakage.
         
       </div>
 
