@@ -161,13 +161,13 @@
       </div>
       <div class="paper-authors">
         Xueping Gao
-        
+         · 2026-06-16
          · arXiv:2606.18051
       </div>
-      <div class="paper-abstract"></div>
+      <div class="paper-abstract">LLM agents increasingly rely on external skills -- reusable tool specifications -- but real-world tasks often require composing multiple skills, not just selecting one. We formalize this as the Compositional Skill Routing problem: given a complex user query and a large skill library, decompose the query into atomic sub-tasks, retrieve the appropriate skill for each sub-task, and compose an executable plan. We present SkillWeaver, a decompose-retrieve-compose framework combining an LLM task decomposer, a bi-encoder skill retriever with FAISS indexing, and a dependency-aware DAG planner. To support evaluation, we introduce CompSkillBench, a benchmark of 300 compositional queries over 2,209 real MCP server skills spanning 24 functional categories, sourced from the public MCP ecosystem. Our experiments reveal that task decomposition quality is the primary bottleneck: standard LLM decomposition reaches only 34.2% category recall at the step level. To address this, we propose Iterative Skill-Aware Decomposition (SAD), a retrieval-augmented feedback loop that iteratively aligns decomposition with available skills. SAD improves decomposition accuracy from 51.0% to 67.7% (+32.7%, Wilcoxon p &lt; 10^-6) in a single iteration; DA-conditioned analysis confirms that correct granularity is the prerequisite for effective retrieval (CatR@1 rises from 34% to 41% when DA=1). SkillWeaver reduces context window consumption by over 99%, and transfer experiments confirm generalization (+35.6% relative DA gain even when target categories are absent from the retrieval pool).</div>
       <div class="layer-badges">
         <span class="badge badge-l0">Layer 0: Intuition</span>
-        <span class="badge badge-l1">Layer 1: Sections (0 w)</span>
+        <span class="badge badge-l1">Layer 1: Sections (4020 w)</span>
         <span class="badge badge-l2">Layer 2: Deeper (0 w)</span>
         <span class="badge badge-l3">Layer 3: Paragraphs (0 annotated)</span>
       </div>

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compositional Skill Routing for LLM Agents: Decompose, Retrieve, and Compose — Article Study</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --line: #d9d9d9;
+      --panel: #f7f7f7;
+      --control: #111111;
+      --max-width: 760px;
+      --index-width: 13.5rem;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .chrome {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .home-link,
+    .paper-meta {
+      pointer-events: auto;
+      font-size: 0.95rem;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.94);
+    }
+
+    .home-link:hover,
+    .paper-root-link:hover {
+      color: var(--text);
+    }
+
+    .paper-meta {
+      text-align: right;
+      line-height: 1.4;
+    }
+
+    .paper-meta.web-meta {
+      max-width: 28rem;
+    }
+
+    .paper-root-link {
+      color: inherit;
+    }
+
+    .source-site,
+    .source-author,
+    .source-date,
+    .source-url,
+    .source-host {
+      display: block;
+    }
+
+    .source-site {
+      color: var(--text);
+    }
+
+    .source-url {
+      word-break: break-word;
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }
+
+    .brief-index {
+      position: fixed;
+      left: 1.4rem;
+      top: 5.25rem;
+      width: var(--index-width);
+      max-height: calc(100vh - 7rem);
+      overflow: auto;
+      padding: 0.2rem 0;
+      z-index: 8;
+      background: rgba(255, 255, 255, 0.94);
+      border-left: 1px solid var(--line);
+      pointer-events: auto;
+    }
+
+    .brief-index-title {
+      margin: 0 0 0.7rem;
+      padding-left: 0.85rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brief-index-list {
+      display: grid;
+      gap: 0.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .brief-index-link {
+      display: block;
+      padding: 0.2rem 0.85rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    .brief-index-link:hover,
+    .brief-index-link.is-active {
+      color: var(--text);
+    }
+
+    .brief-index-link.is-active {
+      border-left: 2px solid var(--text);
+      padding-left: calc(0.85rem - 2px);
+    }
+
+    .viewport {
+      min-height: 100vh;
+      padding: 4.5rem 1.25rem 2rem calc(var(--index-width) + 2.8rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: pan-y;
+    }
+
+    .page-card {
+      width: 100%;
+      max-width: var(--max-width);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 2.5rem 2.25rem 2rem;
+      position: relative;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.9rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+      line-height: 1.2;
+      margin: 0 0 1.2rem;
+    }
+
+    .root-intuition {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .section-summary {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .deeper-copy {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.75;
+      margin: 0;
+      padding: 1.2rem 1.35rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
+    .deeper-copy p {
+      margin: 0 0 1em;
+    }
+
+    .deeper-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
+    .empty-copy {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .summary-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .summary-nav.bottom {
+      margin-top: 2rem;
+      margin-bottom: 0;
+    }
+
+    .summary-nav-spacer {
+      flex: 1 1 0;
+    }
+
+    .summary-nav-link,
+    .down-control,
+    .up-control {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      color: var(--control);
+      font: inherit;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .summary-nav-link {
+      min-height: 2.75rem;
+      padding: 0.55rem 0.95rem;
+      font-size: 0.95rem;
+      line-height: 1.2;
+    }
+
+    .summary-nav-link.next {
+      margin-left: auto;
+    }
+
+    .summary-nav-label {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .down-control,
+    .up-control {
+      margin-top: 2rem;
+      padding: 0.55rem 1rem;
+      background: transparent;
+    }
+
+    .down-label,
+    .up-label {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .screen-reader-hint {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    @media (max-width: 720px) {
+      .chrome {
+        padding: 0.75rem 0.25rem 0;
+        flex-direction: column;
+      }
+
+      .paper-meta {
+        text-align: left;
+      }
+
+      .brief-index {
+        position: static;
+        width: auto;
+        max-height: none;
+        margin: 6.1rem 0.25rem 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brief-index-title {
+        padding-left: 0;
+      }
+
+      .brief-index-list {
+        display: flex;
+        gap: 0.35rem;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+      }
+
+      .brief-index-link {
+        white-space: nowrap;
+        padding: 0.25rem 0.45rem;
+      }
+
+      .brief-index-link.is-active {
+        border-left: 0;
+        border-bottom: 2px solid var(--text);
+        padding-left: 0.45rem;
+      }
+
+      .viewport {
+        padding: 1.25rem 0.25rem 1.5rem;
+      }
+
+      .page-card {
+        padding: 1.25rem 0.85rem 1.5rem;
+      }
+
+      .summary-nav {
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .summary-nav.bottom {
+        margin-top: 1.5rem;
+      }
+
+      .summary-nav-link {
+        min-height: 2.5rem;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body
+  data-prev-summary="../04-summary/index.html"
+  data-next-summary="../06-summary/index.html"
+  data-deep-page="../05-deep/index.html"
+  data-up-page=""
+>
+  <div class="chrome">
+    <a class="home-link" href="../../../../index.html">All papers</a>
+    <div class="paper-meta">
+      <div><a class="paper-root-link" href="../../index.html">Compositional Skill Routing for LLM Agents: Decompose, Retrieve, and Compose</a></div>
+      
+      <div>arXiv:2606.18051</div>
+      
+    </div>
+  </div>
+
+  <nav class="brief-index" aria-label="Brief index">
+    <p class="brief-index-title">Brief index</p>
+    <ol class="brief-index-list">
+      
+      <li>
+        <a class="brief-index-link" href="../../index.html">Top</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../02-summary/index.html">02 Introduction</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../03-summary/index.html">03 Tool Selection and Routing</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../04-summary/index.html">04 Tool-Augmented LLM Benchmarks</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link is-active" href="index.html">05 Task Decomposition and Planning</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../06-summary/index.html">06 MCP Ecosystem and Tool Discovery</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../07-summary/index.html">07 Retrieval-Augmented Generation</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../08-summary/index.html">08 Skill Library</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../09-summary/index.html">09 Compositional Skill Routing</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../10-summary/index.html">10 Method</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../11-summary/index.html">11 Stage 1 Task Decomposition</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../12-summary/index.html">12 Stage 2 Skill Retrieval</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../13-summary/index.html">13 Stage 3 Compose</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../14-summary/index.html">14 Scope of current evaluation</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../15-summary/index.html">15 Skill-Aware Decomposition SAD</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../16-summary/index.html">16 Skill Pool Construction</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../17-summary/index.html">17 Query Generation</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../18-summary/index.html">18 Difficulty Levels</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../19-summary/index.html">19 Query Construction</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../20-summary/index.html">20 Evaluation Metrics</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../21-summary/index.html">21 Step-Level Metrics</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../22-summary/index.html">22 Chain-Level Metrics</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../23-summary/index.html">23 Decomposition Accuracy DA</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../24-summary/index.html">24 Relaxed DA DA  1</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../25-summary/index.html">25 LLM Decomposer</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../26-summary/index.html">26 Retriever</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../27-summary/index.html">27 Comparisons</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../28-summary/index.html">28 Hardware</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../29-summary/index.html">29 Main Results</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../30-summary/index.html">30 Key findings</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../31-summary/index.html">31 Difficulty Analysis</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../32-summary/index.html">32 LLM-Direct ceiling estimate</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../33-summary/index.html">33 ReAct-style</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../34-summary/index.html">34 Paraphrase Robustness</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../35-summary/index.html">35 Cross-Model Validation</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../36-summary/index.html">36 DA as prerequisite for retrieval</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../37-summary/index.html">37 SADs mechanism</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../38-summary/index.html">38 Step-count-constrained baseline</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../39-summary/index.html">39 Context Window Analysis</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../40-summary/index.html">40 Convergence Analysis</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../41-summary/index.html">41 Generalization to Unseen Skills</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../42-summary/index.html">42 Error Analysis and SADs Mechanism</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../43-summary/index.html">43 Discussion</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../44-summary/index.html">44 Cascading bottleneck</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../45-summary/index.html">45 Reranking as a validated lever</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../46-summary/index.html">46 Benchmark Construction</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../47-summary/index.html">47 Evaluation Scope</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../48-summary/index.html">48 Other Limitations</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../49-summary/index.html">49 Ethics Statement</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../50-summary/index.html">50 Human-Style Query Evaluation</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../51-summary/index.html">51 Why is human-style DA low</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../52-summary/index.html">52 Example human-style queries</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../53-summary/index.html">53 Category Taxonomy and Per-Category Results</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../54-summary/index.html">54 Decomposition Distribution</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../55-summary/index.html">55 Formal convergence condition</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../56-summary/index.html">56 SAD hint-count H sensitivity</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../57-summary/index.html">57 System prompt shared by vanilla and SAD</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../58-summary/index.html">58 Vanilla user prompt</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../59-summary/index.html">59 SAD user prompt Pass 2</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../60-summary/index.html">60 Statistical Significance</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../61-summary/index.html">61 Wilcoxon signed-rank tests</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../62-summary/index.html">62 CatR1 on DA-corrected subset</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../63-summary/index.html">63 Bootstrap 95 CI</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../64-summary/index.html">64 Skill Pool Statistics</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../65-summary/index.html">65 End-to-End Pilot with Mock Executors</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../66-summary/index.html">66 Protocol</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../67-summary/index.html">67 Results</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../68-summary/index.html">68 Error Analysis</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../69-summary/index.html">69 Setup</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../70-summary/index.html">70 Results 300 queries 828 sub-tasks</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../71-summary/index.html">71 Cost</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="../72-summary/index.html">72 Encoder Robustness Spot-Check</a>
+      </li>
+      
+    </ol>
+  </nav>
+
+  <main class="viewport" id="viewport">
+    <article class="page-card">
+      
+      <nav class="summary-nav top" aria-label="Summary navigation">
+        
+        <a class="summary-nav-link prev" href="../04-summary/index.html" aria-label="Previous summary page">
+          <span aria-hidden="true">←</span>
+          <span class="summary-nav-label">Previous</span>
+        </a>
+        
+        
+        <a class="summary-nav-link next" href="../06-summary/index.html" aria-label="Next summary page">
+          <span class="summary-nav-label">Next</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        
+      </nav>
+      
+
+      <p class="eyebrow">Section 5 summary</p>
+      
+      <h1 class="section-title">Task Decomposition and Planning</h1>
+      
+
+      <div class="section-summary">
+        
+        <p>This section positions SAD against static decomposition frameworks and output-side retrieval methods, showing that the paper’s key question is where retrieval feedback should enter the agent pipeline. It claims SAD improves compositional routing by feeding retrieved skills back into the decomposition step, so the plan itself is corrected before retrieval is finalized.</p>
+        
+      </div>
+
+      
+
+      
+      <nav class="summary-nav bottom" aria-label="Summary navigation">
+        
+        <a class="summary-nav-link prev" href="../04-summary/index.html" aria-label="Previous summary page">
+          <span aria-hidden="true">←</span>
+          <span class="summary-nav-label">Previous</span>
+        </a>
+        
+        
+        <a class="summary-nav-link next" href="../06-summary/index.html" aria-label="Next summary page">
+          <span class="summary-nav-label">Next</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        
+      </nav>
+      
+
+      
+      <a class="down-control" href="../05-deep/index.html" aria-label="Go to deeper explanation">
+        <span class="down-arrow">↓</span>
+        <span class="down-label">Deeper level</span>
+      </a>
+      
+
+      
+    </article>
+  </main>
+
+  <p class="screen-reader-hint" aria-live="polite" id="page-status">
+    Section 5 summary
+  </p>
+
+  <script>
+    const nav = {
+      prevSummary: document.body.dataset.prevSummary,
+      nextSummary: document.body.dataset.nextSummary,
+      deepPage: document.body.dataset.deepPage,
+      upPage: document.body.dataset.upPage,
+    };
+
+    function goTo(href) {
+      if (!href) {
+        return;
+      }
+      window.location.href = href;
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' && nav.nextSummary) {
+        goTo(nav.nextSummary);
+      } else if (event.key === 'ArrowLeft' && nav.prevSummary) {
+        goTo(nav.prevSummary);
+      } else if (event.key === 'ArrowDown' && nav.deepPage) {
+        goTo(nav.deepPage);
+      } else if (event.key === 'ArrowUp' && nav.upPage) {
+        goTo(nav.upPage);
+      }
+    });
+  </script>
+</body>
+</html>

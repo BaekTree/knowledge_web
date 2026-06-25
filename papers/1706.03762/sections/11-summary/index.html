@@ -180,7 +180,6 @@
       font-size: clamp(1.2rem, 2.2vw, 1.55rem);
       line-height: 1.75;
       margin: 0;
-      white-space: pre-wrap;
     }
 
     .deeper-copy {
@@ -486,7 +485,7 @@
 
       <div class="section-summary">
         
-        This introduction frames the paper’s core problem and motivation: the strongest sequence models at the time were recurrent, but their step-by-step computation makes training hard to parallelize, especially on long sequences. It also notes that attention already helps models capture long-range relationships, but usually as a component attached to recurrence rather than a full replacement. The section therefore sets up the paper’s main question: can we build a sequence-to-sequence model that drops recurrence entirely, relies only on attention, and still improves both efficiency and translation quality? The rest of the paper answers that question by proposing the Transformer and showing that this design can train faster and perform better than prior architectures.
+        <p>This introduction frames the paper’s core problem and motivation: the strongest sequence models at the time were recurrent, but their step-by-step computation makes training hard to parallelize, especially on long sequences. It also notes that attention already helps models capture long-range relationships, but usually as a component attached to recurrence rather than a full replacement. The section therefore sets up the paper’s main question: can we build a sequence-to-sequence model that drops recurrence entirely, relies only on attention, and still improves both efficiency and translation quality? The rest of the paper answers that question by proposing the Transformer and showing that this design can train faster and perform better than prior architectures.</p>
         
       </div>
 

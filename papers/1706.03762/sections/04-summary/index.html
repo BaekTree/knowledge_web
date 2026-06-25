@@ -180,7 +180,6 @@
       font-size: clamp(1.2rem, 2.2vw, 1.55rem);
       line-height: 1.75;
       margin: 0;
-      white-space: pre-wrap;
     }
 
     .deeper-copy {
@@ -486,9 +485,8 @@
 
       <div class="section-summary">
         
-        Scaled Dot-Product Attention
-
-Section 3 turns the paper’s core intuition into a concrete model design: it defines how the Transformer computes attention, why attention is scaled, how multiple heads let the model look at different representation subspaces in parallel, how these attention blocks are used for encoder-decoder interaction and self-attention, and how position information is added since there is no recurrence or convolution. It also specifies the feed-forward sublayers, embeddings, and positional encodings, and compares the model’s computational properties to recurrent and convolutional alternatives. This section exists to answer the practical question of how to build a sequence model that can use attention alone while still handling order, parallelism, and long-range dependencies efficiently.
+        <p>Scaled Dot-Product Attention</p>
+<p>Section 3 turns the paper’s core intuition into a concrete model design: it defines how the Transformer computes attention, why attention is scaled, how multiple heads let the model look at different representation subspaces in parallel, how these attention blocks are used for encoder-decoder interaction and self-attention, and how position information is added since there is no recurrence or convolution. It also specifies the feed-forward sublayers, embeddings, and positional encodings, and compares the model’s computational properties to recurrent and convolutional alternatives. This section exists to answer the practical question of how to build a sequence model that can use attention alone while still handling order, parallelism, and long-range dependencies efficiently.</p>
         
       </div>
 
