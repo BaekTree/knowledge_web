@@ -385,7 +385,7 @@
   data-prev-summary=""
   data-next-summary=""
   data-deep-page=""
-  data-up-page="../01-summary/index.html"
+  data-up-page="../11-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -406,7 +406,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../01-summary/index.html">01 Abstract</a>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
       </li>
       
       <li>
@@ -446,7 +446,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../11-summary/index.html">11 Safety guarantees</a>
+        <a class="brief-index-link is-active" href="../11-summary/index.html">11 Safety guarantees</a>
       </li>
       
       <li>
@@ -516,14 +516,17 @@
     <article class="page-card">
       
 
-      <p class="eyebrow">Section 1 deeper explanation</p>
+      <p class="eyebrow">Section 11 deeper explanation</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">Safety guarantees</h1>
       
 
       <div class="deeper-copy">
         
-        <p>ClawBench is presented as a more realistic stress test for AI agents than offline or read-only benchmarks because it forces the agent to act in the same environment real users face: live websites with changing content, multi-step workflows, and form-heavy interactions. In an offline sandbox, many of the hardest parts of web automation are muted or removed, such as dynamic page states, authentication flows, document lookup, or the consequences of making a wrong click. By contrast, everyday online tasks combine information gathering, navigation, and precise action execution, so they probe whether an agent can actually function as a general-purpose assistant rather than just pattern-match on static pages. This is the core motivation that the Introduction builds on. The benchmark itself is deliberately broad: 153 tasks across 144 live platforms and 15 categories. That scale matters because it reduces the chance that a model can succeed by specializing in a narrow website style or a single task family. Coverage across many platforms and task types tests whether the agent has reusable skills such as reading user-provided documents, transferring information across pages, and completing long workflows without losing state. In other words, the benchmark is not just larger for its own sake; its diversity is part of the measurement, because robustness across domains is what you would want from a real assistant. A key design decision is to evaluate on production websites while blocking only the final submission request through a lightweight interception layer. This preserves the real complexity of the web experience without causing side effects like placing an order, sending an application, or booking an appointment. The idea is to separate “can the agent complete the task?” from “should the system actually commit the action?” That makes the Evaluation Protocol safer while keeping the task environment faithful enough to expose the same failure modes users would encounter in practice. This is much closer to real deployment than a sanitized sandbox. The main empirical result is sobering: even frontier models complete only a minority of tasks, and Claude Sonnet 4.6 reaches 33.3% on the benchmark. That number should be read as evidence that current agents still struggle with reliable end-to-end execution on real websites, especially when tasks require long-horizon control and precise writing. The broader paper uses this result to argue that progress on ClawBench is meaningful precisely because it measures a capability gap that offline benchmarks can hide.</p>
+        <p>The safety boundary in this section is not “make the agent safe everywhere,” but “prevent the one action that creates irreversible external consequences.” In ClawBench, that boundary is the terminal submission request: the final HTTP request that actually commits the task, such as placing an order, submitting an application, or confirming a transaction. By intercepting only that request, the benchmark lets the agent interact with the real website, load pages, fill forms, and navigate normal flows, while stopping the moment the task would leave the browser and affect the outside world. This is the key technical idea: safety is enforced at the point of commitment, not by constraining the agent’s reasoning or interaction too early.</p>
+<p>The mechanism is described as human-annotated at the endpoint level rather than inferred by heuristics. That matters because heuristics for “looks like a submission” are brittle: they can miss unusual APIs or flag harmless traffic. Endpoint-level annotation gives a precise mapping from tasks to the exact request that should be blocked, which is why the validation result can be expressed cleanly as 100% interception on the ground-truth terminal request and zero false positives on navigation traffic. In practical terms, this means the extension is not guessing based on page content or button labels; it is matching the specific network event that represents completion. The design is therefore closer to a ground-truth safety gate than a classifier.</p>
+<p>This also explains why ClawBench claims realism without accepting production risk. Sandbox benchmarks often avoid harm by replacing the actual website with a toy environment, but that changes the task distribution: agents no longer face authentic latency, UI structure, anti-bot defenses, session state, or backend-side validation. Here, the agent still exercises real websites and real workflows, so the benchmark measures genuine competence under realistic conditions. The only thing removed is the final irreversible side effect. That makes the benchmark suitable for studying everyday online task completion as it is actually deployed, not as it appears in a controlled simulation.</p>
+<p>The broader paper’s evaluation protocol and infrastructure controls support this safety model. Because interception is targeted and deterministic, reproducibility is preserved: the same task can be run repeatedly without producing side effects, while the navigation and form-filling history remains intact for measurement. This pairs safety with realism rather than trading one for the other. It also connects back to the Interception Mechanism section, where the browser extension and endpoint annotations define exactly what gets blocked, and to the reproducibility controls, which ensure that the observed performance reflects the agent’s behavior rather than accidental external outcomes.</p>
         
       </div>
 
@@ -534,7 +537,7 @@
       
 
       
-      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+      <a class="up-control" href="../11-summary/index.html" aria-label="Back to section summary">
         <span class="up-arrow">↑</span>
         <span class="up-label">Back to summary</span>
       </a>
@@ -543,7 +546,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 1 deeper explanation
+    Section 11 deeper explanation
   </p>
 
   <script>

@@ -385,7 +385,7 @@
   data-prev-summary=""
   data-next-summary=""
   data-deep-page=""
-  data-up-page="../01-summary/index.html"
+  data-up-page="../15-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -406,7 +406,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../01-summary/index.html">01 Abstract</a>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
       </li>
       
       <li>
@@ -462,7 +462,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../15-summary/index.html">15 Scoring</a>
+        <a class="brief-index-link is-active" href="../15-summary/index.html">15 Scoring</a>
       </li>
       
       <li>
@@ -516,14 +516,14 @@
     <article class="page-card">
       
 
-      <p class="eyebrow">Section 1 deeper explanation</p>
+      <p class="eyebrow">Section 15 deeper explanation</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">Scoring</h1>
       
 
       <div class="deeper-copy">
         
-        <p>ClawBench is presented as a more realistic stress test for AI agents than offline or read-only benchmarks because it forces the agent to act in the same environment real users face: live websites with changing content, multi-step workflows, and form-heavy interactions. In an offline sandbox, many of the hardest parts of web automation are muted or removed, such as dynamic page states, authentication flows, document lookup, or the consequences of making a wrong click. By contrast, everyday online tasks combine information gathering, navigation, and precise action execution, so they probe whether an agent can actually function as a general-purpose assistant rather than just pattern-match on static pages. This is the core motivation that the Introduction builds on. The benchmark itself is deliberately broad: 153 tasks across 144 live platforms and 15 categories. That scale matters because it reduces the chance that a model can succeed by specializing in a narrow website style or a single task family. Coverage across many platforms and task types tests whether the agent has reusable skills such as reading user-provided documents, transferring information across pages, and completing long workflows without losing state. In other words, the benchmark is not just larger for its own sake; its diversity is part of the measurement, because robustness across domains is what you would want from a real assistant. A key design decision is to evaluate on production websites while blocking only the final submission request through a lightweight interception layer. This preserves the real complexity of the web experience without causing side effects like placing an order, sending an application, or booking an appointment. The idea is to separate “can the agent complete the task?” from “should the system actually commit the action?” That makes the Evaluation Protocol safer while keeping the task environment faithful enough to expose the same failure modes users would encounter in practice. This is much closer to real deployment than a sanitized sandbox. The main empirical result is sobering: even frontier models complete only a minority of tasks, and Claude Sonnet 4.6 reaches 33.3% on the benchmark. That number should be read as evidence that current agents still struggle with reliable end-to-end execution on real websites, especially when tasks require long-horizon control and precise writing. The broader paper uses this result to argue that progress on ClawBench is meaningful precisely because it measures a capability gap that offline benchmarks can hide.</p>
+        <p>This scoring section defines ClawBench’s evaluation as a task-level binary decision rather than a fuzzy quality score. For each task t, the evaluator A receives the task instruction q^(t), the agent’s recorded trajectory T_a^(t), and a human reference trajectory T_h^(t). Its output is Score(t) in {0,1}, where 1 means the agent completed the task successfully and 0 means it failed. The overall benchmark metric is the success rate SR = 1/|T| sum_t Score(t), so the paper is measuring the fraction of tasks solved, not how close a trajectory looks in a generic sense. The key design choice is that the Agentic Evaluator does not judge the agent in isolation. Instead, it compares the agent’s behavior against a human reference trajectory under a fixed rubric. That matters because many everyday web tasks are only considered correct if the user’s request is satisfied in a platform-specific way: the right fields must be bound, the sequence of interactions must be valid, and the final submission state must match what the site expects. A trajectory that seems reasonable from the instruction alone can still fail if it submits in the wrong form, skips a required confirmation, or uses the wrong interaction order. The reference trajectory provides concrete evidence for what successful completion looks like in that environment. The rubric is therefore grounded in request-schema fidelity and step-level evidence. Request-schema fidelity means the evaluator checks whether the agent’s actions satisfy the implicit structure of the task request, such as filling the correct fields, selecting the correct item, or arriving at the correct terminal page. Step-level evidence means the judgment is based on observed interactions, not just final outcome text, so the evaluator can verify whether the path taken is consistent with the intended task execution. This makes the score more reliable for tasks where intermediate steps matter as much as the endpoint. This scoring choice also supports comparability across models and task categories. Because every system is reduced to the same binary success criterion under the same rubric, the benchmark can aggregate results cleanly across heterogeneous tasks. That is important for the paper’s broader Evaluation Protocol and Main Results: models may differ widely in how they navigate pages, but the benchmark only credits completion when the task is actually achieved in the recorded environment. In other words, the metric is designed to make cross-model and cross-category comparisons interpretable, while keeping the evaluation aligned with real-world task completion rather than subjective trajectory quality.</p>
         
       </div>
 
@@ -534,7 +534,7 @@
       
 
       
-      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+      <a class="up-control" href="../15-summary/index.html" aria-label="Back to section summary">
         <span class="up-arrow">↑</span>
         <span class="up-label">Back to summary</span>
       </a>
@@ -543,7 +543,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 1 deeper explanation
+    Section 15 deeper explanation
   </p>
 
   <script>

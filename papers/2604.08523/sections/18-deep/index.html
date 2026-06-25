@@ -385,7 +385,7 @@
   data-prev-summary=""
   data-next-summary=""
   data-deep-page=""
-  data-up-page="../01-summary/index.html"
+  data-up-page="../18-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -406,7 +406,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../01-summary/index.html">01 Abstract</a>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
       </li>
       
       <li>
@@ -474,7 +474,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../18-summary/index.html">18 Infrastructure</a>
+        <a class="brief-index-link is-active" href="../18-summary/index.html">18 Infrastructure</a>
       </li>
       
       <li>
@@ -516,14 +516,14 @@
     <article class="page-card">
       
 
-      <p class="eyebrow">Section 1 deeper explanation</p>
+      <p class="eyebrow">Section 18 deeper explanation</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">Infrastructure</h1>
       
 
       <div class="deeper-copy">
         
-        <p>ClawBench is presented as a more realistic stress test for AI agents than offline or read-only benchmarks because it forces the agent to act in the same environment real users face: live websites with changing content, multi-step workflows, and form-heavy interactions. In an offline sandbox, many of the hardest parts of web automation are muted or removed, such as dynamic page states, authentication flows, document lookup, or the consequences of making a wrong click. By contrast, everyday online tasks combine information gathering, navigation, and precise action execution, so they probe whether an agent can actually function as a general-purpose assistant rather than just pattern-match on static pages. This is the core motivation that the Introduction builds on. The benchmark itself is deliberately broad: 153 tasks across 144 live platforms and 15 categories. That scale matters because it reduces the chance that a model can succeed by specializing in a narrow website style or a single task family. Coverage across many platforms and task types tests whether the agent has reusable skills such as reading user-provided documents, transferring information across pages, and completing long workflows without losing state. In other words, the benchmark is not just larger for its own sake; its diversity is part of the measurement, because robustness across domains is what you would want from a real assistant. A key design decision is to evaluate on production websites while blocking only the final submission request through a lightweight interception layer. This preserves the real complexity of the web experience without causing side effects like placing an order, sending an application, or booking an appointment. The idea is to separate “can the agent complete the task?” from “should the system actually commit the action?” That makes the Evaluation Protocol safer while keeping the task environment faithful enough to expose the same failure modes users would encounter in practice. This is much closer to real deployment than a sanitized sandbox. The main empirical result is sobering: even frontier models complete only a minority of tasks, and Claude Sonnet 4.6 reaches 33.3% on the benchmark. That number should be read as evidence that current agents still struggle with reliable end-to-end execution on real websites, especially when tasks require long-horizon control and precise writing. The broader paper uses this result to argue that progress on ClawBench is meaningful precisely because it measures a capability gap that offline benchmarks can hide.</p>
+        <p>This section describes the execution substrate that makes ClawBench more than a simple browser automation test. Each agent is not acting on a toy simulator; it is given a real Chromium instance through the OpenClaw framework, with the browser isolated and managed so the task environment is controlled while still interacting with live websites. That matters because the benchmark is trying to measure whether agents can complete everyday online tasks under realistic web conditions, not just whether they can follow scripted DOM traces. The browser toolset provides the standard action primitives, such as clicking, typing, scrolling, and navigation, which is the minimum interface needed for a general-purpose web agent. The key design choice is to separate acting from recording. While the agent is running, the ClawBench Chrome extension and the CDP instrumentation server stay in the background and observe the session. The extension lives inside the browser context, so it can see page-level events and user-agent actions, while CDP gives a lower-level control and telemetry channel for browser state, navigation, and network activity. Together they capture enough information to reconstruct what the agent saw and did without relying on brittle screenshots alone. This is the operational core of the Five-Layer Recording Infrastructure referenced elsewhere in the paper: the system records the interaction from multiple angles so later evaluation can reason about both visible behavior and hidden browser state. The interception layer is especially important for repeatability on live sites. Live websites change, block automation, and trigger side effects such as form submissions or purchases, so a benchmark needs more than a transcript of clicks. By intercepting HTTP requests and agent actions, the infrastructure can preserve a faithful trace of the run, support post-hoc evaluation, and reduce ambiguity about whether an agent succeeded because of a website quirk or a genuine capability. In effect, the runtime stack turns a live, nondeterministic environment into a measured experiment with a replayable record. This is also where the Safety Guarantees fit: the isolated browser and controlled instrumentation limit what the agent can do and what the benchmark can observe, which helps prevent leakage across tasks and uncontrolled system effects. More broadly, this infrastructure is what makes the benchmark scientifically usable. The paper’s main claims about agent performance depend on being able to reproduce runs, inspect failures, and compare models under the same conditions. The browser/runtime stack, recording pipeline, and evaluation hooks are therefore not implementation details; they are the mechanism that supports valid measurement on real web tasks.</p>
         
       </div>
 
@@ -534,7 +534,7 @@
       
 
       
-      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+      <a class="up-control" href="../18-summary/index.html" aria-label="Back to section summary">
         <span class="up-arrow">↑</span>
         <span class="up-label">Back to summary</span>
       </a>
@@ -543,7 +543,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 1 deeper explanation
+    Section 18 deeper explanation
   </p>
 
   <script>

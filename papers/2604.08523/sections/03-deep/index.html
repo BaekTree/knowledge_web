@@ -385,7 +385,7 @@
   data-prev-summary=""
   data-next-summary=""
   data-deep-page=""
-  data-up-page="../01-summary/index.html"
+  data-up-page="../03-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -406,7 +406,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../01-summary/index.html">01 Abstract</a>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
       </li>
       
       <li>
@@ -414,7 +414,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../03-summary/index.html">03 Benchmark</a>
+        <a class="brief-index-link is-active" href="../03-summary/index.html">03 Benchmark</a>
       </li>
       
       <li>
@@ -516,14 +516,14 @@
     <article class="page-card">
       
 
-      <p class="eyebrow">Section 1 deeper explanation</p>
+      <p class="eyebrow">Section 3 deeper explanation</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">Benchmark</h1>
       
 
       <div class="deeper-copy">
         
-        <p>ClawBench is presented as a more realistic stress test for AI agents than offline or read-only benchmarks because it forces the agent to act in the same environment real users face: live websites with changing content, multi-step workflows, and form-heavy interactions. In an offline sandbox, many of the hardest parts of web automation are muted or removed, such as dynamic page states, authentication flows, document lookup, or the consequences of making a wrong click. By contrast, everyday online tasks combine information gathering, navigation, and precise action execution, so they probe whether an agent can actually function as a general-purpose assistant rather than just pattern-match on static pages. This is the core motivation that the Introduction builds on. The benchmark itself is deliberately broad: 153 tasks across 144 live platforms and 15 categories. That scale matters because it reduces the chance that a model can succeed by specializing in a narrow website style or a single task family. Coverage across many platforms and task types tests whether the agent has reusable skills such as reading user-provided documents, transferring information across pages, and completing long workflows without losing state. In other words, the benchmark is not just larger for its own sake; its diversity is part of the measurement, because robustness across domains is what you would want from a real assistant. A key design decision is to evaluate on production websites while blocking only the final submission request through a lightweight interception layer. This preserves the real complexity of the web experience without causing side effects like placing an order, sending an application, or booking an appointment. The idea is to separate “can the agent complete the task?” from “should the system actually commit the action?” That makes the Evaluation Protocol safer while keeping the task environment faithful enough to expose the same failure modes users would encounter in practice. This is much closer to real deployment than a sanitized sandbox. The main empirical result is sobering: even frontier models complete only a minority of tasks, and Claude Sonnet 4.6 reaches 33.3% on the benchmark. That number should be read as evidence that current agents still struggle with reliable end-to-end execution on real websites, especially when tasks require long-horizon control and precise writing. The broader paper uses this result to argue that progress on ClawBench is meaningful precisely because it measures a capability gap that offline benchmarks can hide.</p>
+        <p>ClawBench is presented as an end-to-end benchmark for measuring whether AI agents can actually finish everyday online tasks that matter in the real world, not just retrieve information about them. The key technical idea is that success is defined by consequential state change: buying something, making a reservation, submitting an application, or otherwise completing a transaction on a live service. That is a stricter target than click-through or question-answering benchmarks, because the agent must interact correctly with dynamic website state, forms, authentication, and transaction flows. In that sense, the benchmark is not just a dataset of tasks; it is an evaluation infrastructure that couples task specification, execution logging, and scoring into one pipeline. The main design choice is to move away from synthetic or sandboxed environments and instead evaluate on 144 live platforms. This improves environmental fidelity because agents face the same variability, UI changes, and operational constraints that humans do. The tradeoff is that such tasks are harder to evaluate reliably, which is why ClawBench emphasizes write-heavy tasks and trace-based verification rather than only final-page inspection. Prior web-agent benchmarks often focus on read-only retrieval or constrained environments where the goal can be checked from a small set of visible outputs. ClawBench broadens coverage to more realistic actions, but that makes the benchmark meaningful only if evaluation can reconstruct what the agent actually did, not just what page it ended on. That is where the Five-Layer Recording Infrastructure and human ground-truth reference come in. The benchmark records the full behavioral trajectory of the agent, then compares that trajectory against a reference execution by a human. The intuition is that many web tasks have multiple intermediate failure modes that a final state alone would hide: an agent might open the wrong account, select the wrong reservation slot, or abandon a partially completed application. By retaining a structured trace, the benchmark gains diagnostic traceability, so failures can be localized to planning, navigation, form filling, confirmation, or submission. The Agentic Evaluator then automates scoring from these traces, which is what makes the benchmark scalable while still being sensitive to real task completion. This section sets up the rest of the paper. The Task Design and Collection section explains how the everyday tasks are curated and grounded in live websites. The Evaluation Protocol and Metrics sections formalize how trajectory comparison and completion scoring work, including how partial progress and correctness are handled. The Main Results section then uses this benchmark to answer the paper’s core question: how far current agents can go on consequential web tasks, and where they fail. Finally, the comparison to prior web-agent benchmarks clarifies ClawBench’s niche: higher realism, heavier write-action coverage, and more interpretable evaluation.</p>
         
       </div>
 
@@ -534,7 +534,7 @@
       
 
       
-      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+      <a class="up-control" href="../03-summary/index.html" aria-label="Back to section summary">
         <span class="up-arrow">↑</span>
         <span class="up-label">Back to summary</span>
       </a>
@@ -543,7 +543,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 1 deeper explanation
+    Section 3 deeper explanation
   </p>
 
   <script>

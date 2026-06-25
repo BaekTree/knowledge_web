@@ -385,7 +385,7 @@
   data-prev-summary=""
   data-next-summary=""
   data-deep-page=""
-  data-up-page="../01-summary/index.html"
+  data-up-page="../23-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -406,7 +406,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../01-summary/index.html">01 Abstract</a>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
       </li>
       
       <li>
@@ -494,7 +494,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../23-summary/index.html">23 LLM-Based Web Agents</a>
+        <a class="brief-index-link is-active" href="../23-summary/index.html">23 LLM-Based Web Agents</a>
       </li>
       
       <li>
@@ -516,14 +516,14 @@
     <article class="page-card">
       
 
-      <p class="eyebrow">Section 1 deeper explanation</p>
+      <p class="eyebrow">Section 23 deeper explanation</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">LLM-Based Web Agents</h1>
       
 
       <div class="deeper-copy">
         
-        <p>ClawBench is presented as a more realistic stress test for AI agents than offline or read-only benchmarks because it forces the agent to act in the same environment real users face: live websites with changing content, multi-step workflows, and form-heavy interactions. In an offline sandbox, many of the hardest parts of web automation are muted or removed, such as dynamic page states, authentication flows, document lookup, or the consequences of making a wrong click. By contrast, everyday online tasks combine information gathering, navigation, and precise action execution, so they probe whether an agent can actually function as a general-purpose assistant rather than just pattern-match on static pages. This is the core motivation that the Introduction builds on. The benchmark itself is deliberately broad: 153 tasks across 144 live platforms and 15 categories. That scale matters because it reduces the chance that a model can succeed by specializing in a narrow website style or a single task family. Coverage across many platforms and task types tests whether the agent has reusable skills such as reading user-provided documents, transferring information across pages, and completing long workflows without losing state. In other words, the benchmark is not just larger for its own sake; its diversity is part of the measurement, because robustness across domains is what you would want from a real assistant. A key design decision is to evaluate on production websites while blocking only the final submission request through a lightweight interception layer. This preserves the real complexity of the web experience without causing side effects like placing an order, sending an application, or booking an appointment. The idea is to separate “can the agent complete the task?” from “should the system actually commit the action?” That makes the Evaluation Protocol safer while keeping the task environment faithful enough to expose the same failure modes users would encounter in practice. This is much closer to real deployment than a sanitized sandbox. The main empirical result is sobering: even frontier models complete only a minority of tasks, and Claude Sonnet 4.6 reaches 33.3% on the benchmark. That number should be read as evidence that current agents still struggle with reliable end-to-end execution on real websites, especially when tasks require long-horizon control and precise writing. The broader paper uses this result to argue that progress on ClawBench is meaningful precisely because it measures a capability gap that offline benchmarks can hide.</p>
+        <p>This section is situating ClawBench in the current wave of LLM-based web agents. The core idea is that a browser agent is not just a language model answering questions, but a model wrapped in a control loop: it observes a page, decides an action, executes that action in a browser, then repeats until the task is complete. Systems such as WebGPT, WebAgent, and SeeAct showed that this loop can work when the agent is given the right observation channels and a constrained action space. The observation side often combines screenshots, which preserve visual layout and rendered state, with structured representations such as HTML or accessibility trees, which make page elements easier to identify and target. The action side turns the model’s intent into concrete browser operations like clicking, typing, scrolling, or navigating. The important technical point is that browser competence depends on both the model and the harness. A strong model can still fail if the interface hides relevant state, if the action primitives are awkward, or if the environment does not expose enough grounding information. That is why recent agent frameworks, including AgentGPT, AutoGPT, and OpenClaw, are not just model wrappers: they standardize the control interface, tool calling, and state management needed to deploy an LLM as a working browser agent. In other words, the framework is part of the algorithm. If the browser state is represented poorly, the model may pick the right high-level plan but still miss the correct element on the page. This also explains why good results on coding tasks or sandboxed agent benchmarks do not transfer cleanly to live web workflows. Coding environments are typically cleaner: state is textual, actions are deterministic, and feedback is immediate. Real websites are messier. Page structure changes, UI elements load asynchronously, popups interfere, and the same intent can require different clicks depending on layout or login state. The agent must handle long-horizon dependencies, recover from partial failures, and stay robust under changing page conditions. So a model’s raw reasoning ability is only one factor; browser control quality, observation fidelity, and task realism all shape the final success rate. ClawBench is built around that insight. Its evaluation target is any agent that can control a Chromium browser, regardless of which foundation model or framework it uses. That design makes the benchmark about end-to-end agent behavior rather than isolated model performance. This section therefore connects directly to the paper’s Models, Experiments, Main Results, and Evaluation Methods for Agent Systems sections: those parts test how different agent stacks perform under the same browser tasks, and ClawBench uses that shared setup to measure whether current systems can actually complete everyday online tasks, not just look good in constrained demos.</p>
         
       </div>
 
@@ -534,7 +534,7 @@
       
 
       
-      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+      <a class="up-control" href="../23-summary/index.html" aria-label="Back to section summary">
         <span class="up-arrow">↑</span>
         <span class="up-label">Back to summary</span>
       </a>
@@ -543,7 +543,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 1 deeper explanation
+    Section 23 deeper explanation
   </p>
 
   <script>

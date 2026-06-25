@@ -385,7 +385,7 @@
   data-prev-summary=""
   data-next-summary=""
   data-deep-page=""
-  data-up-page="../01-summary/index.html"
+  data-up-page="../20-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -406,7 +406,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../01-summary/index.html">01 Abstract</a>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
       </li>
       
       <li>
@@ -482,7 +482,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../20-summary/index.html">20 Metrics</a>
+        <a class="brief-index-link is-active" href="../20-summary/index.html">20 Metrics</a>
       </li>
       
       <li>
@@ -516,14 +516,14 @@
     <article class="page-card">
       
 
-      <p class="eyebrow">Section 1 deeper explanation</p>
+      <p class="eyebrow">Section 20 deeper explanation</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">Metrics</h1>
       
 
       <div class="deeper-copy">
         
-        <p>ClawBench is presented as a more realistic stress test for AI agents than offline or read-only benchmarks because it forces the agent to act in the same environment real users face: live websites with changing content, multi-step workflows, and form-heavy interactions. In an offline sandbox, many of the hardest parts of web automation are muted or removed, such as dynamic page states, authentication flows, document lookup, or the consequences of making a wrong click. By contrast, everyday online tasks combine information gathering, navigation, and precise action execution, so they probe whether an agent can actually function as a general-purpose assistant rather than just pattern-match on static pages. This is the core motivation that the Introduction builds on. The benchmark itself is deliberately broad: 153 tasks across 144 live platforms and 15 categories. That scale matters because it reduces the chance that a model can succeed by specializing in a narrow website style or a single task family. Coverage across many platforms and task types tests whether the agent has reusable skills such as reading user-provided documents, transferring information across pages, and completing long workflows without losing state. In other words, the benchmark is not just larger for its own sake; its diversity is part of the measurement, because robustness across domains is what you would want from a real assistant. A key design decision is to evaluate on production websites while blocking only the final submission request through a lightweight interception layer. This preserves the real complexity of the web experience without causing side effects like placing an order, sending an application, or booking an appointment. The idea is to separate “can the agent complete the task?” from “should the system actually commit the action?” That makes the Evaluation Protocol safer while keeping the task environment faithful enough to expose the same failure modes users would encounter in practice. This is much closer to real deployment than a sanitized sandbox. The main empirical result is sobering: even frontier models complete only a minority of tasks, and Claude Sonnet 4.6 reaches 33.3% on the benchmark. That number should be read as evidence that current agents still struggle with reliable end-to-end execution on real websites, especially when tasks require long-horizon control and precise writing. The broader paper uses this result to argue that progress on ClawBench is meaningful precisely because it measures a capability gap that offline benchmarks can hide.</p>
+        <p>The section defines the benchmark’s primary metric as success rate, or SR: the fraction of tasks where the agent earns a binary score of 1. In practice, this means each task is judged as either completed successfully or not, and the aggregate score is the average of those per-task outcomes. The key advantage of SR is that it is easy to interpret and compare across models, but its simplicity is also its limitation: it collapses all behavior into a single number. For an agent benchmark aimed at everyday online work, that one number can hide very different failure modes, such as browsing mistakes, form-filling errors, or problems following multi-step instructions. That is why the paper reports SR not only overall, but also broken down by the eight high-level category groups. The overall score answers the question “How good is the agent, on average?”, while the category-level view answers “Where does it work, and where does it fail?” This matters because a single aggregate can be dominated by whichever task types are most frequent or easiest, even if the agent performs unevenly across the task space. The breakdown therefore acts as a diagnostic layer on top of the benchmark score, making it possible to distinguish broad competence from narrow specialization. This is especially important when comparing systems that may have similar global SR but very different capability profiles. The metric design also supports traceability and per-task diagnosis, which are central to evaluating agentic systems. A binary per-task score makes it straightforward to inspect specific failures and connect them back to the agent’s trajectory, rather than treating errors as opaque noise. In other words, the benchmark is not just measuring accuracy in the read-only sense; it is preserving enough structure to analyze how the agent behaved during execution. That distinction is important for agent systems, because a failed task may still reveal partial progress, correct subgoals, or a single catastrophic action that caused the collapse. Such diagnostic information is much more actionable than a flat score. This connects directly to the broader paper’s comparison with read-only web-agent benchmarks. Traditional web benchmarks often emphasize question answering or page understanding, where success depends mainly on extracting the right information. ClawBench instead evaluates interactive task completion, where the agent must act in the environment and reach a final outcome. As a result, the metric needs to reflect end-to-end task success while still enabling analysis of diverse task categories and failure traces. The SR plus category breakdown approach gives the paper a compact headline number for Main Results, but also the granularity needed to interpret what that number really means in the context of agent evaluation methods.</p>
         
       </div>
 
@@ -534,7 +534,7 @@
       
 
       
-      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+      <a class="up-control" href="../20-summary/index.html" aria-label="Back to section summary">
         <span class="up-arrow">↑</span>
         <span class="up-label">Back to summary</span>
       </a>
@@ -543,7 +543,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 1 deeper explanation
+    Section 20 deeper explanation
   </p>
 
   <script>

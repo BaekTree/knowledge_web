@@ -385,7 +385,7 @@
   data-prev-summary=""
   data-next-summary=""
   data-deep-page=""
-  data-up-page="../01-summary/index.html"
+  data-up-page="../26-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -406,7 +406,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../01-summary/index.html">01 Abstract</a>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
       </li>
       
       <li>
@@ -506,7 +506,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../26-summary/index.html">26 Conclusion</a>
+        <a class="brief-index-link is-active" href="../26-summary/index.html">26 Conclusion</a>
       </li>
       
     </ol>
@@ -516,14 +516,14 @@
     <article class="page-card">
       
 
-      <p class="eyebrow">Section 1 deeper explanation</p>
+      <p class="eyebrow">Section 26 deeper explanation</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">Conclusion</h1>
       
 
       <div class="deeper-copy">
         
-        <p>ClawBench is presented as a more realistic stress test for AI agents than offline or read-only benchmarks because it forces the agent to act in the same environment real users face: live websites with changing content, multi-step workflows, and form-heavy interactions. In an offline sandbox, many of the hardest parts of web automation are muted or removed, such as dynamic page states, authentication flows, document lookup, or the consequences of making a wrong click. By contrast, everyday online tasks combine information gathering, navigation, and precise action execution, so they probe whether an agent can actually function as a general-purpose assistant rather than just pattern-match on static pages. This is the core motivation that the Introduction builds on. The benchmark itself is deliberately broad: 153 tasks across 144 live platforms and 15 categories. That scale matters because it reduces the chance that a model can succeed by specializing in a narrow website style or a single task family. Coverage across many platforms and task types tests whether the agent has reusable skills such as reading user-provided documents, transferring information across pages, and completing long workflows without losing state. In other words, the benchmark is not just larger for its own sake; its diversity is part of the measurement, because robustness across domains is what you would want from a real assistant. A key design decision is to evaluate on production websites while blocking only the final submission request through a lightweight interception layer. This preserves the real complexity of the web experience without causing side effects like placing an order, sending an application, or booking an appointment. The idea is to separate “can the agent complete the task?” from “should the system actually commit the action?” That makes the Evaluation Protocol safer while keeping the task environment faithful enough to expose the same failure modes users would encounter in practice. This is much closer to real deployment than a sanitized sandbox. The main empirical result is sobering: even frontier models complete only a minority of tasks, and Claude Sonnet 4.6 reaches 33.3% on the benchmark. That number should be read as evidence that current agents still struggle with reliable end-to-end execution on real websites, especially when tasks require long-horizon control and precise writing. The broader paper uses this result to argue that progress on ClawBench is meaningful precisely because it measures a capability gap that offline benchmarks can hide.</p>
+        <p>ClawBench’s conclusion restates the paper’s central technical claim: everyday web tasks in the wild are still not solved by current AI agents. The benchmark is not just a larger task set; it is deliberately built around 153 real tasks on 144 live platforms, covering eight broad categories and emphasizing workflows that actually change state, such as submitting forms, editing content, or completing purchases. That choice matters because it moves evaluation away from static page interaction and toward the kind of long-horizon, error-sensitive behavior that real assistants must handle. In other words, the benchmark is designed to expose the difference between “can navigate a website in principle” and “can reliably finish a real task end to end.” A key technical contribution highlighted here is the safety and traceability stack behind the benchmark. Final-request interception ensures the benchmark can observe or block the last user-affecting action, which is important because many web tasks have irreversible consequences. Five-Layer Recording Infrastructure preserves a structured account of what the agent saw and did, so failures can be diagnosed at the level of page states, actions, and intermediate decisions rather than only by final success or failure. The Agentic Evaluator then judges outcomes in a way that is closer to how a human would validate task completion, instead of relying on a brittle scripted checksum. These design choices are not cosmetic: they make the benchmark safer to run on live sites, and they make failures analyzable enough to support scientific comparison. The conclusion also emphasizes the empirical result from the Main Results section: strong scores on existing web-agent benchmarks do not transfer to ClawBench. That is the core finding because it shows prior benchmarks were measuring a narrower competence profile, often on controlled or sanitized environments. The gap is not merely quantitative; it suggests current agents are overfit to conditions where state changes are limited, page structure is stable, and success criteria are easy to infer. ClawBench therefore acts as a harder external validity test for general-purpose assistants, one that better matches the complexity and fragility of real online work. The broader significance is reproducibility and future research infrastructure. By releasing the benchmark, toolkit, and recording/evaluation system, the paper gives the field a more reliable substrate for comparing agents under realistic conditions. That opens the door to studying failures in a principled way: how agents recover from partial progress, how they handle ambiguous interfaces, and how much planning and memory are needed for everyday tasks. As framed by the Introduction and Safety Guarantees, the benchmark is not only a scorecard but also a controlled experimental environment for building assistants that can be trusted on live web workflows.</p>
         
       </div>
 
@@ -534,7 +534,7 @@
       
 
       
-      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+      <a class="up-control" href="../26-summary/index.html" aria-label="Back to section summary">
         <span class="up-arrow">↑</span>
         <span class="up-label">Back to summary</span>
       </a>
@@ -543,7 +543,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 1 deeper explanation
+    Section 26 deeper explanation
   </p>
 
   <script>

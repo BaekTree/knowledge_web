@@ -385,7 +385,7 @@
   data-prev-summary=""
   data-next-summary=""
   data-deep-page=""
-  data-up-page="../01-summary/index.html"
+  data-up-page="../14-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -406,7 +406,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../01-summary/index.html">01 Abstract</a>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
       </li>
       
       <li>
@@ -458,7 +458,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../14-summary/index.html">14 Agentic Evaluator</a>
+        <a class="brief-index-link is-active" href="../14-summary/index.html">14 Agentic Evaluator</a>
       </li>
       
       <li>
@@ -516,14 +516,14 @@
     <article class="page-card">
       
 
-      <p class="eyebrow">Section 1 deeper explanation</p>
+      <p class="eyebrow">Section 14 deeper explanation</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">Agentic Evaluator</h1>
       
 
       <div class="deeper-copy">
         
-        <p>ClawBench is presented as a more realistic stress test for AI agents than offline or read-only benchmarks because it forces the agent to act in the same environment real users face: live websites with changing content, multi-step workflows, and form-heavy interactions. In an offline sandbox, many of the hardest parts of web automation are muted or removed, such as dynamic page states, authentication flows, document lookup, or the consequences of making a wrong click. By contrast, everyday online tasks combine information gathering, navigation, and precise action execution, so they probe whether an agent can actually function as a general-purpose assistant rather than just pattern-match on static pages. This is the core motivation that the Introduction builds on. The benchmark itself is deliberately broad: 153 tasks across 144 live platforms and 15 categories. That scale matters because it reduces the chance that a model can succeed by specializing in a narrow website style or a single task family. Coverage across many platforms and task types tests whether the agent has reusable skills such as reading user-provided documents, transferring information across pages, and completing long workflows without losing state. In other words, the benchmark is not just larger for its own sake; its diversity is part of the measurement, because robustness across domains is what you would want from a real assistant. A key design decision is to evaluate on production websites while blocking only the final submission request through a lightweight interception layer. This preserves the real complexity of the web experience without causing side effects like placing an order, sending an application, or booking an appointment. The idea is to separate “can the agent complete the task?” from “should the system actually commit the action?” That makes the Evaluation Protocol safer while keeping the task environment faithful enough to expose the same failure modes users would encounter in practice. This is much closer to real deployment than a sanitized sandbox. The main empirical result is sobering: even frontier models complete only a minority of tasks, and Claude Sonnet 4.6 reaches 33.3% on the benchmark. That number should be read as evidence that current agents still struggle with reliable end-to-end execution on real websites, especially when tasks require long-horizon control and precise writing. The broader paper uses this result to argue that progress on ClawBench is meaningful precisely because it measures a capability gap that offline benchmarks can hide.</p>
+        <p>The section describes an evaluation setup where a model is not judged by a simple string match or by the task prompt alone, but by a second agent that plays the role of a disciplined grader. That grader is itself a Claude Code sub-agent, but its behavior is constrained by a fixed rubric, so the evaluation is meant to be repeatable rather than ad hoc. The key idea is alignment between two executions: the agent’s actual trajectory and a human reference trajectory for the same task. Instead of asking only “did the final answer look right?”, the evaluator reconstructs whether the agent followed the same important action sequence, used the right fields and payloads, and arrived at a terminal state that is functionally equivalent to the human’s outcome. Technically, this is a richer comparison than ordinary success/failure scoring. The evaluator consumes the task instruction, the full recorded trajectory of the agent, the human demonstration trajectory, and the concrete payloads or field values used along the way. That evidence lets it detect divergences at the step level, such as clicking the right page but filling the wrong form field, or reaching the right endpoint through a path that fails a required intermediate constraint. The design choice here is to ground judgment in observable behavior, not just the intent encoded in the instruction. That matters in online tasks, where many different action sequences can appear superficially similar while only some actually satisfy the workflow constraints. The reason the evaluator emits a structured justification, rather than only a binary label, is that binary labels alone hide the failure mode. A pass/fail score answers whether the run succeeded, but not why it succeeded or failed, which makes debugging, auditing, and cross-checking much harder. Structured justifications expose the matching and mismatch points between the two trajectories, so the authors can inspect whether the evaluator is judging terminal state, field correctness, or action sequence consistency. In effect, the justification is part of the measurement protocol: it provides transparency and supports reproducibility controls by making the decision trace inspectable. This section connects directly to the paper’s broader Evaluation Protocol and Scoring logic. The Main Results depend on whether the evaluator can consistently recognize task completion in realistic browser workflows, so the quality of this alignment-based grading matters downstream. It also supports the reproducibility story: if another run is evaluated with the same rubric, the same evidence set, and the same structured output format, the judgment should be stable enough to compare systems fairly.</p>
         
       </div>
 
@@ -534,7 +534,7 @@
       
 
       
-      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+      <a class="up-control" href="../14-summary/index.html" aria-label="Back to section summary">
         <span class="up-arrow">↑</span>
         <span class="up-label">Back to summary</span>
       </a>
@@ -543,7 +543,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 1 deeper explanation
+    Section 14 deeper explanation
   </p>
 
   <script>

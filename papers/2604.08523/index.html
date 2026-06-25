@@ -406,7 +406,107 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="sections/01-summary/index.html">01 Sites</a>
+        <a class="brief-index-link" href="sections/01-summary/index.html">01 Abstract</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/02-summary/index.html">02 Introduction</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/03-summary/index.html">03 Benchmark</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/04-summary/index.html">04 Task Design and Collection</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/05-summary/index.html">05 Candidate generation</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/06-summary/index.html">06 Multi-stage filtering</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/07-summary/index.html">07 Interception signal annotation</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/08-summary/index.html">08 Task Taxonomy</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/09-summary/index.html">09 Interception Mechanism</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/10-summary/index.html">10 How it works</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/11-summary/index.html">11 Safety guarantees</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/12-summary/index.html">12 Five-Layer Recording Infrastructure</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/13-summary/index.html">13 Evaluation Protocol</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/14-summary/index.html">14 Agentic Evaluator</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/15-summary/index.html">15 Scoring</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/16-summary/index.html">16 Experiments</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/17-summary/index.html">17 Models</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/18-summary/index.html">18 Infrastructure</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/19-summary/index.html">19 Reproducibility controls</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/20-summary/index.html">20 Metrics</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/21-summary/index.html">21 Main Results</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/22-summary/index.html">22 Web Agent Benchmarks</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/23-summary/index.html">23 LLM-Based Web Agents</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/24-summary/index.html">24 Evaluation Methods for Agent Systems</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/25-summary/index.html">25 Concurrent and Complementary Work</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/26-summary/index.html">26 Conclusion</a>
       </li>
       
     </ol>
@@ -433,15 +533,70 @@
 
       <div class="root-intuition">
         
-        <p><strong>TL;DR:</strong> ClawBench tests whether AI agents can handle 153 everyday tasks like shopping and job applications on real production websites, showing that even the best models succeed on only about one-third.</p>
+        <p><strong>TL;DR:</strong> ClawBench tests whether AI agents can finish ordinary real-world web tasks on live websites, and finds they still fail most of them.</p>
 <ul>
-<li><strong>Problem:</strong> Existing benchmarks evaluate AI agents in sandboxed, static environments rather than the dynamic complexity of real-world websites.</li>
-<li><strong>Insight:</strong> Testing on actual production websites reveals that AI agents fail at seemingly routine tasks requiring document understanding, multi-step workflows across different platforms, and complex form filling.</li>
-<li><strong>Why it matters:</strong> This benchmark exposes a large gap between AI agent performance in controlled tests and what's needed for them to become reliable, general-purpose assistants in daily life.</li>
+<li><strong>Problem:</strong> Current agent benchmarks are too clean and static, so they do not show how agents handle messy everyday online chores on real sites.</li>
+<li><strong>Insight:</strong> The paper builds a safe live-website benchmark with final-request blocking, detailed trajectory tracking, and step-by-step evaluation across 153 tasks on 144 platforms.</li>
+<li><strong>Why it matters:</strong> It shows that strong benchmark scores do not yet translate into reliable digital assistants for everyday life and work.</li>
 </ul>
         
       </div>
 
+      
+      <section class="page-media" aria-label="Paper media">
+        
+
+        
+        <figure class="page-figure">
+          
+          <img src="images/agentic-evaluator-inference.png" alt="Paper figure">
+          
+          
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <img src="images/bench-fig1.png" alt="Paper figure">
+          
+          
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <img src="images/bench-fig2.png" alt="Paper figure">
+          
+          
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <img src="images/bench-fig4.png" alt="Paper figure">
+          
+          
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <img src="images/bench-saturation.png" alt="Paper figure">
+          
+          
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <img src="images/main_scores.png" alt="Paper figure">
+          
+          
+        </figure>
+        
+        <figure class="page-figure">
+          
+          <img src="images/taxonomy_sunburst.png" alt="Paper figure">
+          
+          
+        </figure>
+        
+      </section>
       
 
       

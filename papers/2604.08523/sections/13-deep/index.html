@@ -385,7 +385,7 @@
   data-prev-summary=""
   data-next-summary=""
   data-deep-page=""
-  data-up-page="../01-summary/index.html"
+  data-up-page="../13-summary/index.html"
 >
   <div class="chrome">
     <a class="home-link" href="../../../../index.html">All papers</a>
@@ -406,7 +406,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../01-summary/index.html">01 Abstract</a>
+        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
       </li>
       
       <li>
@@ -454,7 +454,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../13-summary/index.html">13 Evaluation Protocol</a>
+        <a class="brief-index-link is-active" href="../13-summary/index.html">13 Evaluation Protocol</a>
       </li>
       
       <li>
@@ -516,14 +516,14 @@
     <article class="page-card">
       
 
-      <p class="eyebrow">Section 1 deeper explanation</p>
+      <p class="eyebrow">Section 13 deeper explanation</p>
       
-      <h1 class="section-title">Abstract</h1>
+      <h1 class="section-title">Evaluation Protocol</h1>
       
 
       <div class="deeper-copy">
         
-        <p>ClawBench is presented as a more realistic stress test for AI agents than offline or read-only benchmarks because it forces the agent to act in the same environment real users face: live websites with changing content, multi-step workflows, and form-heavy interactions. In an offline sandbox, many of the hardest parts of web automation are muted or removed, such as dynamic page states, authentication flows, document lookup, or the consequences of making a wrong click. By contrast, everyday online tasks combine information gathering, navigation, and precise action execution, so they probe whether an agent can actually function as a general-purpose assistant rather than just pattern-match on static pages. This is the core motivation that the Introduction builds on. The benchmark itself is deliberately broad: 153 tasks across 144 live platforms and 15 categories. That scale matters because it reduces the chance that a model can succeed by specializing in a narrow website style or a single task family. Coverage across many platforms and task types tests whether the agent has reusable skills such as reading user-provided documents, transferring information across pages, and completing long workflows without losing state. In other words, the benchmark is not just larger for its own sake; its diversity is part of the measurement, because robustness across domains is what you would want from a real assistant. A key design decision is to evaluate on production websites while blocking only the final submission request through a lightweight interception layer. This preserves the real complexity of the web experience without causing side effects like placing an order, sending an application, or booking an appointment. The idea is to separate “can the agent complete the task?” from “should the system actually commit the action?” That makes the Evaluation Protocol safer while keeping the task environment faithful enough to expose the same failure modes users would encounter in practice. This is much closer to real deployment than a sanitized sandbox. The main empirical result is sobering: even frontier models complete only a minority of tasks, and Claude Sonnet 4.6 reaches 33.3% on the benchmark. That number should be read as evidence that current agents still struggle with reliable end-to-end execution on real websites, especially when tasks require long-horizon control and precise writing. The broader paper uses this result to argue that progress on ClawBench is meaningful precisely because it measures a capability gap that offline benchmarks can hide.</p>
+        <p>The evaluation protocol is designed to judge agent success by comparing the agent’s entire trajectory against a human reference, not just by inspecting the final webpage or final state. That matters because many online tasks can reach a superficially correct end state through invalid intermediate actions, accidental side effects, or brittle shortcuts that would not generalize. The paper therefore treats the task as a sequence of evidence-bearing steps and aligns the agent’s recorded behavior with a human annotator’s five-layer recording. Those layers include synchronized signals such as session replay, screenshots, HTTP traffic, browser actions, and agent messages, which together provide a richer basis for deciding whether the agent actually executed the intended procedure. A key design choice is to evaluate the task instruction, the reference payloads, and the executed actions jointly. The instruction defines the goal, the reference payloads specify what counts as the relevant target content or expected outcome, and the executed actions show how the agent attempted to satisfy the goal. Using only one of these would be underdetermined: the final state may be ambiguous without the instruction, while the instruction alone does not reveal whether the agent reached the right destination through valid steps. By combining all three, the evaluator can check both semantic correctness and procedural fidelity. This is the same basic logic behind the paper’s Agentic Evaluator setup: the evaluator is not merely a classifier over outcomes, but an evidence-based judge that reasons over a trajectory. The protocol explores three evaluator designs operating over different subsets of the recorded data. The motivation is modality tradeoff: some tasks are best assessed from visual evidence, others from network or action traces, and some need message-level context to interpret intent. Rather than assuming one modality is always sufficient, the paper compares designs to see which evidence stream best supports robust judgment. The structured rubric then produces a binary verdict for success or failure, while also generating a step-level explanation. Conceptually, this is a two-level output: the verdict answers “did the agent complete the task?”, and the explanation answers “where in the trajectory did the evidence support or contradict completion?” That decomposition is important for Scoring, because it makes the evaluation auditable rather than opaque. This section connects directly to the paper’s broader emphasis on reproducible, interpretable benchmarking. The Reproducibility Controls ensure the recorded trajectories are synchronized and comparable across runs, which is essential if the evaluator is comparing stepwise evidence rather than only checking the end state. The Metrics section then uses these binary judgments and explanations to summarize performance across tasks and evaluator variants. In effect, the protocol turns messy browser-agent behavior into a standardized evaluation object: a human reference trajectory, an agent trajectory, and a rubric-driven comparison between them.</p>
         
       </div>
 
@@ -534,7 +534,7 @@
       
 
       
-      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+      <a class="up-control" href="../13-summary/index.html" aria-label="Back to section summary">
         <span class="up-arrow">↑</span>
         <span class="up-label">Back to summary</span>
       </a>
@@ -543,7 +543,7 @@
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Section 1 deeper explanation
+    Section 13 deeper explanation
   </p>
 
   <script>
