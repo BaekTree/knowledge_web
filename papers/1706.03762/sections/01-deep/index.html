@@ -406,15 +406,11 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../01-summary/index.html">01 12
-
-Attention Visualizations</a>
+        <a class="brief-index-link is-active" href="../01-summary/index.html">01 12</a>
       </li>
       
       <li>
-        <a class="brief-index-link" href="../02-summary/index.html">02 2
-
-Figure 1 The Transformer - model architecture</a>
+        <a class="brief-index-link" href="../02-summary/index.html">02 2</a>
       </li>
       
       <li>
@@ -422,9 +418,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../04-summary/index.html">04 3
-
-Scaled Dot-Product Attention</a>
+        <a class="brief-index-link" href="../04-summary/index.html">04 3</a>
       </li>
       
       <li>
@@ -463,18 +457,6 @@
         <a class="brief-index-link" href="../13-summary/index.html">13 References</a>
       </li>
       
-      <li>
-        <a class="brief-index-link" href="../14-summary/index.html">14 12</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../15-summary/index.html">15 2</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../16-summary/index.html">16 3</a>
-      </li>
-      
     </ol>
   </nav>
 
@@ -484,14 +466,13 @@
 
       <p class="eyebrow">Section 1 deeper explanation</p>
       
-      <h1 class="section-title">12
-
-Attention Visualizations</h1>
+      <h1 class="section-title">12</h1>
       
 
       <div class="deeper-copy">
         
-        <p>This section uses attention heatmaps to show what different heads in the Transformer are actually learning. The key idea is that each head assigns weights from one token to other tokens in the sentence, and those weights can reveal linguistic relationships such as long-distance dependencies and anaphora resolution. In Figure 3, several heads in the encoder’s fifth layer focus on the word “making” and attend strongly to “difficult,” showing that self-attention can connect words that are far apart in the sequence even when the dependency spans many intervening tokens. In Figures 4 and 5, other heads appear to track pronouns like “its” back to their antecedents or to capture sentence structure more generally.</p>
+        <p>Attention Visualizations</p>
+<p>This section uses attention heatmaps to show what different heads in the Transformer are actually learning. The key idea is that each head assigns weights from one token to other tokens in the sentence, and those weights can reveal linguistic relationships such as long-distance dependencies and anaphora resolution. In Figure 3, several heads in the encoder’s fifth layer focus on the word “making” and attend strongly to “difficult,” showing that self-attention can connect words that are far apart in the sequence even when the dependency spans many intervening tokens. In Figures 4 and 5, other heads appear to track pronouns like “its” back to their antecedents or to capture sentence structure more generally.</p>
 <p>The design point here is not that every head has a single human-interpretable role, but that the multi-head setup encourages specialization. Different heads can focus on different syntactic or semantic relations at the same time, which is one reason the model can represent rich structure without recurrence or convolution. The authors include these visualizations to argue that attention is not only effective for prediction, but also mechanically well-suited to modeling language relationships that depend on context across long distances. The sharpness of some heads, especially for pronoun resolution, suggests that the learned attention distributions are often selective rather than diffuse.</p>
 <p>This section connects to the next part of the paper by reinforcing the core claim that attention alone is sufficient for sequence modeling. After showing qualitative evidence that heads discover useful structure, the paper moves on to summarize the experimental results and performance comparisons. In other words, the visualizations provide intuition for why the architecture works before the paper turns to quantitative validation.</p>
         

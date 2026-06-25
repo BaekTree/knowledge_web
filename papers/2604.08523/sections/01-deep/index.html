@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GM installs robots at flagship EV factory after laying off 1,300 workers — Article Study</title>
+  <title>ClawBench: Can AI Agents Complete Everyday Online Tasks? — Article Study</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -383,25 +383,16 @@
 </head>
 <body
   data-prev-summary=""
-  data-next-summary="sections/01-summary/index.html"
+  data-next-summary=""
   data-deep-page=""
-  data-up-page=""
+  data-up-page="../01-summary/index.html"
 >
   <div class="chrome">
-    <a class="home-link" href="../../index.html">All papers</a>
-    <div class="paper-meta web-meta">
-      <div><a class="paper-root-link" href="./index.html">GM installs robots at flagship EV factory after laying off 1,300 workers</a></div>
+    <a class="home-link" href="../../../../index.html">All papers</a>
+    <div class="paper-meta">
+      <div><a class="paper-root-link" href="../../index.html">ClawBench: Can AI Agents Complete Everyday Online Tasks?</a></div>
       
-      <div class="source-site">Ars Technica</div>
-      
-      <div class="source-author">Author unavailable</div>
-      
-      
-      <div class="source-date">June 22, 2026</div>
-      
-      
-      <div><a class="source-url" href="https://arstechnica.com/ai/2026/06/gm-installs-robots-at-flagship-ev-factory-after-laying-off-1300-workers/">https://arstechnica.com/ai/2026/06/gm-installs-robots-at-flagship-ev-factory-after-laying-off-1300-workers/</a></div>
-      
+      <div>arXiv:2604.08523</div>
       
     </div>
   </div>
@@ -411,15 +402,11 @@
     <ol class="brief-index-list">
       
       <li>
-        <a class="brief-index-link is-active" href="index.html">Top</a>
+        <a class="brief-index-link" href="../../index.html">Top</a>
       </li>
       
       <li>
-        <a class="brief-index-link" href="sections/01-summary/index.html">01 Article</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="sections/02-summary/index.html">02 Dark factory rising</a>
+        <a class="brief-index-link is-active" href="../01-summary/index.html">01 Sites</a>
       </li>
       
     </ol>
@@ -428,52 +415,39 @@
   <main class="viewport" id="viewport">
     <article class="page-card">
       
-      <nav class="summary-nav top" aria-label="Summary navigation">
-        
-        <span class="summary-nav-spacer" aria-hidden="true"></span>
-        
-        
-        <a class="summary-nav-link next" href="sections/01-summary/index.html" aria-label="Next summary page">
-          <span class="summary-nav-label">Next</span>
-          <span aria-hidden="true">→</span>
-        </a>
-        
-      </nav>
+
+      <p class="eyebrow">Section 1 deeper explanation</p>
+      
+      <h1 class="section-title">Sites</h1>
       
 
-      <p class="eyebrow">Top level intuition</p>
-      
-
-      <div class="root-intuition">
+      <div class="deeper-copy">
         
-        <p>It is showing how General Motors is using robots at its flagship EV factory while cutting more than 1,000 jobs, and framing that as a real-world test of what automation means for workers. It matters because this is not just about faster assembly lines; it is about who keeps a paycheck when a company swaps people for machines in the middle of a shaky EV market. The key insight is that the robots are not appearing as neutral helpers, but as part of a cost-cutting strategy that changes the balance of power on the factory floor. In other words, the article treats the plant as a small version of a much bigger fight over whether technology lifts workers up or quietly pushes them aside.</p>
+        <p>ClawBench's core innovation is targeting <em>state-changing web tasks</em>—the operations users actually perform online—evaluated against real websites rather than sandboxed simulators. Unlike prior benchmarks that use offline recordings or synthetic environments, ClawBench captures objective ground truth through HTTP request interception: every form submission, purchase attempt, or application generates a measurable payload that agents must produce correctly. This design choice reflects a critical insight: testing whether an agent can <em>interact</em> with the web requires observing what the web actually receives, not just what the agent <em>intended</em> to do. By requiring tasks to be completable today (filtering for paid services and geographically restricted sites), ClawBench prioritizes ecological validity—testing agents against authentic complexity they'll encounter in deployment—over artificial reproducibility.</p>
+<p>The benchmark is grounded in human-annotated reference trajectories. Every one of the 153 tasks was executed end-to-end by human annotators who recorded both <em>how</em> they completed the task (the sequence of clicks, form fills, and navigation) and <em>what</em> they submitted to the server (the exact HTTP request body). This dual capture serves two purposes: it creates a ground-truth target for evaluation, and it enables the interception mechanism itself—by logging the expected submission specification, the Chrome DevTools Protocol can reliably distinguish the terminal submission from intermediate HTTP noise. The categorization into eight groups and fifteen fine-grained categories ensures coverage across realistic use-cases: booking travel, managing finances, applying for jobs, social interactions, and academic tasks.</p>
+<p>The data capture layer is deceptively sophisticated: beyond recording the intercepted submission, ClawBench generates five <em>synchronized</em> behavioral channels for every agent run—video, per-step screenshots, full HTTP logs with timing, reasoning traces in JSON, and low-level events like keystrokes and scrolls. This redundancy is intentional. The screenshots enable human review and side-by-side comparison with reference trajectories; the HTTP logs preserve what the server saw (independent of agent claims); the reasoning traces reveal agent decision-making. By blocking requests at the HTTP level after logging, ClawBench observes real-world website complexity—how sites respond to partially-filled forms, what errors they return, how they handle concurrent requests—without causing financial charges or permanently altering accounts. It's a form of "ecological validity under sandbox constraints": agents navigate authentic websites but with a safety valve that prevents permanent side effects.</p>
+<p>Evaluation uses an agentic evaluator—a Claude Code instance following a fixed rubric—to perform step-level alignment: mapping agent actions to reference actions, detecting divergences, and verifying that required fields and actions were correct. The success metric is formalized as \( \text{Success Rate} = \frac{1}{|T|} \sum_t \text{Score}(t) \), where \( \text{Score}(t) \in \{0, 1\} \) for each task—a simple binary: did the agent produce a submission payload matching the reference? The formula's bluntness is a deliberate design choice. Rather than partial credit for "almost correct" submissions, ClawBench imposes binary judgment, because in real applications, a form submission that's 95% correct still fails authentication or payment processing. However, the rubric includes pragmatic rules: if all prior agent actions are correct and the failure is due to the interception system or verification blocks, the task scores as PASS. This prevents penalizing agents for infrastructure constraints beyond their control, focusing measurement on decision-making rather than environmental brittleness.</p>
+<p>This evaluation infrastructure directly enables the benchmark's comparative mission: by capturing complete trajectories and applying consistent scoring, ClawBench can rank model capabilities across task categories and identify systematic weaknesses. The results—Claude Sonnet 4.6 at 33.3% vs. GPT-5.4 at 6.5%—reveal that current models struggle with compound web tasks, and that performance varies sharply across categories, suggesting future work should focus on specific affordances (e-commerce flows, form-filling in novel interfaces, sequential decision-making under uncertainty) rather than uniform improvements.</p>
         
       </div>
 
       
 
       
-      <nav class="summary-nav bottom" aria-label="Summary navigation">
-        
-        <span class="summary-nav-spacer" aria-hidden="true"></span>
-        
-        
-        <a class="summary-nav-link next" href="sections/01-summary/index.html" aria-label="Next summary page">
-          <span class="summary-nav-label">Next</span>
-          <span aria-hidden="true">→</span>
-        </a>
-        
-      </nav>
-      
 
       
 
+      
+      <a class="up-control" href="../01-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
       
     </article>
   </main>
 
   <p class="screen-reader-hint" aria-live="polite" id="page-status">
-    Top level intuition
+    Section 1 deeper explanation
   </p>
 
   <script>

@@ -406,15 +406,11 @@
       </li>
       
       <li>
-        <a class="brief-index-link" href="../01-summary/index.html">01 12
-
-Attention Visualizations</a>
+        <a class="brief-index-link" href="../01-summary/index.html">01 12</a>
       </li>
       
       <li>
-        <a class="brief-index-link" href="../02-summary/index.html">02 2
-
-Figure 1 The Transformer - model architecture</a>
+        <a class="brief-index-link" href="../02-summary/index.html">02 2</a>
       </li>
       
       <li>
@@ -422,9 +418,7 @@
       </li>
       
       <li>
-        <a class="brief-index-link is-active" href="../04-summary/index.html">04 3
-
-Scaled Dot-Product Attention</a>
+        <a class="brief-index-link is-active" href="../04-summary/index.html">04 3</a>
       </li>
       
       <li>
@@ -463,18 +457,6 @@
         <a class="brief-index-link" href="../13-summary/index.html">13 References</a>
       </li>
       
-      <li>
-        <a class="brief-index-link" href="../14-summary/index.html">14 12</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../15-summary/index.html">15 2</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../16-summary/index.html">16 3</a>
-      </li>
-      
     </ol>
   </nav>
 
@@ -484,14 +466,13 @@
 
       <p class="eyebrow">Section 4 deeper explanation</p>
       
-      <h1 class="section-title">3
-
-Scaled Dot-Product Attention</h1>
+      <h1 class="section-title">3</h1>
       
 
       <div class="deeper-copy">
         
-        <p>This section introduces the Transformer’s core mechanism: attention. In scaled dot-product attention, the model compares a query against all keys, turns those similarity scores into a probability distribution with softmax, and uses the resulting weights to blend the values. The key formula is <code>softmax(QK^T / sqrt(dk))V</code>. The <code>sqrt(dk)</code> factor is not cosmetic: without it, large key/query dimensions can make dot products too large, which pushes softmax into saturated regions and weakens gradients. The authors also contrast this with additive attention, noting that dot-product attention is simpler and much faster in practice because it maps well to optimized matrix multiplication.</p>
+        <p>Scaled Dot-Product Attention</p>
+<p>This section introduces the Transformer’s core mechanism: attention. In scaled dot-product attention, the model compares a query against all keys, turns those similarity scores into a probability distribution with softmax, and uses the resulting weights to blend the values. The key formula is <code>softmax(QK^T / sqrt(dk))V</code>. The <code>sqrt(dk)</code> factor is not cosmetic: without it, large key/query dimensions can make dot products too large, which pushes softmax into saturated regions and weakens gradients. The authors also contrast this with additive attention, noting that dot-product attention is simpler and much faster in practice because it maps well to optimized matrix multiplication.</p>
 <p>The next step is multi-head attention, which improves on a single attention operation by projecting queries, keys, and values into several smaller subspaces and running attention in parallel. Each head can focus on different kinds of relationships, so the model is not forced to compress all interactions into one similarity space. After the head outputs are concatenated, a final linear projection combines them. The paper uses 8 heads with reduced per-head dimensions, which keeps the total compute roughly comparable to single-head attention while increasing expressiveness. This section also explains where attention is used: encoder-decoder attention links the decoder to the encoded input, encoder self-attention lets each source position interact with all others, and decoder self-attention uses masking so predictions cannot peek at future tokens.</p>
 <p>This attention machinery sets up the rest of the Transformer. Since attention alone does not encode order, the paper adds positional encodings to token embeddings, using sine and cosine waves at multiple frequencies. The choice is deliberate: fixed encodings preserve sequence order without recurrence, and their smooth, structured form may help the model generalize to longer sequences. Together, attention plus positional encoding forms the basic layer stack that the later model architecture and training results build on.</p>
         
