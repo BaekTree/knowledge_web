@@ -440,11 +440,11 @@
 
       <div class="root-intuition">
         
-        <p><strong>TL;DR:</strong> SpatialClaw helps AI understand 3D spatial relationships by writing and executing Python code on the fly, adapting as it goes, rather than committing to one strategy upfront.</p>
+        <p><strong>TL;DR:</strong> SpatialClaw turns spatial reasoning into a step-by-step coding workflow, letting an agent inspect 3D and 4D scenes with more freedom than fixed tool calls.</p>
 <ul>
-<li><strong>Problem:</strong> AI systems that understand images and language struggle to reason about spatial relationships—where objects are, how they relate, and how they move in 3D.</li>
-<li><strong>Insight:</strong> Instead of rigid tool commands or one-shot analysis, the AI writes executable Python code one step at a time in a live kernel, responding to what it learns along the way.</li>
-<li><strong>Why it matters:</strong> This simple interface change boosts spatial reasoning accuracy by 11+ percentage points and works reliably across different AI models without needing custom tuning for each one.</li>
+<li><strong>Problem:</strong> Vision-language models still struggle to figure out where objects are, how they relate, and how they move in space.</li>
+<li><strong>Insight:</strong> The key idea is to use a stateful Python kernel as the action interface so each new step can build on prior outputs and mix perception and geometry tools flexibly.</li>
+<li><strong>Why it matters:</strong> This gives spatial agents a stronger, training-free way to handle complex visual reasoning tasks and improves results across many benchmarks and model backbones.</li>
 </ul>
         
       </div>

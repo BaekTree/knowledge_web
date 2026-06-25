@@ -430,11 +430,10 @@
 
       <div class="deeper-copy">
         
-        <p>I can't write a meaningful explanation based on what you've provided. The "Full section text" is just a single line of code:</p>
-<pre><code class="language-python">fi_fire = seg_fireplace.frame_indices[0] # &lt;-- ERROR
-</code></pre>
-<p>This isn't enough context to explain the section's main ideas, design decisions, intuition, or connections to the broader paper. A full research paper section would typically be several paragraphs describing concepts, methodology, and reasoning.</p>
-<p>Could you provide the complete section text from the paper? I'll need the full paragraph(s) that make up this section to write an accurate technical explanation.</p>
+        <p>This fragment is not doing heavy computation itself; it is extracting one piece of structured perception output. <code>seg_fireplace</code> is presumably the result of a segmentation or grounding primitive applied to the preloaded input frames, and <code>frame_indices</code> records which frames contain the detected fireplace. The assignment <code>fi_fire = seg_fireplace.frame_indices[0]</code> selects the first matching frame, which is a compact way to anchor the object in the input stream before doing any further reasoning.</p>
+<p>The key technical idea is that SpatialClaw exposes perception results as manipulable Python objects rather than opaque tool responses. That matters because the agent is not just asking “where is the fireplace?” but is operating on a returned data structure that can be indexed, filtered, and combined with later steps. Choosing the first index is a deliberate interface decision: it gives the agent a deterministic representative frame to continue reasoning from, which is often enough when the goal is to establish existence, temporal position, or a starting point for follow-up spatial analysis.</p>
+<p>The commented <code># &lt;-- ERROR</code> hints at a common failure mode in this style of agentic pipeline. If the segmentation module returns no detections, or if <code>frame_indices</code> is empty, direct indexing will crash. That is why robust code in this framework usually needs guards such as checking whether a detection exists before dereferencing it, or falling back to another hypothesis. In other words, the section illustrates both the power and the fragility of code-based action: the agent gains fine-grained control, but it also inherits standard programming failure cases that structured tool calls often hide.</p>
+<p>In the broader paper, this example supports the central thesis that the action interface shapes spatial reasoning quality. SpatialClaw favors executable code because spatial tasks often require intermediate inspection, branching logic, and reuse of partial results across frames. A single line like this shows how the agent can turn perception output into a concrete state variable, then build more complex reasoning on top of it instead of committing to a fixed one-shot plan.</p>
         
       </div>
 

@@ -445,7 +445,12 @@
 
       <div class="section-summary">
         
-        <p>This section demonstrates how spatial reasoning systems fail with naive object tracking by showing a code error when accessing frame indices for detected objects. The error illustrates why simple indexing breaks when objects appear across multiple input images. This concrete failure motivates SpatialClaw's improved spatial interface that robustly handles multi-image object references and cross-frame tracking.</p>
+        <ul>
+<li>Extracts the first frame index where the fireplace segmentation appears, intending to anchor the object to an input image frame.</li>
+<li>Exists to translate a spatial reference from the segmentation output into a concrete image index the downstream pipeline can use.</li>
+<li>Sets up the claim that object presence can be resolved directly from visual inputs, without needing a higher-level scene description.</li>
+<li>The inline <code># &lt;-- ERROR</code> marks this line as a failure point, suggesting the paper is probing or illustrating a brittle frame-selection assumption.</li>
+</ul>
         
       </div>
 

@@ -445,7 +445,13 @@
 
       <div class="section-summary">
         
-        <p>This section introduces 3D reconstruction from input images, converting camera observations into structured spatial representations. The key claim is that accurate geometric reconstruction is foundational—enabling the agent to reason about spatial relationships and execute actions in realistic 3D environments.</p>
+        <ul>
+<li>Turns the input images into a reconstructed 3D representation using a dedicated <code>Reconstruct</code> tool.</li>
+<li>Sets up the spatial substrate the rest of the method needs, so later reasoning happens over a geometry-aware scene rather than raw pixels.</li>
+<li>Answers the question: how do we obtain a usable 3D scene state from multi-view observations?</li>
+<li>Claims that explicit reconstruction is a necessary first step for agentic spatial reasoning because it exposes structure, depth, and object layout in a form the agent can act on.</li>
+<li>Positions the pipeline as tool-driven rather than purely end-to-end, emphasizing an interface that can separate perception from downstream reasoning.</li>
+</ul>
         
       </div>
 
