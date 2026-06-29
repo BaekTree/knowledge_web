@@ -563,7 +563,13 @@
 
       <div class="section-summary">
         
-        <p>This section traces how Self-Harness changes each model’s harness from initial proposals to the final promoted version, showing which edits survive validation and why. It answers how the system improves rather than just whether it does: through a few targeted, failure-driven edits that raise pass rates by fixing each model’s specific execution pathologies, especially around artifacts, tool failures, and exploration-to-implementation transitions.</p>
+        <ul>
+<li>Shows how Self-Harness changes over time by contrasting accepted vs rejected proposals and the code edits that survive into the final promoted harness.</li>
+<li>Sets up the paper’s core question for this stage: whether the system reaches better performance through a smooth sequence of improvements or through a few validation-gated, model-specific fixes.</li>
+<li>Claims that performance gains come from targeted edits tied to concrete failures, not generic iteration: missing artifacts, schema/tool-content issues, stalled loops, retry discipline, and tool-error handling.</li>
+<li>Argues for a shared pattern across models around artifact reliability, while showing that each model needs different adaptations based on its own failure mode.</li>
+<li>Establishes that Self-Harness can diagnose those failures and select effective harness changes that improve behavior for MiniMax M2.5, Qwen3.5, and GLM-5.</li>
+</ul>
         
       </div>
 

@@ -563,7 +563,13 @@
 
       <div class="section-summary">
         
-        <p>This section lays out the core self-improvement loop: the current harness is executed, recurring failure patterns are mined from traces, and the same model proposes small, targeted harness edits that are regression-tested before adoption. It exists to answer how a fixed model can improve its own harness without wholesale redesign, and its key claim is that evidence-driven, minimal revisions can steadily raise performance while controlling regressions.</p>
+        <ul>
+<li>Introduces Self-Harness as a closed-loop method where a fixed model improves its own harness using execution evidence rather than manual redesign or broad search.</li>
+<li>Explains the pipeline: run the current harness, cluster repeated failure traces, and turn those patterns into structured evidence about what is going wrong.</li>
+<li>Sets up the core question the paper answers: can the same model act as both analyzer and proposer to refine harness behavior in a targeted way?</li>
+<li>Claims that proposed edits should be diverse but minimal, each aimed at a specific failure mechanism while preserving the overall control architecture.</li>
+<li>Establishes the acceptance rule: only harness changes that improve held-out performance without unacceptable regressions are promoted.</li>
+</ul>
         
       </div>
 

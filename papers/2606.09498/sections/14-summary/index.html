@@ -563,7 +563,12 @@
 
       <div class="section-summary">
         
-        <p>This section defines the evaluation protocol for Self-Harness by splitting the fixed task set into held-in and held-out portions before any harness runs. It sets up the paper’s central measurement question: whether harness improvements generalize beyond the data shown to the proposer. The key claim is that fixed splits and fresh environments isolate gains to harness changes, not task leakage.</p>
+        <ul>
+<li>Fixes the task set and splits it into held-in and held-out parts before Self-Harness runs.</li>
+<li>Uses the held-in split to expose trajectories, verifier results, and failure evidence to the proposer.</li>
+<li>Keeps the held-out split hidden from the proposer and reserves it for the automatic promotion gate.</li>
+<li>Freezes split assignments across harness variants and resets each task in a fresh environment so gains reflect harness changes, not data leakage or carryover.</li>
+</ul>
         
       </div>
 

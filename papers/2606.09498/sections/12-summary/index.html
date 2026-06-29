@@ -563,7 +563,13 @@
 
       <div class="section-summary">
         
-        <p>This section defines the experimental models and the fairness setup for the paper’s comparisons. It asks whether Self-Harness helps when the base model is held constant, and sets up a controlled within-model test. The key claim is that only the harness changes, while model capability, decoding, tools, environment, and evaluator stay fixed.</p>
+        <ul>
+<li>Evaluates Self-Harness on three fixed base models: MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5.</li>
+<li>Uses the same model across all harness variants and also during the proposal stage, so model capability is held constant.</li>
+<li>Keeps decoding, budget, tools, benchmark environment, and evaluator unchanged to make the comparison strictly within-model.</li>
+<li>Sets up a clean test of whether gains come from the harness itself rather than from better models or a different evaluation protocol.</li>
+<li>Claims that any observed differences can be attributed to Self-Harness variation, isolating the harness effect.</li>
+</ul>
         
       </div>
 

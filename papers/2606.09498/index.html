@@ -558,11 +558,11 @@
 
       <div class="root-intuition">
         
-        <p><strong>TL;DR:</strong> Self-Harness lets a language model improve the agent harness that controls it by turning its own failure traces into small, tested code changes.</p>
+        <p><strong>TL;DR:</strong> Self-Harness shows that an LLM agent can improve its own operating instructions by reading its failures, proposing small fixes, and keeping only the ones that pass tests.</p>
 <ul>
-<li><strong>Problem:</strong> Human-built harnesses do not scale because different models fail in different ways and keep changing.</li>
-<li><strong>Insight:</strong> The paper shows that a model can mine its own execution mistakes, propose minimal fixes, and keep only the changes that pass regression tests.</li>
-<li><strong>Why it matters:</strong> This points to a practical way for agents to get better with less manual tuning, so harnesses can adapt as models evolve.</li>
+<li><strong>Problem:</strong> Human-built agent harnesses do not scale well because different models fail in different ways and need different guidance.</li>
+<li><strong>Insight:</strong> The key idea is to turn execution traces into model-specific harness edits through a propose-test-accept loop.</li>
+<li><strong>Why it matters:</strong> This matters because it lets agents adapt their own control layer instead of waiting for humans to hand-tune every model. </li>
 </ul>
         
       </div>

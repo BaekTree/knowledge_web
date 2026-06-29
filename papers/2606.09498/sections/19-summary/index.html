@@ -563,7 +563,13 @@
 
       <div class="section-summary">
         
-        <p>This section closes the paper by answering whether a fixed model can improve the harness that shapes its behavior. It claims Self-Harness makes harness editing an empirical, evidence-backed state transition: bounded proposals are accepted only when they improve benchmark results without regressions, and the retained edits are small, auditable, and reversible. It also sets up the main limitation and future direction: the method works for constrained harness refinement, not open-ended self-improvement.</p>
+        <ul>
+<li>Summarizes Self-Harness as a propose-evaluate-accept loop for improving a fixed model’s own harness through bounded edits and regression-gated promotion.</li>
+<li>Sets up the paper’s main question: can harness behavior improve as an empirical state transition rather than by changing the model itself?</li>
+<li>Claims the experiments show consistent Pass (%) gains on Terminal-Bench-2.0 across backends while preserving held-in and held-out performance under the acceptance rule.</li>
+<li>Emphasizes that the accepted edits are small, auditable changes driven by execution traces and benchmark validation, not broad or open-ended self-improvement.</li>
+<li>Clarifies the limits and takeaway: this is benchmark-bounded harness refinement, and future self-improvement should remain grounded in behavioral evidence and reversible testing.</li>
+</ul>
         
       </div>
 

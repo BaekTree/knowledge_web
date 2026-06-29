@@ -563,7 +563,12 @@
 
       <div class="section-summary">
         
-        <p>This section defines the exact Terminal-Bench-2.0 evaluation setup used in the paper, including the Harbor execution environment, machine limits, concurrency settings, and resource mirroring policy. It exists to show that results are measured under a controlled, reproducible benchmark condition, while filtering out cases where network instability or unsupported multimodal inputs would confound agent performance.</p>
+        <ul>
+<li>Sets up the exact Terminal-Bench-2.0 evaluation environment used in the paper: Harbor, isolated hardware, and network limits.</li>
+<li>Explains the benchmark controls needed to make results comparable and to separate agent quality from infrastructure noise.</li>
+<li>Claims the authors use fixed concurrency levels that differ by backend, reflecting how they run MiniMax M2.5, GLM-5, and local Qwen3.5-35B-A3B.</li>
+<li>States they mirror slow but stable external resources and exclude unreliable or multimodal tasks to keep the 64-case benchmark focused on the core terminal-interaction setting.</li>
+</ul>
         
       </div>
 

@@ -563,7 +563,13 @@
 
       <div class="section-summary">
         
-        <p>This section reports the core performance results for Self-Harness promotion on Terminal-Bench-2.0, answering whether self-edited harnesses actually improve execution quality. It shows that promoted harnesses improve or at least preserve Pass on both held-in and held-out splits across all backends, supporting the claim that reusable harness edits can generalize without sacrificing regression safety.</p>
+        <ul>
+<li>Reports Terminal-Bench-2.0 performance before vs. after Self-Harness promotion across MiniMax M2.5, Qwen3.5, and GLM-5 on held-in and held-out splits.</li>
+<li>Answers whether harness-level edits actually improve benchmark outcomes when the backend, tools, budget, environment, and evaluator are held fixed.</li>
+<li>Shows promoted harnesses improve or preserve Pass (%) on both splits, with no promoted harness degrading either split.</li>
+<li>Claims the gains are substantial in absolute and relative terms, including strong held-out improvements, so the edits generalize beyond the failures used to generate proposals.</li>
+<li>Sets up the paper’s core argument that Self-Harness should promote reusable execution-mechanism changes, with the regression gate preventing overfit improvements from shipping.</li>
+</ul>
         
       </div>
 

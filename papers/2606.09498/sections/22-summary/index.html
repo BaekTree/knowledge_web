@@ -560,7 +560,13 @@
 
       <div class="section-summary">
         
-        <p>This section turns failed runs into structured evidence for improving the harness: it runs the fixed model, records verifier outcomes and traces, then clusters only failed cases by exact failure signatures. It exists to answer which reusable weaknesses recur and what harness-level intervention they suggest, while separating verifier rejection from underlying agent mechanism.</p>
+        <ul>
+<li>Runs the fixed model and current harness on a held-in split, then turns each failed execution into a trace record with task, trace, output, and evaluator outcome.</li>
+<li>Isolates failed cases and clusters them by exact verifier-grounded failure signatures: terminal verifier cause, causal status of the agent behavior, and the abstract mechanism exposed by the trace.</li>
+<li>Exits the question of whether failures can be treated as individual anecdotes by showing they should instead be aggregated into reusable failure patterns.</li>
+<li>Claims the clustering is deterministic and grounded in evaluator evidence, so similar verifier outcomes are only grouped when they reflect the same underlying behavioral mechanism.</li>
+<li>Produces an evidence bundle of ranked failure patterns, which sets up the proposer to choose targeted harness edits without conflating verifier-level failure with agent-level weakness.</li>
+</ul>
         
       </div>
 

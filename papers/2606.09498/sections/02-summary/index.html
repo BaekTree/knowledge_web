@@ -563,7 +563,13 @@
 
       <div class="section-summary">
         
-        <p>This section frames the paper’s core problem: an agent’s performance depends on its harness, not just its base model, and hand-tuning harnesses does not scale across rapidly changing models. It introduces Self-Harness as an internal improvement loop that learns from execution traces, proposes targeted harness edits, and validates them with regression tests, claiming consistent gains across multiple models and better generalization to unseen tasks.</p>
+        <ul>
+<li>Frames the harness as a core determinant of agent performance, separate from the base model, and argues that current harnesses are mostly human-built and increasingly hard to tune model by model.</li>
+<li>Introduces Self-Harness as the paper’s main idea: an agent improving the harness that governs its own operation, rather than relying on stronger external systems or manual engineering.</li>
+<li>Sets up the paper’s question: can behavioral evidence from execution be turned into targeted harness edits that improve the same model on future tasks?</li>
+<li>Describes the three-stage improvement loop used throughout the paper: mine failures from traces, propose minimal harness changes tied to those failures, and validate them with regression tests before promoting them.</li>
+<li>States the main empirical claim: across three base models on Terminal-Bench-2.0, Self-Harness consistently improves both held-in and held-out performance, with model-specific qualitative edits that generalize beyond simple prompt expansion.</li>
+</ul>
         
       </div>
 

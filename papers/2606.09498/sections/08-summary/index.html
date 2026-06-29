@@ -563,7 +563,13 @@
 
       <div class="section-summary">
         
-        <p>This section defines how Self-Harness turns recurring failures into several candidate harness edits using the same model in a bounded proposer role. It exists to answer how the system explores improvements without unconstrained search: by targeting evidence-backed, editable failure mechanisms, generating diverse branches, and keeping each edit minimal and interpretable.</p>
+        <ul>
+<li>Translates recurring failure evidence into candidate harness edits using the same fixed model in a bounded proposer role</li>
+<li>Exists to answer how Self-Harness turns verifier-grounded failure patterns into concrete improvement proposals before selection</li>
+<li>Proposes K mutually distinct branches, each tied to one primary failure mechanism and one editable harness surface</li>
+<li>Filters out weakly supported or non-addressable failure clusters instead of forcing a patch for every error pattern</li>
+<li>Enforces diversity across branches while keeping each edit minimal, localized, and regression-aware</li>
+</ul>
         
       </div>
 

@@ -563,7 +563,7 @@
 
       <div class="section-summary">
         
-        <p>This section defines how a proposed harness edit is validated before adoption: the candidate is evaluated on both held-in and held-out splits and compared against the current harness. It answers how the system avoids brittle self-improvement, claiming that only edits that improve one split without hurting the other, and that survive repeated evaluation and execution checks, are promoted.</p>
+        <p>This section defines how candidate harness edits are validated before adoption: each proposal is treated as a new harness variant, evaluated on held-in and held-out splits, and accepted only if it improves at least one split without degrading the other. It exists to answer how self-improvement can be made robust rather than opportunistic, by separating evidence-following gains from regressions on unseen behaviors. The key claims are that promotion is conservative, stochastic evaluations are repeated and aggregated before decision-making, compatible accepted edits can be merged in the same round, and failed or non-editing proposals are rejected while remaining auditable in the harness lineage.</p>
         
       </div>
 

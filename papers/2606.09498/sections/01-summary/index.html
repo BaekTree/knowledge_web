@@ -563,7 +563,13 @@
 
       <div class="section-summary">
         
-        <p>This section frames the paper’s central problem: harnesses strongly affect agent performance, but today they are hand-designed and model-specific. It introduces Self-Harness, where an agent iteratively mines its own failures, proposes minimal harness edits, and validates them with regression tests. The key claim is that this loop reliably improves multiple models and turns weaknesses into concrete harness changes.</p>
+        <ul>
+<li>Frames the core problem: harness design is a major part of agent performance, and it is model-specific, but current harnesses are mostly hand-engineered.</li>
+<li>Introduces Self-Harness, where an LLM-based agent iteratively improves its own harness without human engineers or stronger external agents.</li>
+<li>Sets up the paper’s main mechanism: Weakness Mining, Harness Proposal, and Proposal Validation form a loop that turns execution failures into minimal, testable harness edits.</li>
+<li>Claims strong empirical gains on Terminal-Bench-2.0 across three diverse base models, with large held-out pass-rate improvements in every case.</li>
+<li>Establishes the paper’s broader takeaway: agents can do more than adapt to their harnesses; they can help reshape them.</li>
+</ul>
         
       </div>
 
