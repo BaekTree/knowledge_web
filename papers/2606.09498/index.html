@@ -568,6 +568,189 @@
       </div>
 
       
+      <section class="key-information" aria-label="Key information">
+        <h2 class="key-information-title">Key information</h2>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Self-Harness mechanism</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div>Harnesses are the non-parametric scaffolding around a fixed model: instructions, tools, memory, verification, permissions, adapters, and runtime policies.</div>
+              
+              <figure class="key-information-figure">
+                
+                <img src="images/sh1.png" alt="Three paradigms of harness improvement. In human harness engineering, human engineers manually revise the agent harness. In Meta-Harness, a stronger external agent guides the improvement of a weaker target agent. In Self-Harness, the agent improves its own operating harness.">
+                
+                <figcaption class="figure-caption">
+                  sh1.png
+                   — Three paradigms of harness improvement. In human harness engineering, human engineers manually revise the agent harness. In Meta-Harness, a stronger external agent guides the improvement of a weaker target agent. In Self-Harness, the agent improves its own operating harness.
+                </figcaption>
+              </figure>
+              
+            </li>
+            
+            <li>
+              <div>Self-Harness improves that scaffolding through an iterative loop of weakness mining, harness proposal, and proposal validation.</div>
+              
+              <figure class="key-information-figure">
+                
+                <img src="images/sh-6-8-4.png" alt="Overview of one Self-Harness optimization loop. The model weights remain fixed while the surrounding harness evolves through bounded, automatically validated harness edits. Each candidate harness is evaluated by a fixed evaluation system, and the acceptance gate promotes a candidate only when it preserves both train and held-out gate performance while improving at least one split. Accepted candidates advance the lineage; rejected candidates are logged without changing the active harness.">
+                
+                <figcaption class="figure-caption">
+                  sh-6-8-4.pdf
+                   — Overview of one Self-Harness optimization loop. The model weights remain fixed while the surrounding harness evolves through bounded, automatically validated harness edits. Each candidate harness is evaluated by a fixed evaluation system, and the acceptance gate promotes a candidate only when it preserves both train and held-out gate performance while improving at least one split. Accepted candidates advance the lineage; rejected candidates are logged without changing the active harness.
+                </figcaption>
+              </figure>
+              
+            </li>
+            
+            <li>
+              <div>The model weights stay fixed; only bounded harness edits are proposed and tested before adoption.</div>
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Evaluation protocol</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div>Self-Harness evaluates each candidate on held-in and held-out splits to test diagnosis quality and regressions separately.</div>
+              
+            </li>
+            
+            <li>
+              <div>A candidate is accepted only if it improves at least one split without degrading the other split.</div>
+              
+            </li>
+            
+            <li>
+              <div>The benchmark is Terminal-Bench-2.0, using a 64-task subset filtered to remove unstable external dependencies and multimodal inputs.</div>
+              
+            </li>
+            
+            <li>
+              <div>Pass rate is the main metric, measured as the percentage of attempts that satisfy the benchmark verifier; each harness candidate is run twice.</div>
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Main results</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div>Self-Harness improves all three tested backends on Terminal-Bench-2.0, with relative gains reported in the 16% to 138% range.</div>
+              
+              <figure class="key-information-figure">
+                
+                <img src="images/pass_results.png" alt="Pass rates (\%) on Terminal-Bench-2.0 across MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. For each backend, bars compare the initial harness with the final harness produced by Self-Harness on the held-in split, held-out split, and overall set; annotations above the Self-Harness bars show relative gains over the corresponding initial harness.">
+                
+                <figcaption class="figure-caption">
+                  pass_results.pdf
+                   — Pass rates (\%) on Terminal-Bench-2.0 across MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. For each backend, bars compare the initial harness with the final harness produced by Self-Harness on the held-in split, held-out split, and overall set; annotations above the Self-Harness bars show relative gains over the corresponding initial harness.
+                </figcaption>
+              </figure>
+              
+            </li>
+            
+            <li>
+              <div>Final pass rates reached 53.9% for MiniMax M2.5, 36.7% for Qwen3.5-35B-A3B, and 57.0% for GLM-5, up from 42.2%, 20.3%, and 46.1%.</div>
+              
+              <figure class="key-information-figure">
+                
+                <img src="images/pass_results.png" alt="Pass rates (\%) on Terminal-Bench-2.0 across MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. For each backend, bars compare the initial harness with the final harness produced by Self-Harness on the held-in split, held-out split, and overall set; annotations above the Self-Harness bars show relative gains over the corresponding initial harness.">
+                
+                <figcaption class="figure-caption">
+                  pass_results.pdf
+                   — Pass rates (\%) on Terminal-Bench-2.0 across MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5. For each backend, bars compare the initial harness with the final harness produced by Self-Harness on the held-in split, held-out split, and overall set; annotations above the Self-Harness bars show relative gains over the corresponding initial harness.
+                </figcaption>
+              </figure>
+              
+            </li>
+            
+            <li>
+              <div>The gains hold on both held-in and held-out splits, indicating the edits generalize beyond the visible training traces.</div>
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">What the accepted edits changed</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div>Across models, the accepted harness edits mainly improved artifact reliability rather than model weights or benchmark-specific memorization.</div>
+              
+              <figure class="key-information-figure">
+                
+                <img src="images/harness_evolution.png" alt="Self-Harness evolution trajectory. Green markers denote accepted harness candidates and gray crosses denote rejected harness candidates. Step lines connect accepted candidates and keep performance flat across rejected iterations; the two accepted lineages meet at the final success-combined harness.">
+                
+                <figcaption class="figure-caption">
+                  harness_evolution.pdf
+                   — Self-Harness evolution trajectory. Green markers denote accepted harness candidates and gray crosses denote rejected harness candidates. Step lines connect accepted candidates and keep performance flat across rejected iterations; the two accepted lineages meet at the final success-combined harness.
+                </figcaption>
+              </figure>
+              
+            </li>
+            
+            <li>
+              <div>MiniMax M2.5 benefited from edits that force earlier artifact creation and bounded execution on long tasks.</div>
+              
+              <figure class="key-information-figure">
+                
+                <img src="images/case_m25_count_dataset_tokens.png" alt="Case study of a MiniMax M2.5 harness edit on the Terminal-Bench-2.0 count-dataset-tokens task. Left: a failed trace under the initial harness, where the agent continues dataset exploration after finding the relevant metadata configuration and times out without creating the required answer artifact. Right: a successful trace under the edited harness, where the agent identifies the metadata-backed science subset, computes the required token total, writes /app/answer.txt, and reads it back for verification.">
+                
+                <figcaption class="figure-caption">
+                  case_m25_count_dataset_tokens.pdf
+                   — Case study of a MiniMax M2.5 harness edit on the Terminal-Bench-2.0 count-dataset-tokens task. Left: a failed trace under the initial harness, where the agent continues dataset exploration after finding the relevant metadata configuration and times out without creating the required answer artifact. Right: a successful trace under the edited harness, where the agent identifies the metadata-backed science subset, computes the required token total, writes /app/answer.txt, and reads it back for verification.
+                </figcaption>
+              </figure>
+              
+            </li>
+            
+            <li>
+              <div>Qwen3.5 benefited from edits that add dependency checking and recovery from tool errors or missing artifacts.</div>
+              
+              <figure class="key-information-figure">
+                
+                <img src="images/case_qwen_extract_elf.png" alt="Case study of a Qwen3.5 harness edit on the Terminal-Bench-2.0 extract-elf task. Left: a failed trace under the initial harness, where the agent creates the required extractor script but then enters repeated overwrite and edit-file failures; before stopping, it deletes /app/extract.js, causing the verifier to fail because the required artifact is missing. Right: a successful trace under the edited harness, where a tool-error-triggered system prompt redirects the agent to recover the missing artifact, recreate the extractor, validate the generated JSON output, and leave the required file present for the verifier.">
+                
+                <figcaption class="figure-caption">
+                  case_qwen_extract_elf.pdf
+                   — Case study of a Qwen3.5 harness edit on the Terminal-Bench-2.0 extract-elf task. Left: a failed trace under the initial harness, where the agent creates the required extractor script but then enters repeated overwrite and edit-file failures; before stopping, it deletes /app/extract.js, causing the verifier to fail because the required artifact is missing. Right: a successful trace under the edited harness, where a tool-error-triggered system prompt redirects the agent to recover the missing artifact, recreate the extractor, validate the generated JSON output, and leave the required file present for the verifier.
+                </figcaption>
+              </figure>
+              
+            </li>
+            
+            <li>
+              <div>GLM-5 benefited from staged external operations and explicit repair of failed sanity checks.</div>
+              
+              <figure class="key-information-figure">
+                
+                <img src="images/case_glm_build_pov_ray.png" alt="Case study of a GLM-5 harness edit on the Terminal-Bench-2.0 build-pov-ray task. Left: a failed trace under the initial harness, where long monolithic external downloads consume large tool budgets and the agent later finalizes despite repeated non-zero sanity checks. Right: a successful trace under the edited harness, where the agent uses bounded staged operations, checks external archive evidence before committing more work, and repairs the failed sanity check before finalizing.">
+                
+                <figcaption class="figure-caption">
+                  case_glm_build_pov_ray.pdf
+                   — Case study of a GLM-5 harness edit on the Terminal-Bench-2.0 build-pov-ray task. Left: a failed trace under the initial harness, where long monolithic external downloads consume large tool budgets and the agent later finalizes despite repeated non-zero sanity checks. Right: a successful trace under the edited harness, where the agent uses bounded staged operations, checks external archive evidence before committing more work, and repairs the failed sanity check before finalizing.
+                </figcaption>
+              </figure>
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+      </section>
+      
 
       
       <section class="page-media" aria-label="Paper media">
