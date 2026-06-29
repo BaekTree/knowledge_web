@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -475,6 +517,8 @@
 <p>They also report the compute budget: 8 NVIDIA P100 GPUs, 0.4 seconds per step for the base model, and longer training for the larger model. This gives readers a sense of the efficiency gain relative to older sequence models. The section sets up the next part of the paper by showing that the reported translation quality is not just an architectural claim, but the result of a carefully controlled training recipe, including optimization, batching, and regularization choices.</p>
         
       </div>
+
+      
 
       
 

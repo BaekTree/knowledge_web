@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -512,6 +554,8 @@
 <p>GLM-5 illustrates another axis of harness adaptation: persistent environment changes and the transition from exploration to implementation. Here the edits tell the agent to make shell changes persist and to verify that tools remain accessible after environment modifications. They also add a stage-sensitive constraint that forces the agent to stop exploring once required artifacts are not emerging and instead implement and test a solution. In the trace, that changes the execution strategy from long downloads and post hoc rationalization to early source validation, repair of the failing check, and finalization. This ties the section back to the broader paper’s main results: the gains come from targeted workflow corrections that match each model’s observed failure pattern, not from a single universal prompt that would help all backends equally.</p>
         
       </div>
+
+      
 
       
       <section class="page-media" aria-label="Paper media">

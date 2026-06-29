@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -724,6 +766,8 @@
         <p>This section defines the common decomposition prompt used by both the vanilla and SAD agents: turn a complex user query into atomic sub-tasks, with each sub-task mapped to exactly one tool or skill. It exists to isolate routing behavior from later model differences and to set up a fair comparison. The key claim is that a strict, JSON-only decomposition format makes downstream execution more modular and controllable.</p>
         
       </div>
+
+      
 
       
 

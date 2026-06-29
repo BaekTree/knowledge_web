@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -488,6 +530,8 @@
         <p>The abstract does the high-level sales job for the paper: it states the problem with then-dominant sequence models, introduces the Transformer as a simpler attention-only alternative, and summarizes the main empirical wins in translation and parsing. It exists to answer the reader’s first question, “Why should I care about this model?” by showing that the architecture is not just cleaner in design but also faster to train, more parallelizable, and competitive or superior on important benchmarks. In other words, it sets up the paper’s core claim that attention alone can replace recurrence and convolution without sacrificing performance, and that this design generalizes beyond the original translation setting.</p>
         
       </div>
+
+      
 
       
 

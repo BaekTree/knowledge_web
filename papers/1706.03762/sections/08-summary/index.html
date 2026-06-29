@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -488,6 +530,8 @@
         <p>This section tests whether the Transformer’s architectural choices actually pay off in practice. It reports translation results showing that both the base and big models outperform prior systems, then isolates specific design decisions like number of heads, key size, model width, dropout, and positional encoding to see which ones matter most. It also checks whether the model transfers beyond machine translation by applying it to English constituency parsing, a structurally different sequence prediction task. The point of the section is to answer two questions: does the Transformer achieve state-of-the-art performance at competitive training cost, and is its success due to a robust general architecture rather than a narrow fit to one benchmark.</p>
         
       </div>
+
+      
 
       
 

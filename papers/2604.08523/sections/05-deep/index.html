@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -528,6 +570,8 @@
 <p>This generation process connects directly to the paper’s broader evaluation protocol and safety guarantees. The Task Design and Collection and Task Taxonomy sections explain how tasks are sampled across domains and why the benchmark retains only a curated subset of 153 tasks. The Evaluation Protocol then uses the human reference and submission target to score agent attempts consistently. Finally, by grounding tasks in live websites and recording only terminal submissions, the benchmark can evaluate realistic agent behavior without requiring uncontrolled side effects, which is important for safety and for keeping the benchmark auditable.</p>
         
       </div>
+
+      
 
       
 

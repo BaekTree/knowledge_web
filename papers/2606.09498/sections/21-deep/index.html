@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -512,6 +554,8 @@
 <p>Taken together, these choices define the “splits and protocol” for evaluation: a fixed machine, capped network, tuned concurrency, mirrored assets where needed, and explicit exclusion rules for unsupported or unreliable cases. That matters for the metrics reported later in the paper, because the benchmark score should reflect the agent’s ability to operate in a terminal environment, not its ability to survive unstable downloads or unsupported modalities. The section therefore anchors the paper’s claims in a carefully bounded evaluation protocol rather than a loosely specified run environment.</p>
         
       </div>
+
+      
 
       
 

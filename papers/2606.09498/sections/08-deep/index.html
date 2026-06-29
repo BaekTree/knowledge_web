@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -512,6 +554,8 @@
 <p>The final design principle is the tension between diversity and minimality. Diversity is enforced across proposal branches so the system explores different hypotheses in parallel: different failure mechanisms, different surfaces, or different intervention styles. Minimality is enforced within each branch so that each edit changes only what is needed to address one mechanism, preserves unrelated behavior, and avoids broad architectural rewrites. This combination makes the search space larger at the branch level but smaller within each branch, which is a practical way to explore harness evolution without destabilizing retained edits from previous rounds. It also fits the broader paper’s self-improvement loop: mining reveals weaknesses, proposal generates candidate repairs, validation selects robust ones, and retained edits accumulate into a better harness over time.</p>
         
       </div>
+
+      
 
       
 

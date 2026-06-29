@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -488,6 +530,8 @@
         <p>This conclusion closes the paper by summarizing the Transformer’s main claim: a sequence-to-sequence model built entirely on attention can replace recurrent layers and still train faster while achieving state-of-the-art translation results. It exists to answer the practical question of whether the new architecture is not just conceptually cleaner, but also competitive and efficient in real benchmarks. It also sets up the next research direction by pointing beyond translation, suggesting that attention should be extended to other modalities like images, audio, and video, and that more local or restricted attention may be needed for very large inputs and outputs. In short, the section turns the paper from a specific model proposal into a broader research agenda.</p>
         
       </div>
+
+      
 
       
 

@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -527,6 +569,8 @@ Introduction</a>
 <p>The factorially complete design is computationally expensive (5,088 trajectories) but essential for causal inference about harness effects. Without this structure, improvements in task completion could be attributed to either better harness orchestration or inherent model capability; the factorial grid allows regression or analysis-of-variance techniques to partition variance between these factors. The authors additionally report Codex separately under its native configuration, acknowledging that model-bound agents (where the harness and model cannot be decoupled) represent a different category that requires distinct treatment. This methodological discipline—recognizing when an experimental factor breaks the factorial assumption and handling it transparently—reflects rigor in benchmarking design.</p>
         
       </div>
+
+      
 
       
 

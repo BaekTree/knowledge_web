@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -475,6 +517,8 @@
 <p>This section also points forward. The authors are not treating the Transformer as a translation-specific trick; they frame it as a general sequence modeling framework that could extend to other modalities like images, audio, and video. They also identify two research directions: local or restricted attention for very large inputs and outputs, and less sequential generation. That connects directly to the paper’s broader trajectory: if attention can replace recurrence for translation, the next question is how far that idea can be pushed toward a general-purpose architecture for learning dependencies efficiently across domains.</p>
         
       </div>
+
+      
 
       
 

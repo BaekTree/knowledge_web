@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -528,6 +570,8 @@
 <p>The broader paper uses this section to justify why ClawBench is a meaningful benchmark for everyday online agents. Candidate generation proposes possible tasks, multi-stage filtering removes cases that are too trivial, too ambiguous, or otherwise unsuitable, and interception signal annotation helps determine whether an action truly corresponds to the intended state-changing operation. Together, these steps ensure the benchmark measures workflows that are both realistic and checkable. In that sense, Task Design and Collection is the bridge between the abstract benchmark goal and the concrete evaluation machinery used elsewhere in the paper.</p>
         
       </div>
+
+      
 
       
 

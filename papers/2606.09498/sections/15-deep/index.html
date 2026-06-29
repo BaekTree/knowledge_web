@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -512,6 +554,8 @@
 <p>This metric connects directly to the paper’s broader evaluation story. In the Benchmarks section, the authors need a common success definition that can be applied across tasks and harness candidates. In Proposal Validation, the same Pass (%) logic supports the claim that a proposed improvement is robust rather than anecdotal, especially when repeated attempts are used. And in Main Results, improvements are interpreted as higher verifier-based success rates under this fixed protocol, so the metric is the bridge between harness design changes and the paper’s empirical claims about self-improvement.</p>
         
       </div>
+
+      
 
       
       <section class="page-media" aria-label="Paper media">

@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -528,6 +570,8 @@
 <p>The technical value of the comparison-based rubric is that it captures the real constraints of web interaction: field bindings, ordering dependencies, and correct submission structure. These are easy to overlook if you only inspect the final page state or read the instruction text loosely. In that sense, the scoring section connects the Evaluation Protocol to the Agentic Evaluator and the reported metrics: the protocol defines what counts as valid completion, the evaluator enforces it by comparing traces, and the success rate summarizes performance over the full benchmark.</p>
         
       </div>
+
+      
 
       
 

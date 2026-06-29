@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -526,6 +568,8 @@ Introduction</a>
 <p>This reframing has direct implications for how agent systems should be evaluated and reported. Rather than attributing performance to "the model" as a stand-alone entity, Harness-Bench provides evidence that capability should be indexed by the (model, harness) configuration pair. A high-performing model may falter under a harness configuration that suppresses or delays tool feedback; conversely, a thoughtful harness can substantially recover an otherwise marginal model's completion rate. By providing reproducible measurement infrastructure grounded in real execution patterns, Harness-Bench establishes a foundation for diagnosing why failures occur at the execution layer, optimizing harness design, and building more reliable and auditable agent workflows.</p>
         
       </div>
+
+      
 
       
 

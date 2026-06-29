@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -528,6 +570,8 @@
 <p>This mechanism fits into the broader paper as the concrete implementation of the benchmark’s recording and safety infrastructure. It connects directly to the interception signal annotation process, which defines what to watch for, and to the five-layer recording infrastructure, which keeps the browser interaction, network capture, and local logging separated but coordinated. In effect, this section explains how ClawBench turns open-ended browsing into a measurable event stream: normal browsing stays intact, while the benchmark extracts a reliable completion signal from the final request.</p>
         
       </div>
+
+      
 
       
 

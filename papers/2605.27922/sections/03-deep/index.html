@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -526,6 +568,8 @@ Introduction</a>
 <p>The scoring system intentionally combines outcome and process dimensions using a multiplicative formula: TaskScore = Security · Completion · Process, where Security is binary (one permission violation zeros the entire score), Completion measures task-specific output quality, and Process averages three dimensions extracted from the trace: Robustness (handling failures), ToolUse (selecting appropriate tools), and Consistency (alignment between actions and workspace state). The multiplication is conservative by design—perfect completion with poor process execution yields low aggregate scores, and any security violation guarantees failure. This reflects a deployment reality where a fast but untrustworthy solution is worse than a slow correct one. By separately reporting completion, security, and process metrics alongside the aggregate, the benchmark supports both high-level deployment assessment and detailed diagnostic investigation of where and why harness configurations succeed or fail.</p>
         
       </div>
+
+      
 
       
 

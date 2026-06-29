@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -528,6 +570,8 @@
 <p>The rest of the section introduces the measurement stack that makes this feasible: five-layer recording and human-grounded evaluation. Each task produces session replay, screenshots, HTTP traffic, agent messages, and raw browser actions, so failures can be analyzed at the level of concrete steps instead of only at the final outcome. Human annotators perform the same tasks to create reference trajectories, and an agentic evaluator compares an agent run against that human trace rather than checking only a final state. This is important because many web tasks have multiple intermediate constraints, so a binary “did it work” outcome is often too coarse to explain why it failed. The introduction therefore connects the benchmark design, the safe live-web setup, and the evaluation protocol into one pipeline aimed at measuring real-world assistant capability rather than benchmark-specific performance.</p>
         
       </div>
+
+      
 
       
 

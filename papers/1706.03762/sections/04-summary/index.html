@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -489,6 +531,8 @@
 <p>Section 3 turns the paper’s core intuition into a concrete model design: it defines how the Transformer computes attention, why attention is scaled, how multiple heads let the model look at different representation subspaces in parallel, how these attention blocks are used for encoder-decoder interaction and self-attention, and how position information is added since there is no recurrence or convolution. It also specifies the feed-forward sublayers, embeddings, and positional encodings, and compares the model’s computational properties to recurrent and convolutional alternatives. This section exists to answer the practical question of how to build a sequence model that can use attention alone while still handling order, parallelism, and long-range dependencies efficiently.</p>
         
       </div>
+
+      
 
       
 

@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -488,6 +530,8 @@
         <p>This section positions the Transformer against earlier attempts to speed up sequence models and introduces self-attention as the key alternative. It explains why convolutional and recurrent approaches still make distant positions harder to connect, because information has to travel through many intermediate steps, whereas self-attention lets any position directly interact with any other in a constant number of operations. It also notes the main tradeoff: self-attention can blur detail, which motivates using multiple attention heads later. The section exists to answer a setup question for the paper: why abandon recurrence and convolution, and what principle will let the Transformer model long-range dependencies more efficiently while still producing useful representations?</p>
         
       </div>
+
+      
 
       
 

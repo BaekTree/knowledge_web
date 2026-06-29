@@ -205,6 +205,48 @@
       gap: 1rem;
     }
 
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
     .page-figure {
       margin: 0;
       padding: 1rem;
@@ -512,6 +554,8 @@
 <p>The reported benchmark results illustrate why this matters. On Terminal-Bench-2.0, Self-Harness improves three diverse models substantially, including both held-in and held-out gains, which suggests the method is not merely overfitting to the observed traces. The qualitative examples reinforce the main technical message: the learned edits are model-specific and operational, such as reducing tool-use loops, checking dependencies earlier, preserving environment state, or encouraging faster movement from exploration to implementation. In other words, the paper is not claiming that “better prompts” are enough; it shows that a self-updating harness can encode recurring execution knowledge into the agent’s control structure, turning model-specific weakness into a reusable improvement mechanism.</p>
         
       </div>
+
+      
 
       
       <section class="page-media" aria-label="Paper media">
