@@ -564,10 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Introduces the starting harness: a minimal DeepAgent-based setup with a short benchmark-facing system prompt plus default filesystem and shell tools.</li>
-<li>Defines the editable boundary for self-improvement: only the harness definition file can be changed to produce a new candidate harness.</li>
-<li>Clarifies the exposed configuration surfaces the system is allowed to optimize, such as instructions, tools, and verification guidance.</li>
-<li>Sets up the paper’s core question: can a harness improve itself by iteratively rewriting its own control/configuration layer rather than the underlying agent model?</li>
+<li>Establishes the initial harness as a minimal baseline built on DeepAgent SDK with core system prompt and filesystem/shell tools</li>
+<li>Constrains self-optimization strictly to the harness definition file, excluding modifications to the SDK or underlying tools</li>
+<li>Maps editable configuration surfaces (instruction, tools, verification guidance) to specific declaration points in the harness definition</li>
+<li>Defines the scope of self-improvement: the system can only optimize through changes to these predefined editable configuration surfaces</li>
 </ul>
         
       </div>

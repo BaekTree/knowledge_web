@@ -558,11 +558,11 @@
 
       <div class="root-intuition">
         
-        <p><strong>TL;DR:</strong> Self-Harness shows that an LLM agent can improve its own operating instructions by reading its failures, proposing small fixes, and keeping only the ones that pass tests.</p>
+        <p><strong>TL;DR:</strong> Models can improve their own operating instructions by analyzing their failures, proposing targeted fixes, and testing changes before adopting them.</p>
 <ul>
-<li><strong>Problem:</strong> Human-built agent harnesses do not scale well because different models fail in different ways and need different guidance.</li>
-<li><strong>Insight:</strong> The key idea is to turn execution traces into model-specific harness edits through a propose-test-accept loop.</li>
-<li><strong>Why it matters:</strong> This matters because it lets agents adapt their own control layer instead of waiting for humans to hand-tune every model. </li>
+<li><strong>Problem:</strong> The instructions governing agent behavior are model-specific but still manually engineered by humans, creating a scaling bottleneck as new LLMs emerge constantly.</li>
+<li><strong>Insight:</strong> By examining its own failures, a model can propose concrete tweaks to its instructions and safely keep only changes that don't cause regressions.</li>
+<li><strong>Why it matters:</strong> This removes the human engineering bottleneck, allowing each model to automatically adapt its behavior to its unique strengths and weaknesses.</li>
 </ul>
         
       </div>

@@ -564,11 +564,9 @@
       <div class="section-summary">
         
         <ul>
-<li>Evaluates Self-Harness on three fixed base models: MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5.</li>
-<li>Uses the same model across all harness variants and also during the proposal stage, so model capability is held constant.</li>
-<li>Keeps decoding, budget, tools, benchmark environment, and evaluator unchanged to make the comparison strictly within-model.</li>
-<li>Sets up a clean test of whether gains come from the harness itself rather than from better models or a different evaluation protocol.</li>
-<li>Claims that any observed differences can be attributed to Self-Harness variation, isolating the harness effect.</li>
+<li>Specifies three fixed models (MiniMax M2.5, Qwen3.5-35B-A3B, GLM-5) for evaluating Self-Harness to isolate harness improvements from model capability differences</li>
+<li>Establishes strict experimental control by holding constant all factors except the harness variant (decoding, budget, tools, benchmark, evaluator)</li>
+<li>Ensures within-model comparisons only, using the same model in proposal stage, to measure harness effectiveness independent of confounding variables</li>
 </ul>
         
       </div>

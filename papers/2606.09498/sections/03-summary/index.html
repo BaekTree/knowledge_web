@@ -564,10 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Reframes control of LLMs from static prompt engineering to full harness design, where prompts, tools, memory, verification, permissions, adapters, and runtime policies jointly shape behavior.</li>
-<li>Explains why the section exists: to show that many agent failures come from the surrounding system layer, not from a single bad model output, and to motivate improving the execution environment itself.</li>
-<li>Sets up the paper’s core question of how to build harnesses that make agents more reliable over long horizons, especially when success depends on observations, retries, feedback, and recovery.</li>
-<li>Claims that agentic systems extend the model’s control surface into an environment where actions have consequences, so better performance requires changing runtime mechanisms, not just rewriting prompts.</li>
+<li>Transitions from prompt engineering (controlling single inputs) to agentic systems that interact with execution environments through tools, feedback loops, and runtime policies</li>
+<li>Introduces "harness" as the critical system layer—prompts, tools, memory, verification, permissions, adapters, runtime mechanisms—that mediates between model and environment</li>
+<li>Claims agent failures typically stem from harness-layer interactions, not isolated model responses, because failures emerge from how instructions, observations, and tools interact rather than single components</li>
+<li>Sets up the paper's core premise that improving agents requires redesigning this surrounding system, not just improving the base model</li>
 </ul>
         
       </div>

@@ -563,7 +563,11 @@
 
       <div class="section-summary">
         
-        <p>This section defines how candidate harness edits are validated before adoption: each proposal is treated as a new harness variant, evaluated on held-in and held-out splits, and accepted only if it improves at least one split without degrading the other. It exists to answer how self-improvement can be made robust rather than opportunistic, by separating evidence-following gains from regressions on unseen behaviors. The key claims are that promotion is conservative, stochastic evaluations are repeated and aggregated before decision-making, compatible accepted edits can be merged in the same round, and failed or non-editing proposals are rejected while remaining auditable in the harness lineage.</p>
+        <ul>
+<li>Validates harness edits by evaluating candidates against the current harness on two data splits: held-in (tests whether the diagnosis was correct) and held-out (regression test for unintended side effects)</li>
+<li>Establishes a strict acceptance rule: candidates must improve at least one split without degrading the other, preventing changes that merely trade off between metrics</li>
+<li>Ensures robustness and auditability by logging all evaluated candidates, their outcomes, and acceptance decisions throughout the harness lineage</li>
+</ul>
         
       </div>
 

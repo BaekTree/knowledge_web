@@ -564,11 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Introduces Self-Harness as a closed-loop method where a fixed model improves its own harness using execution evidence rather than manual redesign or broad search.</li>
-<li>Explains the pipeline: run the current harness, cluster repeated failure traces, and turn those patterns into structured evidence about what is going wrong.</li>
-<li>Sets up the core question the paper answers: can the same model act as both analyzer and proposer to refine harness behavior in a targeted way?</li>
-<li>Claims that proposed edits should be diverse but minimal, each aimed at a specific failure mechanism while preserving the overall control architecture.</li>
-<li>Establishes the acceptance rule: only harness changes that improve held-out performance without unacceptable regressions are promoted.</li>
+<li>Presents Self-Harness as a middle ground: the model iteratively improves its own harness by mining failure patterns from execution traces rather than relying on external optimization or pure human expertise.</li>
+<li>The core loop operates in four stages—evaluate current harness, mine structured evidence from clustered failures, propose diverse candidate modifications, validate through regression testing—creating an execution-evidence-driven feedback cycle.</li>
+<li>Key constraint: candidate edits target specific failure mechanisms while preserving the overall control architecture, ensuring modifications are minimal and interpretable.</li>
+<li>Enforces safety via explicit acceptance rules that promote only edits improving performance without introducing unacceptable regressions.</li>
 </ul>
         
       </div>

@@ -564,10 +564,9 @@
       <div class="section-summary">
         
         <ul>
-<li>Shows how accepted harness edits change actual agent traces, using representative before-after examples from Terminal-Bench-2.0.</li>
-<li>Explains why this section exists: to connect the paper’s quantitative gains to concrete behavioral changes and answer whether Self-Harness learns targeted fixes rather than a generic stronger prompt.</li>
-<li>Main claim: the promoted edits are model-specific and address each backend’s dominant failure mode, such as early artifact creation for MiniMax, loop breaking and recovery discipline for Qwen3.5, and persistent environment handling plus implementation transitions for GLM-5.</li>
-<li>Overall takeaway: the accepted edits alter execution in observable, mechanism-aligned ways that improve artifact production, recovery, and verification, supporting the interpretation that Self-Harness works through targeted workflow changes.</li>
+<li>Analyzes before-after execution traces from three models (MiniMax M2.5, Qwen3.5, GLM-5) to show how accepted edits change observable behavior</li>
+<li>Each model's promoted edits target its dominant failures: M2.5 (early artifact creation + bounded execution), Qwen3.5 (dependency checking + error recovery), GLM-5 (environment persistence + exploration-to-implementation)</li>
+<li>Validates that performance gains stem from model-specific workflow improvements aligned with diagnosed failures, not generic prompts or stochastic variation</li>
 </ul>
         
       </div>

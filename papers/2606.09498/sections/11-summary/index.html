@@ -564,10 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Evaluates Self-Harness on Terminal-Bench-2.0, a multi-turn terminal benchmark with realistic execution environments and deterministic verification.</li>
-<li>Uses a fixed 64-case subset of the 89 tasks, filtering out cases that rely on unstable web resources or multimodal inputs.</li>
-<li>This section sets up a cleaner, lower-noise evaluation so changes reflect harness quality rather than outside task dependencies.</li>
-<li>The key claim is that the benchmark choice isolates the effect of Self-Harness edits on core tool-use, verification, artifact handling, and error-recovery behavior.</li>
+<li>Establishes Terminal-Bench-2.0, a multi-turn agentic benchmark with 89 containerized tasks, as the evaluation framework for Self-Harness</li>
+<li>Justifies a 64-case subset that excludes tasks with unstable external dependencies or multimodal inputs, arguing this filtering isolates harness improvements from confounding factors</li>
+<li>Claims that multimodal tasks would primarily measure unsupported harness functionality rather than the effect of Self-Harness edits, validating the filtering approach</li>
+<li>Employs deterministic verifiers to assess performance on realistic execution scenarios, establishing a controlled experimental environment</li>
 </ul>
         
       </div>

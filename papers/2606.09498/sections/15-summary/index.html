@@ -564,11 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Defines the paper’s main evaluation metric as Pass (%), the share of evaluated attempts that satisfy the benchmark verifier.</li>
-<li>Uses two repeated attempts per harness candidate by default, so the metric reflects mean single-attempt success under a fixed harness and protocol.</li>
-<li>Clarifies that the section is about how to measure harness quality consistently, not about changing the task itself.</li>
-<li>Sets up comparisons across harness candidates by making results verifier-based and reproducible.</li>
-<li>For Terminal-Bench-2.0, specifies that success is judged by the verifier on the final container state.</li>
+<li>Defines Pass (%) as the primary metric: percentage of task attempts passing the benchmark verifier under a fixed harness configuration</li>
+<li>Specifies evaluation protocol with two repeated attempts per harness candidate to measure mean single-attempt task success</li>
+<li>For Terminal-Bench-2.0, pass signal is determined by the task verifier examining the final container state</li>
+<li>Establishes standardized measurement methodology for empirical comparison of different harness candidates</li>
 </ul>
         
       </div>
