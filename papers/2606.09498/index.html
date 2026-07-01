@@ -572,13 +572,21 @@
         <h2 class="key-information-title">Methodology resolution</h2>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Harness as a self-optimizing interface</h3>
+          <h3 class="key-information-theme">Trace-grounded weakness mining</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Treat the harness around the model as the part being revised, with the draft suggesting that Self-Harness changes agent behavior through that surrounding control layer.</div>
+              <div><strong>Method:</strong> Use benchmark runs and their execution traces to look for recurring failure modes before revising the harness.</div>
               
-              <div><strong>Why it helps:</strong> This keeps the focus on the controllable interface around the model rather than implying the paper proves anything about retraining or weight updates.</div>
+              <div><strong>Why it helps:</strong> This keeps the workflow evidence-oriented, while leaving the exact ordering of runs, trace capture, and review as a draft-level choice rather than a claimed fact.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Review trace-level failures for repeated patterns and summarize them in a compact notes form.</div>
+              
+              <div><strong>Why it helps:</strong> This can help organize noisy observations, but the evidence supports trace diagnosis more directly than any formal clustering or report artifact.</div>
               
               
             </li>
@@ -587,21 +595,21 @@
         </section>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Observed failure patterns</h3>
+          <h3 class="key-information-theme">Iterative harness proposal</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Where benchmark failures are visible, describe the relevant control-flow pattern instead of the prompt in the abstract.</div>
+              <div><strong>Method:</strong> Use the same model inside an iterative harness-improvement loop to propose harness revisions.</div>
               
-              <div><strong>Why it helps:</strong> This stays close to the evidence that Self-Harness changes observable control flow, while avoiding a stronger claim that the method explicitly mines or clusters traces.</div>
+              <div><strong>Why it helps:</strong> Keeping proposal generation within the system being improved is consistent with the evidence, though the exact use of a weakness summary remains an inference.</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Frame the weakness in terms of the agent&#39;s behavior rather than as a purely prompt-level issue.</div>
+              <div><strong>Method:</strong> Translate accepted edits into harness behavior changes that alter observable control flow and recovery behavior during execution.</div>
               
-              <div><strong>Why it helps:</strong> That preserves the distinction the evidence supports between control-flow changes and generic prompt improvement, without asserting a formal diagnosis step.</div>
+              <div><strong>Why it helps:</strong> This matches the evidence that Self-Harness changes control flow around the model, without adding unsupported detail about specific policy mechanisms. (Note: this claim could not be fully verified against the selected evidence.)</div>
               
               
             </li>
@@ -610,36 +618,29 @@
         </section>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Bounded harness proposal</h3>
+          <h3 class="key-information-theme">Regression-gated validation</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Propose harness edits that affect observable behavior such as recovery logic or verification steps, but treat that scope as an inference from the evidence rather than a stated procedure.</div>
+              <div><strong>Method:</strong> Evaluate candidate harness revisions with runtime checks and accept them only when they satisfy the intended verification rules.</div>
               
-              <div><strong>Why it helps:</strong> Narrow behavioral edits are easier to evaluate against benchmark behavior, and the evidence supports harness-level changes without spelling out a specific edit recipe.</div>
+              <div><strong>Why it helps:</strong> The evidence supports a checked improvement loop, while the exact acceptance policy should be treated as draft framing rather than a directly stated requirement.</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Prefer edits that are aligned with the failure mode being addressed, while noting that the source only supports this as a general alignment, not a fixed failure-mode-specific taxonomy.</div>
+              <div><strong>Method:</strong> Keep unaccepted candidates separate from the active harness until a candidate is accepted for use.</div>
               
-              <div><strong>Why it helps:</strong> This matches the benchmark-oriented framing in the evidence without overstating how explicitly the edit targets are defined.</div>
+              <div><strong>Why it helps:</strong> This preserves a conservative workflow, though the evidence does not explicitly define this bookkeeping distinction.</div>
               
               
             </li>
             
-          </ul>
-        </section>
-        
-        <section class="key-information-group">
-          <h3 class="key-information-theme">Verification and adoption</h3>
-          <ul class="key-information-points">
-            
             <li>
-              <div><strong>Method:</strong> Check candidate harness changes against the benchmark&#39;s verification rules when those rules are available, noting that the evidence does not spell out a full regression protocol.</div>
+              <div><strong>Method:</strong> Carry only accepted harness changes forward into the next iteration.</div>
               
-              <div><strong>Why it helps:</strong> A verification step is consistent with the harness framing, but the claim is kept cautious because the workflow is not described in detail in the evidence.</div>
+              <div><strong>Why it helps:</strong> This keeps the process cumulative and remains aligned with the iterative harness-improvement framing in the evidence. (Note: this claim could not be fully verified against the selected evidence.)</div>
               
               
             </li>
@@ -648,13 +649,28 @@
         </section>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Limitations</h3>
+          <h3 class="key-information-theme">Difference from prior work</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Note as a caveat that the benchmark-dependent control-flow framing may not transfer unchanged to other settings, since the evidence does not explicitly define the scope of generalization.</div>
+              <div><strong>Method:</strong> Note that the draft still needs a clearer comparison against prior work or related self-improvement baselines.</div>
               
-              <div><strong>Why it helps:</strong> This keeps the limitation as a guarded inference rather than a stronger claim about failure cases or transferability that the evidence does not directly state.</div>
+              <div><strong>Why it helps:</strong> The evidence pack situates Self-Harness among related approaches, but it does not provide a full baseline comparison, so this caveat keeps the draft from overclaiming.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Limitations and boundaries</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Treat boundary conditions, failure cases, and scope limits as provisional until the draft adds more direct evidence.</div>
+              
+              <div><strong>Why it helps:</strong> This keeps the explanation honest about what is and is not supported by the current evidence pack.</div>
               
               
             </li>
