@@ -564,9 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Analyzes before-after execution traces from three models (MiniMax M2.5, Qwen3.5, GLM-5) to show how accepted edits change observable behavior</li>
-<li>Each model's promoted edits target its dominant failures: M2.5 (early artifact creation + bounded execution), Qwen3.5 (dependency checking + error recovery), GLM-5 (environment persistence + exploration-to-implementation)</li>
-<li>Validates that performance gains stem from model-specific workflow improvements aligned with diagnosed failures, not generic prompts or stochastic variation</li>
+<li>Examines before-and-after traces from several backends to show how accepted harness edits change agent behavior.</li>
+<li>Exists to answer whether Self-Harness improves models through targeted workflow changes, not a generic prompt boost.</li>
+<li>Shows MiniMax M2.5 being pushed toward earlier artifact creation, bounded tool use, and a concrete write-and-verify workflow.</li>
+<li>Shows Qwen3.5 gaining better failure recovery through dependency checks, loop breaking, retry discipline, and keeping required artifacts present.</li>
+<li>Shows GLM-5 improving persistence across shell sessions and switching from exploration to implementation once evidence indicates the current approach is stalled.</li>
 </ul>
         
       </div>

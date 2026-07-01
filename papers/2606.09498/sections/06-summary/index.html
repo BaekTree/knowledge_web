@@ -564,10 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Defines "harness" as non-parametric scaffolding (instructions, tools, memory) governing how a fixed LM operates as an agent, with execution producing a trace recording actions and outcomes</li>
-<li>Establishes formal framework: fixed model M under harness h produces trace τ and output y for task x, evaluated by fixed evaluator E to determine behavioral outcomes</li>
-<li>Core thesis: improves harnesses through iterative bounded edits to execution protocol while holding model weights and evaluator fixed, treating harness as the improvement object</li>
-<li>Self-Harness algorithm: iteratively evaluates harness, proposes K candidates in parallel from verifier-grounded failures, accepts edits that improve held-in performance while maintaining held-out performance</li>
+<li>Defines a harness as the non-parametric scaffolding around a fixed language model: instructions, tools, memory, state handling, and the execution protocol for acting and checking intermediate results.</li>
+<li>Sets up the formal problem: given a fixed model M and evaluator E, running under harness h yields a trace and output, and the evaluator maps them to behavioral success or failure.</li>
+<li>Establishes the paper’s target of improvement: not model weights, but the harness itself, treated as a sequence of bounded protocol edits h_0, h_1, ..., h_T.</li>
+<li>Introduces the Self-Harness loop, which repeatedly evaluates the current harness, builds evidence from verifier-grounded failures, proposes candidate edits in parallel, and accepts only improvements that help held-in and held-out performance without regressions.</li>
+<li>Claims the method is disciplined and selection-based: accepted edits are merged into the next harness, while rejected proposals do not affect the lineage.</li>
 </ul>
         
       </div>

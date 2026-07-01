@@ -564,9 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Validates harness edits by evaluating candidates against the current harness on two data splits: held-in (tests whether the diagnosis was correct) and held-out (regression test for unintended side effects)</li>
-<li>Establishes a strict acceptance rule: candidates must improve at least one split without degrading the other, preventing changes that merely trade off between metrics</li>
-<li>Ensures robustness and auditability by logging all evaluated candidates, their outcomes, and acceptance decisions throughout the harness lineage</li>
+<li>Evaluates each proposed harness edit as a candidate variant against the current harness on both held-in and held-out splits.</li>
+<li>Exists to answer whether an edit truly fixes the motivating evidence without introducing regressions in unseen behaviors.</li>
+<li>Accepts a candidate only if it improves at least one split and does not degrade the other, with repeated evaluation used to reduce stochastic false positives.</li>
+<li>If multiple compatible candidates pass, they are merged into the next harness; rejected or invalid proposals stay logged without changing the active harness.</li>
+<li>The section’s core claim is that conservative, auditable validation is necessary for safe self-improvement.</li>
 </ul>
         
       </div>

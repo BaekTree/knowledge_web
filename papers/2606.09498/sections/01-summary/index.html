@@ -564,10 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Establishes the problem: effective harnesses must be model-specific, but human engineering doesn't scale with rapidly evolving LLMs</li>
-<li>Proposes Self-Harness: an autonomous iterative loop (Weakness Mining → Harness Proposal → Proposal Validation) enabling agents to improve their own harnesses without human or external intervention</li>
-<li>Shows significant empirical gains: 40.5%→61.9%, 23.8%→38.1%, and 42.9%→57.1% performance improvements across three diverse model families</li>
-<li>Key claim: generates concrete model-specific changes, not generic instructions, enabling agents to reshape their own harnesses rather than just being shaped by them</li>
+<li>Frames the paper’s core problem: agent performance depends on both the base model and the harness, and harnesses are currently hand-engineered in a way that does not scale.</li>
+<li>Introduces Self-Harness, a paradigm where an LLM-based agent iteratively improves its own harness without human engineers or stronger outside agents.</li>
+<li>Sets up the paper’s method by defining the three-stage loop: Weakness Mining, Harness Proposal, and Proposal Validation.</li>
+<li>States the main result: across three diverse models on Terminal-Bench-2.0, the method consistently boosts held-out pass rates.</li>
+<li>Claims the key takeaway is not generic prompt inflation, but converting model-specific failure patterns into concrete, executable harness edits.</li>
 </ul>
         
       </div>

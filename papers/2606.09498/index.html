@@ -558,11 +558,11 @@
 
       <div class="root-intuition">
         
-        <p><strong>TL;DR:</strong> Models can improve their own operating instructions by analyzing their failures, proposing targeted fixes, and testing changes before adopting them.</p>
+        <p><strong>TL;DR:</strong> Self-Harness shows that an LLM agent can improve the rules that steer it by turning its own failures into small, tested harness edits.</p>
 <ul>
-<li><strong>Problem:</strong> The instructions governing agent behavior are model-specific but still manually engineered by humans, creating a scaling bottleneck as new LLMs emerge constantly.</li>
-<li><strong>Insight:</strong> By examining its own failures, a model can propose concrete tweaks to its instructions and safely keep only changes that don't cause regressions.</li>
-<li><strong>Why it matters:</strong> This removes the human engineering bottleneck, allowing each model to automatically adapt its behavior to its unique strengths and weaknesses.</li>
+<li><strong>Problem:</strong> Human-built agent harnesses are slow to adapt and often miss the model-specific mistakes they are meant to prevent.</li>
+<li><strong>Insight:</strong> The key idea is a loop of finding repeated failure patterns, proposing minimal fixes, and keeping only changes that pass regression tests.</li>
+<li><strong>Why it matters:</strong> It points to a practical way for agents to get better without relying on constant human tuning, and it boosts performance across different model families.</li>
 </ul>
         
       </div>
@@ -572,39 +572,13 @@
         <h2 class="key-information-title">Methodology resolution</h2>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Define the harness as the editable target</h3>
+          <h3 class="key-information-theme">Self-Harness control flow</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Treat prompts, tools, memory, verification, and runtime policy as one harness that surrounds a fixed model.</div>
+              <div><strong>Method:</strong> Self-Harness appears to work by changing the agent’s observable control flow at the harness level; the evidence supports that framing, but it does not explicitly establish a contrast with base-model weight updates or a fixed edit-evaluate loop.</div>
               
-              <div><strong>Why it helps:</strong> This makes the operating scaffold, not the base model, the object to optimize, so improvements can be targeted at model-specific failure modes.</div>
-              
-              
-              <figure class="key-information-figure">
-                
-                <img src="images/sh1.png" alt="Three paradigms of harness improvement. In human harness engineering, human engineers manually revise the agent harness. In Meta-Harness, a stronger external agent guides the improvement of a weaker target agent. In Self-Harness, the agent improves its own operating harness.">
-                
-                <figcaption class="figure-caption">
-                  sh1.png
-                   — Three paradigms of harness improvement. In human harness engineering, human engineers manually revise the agent harness. In Meta-Harness, a stronger external agent guides the improvement of a weaker target agent. In Self-Harness, the agent improves its own operating harness.
-                </figcaption>
-              </figure>
-              
-            </li>
-            
-            <li>
-              <div><strong>Method:</strong> Freeze model weights and restrict self-improvement to the harness definition file.</div>
-              
-              <div><strong>Why it helps:</strong> Keeping the model fixed isolates the effect of harness changes and prevents the optimization loop from drifting into model retraining or SDK modifications.</div>
-              
-              
-            </li>
-            
-            <li>
-              <div><strong>Method:</strong> Start from a minimal baseline harness so later behavior changes can be attributed to specific edits.</div>
-              
-              <div><strong>Why it helps:</strong> A sparse starting point reduces confounding from existing hand-tuned logic and makes each accepted change easier to interpret and validate.</div>
+              <div><strong>Why it helps:</strong> This keeps the claim within the evidence while preserving the key distinction that harness-level behavior can matter independently of the underlying model.</div>
               
               
             </li>
@@ -613,29 +587,21 @@
         </section>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Mine reusable weaknesses from failures</h3>
+          <h3 class="key-information-theme">Failure-mode alignment</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Run the current harness on task attempts and collect execution traces, verifier outcomes, and failure evidence.</div>
+              <div><strong>Method:</strong> Use benchmark failure behavior to guide harness edits, as the evidence suggests alignment between the harness and observed failures, while leaving the exact discovery process unspecified.</div>
               
-              <div><strong>Why it helps:</strong> The loop needs grounded signals about where the agent actually fails, not just a generic critique, so edits can target observed breakdowns.</div>
-              
-              
-            </li>
-            
-            <li>
-              <div><strong>Method:</strong> Cluster failures by exact signature and separate verifier-level causes from agent-level mechanisms.</div>
-              
-              <div><strong>Why it helps:</strong> This turns many surface symptoms into a smaller set of reusable weaknesses, which helps the proposer focus on patterns that are likely to generalize.</div>
+              <div><strong>Why it helps:</strong> This reflects the supported idea that harness changes should track failure behavior without adding an unsupported account of how those failures are identified.</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Rank the resulting failure patterns before proposing edits.</div>
+              <div><strong>Method:</strong> Describe failures at a high level and revise the harness accordingly; the evidence supports this general approach, but it does not support naming specific categories such as misplanning or tool misuse without more evidence.</div>
               
-              <div><strong>Why it helps:</strong> Prioritization steers the search toward the weaknesses most worth fixing first, instead of spreading effort across incidental edge cases.</div>
+              <div><strong>Why it helps:</strong> This narrows the draft to the level of specificity supported by the source material and avoids overcommitting to a fine-grained failure taxonomy.</div>
               
               
             </li>
@@ -644,122 +610,46 @@
         </section>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Propose bounded harness edits</h3>
+          <h3 class="key-information-theme">Evidence gaps and limitations</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Generate a small set of diverse candidate harness modifications for each identified weakness pattern.</div>
+              <div><strong>Method:</strong> The source material supports harness-level changes, but it does not describe a full training or optimization loop, so any such loop should be treated as provisional.</div>
               
-              <div><strong>Why it helps:</strong> Diversity explores different fixes in parallel, while keeping each candidate small limits the chance of overfitting or introducing unrelated regressions.</div>
-              
-              
-            </li>
-            
-            <li>
-              <div><strong>Method:</strong> Ground each proposal in a specific failure pattern and an editable surface such as instructions, tools, or execution policy.</div>
-              
-              <div><strong>Why it helps:</strong> Binding the edit to an observed weakness and a concrete control knob makes the proposal actionable rather than a vague prompt rewrite.</div>
+              <div><strong>Why it helps:</strong> This adds the required caveat for the training_or_optimization aspect without inventing an end-to-end workflow.</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Constrain the proposer with bounded context from prior edits and available harness surfaces.</div>
+              <div><strong>Method:</strong> The source material supports changes to agent control flow, but it does not spell out a concrete execution-time protocol, so the inference-side mechanism should remain high level.</div>
               
-              <div><strong>Why it helps:</strong> This keeps the search localized to changes the system can actually adopt and prevents it from proposing changes outside the allowed harness boundary.</div>
-              
-              
-            </li>
-            
-          </ul>
-        </section>
-        
-        <section class="key-information-group">
-          <h3 class="key-information-theme">Validate before adoption</h3>
-          <ul class="key-information-points">
-            
-            <li>
-              <div><strong>Method:</strong> Evaluate each candidate against the current harness on held-in and held-out splits under a fixed evaluation system.</div>
-              
-              <div><strong>Why it helps:</strong> Held-in data checks whether the diagnosis was correct, while held-out data checks that the fix does not break other tasks.</div>
-              
-              
-              <figure class="key-information-figure">
-                
-                <img src="images/sh-6-8-4.png" alt="Overview of one Self-Harness optimization loop. The model weights remain fixed while the surrounding harness evolves through bounded, automatically validated harness edits. Each candidate harness is evaluated by a fixed evaluation system, and the acceptance gate promotes a candidate only when it preserves both train and held-out gate performance while improving at least one split. Accepted candidates advance the lineage; rejected candidates are logged without changing the active harness.">
-                
-                <figcaption class="figure-caption">
-                  sh-6-8-4.pdf
-                   — Overview of one Self-Harness optimization loop. The model weights remain fixed while the surrounding harness evolves through bounded, automatically validated harness edits. Each candidate harness is evaluated by a fixed evaluation system, and the acceptance gate promotes a candidate only when it preserves both train and held-out gate performance while improving at least one split. Accepted candidates advance the lineage; rejected candidates are logged without changing the active harness.
-                </figcaption>
-              </figure>
-              
-            </li>
-            
-            <li>
-              <div><strong>Method:</strong> Accept a candidate only if it improves at least one split without degrading the other.</div>
-              
-              <div><strong>Why it helps:</strong> This acceptance rule makes harness changes empirical state transitions rather than speculative edits, which protects against regression while still allowing progress.</div>
+              <div><strong>Why it helps:</strong> This covers the inference_or_execution aspect cautiously and avoids overstating runtime details. (Note: this claim could not be fully verified against the selected evidence.)</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Use repeated attempts with a fixed benchmark protocol to score candidate pass rates.</div>
+              <div><strong>Method:</strong> The available evidence is broad rather than exhaustive, so any statement about limitations or tradeoffs should be framed as cautious and qualified rather than definitive.</div>
               
-              <div><strong>Why it helps:</strong> Repeated evaluation stabilizes noisy agent behavior and gives the gate a more reliable basis for deciding whether a candidate is actually better.</div>
-              
-              
-            </li>
-            
-          </ul>
-        </section>
-        
-        <section class="key-information-group">
-          <h3 class="key-information-theme">Iterate the harness lineage</h3>
-          <ul class="key-information-points">
-            
-            <li>
-              <div><strong>Method:</strong> Promote accepted candidates into the active harness and continue iterating from the new lineage.</div>
-              
-              <div><strong>Why it helps:</strong> Each accepted step accumulates improvements instead of restarting from scratch, so the harness can compound gains over multiple rounds.</div>
-              
-              
-              <figure class="key-information-figure">
-                
-                <img src="images/harness_evolution.png" alt="Self-Harness evolution trajectory. Green markers denote accepted harness candidates and gray crosses denote rejected harness candidates. Step lines connect accepted candidates and keep performance flat across rejected iterations; the two accepted lineages meet at the final success-combined harness.">
-                
-                <figcaption class="figure-caption">
-                  harness_evolution.pdf
-                   — Self-Harness evolution trajectory. Green markers denote accepted harness candidates and gray crosses denote rejected harness candidates. Step lines connect accepted candidates and keep performance flat across rejected iterations; the two accepted lineages meet at the final success-combined harness.
-                </figcaption>
-              </figure>
-              
-            </li>
-            
-            <li>
-              <div><strong>Method:</strong> Keep rejected candidates logged but out of the active harness.</div>
-              
-              <div><strong>Why it helps:</strong> Rejected edits remain available as evidence without contaminating the deployed harness, which preserves a clean separation between exploration and adoption.</div>
+              <div><strong>Why it helps:</strong> This keeps the limitations aspect aligned with the evidence level and avoids presenting speculative constraints as settled conclusions. (Note: this claim could not be fully verified against the selected evidence.)</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Retain only the edits that survive validation in the final harness.</div>
+              <div><strong>Method:</strong> The evidence points to harness-level control flow and surrounding agent machinery, but it does not enumerate the full set of main components, so a complete methodology description still needs more detail.</div>
               
-              <div><strong>Why it helps:</strong> This yields a compact set of modifications that are justified by observed behavior changes, rather than a large unstructured prompt rewrite.</div>
+              <div><strong>Why it helps:</strong> This adds a caveat for the main_components aspect instead of inventing a fuller component list than the evidence supports.</div>
               
               
-              <figure class="key-information-figure">
-                
-                <img src="images/evolved_harness_delta.png" alt="Differences for the three harness modifications accepted by Self-Harness and retained in the final harness. Red rows denote code removed from the initial harness, and green rows denote the updated harness behavior.">
-                
-                <figcaption class="figure-caption">
-                  evolved_harness_delta.pdf
-                   — Differences for the three harness modifications accepted by Self-Harness and retained in the final harness. Red rows denote code removed from the initial harness, and green rows denote the updated harness behavior.
-                </figcaption>
-              </figure>
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> The selected evidence distinguishes harness-level self-improvement from broader self-improvement categories only at a high level, so any comparison to prior work should remain brief and qualified.</div>
+              
+              <div><strong>Why it helps:</strong> This addresses the difference_from_prior_work aspect cautiously and avoids claiming a detailed comparison that is not in the evidence.</div>
+              
               
             </li>
             

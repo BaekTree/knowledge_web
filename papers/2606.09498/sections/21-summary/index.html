@@ -564,9 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li><strong>Infrastructure baseline</strong>: Harbor environment, 64-core/256GB isolated machine, 2MB/s bandwidth cap, concurrency set to 32 (MiniMax/GLM-5) or 48 (Qwen3.5)</li>
-<li><strong>Failure triage</strong>: Mirrors slow external resources and excludes tasks with unreliable dependencies or unsupported multimodal inputs to measure agent behavior not infrastructure variability</li>
-<li><strong>Evaluation scope</strong>: The 64-task set excludes only resource-access and feature-unsupport cases; preserves Terminal-Bench-2.0's core terminal-interaction property</li>
+<li>Defines the execution setup for Terminal-Bench-2.0 evaluations: Harbor as the runtime, isolated hardware, and a network cap.</li>
+<li>Explains the benchmark conditions the paper standardizes so results are comparable and not driven by infrastructure noise.</li>
+<li>Claims that concurrency is tuned per backend: 32 for MiniMax M2.5 and GLM-5, 48 for locally deployed Qwen3.5-35B-A3B.</li>
+<li>States that stable-but-slow external resources are mirrored to avoid incidental network latency failures, while unreliable or unsupported multimodal tasks are excluded from the main 64-case set.</li>
+<li>Sets up the paper’s core evaluation claim: the benchmark remains controlled while preserving the terminal-interaction setting.</li>
 </ul>
         
       </div>

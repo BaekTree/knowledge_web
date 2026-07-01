@@ -564,10 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Concludes that harness improvement should be an empirical state transition with explicit requirements: behavior changed, surface modified, evidence supporting it, and evaluation results justifying promotion</li>
-<li>Reports that Self-Harness improves Pass rates across all tested backends while preserving held-in and held-out performance under non-regression acceptance rules</li>
-<li>Acknowledges key limits: the framework operates on bounded edits under fixed benchmarks, depends on verifier quality, and would require stronger acceptance gates for higher-stakes changes</li>
-<li>Positions harnesses as evolving through recorded, testable, reversible changes grounded in behavioral evidence rather than proposer rationale alone</li>
+<li>Summarizes the paper’s core result: a fixed model can improve the harness that governs its own behavior through a propose–evaluate–accept loop.</li>
+<li>Explains why the section exists: to answer whether better behavior comes from harness changes rather than changes to the model, evaluator, or benchmark protocol.</li>
+<li>States the main claim: harness improvement should be treated as an empirical state transition, with edits justified by structured evidence and regression-tested before promotion.</li>
+<li>Concludes that Self-Harness yields small, auditable gains on Terminal-Bench-2.0 while preserving held-in and held-out performance, but remains limited to bounded, benchmark-specific self-improvement.</li>
 </ul>
         
       </div>

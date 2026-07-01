@@ -564,10 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Presents Self-Harness as a middle ground: the model iteratively improves its own harness by mining failure patterns from execution traces rather than relying on external optimization or pure human expertise.</li>
-<li>The core loop operates in four stages—evaluate current harness, mine structured evidence from clustered failures, propose diverse candidate modifications, validate through regression testing—creating an execution-evidence-driven feedback cycle.</li>
-<li>Key constraint: candidate edits target specific failure mechanisms while preserving the overall control architecture, ensuring modifications are minimal and interpretable.</li>
-<li>Enforces safety via explicit acceptance rules that promote only edits improving performance without introducing unacceptable regressions.</li>
+<li>Defines a closed-loop method where a fixed model improves its own harness using execution evidence rather than hand tuning or broad search.</li>
+<li>Explains the pipeline: run the current harness, cluster traces to find recurring failures, turn them into structured evidence, then ask the same model to propose fixes.</li>
+<li>Emphasizes that proposals should be diverse but minimal, targeting a specific failure mode without changing the overall control architecture.</li>
+<li>Sets up the paper’s core question: can self-generated evidence plus model-guided edits reliably improve harnesses while preserving behavior on held-out tasks?</li>
+<li>Claims that accepted edits must pass regression testing and only survive if they improve performance without introducing unacceptable regressions.</li>
 </ul>
         
       </div>

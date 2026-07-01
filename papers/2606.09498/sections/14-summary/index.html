@@ -564,10 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Splits task set into held-in (proposer-visible) and held-out (evaluation-only) to prevent overfitting and leakage to the proposer</li>
-<li>Held-in split supplies trajectories, verifier outcomes, and failure evidence that the proposer uses to improve harnesses</li>
-<li>Fixed task assignments and fresh environments across harness variants ensure improvements come solely from harness changes, not from experimental confounds</li>
-<li>Automatic promotion gate evaluates candidates on held-out split, confirming improvements generalize beyond the data shown to proposer</li>
+<li>Fixes the evaluated task set and splits it into held-in and held-out partitions before Self-Harness runs</li>
+<li>Uses the held-in split to expose trajectories, verifier outcomes, and failure evidence to the proposer</li>
+<li>Keeps the held-out split hidden from the proposer and reserves it for the automatic promotion gate</li>
+<li>Applies the same task split assignments across all harness variants and resets each task in a fresh benchmark environment</li>
+<li>Sets up a fair evaluation protocol so any measured gain can be attributed to harness changes, not task selection or environment carryover</li>
 </ul>
         
       </div>

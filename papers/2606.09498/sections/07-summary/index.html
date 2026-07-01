@@ -564,9 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Decomposes failures into verifier-level causes and agent mechanisms, distinguishing reusable weaknesses from surface symptoms</li>
-<li>Clusters failures deterministically by exact signature agreement, grouping only cases with matching verifier rejection and underlying mechanism</li>
-<li>Generates ranked failure patterns that identify weaknesses without prescribing fixes, maintaining evaluator-optimizer separation</li>
+<li>Converts failed runs under the current harness into structured evidence for revision by pairing each task, trace, output, and evaluator verdict.</li>
+<li>Focuses only on failures and clusters them by exact verifier-grounded failure signatures, not by vague semantic similarity.</li>
+<li>Separates terminal verifier cause, causal status of agent behavior, and reusable mechanism so the same surface symptom is not mistaken for the same underlying weakness.</li>
+<li>Produces ordered failure clusters with representative examples, shared symptoms, and inferred mechanisms, then bundles them into evidence for the next stage.</li>
+<li>Exists to answer what recurring harness-relevant weaknesses are actually driving failures, and to set up the proposer with actionable, cross-case evidence rather than a direct edit.</li>
 </ul>
         
       </div>

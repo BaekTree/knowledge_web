@@ -564,10 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Establishes the initial harness as a minimal baseline built on DeepAgent SDK with core system prompt and filesystem/shell tools</li>
-<li>Constrains self-optimization strictly to the harness definition file, excluding modifications to the SDK or underlying tools</li>
-<li>Maps editable configuration surfaces (instruction, tools, verification guidance) to specific declaration points in the harness definition</li>
-<li>Defines the scope of self-improvement: the system can only optimize through changes to these predefined editable configuration surfaces</li>
+<li>Introduces the starting harness as a deliberately minimal DeepAgent-based setup with only a short benchmark-facing system prompt and default filesystem/shell tools.</li>
+<li>Defines the only editable surface for Self-Harness: the harness definition file that controls how DeepAgent is instantiated and governed.</li>
+<li>Clarifies that candidates are created by modifying declared configuration points such as instructions, tools, and verification guidance.</li>
+<li>Sets up the paper’s central question: how much a harness can improve by editing the harness itself rather than the benchmark tasks.</li>
+<li>Claims the initial harness is intentionally constrained so later self-modifications are focused, measurable, and comparable.</li>
 </ul>
         
       </div>

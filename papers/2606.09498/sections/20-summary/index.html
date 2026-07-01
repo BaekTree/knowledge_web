@@ -564,9 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Details the inference infrastructure for the study: MiniMax M2.5 and GLM-5 accessed via hosted APIs (MiniMax's platform and OpenRouter), Qwen3.5-35B-A3B deployed locally on four NVIDIA H200 GPUs using SGLang</li>
-<li>Provides reproducible specifications with exact endpoints, subscription links, and Docker image versions to enable others to replicate the same setup</li>
-<li>Establishes a hybrid deployment strategy: cloud-hosted models for convenience and on-premise GPU compute for cost control and latency optimization</li>
+<li>Describes how the paper accessed the models used in the experiments, mixing hosted APIs for MiniMax M2.5 and GLM-5 with local deployment for Qwen3.5-35B-A3B.</li>
+<li>Sets up the execution environment so the reader knows which inference stack produced the results and how each model was run.</li>
+<li>Clarifies the practical provenance of the models, including the external services, endpoint sources, and the local SGLang-based GPU deployment.</li>
+<li>Establishes that the experiments are grounded in concrete, reproducible service choices rather than abstract model names alone.</li>
 </ul>
         
       </div>
