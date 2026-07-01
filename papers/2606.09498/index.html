@@ -572,13 +572,13 @@
         <h2 class="key-information-title">Methodology resolution</h2>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Self-Harness control flow</h3>
+          <h3 class="key-information-theme">Harness as a self-optimizing interface</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Self-Harness appears to work by changing the agent’s observable control flow at the harness level; the evidence supports that framing, but it does not explicitly establish a contrast with base-model weight updates or a fixed edit-evaluate loop.</div>
+              <div><strong>Method:</strong> Treat the harness around the model as the part being revised, with the draft suggesting that Self-Harness changes agent behavior through that surrounding control layer.</div>
               
-              <div><strong>Why it helps:</strong> This keeps the claim within the evidence while preserving the key distinction that harness-level behavior can matter independently of the underlying model.</div>
+              <div><strong>Why it helps:</strong> This keeps the focus on the controllable interface around the model rather than implying the paper proves anything about retraining or weight updates.</div>
               
               
             </li>
@@ -587,21 +587,21 @@
         </section>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Failure-mode alignment</h3>
+          <h3 class="key-information-theme">Observed failure patterns</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Use benchmark failure behavior to guide harness edits, as the evidence suggests alignment between the harness and observed failures, while leaving the exact discovery process unspecified.</div>
+              <div><strong>Method:</strong> Where benchmark failures are visible, describe the relevant control-flow pattern instead of the prompt in the abstract.</div>
               
-              <div><strong>Why it helps:</strong> This reflects the supported idea that harness changes should track failure behavior without adding an unsupported account of how those failures are identified.</div>
+              <div><strong>Why it helps:</strong> This stays close to the evidence that Self-Harness changes observable control flow, while avoiding a stronger claim that the method explicitly mines or clusters traces.</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Describe failures at a high level and revise the harness accordingly; the evidence supports this general approach, but it does not support naming specific categories such as misplanning or tool misuse without more evidence.</div>
+              <div><strong>Method:</strong> Frame the weakness in terms of the agent&#39;s behavior rather than as a purely prompt-level issue.</div>
               
-              <div><strong>Why it helps:</strong> This narrows the draft to the level of specificity supported by the source material and avoids overcommitting to a fine-grained failure taxonomy.</div>
+              <div><strong>Why it helps:</strong> That preserves the distinction the evidence supports between control-flow changes and generic prompt improvement, without asserting a formal diagnosis step.</div>
               
               
             </li>
@@ -610,45 +610,51 @@
         </section>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Evidence gaps and limitations</h3>
+          <h3 class="key-information-theme">Bounded harness proposal</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> The source material supports harness-level changes, but it does not describe a full training or optimization loop, so any such loop should be treated as provisional.</div>
+              <div><strong>Method:</strong> Propose harness edits that affect observable behavior such as recovery logic or verification steps, but treat that scope as an inference from the evidence rather than a stated procedure.</div>
               
-              <div><strong>Why it helps:</strong> This adds the required caveat for the training_or_optimization aspect without inventing an end-to-end workflow.</div>
-              
-              
-            </li>
-            
-            <li>
-              <div><strong>Method:</strong> The source material supports changes to agent control flow, but it does not spell out a concrete execution-time protocol, so the inference-side mechanism should remain high level.</div>
-              
-              <div><strong>Why it helps:</strong> This covers the inference_or_execution aspect cautiously and avoids overstating runtime details. (Note: this claim could not be fully verified against the selected evidence.)</div>
+              <div><strong>Why it helps:</strong> Narrow behavioral edits are easier to evaluate against benchmark behavior, and the evidence supports harness-level changes without spelling out a specific edit recipe.</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> The available evidence is broad rather than exhaustive, so any statement about limitations or tradeoffs should be framed as cautious and qualified rather than definitive.</div>
+              <div><strong>Method:</strong> Prefer edits that are aligned with the failure mode being addressed, while noting that the source only supports this as a general alignment, not a fixed failure-mode-specific taxonomy.</div>
               
-              <div><strong>Why it helps:</strong> This keeps the limitations aspect aligned with the evidence level and avoids presenting speculative constraints as settled conclusions. (Note: this claim could not be fully verified against the selected evidence.)</div>
-              
-              
-            </li>
-            
-            <li>
-              <div><strong>Method:</strong> The evidence points to harness-level control flow and surrounding agent machinery, but it does not enumerate the full set of main components, so a complete methodology description still needs more detail.</div>
-              
-              <div><strong>Why it helps:</strong> This adds a caveat for the main_components aspect instead of inventing a fuller component list than the evidence supports.</div>
+              <div><strong>Why it helps:</strong> This matches the benchmark-oriented framing in the evidence without overstating how explicitly the edit targets are defined.</div>
               
               
             </li>
             
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Verification and adoption</h3>
+          <ul class="key-information-points">
+            
             <li>
-              <div><strong>Method:</strong> The selected evidence distinguishes harness-level self-improvement from broader self-improvement categories only at a high level, so any comparison to prior work should remain brief and qualified.</div>
+              <div><strong>Method:</strong> Check candidate harness changes against the benchmark&#39;s verification rules when those rules are available, noting that the evidence does not spell out a full regression protocol.</div>
               
-              <div><strong>Why it helps:</strong> This addresses the difference_from_prior_work aspect cautiously and avoids claiming a detailed comparison that is not in the evidence.</div>
+              <div><strong>Why it helps:</strong> A verification step is consistent with the harness framing, but the claim is kept cautious because the workflow is not described in detail in the evidence.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Limitations</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Note as a caveat that the benchmark-dependent control-flow framing may not transfer unchanged to other settings, since the evidence does not explicitly define the scope of generalization.</div>
+              
+              <div><strong>Why it helps:</strong> This keeps the limitation as a guarded inference rather than a stronger claim about failure cases or transferability that the evidence does not directly state.</div>
               
               
             </li>
