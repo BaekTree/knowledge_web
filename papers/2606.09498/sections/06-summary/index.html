@@ -564,11 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Defines a harness as the non-parametric scaffolding around a fixed language model: instructions, tools, memory, state handling, and the execution protocol for acting and checking intermediate results.</li>
-<li>Sets up the formal problem: given a fixed model M and evaluator E, running under harness h yields a trace and output, and the evaluator maps them to behavioral success or failure.</li>
-<li>Establishes the paper’s target of improvement: not model weights, but the harness itself, treated as a sequence of bounded protocol edits h_0, h_1, ..., h_T.</li>
-<li>Introduces the Self-Harness loop, which repeatedly evaluates the current harness, builds evidence from verifier-grounded failures, proposes candidate edits in parallel, and accepts only improvements that help held-in and held-out performance without regressions.</li>
-<li>Claims the method is disciplined and selection-based: accepted edits are merged into the next harness, while rejected proposals do not affect the lineage.</li>
+<li>Defines a "harness" as the non-parametric scaffolding around a fixed language model: instructions, tools, memory, state handling, and the execution protocol for acting and verifying.</li>
+<li>Sets up the paper’s core framing: the model M and evaluator E stay fixed, while the harness h is the thing being improved over time.</li>
+<li>Introduces Self-Harness as a lineage of harness versions h0, h1, ..., where each step is a bounded edit to the agent protocol rather than a weight update.</li>
+<li>Lays out the optimization loop: evaluate the current harness, build evidence from verifier-grounded failures, propose multiple edits in parallel, test candidates, and merge only accepted improvements.</li>
+<li>Claims the harness can be systematically improved by using held-in/held-out evaluation to guide edits while preserving the underlying model.</li>
 </ul>
         
       </div>

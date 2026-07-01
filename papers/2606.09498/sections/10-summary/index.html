@@ -564,11 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Tests whether Self-Harness can improve agent performance by changing only the harness while keeping the language model fixed.</li>
+<li>Tests whether Self-Harness can raise agent performance by changing only the harness while keeping the language model fixed.</li>
 <li>Uses Terminal-Bench-2.0, a terminal-interaction benchmark in containerized environments, as the evaluation setting.</li>
-<li>Starts from the same minimal DeepAgent-based harness across multiple model backends, so gains can be attributed to harness edits rather than model changes.</li>
-<li>Lets Self-Harness propose, validate, and promote bounded harness edits using held-in execution evidence and held-out regression gates.</li>
-<li>Sets up the paper’s central performance claim: a self-improving harness can measurably boost agent behavior without retraining or swapping the underlying model.</li>
+<li>Starts from the same minimal DeepAgent-based harness across multiple model backends, then lets Self-Harness propose, validate, and promote bounded edits.</li>
+<li>Uses held-in execution evidence plus held-out regression gates to control which harness changes are accepted.</li>
+<li>Sets up the paper’s main empirical claim: harness self-improvement can yield better agent behavior without model changes.</li>
 </ul>
         
       </div>

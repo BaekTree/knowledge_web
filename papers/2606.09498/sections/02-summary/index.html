@@ -564,11 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Frames the core problem: agent performance depends heavily on the harness, not just the base model, and current harnesses are mostly hand-engineered.</li>
-<li>Sets up the paper’s main question: can a model improve the harness that shapes its own behavior, instead of relying on humans or stronger external agents?</li>
-<li>Introduces Self-Harness as an iterative loop that mines failure patterns from traces, proposes targeted harness edits, and validates them with regression tests.</li>
-<li>Claims the approach improves multiple base models on Terminal-Bench-2.0, with gains that generalize to held-out tasks rather than just fitting observed failures.</li>
-<li>Establishes that the learned changes are model-specific and structural, not just longer prompts or generic instructions, which motivates the rest of the paper.</li>
+<li>Frames the core problem: an agent’s behavior is shaped not just by its base model but by its harness, so the same model can perform very differently under different surrounding systems.</li>
+<li>Sets up the paper’s main question: can a model improve the harness it runs in, instead of relying on humans or stronger external agents to redesign it?</li>
+<li>Introduces Self-Harness as an internal improvement loop that mines failures from execution traces, proposes small targeted harness edits, and keeps only changes that pass regression checks.</li>
+<li>Claims the approach works in practice: across three diverse models on Terminal-Bench-2.0, Self-Harness improves both held-in and held-out performance.</li>
+<li>Argues the gains come from model-specific, behavior-driven harness changes rather than generic prompt lengthening, and that some edits add broader structural improvements such as decomposition and middleware.</li>
 </ul>
         
       </div>

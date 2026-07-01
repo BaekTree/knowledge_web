@@ -564,11 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Defines a closed-loop method where a fixed model improves its own harness using execution evidence rather than hand tuning or broad search.</li>
-<li>Explains the pipeline: run the current harness, cluster traces to find recurring failures, turn them into structured evidence, then ask the same model to propose fixes.</li>
-<li>Emphasizes that proposals should be diverse but minimal, targeting a specific failure mode without changing the overall control architecture.</li>
-<li>Sets up the paper’s core question: can self-generated evidence plus model-guided edits reliably improve harnesses while preserving behavior on held-out tasks?</li>
-<li>Claims that accepted edits must pass regression testing and only survive if they improve performance without introducing unacceptable regressions.</li>
+<li>Defines the core Self-Harness loop: the model evaluates its current harness, extracts recurring failure patterns from execution traces, proposes targeted edits, and then validates them on held-out tasks.</li>
+<li>Explains the paper’s middle-ground position between manual harness engineering and external search-based optimization: the harness is improved by the same fixed model, but only through evidence from actual failures.</li>
+<li>Sets up why explicit structured evidence matters: clustered traces turn raw errors into actionable guidance for proposing minimal, diverse changes.</li>
+<li>Claims that candidate edits should be narrow and mechanism-specific rather than architectural overhauls, so the control loop stays stable while weaknesses are patched.</li>
+<li>Emphasizes the acceptance rule as the safeguard: only edits that improve performance without unacceptable regressions are promoted.</li>
 </ul>
         
       </div>

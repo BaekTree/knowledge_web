@@ -564,11 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Evaluates each proposed harness edit as a candidate variant against the current harness on both held-in and held-out splits.</li>
-<li>Exists to answer whether an edit truly fixes the motivating evidence without introducing regressions in unseen behaviors.</li>
-<li>Accepts a candidate only if it improves at least one split and does not degrade the other, with repeated evaluation used to reduce stochastic false positives.</li>
-<li>If multiple compatible candidates pass, they are merged into the next harness; rejected or invalid proposals stay logged without changing the active harness.</li>
-<li>The section’s core claim is that conservative, auditable validation is necessary for safe self-improvement.</li>
+<li>Treat every proposed harness edit as a candidate variant and evaluate it with the same evaluator used on the current harness.</li>
+<li>Compare each candidate on both held-in and held-out splits so the edit must fix the motivating evidence without harming unseen behaviors.</li>
+<li>Accept a candidate only when it improves at least one split and does not degrade the other; total pass-count gains alone are not enough.</li>
+<li>Repeat stochastic evaluations and use aggregate counts to reduce promotions caused by lucky runs.</li>
+<li>Log changed surfaces, split-wise results, repeats, and the final accept/reject decision so harness evolution stays auditable.</li>
 </ul>
         
       </div>

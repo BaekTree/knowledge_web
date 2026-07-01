@@ -564,10 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Evaluates Self-Harness on three fixed models: MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5.</li>
-<li>Keeps the base model constant across all harness variants, and also uses that same model during proposal generation from evaluator feedback.</li>
-<li>Makes every comparison a within-model test by holding decoding, budget, tools, benchmark environment, and evaluator fixed while varying only the harness.</li>
-<li>Sets up the paper’s core causal claim: any performance differences can be attributed to Self-Harness itself, not to model capability or evaluation changes.</li>
+<li>Evaluates Self-Harness on three fixed base models: MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5.</li>
+<li>Keeps the model constant across all harness variants, and also uses it in the proposal stage to turn evaluator feedback into edits.</li>
+<li>Compares harnesses within the same model, holding decoding, budget, tools, benchmark environment, and evaluator fixed.</li>
+<li>Sets up a controlled test so any performance difference can be attributed to the harness itself, not to model strength or protocol changes.</li>
 </ul>
         
       </div>

@@ -564,11 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Defines the execution setup for Terminal-Bench-2.0 evaluations: Harbor as the runtime, isolated hardware, and a network cap.</li>
-<li>Explains the benchmark conditions the paper standardizes so results are comparable and not driven by infrastructure noise.</li>
-<li>Claims that concurrency is tuned per backend: 32 for MiniMax M2.5 and GLM-5, 48 for locally deployed Qwen3.5-35B-A3B.</li>
-<li>States that stable-but-slow external resources are mirrored to avoid incidental network latency failures, while unreliable or unsupported multimodal tasks are excluded from the main 64-case set.</li>
-<li>Sets up the paper’s core evaluation claim: the benchmark remains controlled while preserving the terminal-interaction setting.</li>
+<li>Sets the exact evaluation environment for Terminal-Bench-2.0 tasks, using Harbor on an isolated high-resource machine with a tight outbound bandwidth cap.</li>
+<li>Fixes the main concurrency settings by backend, with 32 parallel tasks for MiniMax M2.5 and GLM-5 and 48 for the local Qwen3.5-35B-A3B backend.</li>
+<li>Reduces noise from slow external dependencies by mirroring stable but sluggish resources, so failures reflect agent behavior more than network latency.</li>
+<li>Narrows the 64-case benchmark to tasks that are reliably runnable in the harness, excluding unstable external-resource tasks and unsupported multimodal tasks.</li>
 </ul>
         
       </div>

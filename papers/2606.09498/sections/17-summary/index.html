@@ -564,11 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Shows how the harness changes over time for MiniMax M2.5, Qwen3.5, and GLM-5, and which edits survive into the final promoted variant.</li>
-<li>Sets up the paper’s core question of whether self-improving harnesses converge through gradual improvement or through a few validation-gated edits that fix specific failures.</li>
-<li>Claims the final gains come from targeted, model-specific repairs rather than a smooth stream of uniformly successful proposals.</li>
-<li>Highlights the shared theme of artifact reliability while showing different failure modes for each model, such as missing outputs, tool-loop stalls, retry discipline, and environment persistence.</li>
-<li>Establishes that Self-Harness adapts the harness to each model’s observed pathologies, producing edits that improve recovery, execution control, and successful artifact delivery.</li>
+<li>Shows how Self-Harness evolves each model’s harness by tracking accepted vs. rejected proposals and the final retained code edits.</li>
+<li>Sets up the question of whether the system converges through gradual improvement or through a few validated, targeted changes.</li>
+<li>Claims the final harness is reached by a small number of validation-gated edits, not a smooth stream of uniformly successful proposals.</li>
+<li>Shows the common theme across models is better artifact reliability, while the specific fixes differ by model failure mode.</li>
+<li>Demonstrates that Self-Harness adapts its proposals to each model’s pathologies, such as early artifact creation, tool-error recovery, retry discipline, and persistent execution context.</li>
 </ul>
         
       </div>

@@ -564,10 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Evaluates Self-Harness on Terminal-Bench-2.0, a multi-turn terminal benchmark with deterministic verifiers in realistic execution environments.</li>
-<li>Uses a fixed 64-task subset to measure harness changes more cleanly and reduce noise from unstable external web dependencies.</li>
-<li>Excludes multimodal tasks because the initial harness does not support modality-specific inputs, so those tasks would test missing harness capability instead of Self-Harness itself.</li>
-<li>Sets up the paper's core comparison by focusing evaluation on tool use, verification, artifact handling, and recovery from execution errors.</li>
+<li>Evaluates Self-Harness on Terminal-Bench-2.0, a multi-turn terminal benchmark with deterministic verifiers.</li>
+<li>Uses a fixed 64-case subset to keep the evaluation focused and reduce noise from unstable web dependencies and unsupported multimodal inputs.</li>
+<li>Sets up the paper’s core measurement question: whether harness edits improve agent performance in realistic execution tasks.</li>
+<li>Claims the benchmark tests broad tool-use skills like artifact handling, command use, verification, and recovery from execution errors.</li>
+<li>Argues that excluding multimodal and web-fragile tasks makes the results better reflect harness quality rather than missing initial capabilities.</li>
 </ul>
         
       </div>

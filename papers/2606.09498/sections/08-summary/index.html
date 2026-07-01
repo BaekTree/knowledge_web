@@ -564,11 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Translates the evidence bundle into concrete candidate harness edits, using the current harness, failure patterns, preserved passing behavior, and prior edit history as bounded context.</li>
-<li>Sets up the paper’s answer to how self-improvement should search the harness space: not with a free-form optimizer, but with the same fixed model making grounded proposals from structured evidence.</li>
-<li>Claims that proposal generation should be parallel and diverse: multiple mutually distinct candidate bundles are produced from the same evidence to broaden exploration.</li>
-<li>Claims each candidate must be both evidence-backed and addressable by an editable harness surface, excluding weak, task-specific, or capability-limited failures that are not suitable for harness changes.</li>
-<li>Establishes the design rule that proposals should be minimal within each branch, changing only the surface needed to target one clear failure mechanism while preserving unrelated behavior.</li>
+<li>Turns the evidence bundle into candidate harness edits by asking the same fixed model to act as a proposer under a bounded context.</li>
+<li>Exists to answer how Self-Harness explores improvements without giving an unrestricted optimizer free rein over the search space.</li>
+<li>Selects only failure patterns that are both evidence-backed and plausibly fixable through an editable harness surface, filtering out task-specific or capability-limited failures.</li>
+<li>Generates several materially distinct proposal branches in parallel, each tied to one primary mechanism and a concrete harness surface.</li>
+<li>Enforces minimality within each branch so edits preserve unrelated behavior, avoid broad rewrites, and keep each candidate interpretable and auditable.</li>
 </ul>
         
       </div>

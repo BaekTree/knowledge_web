@@ -558,11 +558,11 @@
 
       <div class="root-intuition">
         
-        <p><strong>TL;DR:</strong> Self-Harness shows that an LLM agent can improve the rules that steer it by turning its own failures into small, tested harness edits.</p>
+        <p><strong>TL;DR:</strong> Self-Harness shows that a language model can improve the rules around itself by studying its own failures, proposing small harness changes, and keeping only the ones that help.</p>
 <ul>
-<li><strong>Problem:</strong> Human-built agent harnesses are slow to adapt and often miss the model-specific mistakes they are meant to prevent.</li>
-<li><strong>Insight:</strong> The key idea is a loop of finding repeated failure patterns, proposing minimal fixes, and keeping only changes that pass regression tests.</li>
-<li><strong>Why it matters:</strong> It points to a practical way for agents to get better without relying on constant human tuning, and it boosts performance across different model families.</li>
+<li><strong>Problem:</strong> LLM agents still depend on human-made harnesses, which do not scale well and often fit one model poorly.</li>
+<li><strong>Insight:</strong> The key idea is to turn execution traces into model-specific harness edits, then accept only changes that pass regression checks.</li>
+<li><strong>Why it matters:</strong> This makes agent design more adaptive, because the system can keep refining how it works instead of waiting for humans to rewrite the rules every time a model changes.</li>
 </ul>
         
       </div>
@@ -572,21 +572,21 @@
         <h2 class="key-information-title">Methodology resolution</h2>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Trace-grounded weakness mining</h3>
+          <h3 class="key-information-theme">Harness as the editable control layer</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Use benchmark runs and their execution traces to look for recurring failure modes before revising the harness.</div>
+              <div><strong>Method:</strong> Define the harness as the non-parametric scaffold around a fixed model, including instructions, tools, memory, state handling, and verifier hooks.</div>
               
-              <div><strong>Why it helps:</strong> This keeps the workflow evidence-oriented, while leaving the exact ordering of runs, trace capture, and review as a draft-level choice rather than a claimed fact.</div>
+              <div><strong>Why it helps:</strong> This turns improvement into a systems problem: the model stays fixed while the execution protocol changes, so gains can be attributed to harness design instead of weight updates.</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Review trace-level failures for repeated patterns and summarize them in a compact notes form.</div>
+              <div><strong>Method:</strong> Represent self-improvement as a lineage of harness versions with bounded edits to the harness.</div>
               
-              <div><strong>Why it helps:</strong> This can help organize noisy observations, but the evidence supports trace diagnosis more directly than any formal clustering or report artifact.</div>
+              <div><strong>Why it helps:</strong> A versioned harness makes each change easier to trace and compare, and it keeps rollback or reversibility as a possible operational goal rather than a guaranteed property.</div>
               
               
             </li>
@@ -595,21 +595,21 @@
         </section>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Iterative harness proposal</h3>
+          <h3 class="key-information-theme">Trace-to-evidence mining</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Use the same model inside an iterative harness-improvement loop to propose harness revisions.</div>
+              <div><strong>Method:</strong> Run the current harness and collect execution traces, tool calls, and verifier outcomes on the benchmark tasks.</div>
               
-              <div><strong>Why it helps:</strong> Keeping proposal generation within the system being improved is consistent with the evidence, though the exact use of a weakness summary remains an inference.</div>
+              <div><strong>Why it helps:</strong> The traces expose how the agent actually failed at runtime, giving the method concrete behavioral evidence instead of vague intuition.</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Translate accepted edits into harness behavior changes that alter observable control flow and recovery behavior during execution.</div>
+              <div><strong>Method:</strong> Cluster recurring failures into a structured evidence bundle before proposing edits.</div>
               
-              <div><strong>Why it helps:</strong> This matches the evidence that Self-Harness changes control flow around the model, without adding unsupported detail about specific policy mechanisms. (Note: this claim could not be fully verified against the selected evidence.)</div>
+              <div><strong>Why it helps:</strong> Grouping repeated failure patterns focuses the search on mechanisms that are stable and fixable by the harness, rather than isolated mistakes or noise.</div>
               
               
             </li>
@@ -618,29 +618,62 @@
         </section>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Regression-gated validation</h3>
+          <h3 class="key-information-theme">Minimal branching proposal generation</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Evaluate candidate harness revisions with runtime checks and accept them only when they satisfy the intended verification rules.</div>
+              <div><strong>Method:</strong> Use the same model in a proposer role to generate multiple candidate harness edits from the evidence bundle.</div>
               
-              <div><strong>Why it helps:</strong> The evidence supports a checked improvement loop, while the exact acceptance policy should be treated as draft framing rather than a directly stated requirement.</div>
+              <div><strong>Why it helps:</strong> Multiple branches let the system explore alternative fixes while staying grounded in observed failures; the exact context bound is an inference, not an explicit claim.</div>
+              
+              
+              <figure class="key-information-figure">
+                
+                <img src="images/sh-6-8-4.png" alt="Overview of one Self-Harness optimization loop. The model weights remain fixed while the surrounding harness evolves through bounded, automatically validated harness edits. Each candidate harness is evaluated by a fixed evaluation system, and the acceptance gate promotes a candidate only when it preserves both train and held-out gate performance while improving at least one split. Accepted candidates advance the lineage; rejected candidates are logged without changing the active harness.">
+                
+                <figcaption class="figure-caption">
+                  sh-6-8-4.pdf
+                   — Overview of one Self-Harness optimization loop. The model weights remain fixed while the surrounding harness evolves through bounded, automatically validated harness edits. Each candidate harness is evaluated by a fixed evaluation system, and the acceptance gate promotes a candidate only when it preserves both train and held-out gate performance while improving at least one split. Accepted candidates advance the lineage; rejected candidates are logged without changing the active harness.
+                </figcaption>
+              </figure>
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Constrain each proposal to be minimal and tied to a specific failure mechanism.</div>
+              
+              <div><strong>Why it helps:</strong> Minimal edits reduce collateral regressions and keep the search targeted, although the evidence does not explicitly name the editable surface.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Regression-gated promotion</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Evaluate each candidate harness with the same evaluator on held-in and held-out splits.</div>
+              
+              <div><strong>Why it helps:</strong> Using a fixed evaluation path makes candidate comparison apples-to-apples and exposes whether a fix generalizes beyond the evidence that motivated it.</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Keep unaccepted candidates separate from the active harness until a candidate is accepted for use.</div>
+              <div><strong>Method:</strong> Promote a candidate only if it improves at least one split and does not degrade the other, then merge accepted edits into the next harness version.</div>
               
-              <div><strong>Why it helps:</strong> This preserves a conservative workflow, though the evidence does not explicitly define this bookkeeping distinction.</div>
+              <div><strong>Why it helps:</strong> The gate prevents one-split wins from silently harming generalization, so self-improvement stays conservative and auditable over time.</div>
               
               
             </li>
             
             <li>
-              <div><strong>Method:</strong> Carry only accepted harness changes forward into the next iteration.</div>
+              <div><strong>Method:</strong> Log rejected candidates instead of letting them alter the active harness.</div>
               
-              <div><strong>Why it helps:</strong> This keeps the process cumulative and remains aligned with the iterative harness-improvement framing in the evidence. (Note: this claim could not be fully verified against the selected evidence.)</div>
+              <div><strong>Why it helps:</strong> Keeping rejected edits in the record preserves lineage and makes later analysis of failure modes and discarded ideas possible without contaminating the current system.</div>
               
               
             </li>
@@ -653,9 +686,9 @@
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Note that the draft still needs a clearer comparison against prior work or related self-improvement baselines.</div>
+              <div><strong>Method:</strong> Position Self-Harness as a middle ground between manual harness engineering and broader search-based optimization, while treating the precise novelty boundary as a cautious interpretation rather than a settled claim.</div>
               
-              <div><strong>Why it helps:</strong> The evidence pack situates Self-Harness among related approaches, but it does not provide a full baseline comparison, so this caveat keeps the draft from overclaiming.</div>
+              <div><strong>Why it helps:</strong> This clarifies how the method relates to prior approaches without overstating what the selected evidence directly proves.</div>
               
               
             </li>
@@ -664,13 +697,13 @@
         </section>
         
         <section class="key-information-group">
-          <h3 class="key-information-theme">Limitations and boundaries</h3>
+          <h3 class="key-information-theme">Limitations</h3>
           <ul class="key-information-points">
             
             <li>
-              <div><strong>Method:</strong> Treat boundary conditions, failure cases, and scope limits as provisional until the draft adds more direct evidence.</div>
+              <div><strong>Method:</strong> Note that the selected evidence does not yet specify concrete limits on compute cost, scope, or failure cases, so this limitation section should remain provisional.</div>
               
-              <div><strong>Why it helps:</strong> This keeps the explanation honest about what is and is not supported by the current evidence pack.</div>
+              <div><strong>Why it helps:</strong> This keeps the draft honest about an evidence gap instead of implying the methodology is more general than the sources support.</div>
               
               
             </li>

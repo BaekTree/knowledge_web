@@ -564,10 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Describes how the paper accessed the models used in the experiments, mixing hosted APIs for MiniMax M2.5 and GLM-5 with local deployment for Qwen3.5-35B-A3B.</li>
-<li>Sets up the execution environment so the reader knows which inference stack produced the results and how each model was run.</li>
-<li>Clarifies the practical provenance of the models, including the external services, endpoint sources, and the local SGLang-based GPU deployment.</li>
-<li>Establishes that the experiments are grounded in concrete, reproducible service choices rather than abstract model names alone.</li>
+<li>Describes the runtime setup used to run the paper’s evaluated models, including hosted APIs and local deployment.</li>
+<li>Establishes the practical inference environment behind the experiments, so readers know how each model was accessed and served.</li>
+<li>Shows that MiniMax M2.5 and GLM-5 were consumed via external hosted services, while Qwen3.5-35B-A3B was run locally on four NVIDIA H200 GPUs.</li>
+<li>Key claim: the reported results are grounded in specific, reproducible serving choices rather than an abstract model-only comparison.</li>
 </ul>
         
       </div>

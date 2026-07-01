@@ -564,11 +564,10 @@
       <div class="section-summary">
         
         <ul>
-<li>Examines before-and-after traces from several backends to show how accepted harness edits change agent behavior.</li>
-<li>Exists to answer whether Self-Harness improves models through targeted workflow changes, not a generic prompt boost.</li>
-<li>Shows MiniMax M2.5 being pushed toward earlier artifact creation, bounded tool use, and a concrete write-and-verify workflow.</li>
-<li>Shows Qwen3.5 gaining better failure recovery through dependency checks, loop breaking, retry discipline, and keeping required artifacts present.</li>
-<li>Shows GLM-5 improving persistence across shell sessions and switching from exploration to implementation once evidence indicates the current approach is stalled.</li>
+<li>Examines before-after execution traces to show how accepted harness edits change behavior in practice</li>
+<li>Exists to explain what mechanism sits behind the quantitative gains: whether Self-Harness makes targeted workflow changes rather than generic prompt improvements</li>
+<li>Argues that the edits are model-specific and address each backend’s dominant failure mode: earlier artifact creation and bounded execution for MiniMax M2.5, better error recovery and loop breaking for Qwen3.5, and persistent environment handling plus earlier transition from exploration to implementation for GLM-5</li>
+<li>Concludes that performance improvements come from induced workflow changes that directly fix observed failures, not from unrelated randomness or a uniformly stronger harness</li>
 </ul>
         
       </div>

@@ -561,11 +561,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Converts failed runs under the current harness into structured evidence for revision by pairing each task, trace, output, and evaluator verdict.</li>
-<li>Focuses only on failures and clusters them by exact verifier-grounded failure signatures, not by vague semantic similarity.</li>
-<li>Separates terminal verifier cause, causal status of agent behavior, and reusable mechanism so the same surface symptom is not mistaken for the same underlying weakness.</li>
-<li>Produces ordered failure clusters with representative examples, shared symptoms, and inferred mechanisms, then bundles them into evidence for the next stage.</li>
-<li>Exists to answer what recurring harness-relevant weaknesses are actually driving failures, and to set up the proposer with actionable, cross-case evidence rather than a direct edit.</li>
+<li>Converts failed runs under the current harness into structured evidence for later harness revision.</li>
+<li>Runs the fixed model and evaluator on held-in tasks, then records each trace as a failure record with outcome labels.</li>
+<li>Clusters failures by an evaluator-grounded signature: terminal verifier cause, causal status of the agent behavior, and the abstract mechanism behind it.</li>
+<li>Exists to avoid treating failures as isolated anecdotes and to separate superficial symptoms from reusable weaknesses that can share one harness fix.</li>
+<li>Produces an ordered evidence bundle of dominant failure patterns, prioritized by support and estimated actionability, without prescribing an edit yet.</li>
 </ul>
         
       </div>

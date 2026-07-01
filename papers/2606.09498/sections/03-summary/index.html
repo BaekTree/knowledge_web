@@ -564,10 +564,11 @@
       <div class="section-summary">
         
         <ul>
-<li>Defines the paper’s scope shift from prompt engineering to the broader harness around a model</li>
-<li>Explains that agent behavior is shaped by execution-time context: tools, memory, feedback, policies, and runtime mechanisms</li>
-<li>Sets up the motivation for Self-Harness by arguing that many agent failures come from harness design, not just model mistakes</li>
-<li>Claims that fixing agent reliability requires changing the surrounding system, not only the prompt text</li>
+<li>Reframes prompting as only one part of control, then expands to agent harnesses: the surrounding execution system that shapes behavior.</li>
+<li>Sets up the paper’s core question: why agent failures often come from the runtime layer, not from a single bad model response.</li>
+<li>Defines harnesses as prompts, tools, memory, verification, permissions, adapters, and other runtime mechanisms that mediate model-environment interaction.</li>
+<li>Claims that long-horizon errors like false success, bad retries, lost state, and missing recovery paths arise from instruction-observation-tool feedback loops.</li>
+<li>Establishes the need to improve system design, not just prompt text, if self-improving harnesses are to work.</li>
 </ul>
         
       </div>
