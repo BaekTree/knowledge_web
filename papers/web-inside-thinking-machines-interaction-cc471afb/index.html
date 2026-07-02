@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inside Thinking Machines’ Interaction Models — Article Study</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --line: #d9d9d9;
+      --panel: #f7f7f7;
+      --control: #111111;
+      --max-width: 760px;
+      --index-width: 13.5rem;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .chrome {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .home-link,
+    .paper-meta {
+      pointer-events: auto;
+      font-size: 0.95rem;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.94);
+    }
+
+    .home-link:hover,
+    .paper-root-link:hover {
+      color: var(--text);
+    }
+
+    .paper-meta {
+      text-align: right;
+      line-height: 1.4;
+    }
+
+    .paper-meta.web-meta {
+      max-width: 28rem;
+    }
+
+    .paper-root-link {
+      color: inherit;
+    }
+
+    .source-site,
+    .source-author,
+    .source-date,
+    .source-url,
+    .source-host {
+      display: block;
+    }
+
+    .source-site {
+      color: var(--text);
+    }
+
+    .source-url {
+      word-break: break-word;
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }
+
+    .brief-index {
+      position: fixed;
+      left: 1.4rem;
+      top: 5.25rem;
+      width: var(--index-width);
+      max-height: calc(100vh - 7rem);
+      overflow: auto;
+      padding: 0.2rem 0;
+      z-index: 8;
+      background: rgba(255, 255, 255, 0.94);
+      border-left: 1px solid var(--line);
+      pointer-events: auto;
+    }
+
+    .brief-index-title {
+      margin: 0 0 0.7rem;
+      padding-left: 0.85rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brief-index-list {
+      display: grid;
+      gap: 0.25rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .brief-index-link {
+      display: block;
+      padding: 0.2rem 0.85rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    .brief-index-link:hover,
+    .brief-index-link.is-active {
+      color: var(--text);
+    }
+
+    .brief-index-link.is-active {
+      border-left: 2px solid var(--text);
+      padding-left: calc(0.85rem - 2px);
+    }
+
+    .viewport {
+      min-height: 100vh;
+      padding: 4.5rem 1.25rem 2rem calc(var(--index-width) + 2.8rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: pan-y;
+    }
+
+    .page-card {
+      width: 100%;
+      max-width: var(--max-width);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 2.5rem 2.25rem 2rem;
+      position: relative;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.9rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+      line-height: 1.2;
+      margin: 0 0 1.2rem;
+    }
+
+    .root-intuition {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .section-summary {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .deeper-copy {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.75;
+      margin: 0;
+      padding: 1.2rem 1.35rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
+    .deeper-copy p {
+      margin: 0 0 1em;
+    }
+
+    .deeper-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .page-media {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .key-information {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .key-information-title {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .key-information-group + .key-information-group {
+      margin-top: 1.5rem;
+    }
+
+    .key-information-theme {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .key-information-points {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .key-information-figure {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+      list-style: none;
+    }
+
+    .key-information-figure img {
+      display: block;
+      width: 100%;
+      max-height: 28rem;
+      margin: 0 auto;
+    }
+
+    .page-figure {
+      margin: 0;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      background: #fcfcfc;
+    }
+
+    .page-figure img {
+      display: block;
+      width: 100%;
+      max-height: 36rem;
+      margin: 0 auto;
+    }
+
+    .figure-caption {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
+    .empty-copy {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .summary-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .summary-nav.bottom {
+      margin-top: 2rem;
+      margin-bottom: 0;
+    }
+
+    .summary-nav-spacer {
+      flex: 1 1 0;
+    }
+
+    .summary-nav-link,
+    .down-control,
+    .up-control {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      color: var(--control);
+      font: inherit;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .summary-nav-link {
+      min-height: 2.75rem;
+      padding: 0.55rem 0.95rem;
+      font-size: 0.95rem;
+      line-height: 1.2;
+    }
+
+    .summary-nav-link.next {
+      margin-left: auto;
+    }
+
+    .summary-nav-label {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .down-control,
+    .up-control {
+      margin-top: 2rem;
+      padding: 0.55rem 1rem;
+      background: transparent;
+    }
+
+    .down-label,
+    .up-label {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .screen-reader-hint {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    @media (max-width: 720px) {
+      .chrome {
+        padding: 0.75rem 0.25rem 0;
+        flex-direction: column;
+      }
+
+      .paper-meta {
+        text-align: left;
+      }
+
+      .brief-index {
+        position: static;
+        width: auto;
+        max-height: none;
+        margin: 6.1rem 0.25rem 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brief-index-title {
+        padding-left: 0;
+      }
+
+      .brief-index-list {
+        display: flex;
+        gap: 0.35rem;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+      }
+
+      .brief-index-link {
+        white-space: nowrap;
+        padding: 0.25rem 0.45rem;
+      }
+
+      .brief-index-link.is-active {
+        border-left: 0;
+        border-bottom: 2px solid var(--text);
+        padding-left: 0.45rem;
+      }
+
+      .viewport {
+        padding: 1.25rem 0.25rem 1.5rem;
+      }
+
+      .page-card {
+        padding: 1.25rem 0.85rem 1.5rem;
+      }
+
+      .summary-nav {
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .summary-nav.bottom {
+        margin-top: 1.5rem;
+      }
+
+      .summary-nav-link {
+        min-height: 2.5rem;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body
+  data-prev-summary=""
+  data-next-summary="sections/01-summary/index.html"
+  data-deep-page=""
+  data-up-page=""
+>
+  <div class="chrome">
+    <a class="home-link" href="../../index.html">All papers</a>
+    <div class="paper-meta web-meta">
+      <div><a class="paper-root-link" href="./index.html">Inside Thinking Machines’ Interaction Models</a></div>
+      
+      <div class="source-site">blog.bytebytego.com</div>
+      
+      <div class="source-author">ByteByteGo</div>
+      
+      
+      <div class="source-date">Date unavailable</div>
+      
+      
+      <div><a class="source-url" href="https://blog.bytebytego.com/p/inside-thinking-machines-interaction">https://blog.bytebytego.com/p/inside-thinking-machines-interaction</a></div>
+      
+      
+    </div>
+  </div>
+
+  <nav class="brief-index" aria-label="Brief index">
+    <p class="brief-index-title">Brief index</p>
+    <ol class="brief-index-list">
+      
+      <li>
+        <a class="brief-index-link is-active" href="index.html">Top</a>
+      </li>
+      
+      <li>
+        <a class="brief-index-link" href="sections/01-summary/index.html">01 Article</a>
+      </li>
+      
+    </ol>
+  </nav>
+
+  <main class="viewport" id="viewport">
+    <article class="page-card">
+      
+      <nav class="summary-nav top" aria-label="Summary navigation">
+        
+        <span class="summary-nav-spacer" aria-hidden="true"></span>
+        
+        
+        <a class="summary-nav-link next" href="sections/01-summary/index.html" aria-label="Next summary page">
+          <span class="summary-nav-label">Next</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        
+      </nav>
+      
+
+      <p class="eyebrow">Top level intuition</p>
+      
+
+      <div class="root-intuition">
+        
+        <p><strong>TL;DR:</strong> The paper explains how Thinking Machines designs interaction models that let people and AI work together more naturally and reliably.</p>
+<ul>
+<li><strong>Problem:</strong> It tackles the problem of turning messy human intent into a predictable interaction flow.</li>
+<li><strong>Insight:</strong> Its key idea is to use clear interaction patterns that shape the conversation instead of leaving the user to improvise.</li>
+<li><strong>Why it matters:</strong> That matters because better interaction models make AI tools easier to trust, use, and scale.</li>
+</ul>
+        
+      </div>
+
+      
+      <section class="key-information" aria-label="Methodology resolution">
+        <h2 class="key-information-title">Methodology resolution</h2>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Problem Setting</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Treat real-time AI as a continuous interaction problem rather than a discrete request-response problem.</div>
+              
+              <div><strong>Why it helps:</strong> This aligns the system with how human collaboration actually unfolds: speech, gaze, interruption, and feedback happen continuously, not in clean turns.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Identify the turn-based voice stack as the bottleneck, not just latency.</div>
+              
+              <div><strong>Why it helps:</strong> The model only sees a cleaned-up post-hoc turn, so important cues are lost before reasoning even begins.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Separate fast interactive needs from slower reasoning needs.</div>
+              
+              <div><strong>Why it helps:</strong> Hard tasks often need browsing, deliberation, and tool use, so a single-response latency target is the wrong objective.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Core Idea</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Replace discrete turns with 200-millisecond micro-turns.</div>
+              
+              <div><strong>Why it helps:</strong> Small time slices let the system react while an interaction is still unfolding, enabling interruption, overlap, and proactive correction.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Make interaction modality-first, starting from audio and video rather than text.</div>
+              
+              <div><strong>Why it helps:</strong> Live multimodal interaction exposes the limits of turn-based orchestration more clearly than text-only workflows.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Design for continuous collaboration instead of task handoff.</div>
+              
+              <div><strong>Why it helps:</strong> The human stays in the loop throughout execution, which makes the system better at clarification, redirection, and mid-course correction.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Method Pipeline</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Continuously ingest whatever has arrived in the current time slice.</div>
+              
+              <div><strong>Why it helps:</strong> This preserves the temporal structure of the interaction instead of flattening it into a single finalized turn.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Use voice activity detection as a boundary detector for user speech.</div>
+              
+              <div><strong>Why it helps:</strong> It provides a simple operational signal for when the system should stop treating audio as active speech and transition to the next phase.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Run background reasoning asynchronously and merge outputs back into the live exchange.</div>
+              
+              <div><strong>Why it helps:</strong> The user experiences one continuous interaction while slower tasks finish in parallel.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Main Components</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Interaction model for low-latency, always-on engagement.</div>
+              
+              <div><strong>Why it helps:</strong> It handles immediate conversational responsiveness without waiting for slower reasoning to finish.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Background model for extended reasoning, browsing, and tool use.</div>
+              
+              <div><strong>Why it helps:</strong> It preserves capability for deeper tasks without forcing them onto the latency-critical path.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Lightweight audio and video components learned from scratch.</div>
+              
+              <div><strong>Why it helps:</strong> This points to a more self-contained multimodal pipeline instead of depending on heavy external encoders.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Training or Optimization</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Favor smaller audio/video components learned from scratch.</div>
+              
+              <div><strong>Why it helps:</strong> This suggests the system is being shaped for a self-contained interaction pipeline rather than a dependency-heavy encoder stack.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Optimize the interaction model for low latency while keeping the background model slow and rich.</div>
+              
+              <div><strong>Why it helps:</strong> This avoids forcing one model to satisfy incompatible objectives at once.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Use custom benchmarks such as TimeSpeak, CueSpeak, RepCount-A, and ProactiveVideoQA.</div>
+              
+              <div><strong>Why it helps:</strong> These tests measure continuous and proactive behavior that ordinary voice benchmarks miss.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Inference or Execution</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Run each 200-millisecond slice as a chance to read and write across streams.</div>
+              
+              <div><strong>Why it helps:</strong> The model can react before a user turn is formally closed, which is essential for real-time dialogue.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Surface background-model results only when the interaction model decides the timing is right.</div>
+              
+              <div><strong>Why it helps:</strong> This keeps the user experience continuous instead of exposing internal handoffs.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Use simple speech-boundary detection to know when user speech has paused.</div>
+              
+              <div><strong>Why it helps:</strong> It gives the system a practical control signal for transitions in a live audio stream.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Difference From Prior Work</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Move beyond the turn-based stack of pause detection, transcription, generation, and synthesis.</div>
+              
+              <div><strong>Why it helps:</strong> That stack hides the interaction from the model and creates a bandwidth ceiling.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Treat human-AI collaboration as the primary design target, not autonomous completion.</div>
+              
+              <div><strong>Why it helps:</strong> This changes what the system is optimized to do: stay engaged with the user throughout the task rather than only respond at the end.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Preserve multimodal cues instead of reducing them to a cleaned-up text turn.</div>
+              
+              <div><strong>Why it helps:</strong> It keeps timing, interruption, and visual context available for reasoning.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="key-information-group">
+          <h3 class="key-information-theme">Limitations</h3>
+          <ul class="key-information-points">
+            
+            <li>
+              <div><strong>Method:</strong> Accept that long-running sessions still create context-management pressure.</div>
+              
+              <div><strong>Why it helps:</strong> Even with streaming, multimodal interactions accumulate state quickly and can become hard to manage over time.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Rely on connectivity for the streaming interaction loop.</div>
+              
+              <div><strong>Why it helps:</strong> This is practical for a live system, but it makes the experience dependent on stable network conditions.</div>
+              
+              
+            </li>
+            
+            <li>
+              <div><strong>Method:</strong> Ship first as a limited research preview.</div>
+              
+              <div><strong>Why it helps:</strong> That is a controlled deployment path while the architecture’s operational limits are still being worked out.</div>
+              
+              
+            </li>
+            
+          </ul>
+        </section>
+        
+      </section>
+      
+
+      
+
+      
+      <nav class="summary-nav bottom" aria-label="Summary navigation">
+        
+        <span class="summary-nav-spacer" aria-hidden="true"></span>
+        
+        
+        <a class="summary-nav-link next" href="sections/01-summary/index.html" aria-label="Next summary page">
+          <span class="summary-nav-label">Next</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        
+      </nav>
+      
+
+      
+
+      
+    </article>
+  </main>
+
+  <p class="screen-reader-hint" aria-live="polite" id="page-status">
+    Top level intuition
+  </p>
+
+  <script>
+    const nav = {
+      prevSummary: document.body.dataset.prevSummary,
+      nextSummary: document.body.dataset.nextSummary,
+      deepPage: document.body.dataset.deepPage,
+      upPage: document.body.dataset.upPage,
+    };
+
+    function goTo(href) {
+      if (!href) {
+        return;
+      }
+      window.location.href = href;
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' && nav.nextSummary) {
+        goTo(nav.nextSummary);
+      } else if (event.key === 'ArrowLeft' && nav.prevSummary) {
+        goTo(nav.prevSummary);
+      } else if (event.key === 'ArrowDown' && nav.deepPage) {
+        goTo(nav.deepPage);
+      } else if (event.key === 'ArrowUp' && nav.upPage) {
+        goTo(nav.upPage);
+      }
+    });
+  </script>
+</body>
+</html>
