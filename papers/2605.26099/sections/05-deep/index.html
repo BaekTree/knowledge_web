@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Do Language Models Need Sleep? Offline Recurrence for Improved Online Inference — arxiv Study</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --line: #d9d9d9;
+      --panel: #f7f7f7;
+      --control: #111111;
+      --max-width: 760px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .chrome {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .home-link,
+    .paper-meta {
+      pointer-events: auto;
+      font-size: 0.95rem;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.94);
+    }
+
+    .home-link:hover,
+    .paper-root-link:hover {
+      color: var(--text);
+    }
+
+    .paper-meta {
+      text-align: right;
+      line-height: 1.4;
+    }
+
+    .paper-root-link {
+      color: inherit;
+    }
+
+    .viewport {
+      min-height: 100vh;
+      padding: 4.5rem 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: pan-y;
+    }
+
+    .page-card {
+      width: 100%;
+      max-width: var(--max-width);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 3rem 5.5rem 2rem;
+      position: relative;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.9rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+      line-height: 1.2;
+      margin: 0 0 1.2rem;
+    }
+
+    .root-intuition {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .section-summary,
+    .deeper-copy {
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.75;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .deeper-copy {
+      padding: 1.2rem 1.35rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
+    .empty-copy {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .nav-arrow,
+    .down-control,
+    .up-control {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      color: var(--control);
+      font: inherit;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3.5rem;
+      height: 3.5rem;
+      font-size: 1.9rem;
+      line-height: 1;
+    }
+
+    .nav-arrow.prev { left: 1rem; }
+    .nav-arrow.next { right: 1rem; }
+
+    .down-control,
+    .up-control {
+      margin-top: 2rem;
+      padding: 0.55rem 1rem;
+      background: transparent;
+    }
+
+    .down-label,
+    .up-label {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .screen-reader-hint {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    @media (max-width: 720px) {
+      .chrome {
+        padding: 1rem 1rem 0;
+        flex-direction: column;
+      }
+
+      .paper-meta {
+        text-align: left;
+      }
+
+      .viewport {
+        padding: 6rem 1rem 2rem;
+      }
+
+      .page-card {
+        padding: 2rem 4rem 2rem;
+      }
+
+      .nav-arrow {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.6rem;
+      }
+
+      .nav-arrow.prev { left: 0.5rem; }
+      .nav-arrow.next { right: 0.5rem; }
+    }
+  </style>
+</head>
+<body
+  data-prev-summary=""
+  data-next-summary=""
+  data-deep-page=""
+  data-up-page="../05-summary/index.html"
+>
+  <div class="chrome">
+    <a class="home-link" href="../../../../index.html">All papers</a>
+    <div class="paper-meta">
+      <div><a class="paper-root-link" href="../../index.html">Do Language Models Need Sleep? Offline Recurrence for Improved Online Inference</a></div>
+      <div>arxiv:2605.26099</div>
+    </div>
+  </div>
+
+  <main class="viewport" id="viewport">
+    <article class="page-card">
+      
+      
+
+      <p class="eyebrow">Section 5 deeper explanation</p>
+      
+      <h1 class="section-title">5
+
+Embed  cid2Battn</h1>
+      
+
+      <div class="deeper-copy">
+        
+        Let&#39;s break down the section you&#39;re reading, which discusses how language models can improve their reasoning by &#34;sleeping&#34; on data during training.
+
+The key idea here is about **offline training** and how models can use **recurrent training passes** (called &#34;sleep&#34; or &#34;consolidation&#34;) to better handle complex reasoning tasks.
+
+### What the section explains:
+
+- The model uses an **SSM (Self-Supervised Memory)** system, which helps it remember important information over time.
+- Normally, when a model processes new data, it updates its weights in a forward pass. But in this case, the model **evicts old information** every L tokens and then **reprocesses** the context in a new forward pass.
+- This process is called **offline recurrence** or **sleep training**. It&#39;s inspired by how humans might revisit past experiences before making a decision.
+- The number of these &#34;sleep passes&#34; is controlled by parameter N — this means the model goes through N cycles of updating its weights.
+
+### How it works in practice:
+
+1. **Initialization**: The model starts with a fixed context window size (L).
+2. **Eviction**: Every L tokens, the model discards the most recent tokens (like clearing a memory).
+3. **Recurrent passes**: For N such evictions, the model goes through N iterations, each time updating its internal representations (fast weights) using the new context.
+4. **Prediction**: After training, the model can answer questions using the consolidated context from these N passes.
+
+### Why this helps:
+
+- It allows the model to **consolidate** past information before making predictions.
+- It mimics how humans might reflect on past events before solving a new problem.
+- The more N (sleep passes), the better the model can handle complex reasoning, even if it means using more computational resources.
+
+### Summary:
+
+This section explains that by using **offline recurrent training** (like &#34;sleeping&#34; on data), language models can improve their ability to reason over longer contexts or more complex tasks. It&#39;s a way to make the model&#39;s internal representations more robust and context-aware.
+
+Let me know if you&#39;d like a simpler analogy or a visual explanation!
+        
+      </div>
+
+      
+
+      
+      <a class="up-control" href="../05-summary/index.html" aria-label="Back to section summary">
+        <span class="up-arrow">↑</span>
+        <span class="up-label">Back to summary</span>
+      </a>
+      
+    </article>
+  </main>
+
+  <p class="screen-reader-hint" aria-live="polite" id="page-status">
+    Section 5 deeper explanation
+  </p>
+
+  <script>
+    const nav = {
+      prevSummary: document.body.dataset.prevSummary,
+      nextSummary: document.body.dataset.nextSummary,
+      deepPage: document.body.dataset.deepPage,
+      upPage: document.body.dataset.upPage,
+    };
+    let touchStartX = null;
+
+    function goTo(href) {
+      if (!href) {
+        return;
+      }
+      window.location.href = href;
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight' && nav.nextSummary) {
+        goTo(nav.nextSummary);
+      } else if (event.key === 'ArrowLeft' && nav.prevSummary) {
+        goTo(nav.prevSummary);
+      } else if (event.key === 'ArrowDown' && nav.deepPage) {
+        goTo(nav.deepPage);
+      } else if (event.key === 'ArrowUp' && nav.upPage) {
+        goTo(nav.upPage);
+      }
+    });
+
+    document.getElementById('viewport').addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    document.getElementById('viewport').addEventListener('touchend', (event) => {
+      if (touchStartX === null) {
+        return;
+      }
+
+      const touchEndX = event.changedTouches[0].clientX;
+      const deltaX = touchEndX - touchStartX;
+      touchStartX = null;
+
+      if (Math.abs(deltaX) < 50) {
+        return;
+      }
+
+      if (deltaX < 0 && nav.nextSummary) {
+        goTo(nav.nextSummary);
+      } else if (deltaX > 0 && nav.prevSummary) {
+        goTo(nav.prevSummary);
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>

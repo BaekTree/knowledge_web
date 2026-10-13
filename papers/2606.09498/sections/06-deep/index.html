@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Self-Harness: Harnesses That Improve Themselves — Article Study</title>
+  <title>Self-Harness: Harnesses That Improve Themselves — arxiv Study</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -13,7 +13,6 @@
       --panel: #f7f7f7;
       --control: #111111;
       --max-width: 760px;
-      --index-width: 13.5rem;
     }
 
     * { box-sizing: border-box; }
@@ -63,84 +62,13 @@
       line-height: 1.4;
     }
 
-    .paper-meta.web-meta {
-      max-width: 28rem;
-    }
-
     .paper-root-link {
       color: inherit;
     }
 
-    .source-site,
-    .source-author,
-    .source-date,
-    .source-url,
-    .source-host {
-      display: block;
-    }
-
-    .source-site {
-      color: var(--text);
-    }
-
-    .source-url {
-      word-break: break-word;
-      text-decoration: underline;
-      text-underline-offset: 0.12em;
-    }
-
-    .brief-index {
-      position: fixed;
-      left: 1.4rem;
-      top: 5.25rem;
-      width: var(--index-width);
-      max-height: calc(100vh - 7rem);
-      overflow: auto;
-      padding: 0.2rem 0;
-      z-index: 8;
-      background: rgba(255, 255, 255, 0.94);
-      border-left: 1px solid var(--line);
-      pointer-events: auto;
-    }
-
-    .brief-index-title {
-      margin: 0 0 0.7rem;
-      padding-left: 0.85rem;
-      color: var(--muted);
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .brief-index-list {
-      display: grid;
-      gap: 0.25rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .brief-index-link {
-      display: block;
-      padding: 0.2rem 0.85rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.3;
-    }
-
-    .brief-index-link:hover,
-    .brief-index-link.is-active {
-      color: var(--text);
-    }
-
-    .brief-index-link.is-active {
-      border-left: 2px solid var(--text);
-      padding-left: calc(0.85rem - 2px);
-    }
-
     .viewport {
       min-height: 100vh;
-      padding: 4.5rem 1.25rem 2rem calc(var(--index-width) + 2.8rem);
+      padding: 4.5rem 1.25rem 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -152,7 +80,7 @@
       max-width: var(--max-width);
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
-      padding: 2.5rem 2.25rem 2rem;
+      padding: 3rem 5.5rem 2rem;
       position: relative;
     }
 
@@ -176,96 +104,18 @@
       margin: 0;
     }
 
-    .section-summary {
-      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
-      line-height: 1.75;
-      margin: 0;
-    }
-
+    .section-summary,
     .deeper-copy {
       font-size: clamp(1.2rem, 2.2vw, 1.55rem);
       line-height: 1.75;
       margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .deeper-copy {
       padding: 1.2rem 1.35rem;
       background: var(--panel);
       border: 1px solid var(--line);
-    }
-
-    .deeper-copy p {
-      margin: 0 0 1em;
-    }
-
-    .deeper-copy p:last-child {
-      margin-bottom: 0;
-    }
-
-    .page-media {
-      margin-top: 2rem;
-      display: grid;
-      gap: 1rem;
-    }
-
-    .key-information {
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--line);
-    }
-
-    .key-information-title {
-      margin: 0 0 1rem;
-      font-size: 1.25rem;
-    }
-
-    .key-information-group + .key-information-group {
-      margin-top: 1.5rem;
-    }
-
-    .key-information-theme {
-      margin: 0 0 0.75rem;
-      font-size: 1.05rem;
-    }
-
-    .key-information-points {
-      margin: 0;
-      padding-left: 1.25rem;
-      display: grid;
-      gap: 0.85rem;
-    }
-
-    .key-information-figure {
-      margin-top: 0.75rem;
-      padding: 0.85rem;
-      border: 1px solid var(--line);
-      background: #fcfcfc;
-      list-style: none;
-    }
-
-    .key-information-figure img {
-      display: block;
-      width: 100%;
-      max-height: 28rem;
-      margin: 0 auto;
-    }
-
-    .page-figure {
-      margin: 0;
-      padding: 1rem;
-      border: 1px solid var(--line);
-      background: #fcfcfc;
-    }
-
-    .page-figure img {
-      display: block;
-      width: 100%;
-      max-height: 36rem;
-      margin: 0 auto;
-    }
-
-    .figure-caption {
-      margin-top: 0.75rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-      word-break: break-word;
     }
 
     .empty-copy {
@@ -273,24 +123,7 @@
       font-style: italic;
     }
 
-    .summary-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 1.35rem;
-    }
-
-    .summary-nav.bottom {
-      margin-top: 2rem;
-      margin-bottom: 0;
-    }
-
-    .summary-nav-spacer {
-      flex: 1 1 0;
-    }
-
-    .summary-nav-link,
+    .nav-arrow,
     .down-control,
     .up-control {
       display: inline-flex;
@@ -305,21 +138,18 @@
       cursor: pointer;
     }
 
-    .summary-nav-link {
-      min-height: 2.75rem;
-      padding: 0.55rem 0.95rem;
-      font-size: 0.95rem;
-      line-height: 1.2;
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3.5rem;
+      height: 3.5rem;
+      font-size: 1.9rem;
+      line-height: 1;
     }
 
-    .summary-nav-link.next {
-      margin-left: auto;
-    }
-
-    .summary-nav-label {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
+    .nav-arrow.prev { left: 1rem; }
+    .nav-arrow.next { right: 1rem; }
 
     .down-control,
     .up-control {
@@ -347,7 +177,7 @@
 
     @media (max-width: 720px) {
       .chrome {
-        padding: 0.75rem 0.25rem 0;
+        padding: 1rem 1rem 0;
         flex-direction: column;
       }
 
@@ -355,72 +185,24 @@
         text-align: left;
       }
 
-      .brief-index {
-        position: static;
-        width: auto;
-        max-height: none;
-        margin: 6.1rem 0.25rem 0;
-        border-left: 0;
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
-      }
-
-      .brief-index-title {
-        padding-left: 0;
-      }
-
-      .brief-index-list {
-        display: flex;
-        gap: 0.35rem;
-        overflow-x: auto;
-        padding-bottom: 0.2rem;
-      }
-
-      .brief-index-link {
-        white-space: nowrap;
-        padding: 0.25rem 0.45rem;
-      }
-
-      .brief-index-link.is-active {
-        border-left: 0;
-        border-bottom: 2px solid var(--text);
-        padding-left: 0.45rem;
-      }
-
       .viewport {
-        padding: 1.25rem 0.25rem 1.5rem;
+        padding: 6rem 1rem 2rem;
       }
 
       .page-card {
-        padding: 1.25rem 0.85rem 1.5rem;
+        padding: 2rem 4rem 2rem;
       }
 
-      .summary-nav {
-        gap: 0.5rem;
-        margin-bottom: 1rem;
+      .nav-arrow {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.6rem;
       }
 
-      .summary-nav.bottom {
-        margin-top: 1.5rem;
-      }
-
-      .summary-nav-link {
-        min-height: 2.5rem;
-        padding: 0.5rem 0.8rem;
-        font-size: 0.9rem;
-      }
+      .nav-arrow.prev { left: 0.5rem; }
+      .nav-arrow.next { right: 0.5rem; }
     }
   </style>
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']]
-      },
-      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
-    };
-  </script>
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body
   data-prev-summary=""
@@ -432,149 +214,29 @@
     <a class="home-link" href="../../../../index.html">All papers</a>
     <div class="paper-meta">
       <div><a class="paper-root-link" href="../../index.html">Self-Harness: Harnesses That Improve Themselves</a></div>
-      
-      <div>arXiv:2606.09498</div>
-      
+      <div>arxiv:2606.09498</div>
     </div>
   </div>
-
-  <nav class="brief-index" aria-label="Brief index">
-    <p class="brief-index-title">Brief index</p>
-    <ol class="brief-index-list">
-      
-      <li>
-        <a class="brief-index-link" href="../../index.html">Top</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../01-summary/index.html">01 Abstract</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../02-summary/index.html">02 Introduction</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../03-summary/index.html">03 From prompts to agent harnesses</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../04-summary/index.html">04 Self-improving agents and automated agent design</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../05-summary/index.html">05 Self-Harness An Iterative Loop for Model-Specific Harness Im</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link is-active" href="../06-summary/index.html">06 Preliminary</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../07-summary/index.html">07 Weakness Mining Identifying Failure Patterns from Clustered </a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../08-summary/index.html">08 Harness Proposal Exploring Diverse yet Minimal Candidate Mod</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../09-summary/index.html">09 Proposal Validation Ensuring Robust Improvement through Regr</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../10-summary/index.html">10 Experiments</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../11-summary/index.html">11 Benchmarks</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../12-summary/index.html">12 Models</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../13-summary/index.html">13 Harness</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../14-summary/index.html">14 Splits and protocol</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../15-summary/index.html">15 Metrics</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../16-summary/index.html">16 Main Results</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../17-summary/index.html">17 Harness evolution and retained edits</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../18-summary/index.html">18 Trace-Level Analysis of Accepted Edits</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../19-summary/index.html">19 Conclusion</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../20-summary/index.html">20 Model inference services</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../21-summary/index.html">21 Terminal-Bench-20 configuration</a>
-      </li>
-      
-      <li>
-        <a class="brief-index-link" href="../22-summary/index.html">22 Weakness Mining Identifying Failure Patterns from Clustered</a>
-      </li>
-      
-    </ol>
-  </nav>
 
   <main class="viewport" id="viewport">
     <article class="page-card">
       
+      
 
       <p class="eyebrow">Section 6 deeper explanation</p>
       
-      <h1 class="section-title">Preliminary</h1>
+      <h1 class="section-title">4 Experiments</h1>
       
 
       <div class="deeper-copy">
         
-        <p>This section defines the paper’s central object: the harness. Here, a harness is the non-parametric scaffolding around a fixed language model, meaning everything that shapes how the model is used without changing its weights. That includes the prompt instructions, the tool set, memory, state tracking, verifier hooks, and other runtime policies that control what the model sees and how its actions are executed. The key distinction is that Self-Harness does not try to improve the model itself; it improves the execution protocol around the model. That framing is important because it makes harness design an optimization problem over system behavior rather than a training problem over parameters.</p>
-<p>Formally, the paper treats the model \(M\) and evaluator \(E\) as fixed, and varies only the harness \(h\). For a task instance \(x\), running \(M\) under \(h\) yields an execution trace and a final output \(y\). The trace is not just logging; it is the evidence of how the agent behaved: messages, tool calls, intermediate artifacts, and verifier outcomes. The evaluator then maps the task, trace, and output to a behavioral score such as pass or fail. This setup matters because harness changes are judged by their observable effect on behavior, not by internal model changes. The lineage \(h_0, h_1, \ldots, h_T\) captures the idea that each round makes bounded edits to the protocol, producing a sequence of candidate harnesses rather than a single monolithic redesign.</p>
-<p>Algorithmically, Self-Harness alternates between evaluation, weakness mining, proposal generation, and validation. First, the current harness is evaluated on held-in and held-out splits, producing outcomes and failure traces. The held-in failures are converted into an evidence bundle, which grounds the next proposals in concrete weaknesses rather than vague speculation. Then the model generates \(K\) candidate edits in parallel, each paired with an action or rationale. Each candidate is applied to the current harness to form a modified harness \(h_t^{(j)}\), which is re-evaluated on both splits. The acceptance test compares the candidate’s deltas against the baseline: it must improve at least one metric and not regress on the other in a way that violates the acceptance rule. Intuitively, this is a conservative local search over harness space, with the held-out split acting as a guard against overfitting to the failures used for proposal generation.</p>
-<p>The broader paper uses this preliminary definition to justify the rest of the Self-Harness pipeline. Later sections on Self-Harness as an iterative loop, harness weakness mining, harness proposal, and proposal validation all depend on this decomposition. The important design decision is to treat the harness as an editable system artifact with explicit surfaces, not as an opaque prompt. That makes improvement traceable, testable, and compositional: proposals can target instructions, tools, or runtime policy independently, while evaluation remains anchored to the same fixed model and evaluator.</p>
+        This section sets up Self-Harness as a method for improving agent performance by changing the harness, not the underlying language model. A harness is the scaffolding around the model: how it is prompted, what tools it can use, how outputs are checked, and how failures are recovered. The key experimental question is therefore whether bounded harness edits can produce better terminal-agent behavior when the model itself is held fixed. To test that, the authors use Terminal-Bench-2.0, a benchmark of realistic, multi-turn terminal tasks with deterministic verifiers, so success can be measured reliably rather than by subjective judgment.
+
+The design choices are aimed at isolating the effect of the harness. They start from the same minimal DeepAgent-based harness across all runs, then let Self-Harness propose edits, validate them on held-in execution evidence, and promote them only if they pass held-out regression gates. That setup matters because it turns harness improvement into a controlled search problem: candidate changes are allowed, but only if they improve behavior without breaking earlier cases. They also evaluate on a fixed 64-task subset, removing web-dependent and multimodal tasks to reduce noise from capabilities the initial harness does not even support. This makes the benchmark better aligned with what the method can actually change.
+
+The model choice reinforces that point. MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5 are kept fixed, and the same model is used both to act in the benchmark and to propose harness edits from evaluator feedback. As a result, the comparison is strictly within-model: any gain must come from the harness, not from a stronger model, different decoding, or a changed tool environment. This experimental framing sets up the next part of the paper, where the authors can ask whether the self-improving harness actually delivers measurable gains and which kinds of edits are responsible.
         
       </div>
-
-      
-
-      
-      <section class="page-media" aria-label="Paper media">
-        
-        <figure class="page-figure">
-          
-          <img src="../../images/sh-6-8-4.png" alt="Overview of one Self-Harness optimization loop. The model weights remain fixed while the surrounding harness evolves through bounded, automatically validated harness edits. Each candidate harness is evaluated by a fixed evaluation system, and the acceptance gate promotes a candidate only when it preserves both train and held-out gate performance while improving at least one split. Accepted candidates advance the lineage; rejected candidates are logged without changing the active harness.">
-          
-          
-          <figcaption class="figure-caption">Overview of one Self-Harness optimization loop. The model weights remain fixed while the surrounding harness evolves through bounded, automatically validated harness edits. Each candidate harness is evaluated by a fixed evaluation system, and the acceptance gate promotes a candidate only when it preserves both train and held-out gate performance while improving at least one split. Accepted candidates advance the lineage; rejected candidates are logged without changing the active harness.</figcaption>
-          
-        </figure>
-        
-
-        
-      </section>
-      
-
-      
 
       
 
@@ -598,6 +260,7 @@
       deepPage: document.body.dataset.deepPage,
       upPage: document.body.dataset.upPage,
     };
+    let touchStartX = null;
 
     function goTo(href) {
       if (!href) {
@@ -617,6 +280,30 @@
         goTo(nav.upPage);
       }
     });
+
+    document.getElementById('viewport').addEventListener('touchstart', (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    document.getElementById('viewport').addEventListener('touchend', (event) => {
+      if (touchStartX === null) {
+        return;
+      }
+
+      const touchEndX = event.changedTouches[0].clientX;
+      const deltaX = touchEndX - touchStartX;
+      touchStartX = null;
+
+      if (Math.abs(deltaX) < 50) {
+        return;
+      }
+
+      if (deltaX < 0 && nav.nextSummary) {
+        goTo(nav.nextSummary);
+      } else if (deltaX > 0 && nav.prevSummary) {
+        goTo(nav.prevSummary);
+      }
+    }, { passive: true });
   </script>
 </body>
 </html>
